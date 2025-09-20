@@ -1,6 +1,6 @@
-import GameList from './components/GameList/GameList';
-import Friends from './components/Friends/Friends';
-import GOTW from './components/GOTW/GOTW';
+import Dashboard from './components/Dashboard/Dashboard';
+import Header from './components/Header/Header';
+import Navigation from './components/Navigation/Navigation';
 
 import { useState } from 'react'
 import './styles/main.scss'
@@ -16,23 +16,17 @@ function App() {
   }
 
   return (
-    <>
+    <main className='app-layout'>
 
       <button className="toggle-mode" onClick={() => toggleMode()}>
         Cambiar a {mode === "dark" ? "Girly Mode 🌸" : "Dark Mode 🌑"}
       </button>
-
-
-      <h1>Gaming Dashboard</h1>
-      <p>Welcome to your gaming dashboard!</p>
-
-      <div className='dashboard'>
-        <GOTW />
-        <GameList />
-        <Friends />
+      <Navigation />
+      <Header />
+      <div className='main-content'>
+        <Dashboard />
       </div>
-
-    </>
+    </main>
   )
 }
 

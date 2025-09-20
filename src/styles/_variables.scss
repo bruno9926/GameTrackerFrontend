@@ -43,3 +43,21 @@ body {
 
   }
 }
+
+body {
+  &.light {
+    --color-title: #333333;
+    --color-text: #333333;
+    --color-bg: #f5f5f5;
+    --color-accent: #cc4e45;
+    --color-card-bg: #ffffff;
+    --color-scrollbar: #bbbbbb;
+    --color-border: #cccccc;
+
+    // gaming colors
+    --color-playing: #1E90FF;
+    --color-completed: #00FF85;
+    --color-wishlist: #FF0099;
+    --color-paused: #FFA500;
+  }
+}
