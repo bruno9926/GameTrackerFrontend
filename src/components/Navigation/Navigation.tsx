@@ -1,14 +1,68 @@
 import styles from './Navigation.module.scss';
+import { useState } from 'react';
+
+const navigationItems = [
+  { label: 'Dashboard', active: true },
+  { label: 'Games' },
+  { label: 'Platforms' },
+  { label: 'Settings' },
+];
 
 const Navigation = () => {
-    return (
-        <nav className={styles.navigation}>
-            <span>Gaming Tracker</span>
-            <span className={styles.link}>Home</span>
-            <span className={styles.link}>Games</span>
-            <span className={styles.link}>Friends</span>
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const toggleMenu = () => setShowMobileMenu(current => !current);
+
+  return (
+    <>
+      {showMobileMenu && (
+        <div
+          className={styles.overlay}
+          onClick={toggleMenu}
+        />
+      )}
+
+      <div
+        className={`${styles.navigation} ${showMobileMenu ? styles['show-mobile-menu'] : ''}`}
+      >
+        <nav className={styles['navigation-menu']}>
+          <span>Gaming Tracker</span>
+          <div className={styles['nav-items']}>
+            {navigationItems.map((item) => (
+              <NavigationItem key={item.label} active={item.active}>
+                {item.label}
+              </NavigationItem>
+            ))}
+          </div>
         </nav>
-    )
+        <MobileController toggleMenu={toggleMenu} />
+      </div>
+    </>
+  );
+};
+
+interface NavigationItemProps {
+  children: Readonly<React.ReactNode>;
+  active?: boolean;
 }
 
-export default Navigation
+const NavigationItem = ({ children, active }: NavigationItemProps) => {
+  return (
+    <div className={`${styles['nav-item']} ${active ? styles['active'] : ''}`}>
+      {children}
+    </div>
+  );
+};
+
+interface MobileControllerProps {
+  toggleMenu: () => void;
+}
+
+const MobileController = ({ toggleMenu }: MobileControllerProps) => {
+  return (
+    <div className={styles['mobile-controller']} onClick={toggleMenu}>
+      <span>☰</span>
+    </div>
+  );
+};
+
+export default Navigation;

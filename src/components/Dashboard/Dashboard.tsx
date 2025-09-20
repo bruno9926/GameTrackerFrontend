@@ -2,6 +2,8 @@ import GameList from '../GameList/GameList';
 import Friends from '../Friends/Friends';
 import GOTW from '../GOTW/GOTW';
 
+import './Dashboard.scss';
+
 const Dashboard = () => {
     return (
         <div>
