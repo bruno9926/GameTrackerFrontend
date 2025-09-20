@@ -1,22 +1,3 @@
-//Colors
-$color-bg-dark: #121212;
-$color-text-dark: #ffffff;
-$color-title-dark: #fff;
-$color-accent-dark: #1E90FF;
-
-$color-bg-girly: #fff0f6;
-$color-text-girly: #5a3e5c;
-$color-title-girly: #ff85c0;
-$color-accent-girly: #ff85c0;
-
-// Game colores
-$color-playing: #1E90FF;
-$text-color-playing: black;
-$color-completed: #00FF85;
-$text-color-completed: black;
-$color-wishlist: #FF0099;
-$text-color-wishlist: black;
-
 //Font Sizes
 $font-size-base: 16px;
 $font-size-small: 14px;
@@ -26,3 +7,32 @@ $font-size-large: 18px;
 $spacing-small: 8px;
 $spacing-medium: 12px;
 $spacing-large: 16px;
+
+:root {
+  --color-title: #fff;
+  --color-text: #fff;
+  --color-bg: #121212;
+  --color-accent: #1E90FF;
+
+  --color-card-bg: #1b1b1b;
+
+  // gaming colors
+    --color-playing: #1E90FF;
+    --color-completed: #00FF85;
+    --color-wishlist: #FF0099;
+}
+
+body {
+  &.girly {
+    --color-title: #5a3e5c;
+    --color-text: #5a3e5c;
+    --color-bg: #fff0f6;
+    --color-accent: #ff85c0;
+    --color-card-bg: #ffe6f0;
+
+    // gaming colors
+    --color-playing: #88bbee;
+    --color-completed: #8de9bd;
+    --color-wishlist: #e490c2;
+  }
+}

@@ -1,32 +1,36 @@
-@use '../../styles/variables' as v; 
-
 .game-list-item {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
-  padding: 10px;
+  padding: 1rem;
   border: 1px solid #333333;
-  background-color: #1b1b1b;
+  background-color: var(--color-card-bg);
   border-radius: 12px;
+
+  .game-name {
+    white-space: nowrap;
+    width: 16rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 
   .game-status {
     font-size: 0.9em;
     padding: 4px 10px;
     border-radius: 15px;
     font-weight: bold;
-    
+    color: black;
+    cursor: pointer;
+
     &.playing {
-      background-color: v.$color-playing;
-    color: v.$text-color-playing;
+      background-color: var(--color-playing);
     }
     &.completed {
-      background-color: v.$color-completed;
-      color: v.$text-color-completed;
+      background-color: var(--color-completed);
     }
     &.wishlist {
-      background-color: v.$color-wishlist;
-      color: v.$text-color-wishlist;
+      background-color: var(--color-wishlist);
     }
   }
 }

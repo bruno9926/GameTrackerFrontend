@@ -1,14 +1,14 @@
 import GameListItem from './GameListItem';
-import type {Game} from '../../types/Game'
 //styles
 import styles from './GameList.module.scss'
 // data
-import gameListData from '../../data/games.json'
+import gameListData from '../../data/games.json';
+import type {Game} from '../../types/Game';
 
 
 const gameList: Array<Game> = gameListData as Array<Game>;
 
-export const GameList = () => {
+const GameList = () => {
   return (
     <section className={`${styles['game-list-section']} dashboard-tile`}>
         <h2>Game List</h2>
@@ -24,3 +24,5 @@ export const GameList = () => {
     </section>
   )
 }
+
+export default GameList;
