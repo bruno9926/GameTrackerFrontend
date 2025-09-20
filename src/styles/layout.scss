@@ -43,17 +43,38 @@ button {
 
 .dashboard {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  grid-template-rows: masonry;
+  
   gap: 20px;
   width: 100%;
-  max-width: 1200px;
   margin-top: 20px;
 
+  > section:nth-child(1) {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  > section:nth-child(2) {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  > section:nth-child(3) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
   .dashboard-tile {
-    border: 1px solid #333333;
+    border: 1px solid var(--color-border);
     border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dashboard-container {
+    @extend .dashboard-tile;
     padding: 20px;
     padding-top: 0;
-    height: fit-content;
+    max-height: 500px;
   }
 }

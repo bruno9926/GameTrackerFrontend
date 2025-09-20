@@ -1,5 +1,6 @@
 import GameList from './components/GameList/GameList';
 import Friends from './components/Friends/Friends';
+import GOTW from './components/GOTW/GOTW';
 
 import { useState } from 'react'
 import './styles/main.scss'
@@ -26,6 +27,7 @@ function App() {
       <p>Welcome to your gaming dashboard!</p>
 
       <div className='dashboard'>
+        <GOTW />
         <GameList />
         <Friends />
       </div>

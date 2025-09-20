@@ -9,14 +9,14 @@
     {
         "id": 2,
         "name": "Chaux",
-        "status": "offline",
+        "status": "online",
         "avatar": "/src/assets/chaux.jpg",
         "games": ["League of Legends", "The Legend of Zelda: Ocarina of Time"]
     },
     {
         "id": 3,
         "name": "Johan",
-        "status": "busy",
+        "status": "online",
         "avatar": "/src/assets/johan.jpg",
         "games": ["Doom Eternal"]
     }

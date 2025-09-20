@@ -1,0 +1,53 @@
+.gotw {
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.07);
+      transition: transform 0.3s ease;
+    }
+  }
+
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+  }
+
+  .gotw-info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: flex-start;
+
+    h2 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    p {
+      margin: 5px 0 0 0;
+      font-size: 1em;
+    }
+  }
+}

@@ -10,7 +10,7 @@ const friends = friendsData as Array<Friend>;
 
 const Friends = () => {
   return (
-    <section className={`${styles['friends-section']} dashboard-tile`}>
+    <section className={`${styles['friends-section']} dashboard-container`}>
         <h2>Friends</h2>
         <div className={styles['friends-list']}>
             {friends.map(friend => (

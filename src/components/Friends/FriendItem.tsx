@@ -1,8 +1,18 @@
+import styles from './FriendItem.module.scss'
 import type {Friend} from '../../types/Friend'
 
-type FriendItemProps = {} & Friend;
+type FriendItemProps = {} & Omit<Friend, 'id'>;
 
-import styles from './FriendItem.module.scss'
+const gameImages: Record<string, string> = {
+    "Hollow Knight: Silksong": "/games/hollow-knight-silksong.jpg",
+    "Final Fantasy 7 Rebirth": "/games/final-fantasy-7-rebirth.jpg",
+    "God of War Ragnarök": "/games/god-of-war-ragnarok.jpg",
+    "The Legend of Zelda: Tears of the Kingdom": "/games/zelda-tears-of-the-kingdom.jpg",
+    "Doom Eternal": "/src/assets/doom.png",
+    "The Legend of Zelda: Ocarina of Time": "/src/assets/zelda-ocarina.jpg",
+    "League of Legends": "/src/assets/lol.jpg",
+    "Bioshock": "/src/assets/bioshock.jpg",
+};
 
 const FriendItem = ({ name, status, avatar, games }: FriendItemProps) => {
     return (
@@ -19,11 +29,12 @@ const FriendItem = ({ name, status, avatar, games }: FriendItemProps) => {
                 <div className={styles['friends-games-list']}>
                     {/* Here you can map through the games if needed */}
                     {games.map((game, index) => (
-                        <span key={index} className={styles['friends-game']} title={game} />
+                        <div key={index} className={styles['friends-game']} title={game}>
+                            <img src={gameImages[game]} alt={game} />
+                        </div>
                     ))}
                 </div>
             </div>
-
         </div>
     )
 }

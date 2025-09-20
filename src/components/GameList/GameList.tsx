@@ -10,7 +10,7 @@ const gameList: Array<Game> = gameListData as Array<Game>;
 
 const GameList = () => {
   return (
-    <section className={`${styles['game-list-section']} dashboard-tile`}>
+    <section className={`${styles['game-list-section']} dashboard-container`}>
         <h2>Game List</h2>
         <div className={styles['game-list']}>
             {gameList.map(game => (

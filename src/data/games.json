@@ -1,6 +1,7 @@
 [
     { "id": 1, "name": "Hollow Knight: Silksong", "status": "playing" },
     { "id": 2, "name": "Final Fantasy 7 Rebirth", "status": "completed" },
-    { "id": 3, "name": "God of War Ragnarök", "status": "wishlist" },
-    { "id": 5, "name": "The Legend of Zelda: Tears of the Kingdom", "status": "wishlist" }
+    { "id": 3, "name": "Yakuza 0", "status": "paused" },
+    { "id": 5, "name": "The Legend of Zelda: Echoes of Wisdom", "status": "paused" },
+    { "id": 4, "name": "Metal Gear Solid Delta: Snake Eater", "status": "playing" }
 ]

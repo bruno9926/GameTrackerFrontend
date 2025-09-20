@@ -2,9 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 
   padding: 1rem;
-  border: 1px solid #333333;
+  border: 1px solid var(--color-border);
   background-color: var(--color-card-bg);
   border-radius: 12px;
 
@@ -31,6 +32,9 @@
     }
     &.wishlist {
       background-color: var(--color-wishlist);
+    }
+    &.paused {
+      background-color: var(--color-paused);
     }
   }
 }
