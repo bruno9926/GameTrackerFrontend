@@ -1,0 +1,7 @@
+[
+    { "id": 1, "name": "Hollow Knight: Silksong", "status": "playing" },
+    { "id": 2, "name": "Final Fantasy 7 Rebirth", "status": "completed" },
+    { "id": 3, "name": "God of War Ragnarök", "status": "wishlist" },
+    { "id": 4, "name": "Elden Ring", "status": "playing" },
+    { "id": 5, "name": "The Legend of Zelda: Tears of the Kingdom", "status": "wishlist" }
+]

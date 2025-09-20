@@ -1,0 +1,73 @@
+@use "./variables" as v;
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  padding: 2rem;
+
+  &.dark {
+    color: v.$color-text-dark;
+    background-color: v.$color-bg-dark;
+
+    h1 {
+        color: v.$color-title-dark;
+    }
+
+    button {
+        background-color: v.$color-accent-dark;
+        color: v.$color-text-dark;
+    }
+  }
+
+  &.girly {
+    color: v.$color-text-girly;
+    background-color: v.$color-bg-girly;
+
+    h1 {
+        color: v.$color-title-girly;
+    }
+
+    button {
+        background-color: v.$color-accent-girly;
+        color: v.$color-text-girly;
+    }
+  }
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+button.toggle-mode {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+.dashboard-tile {
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 20px;
+  padding-top: 0;
+}

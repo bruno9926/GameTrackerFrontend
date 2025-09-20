@@ -1,0 +1,32 @@
+@use '../../styles/variables' as v; 
+
+.game-list-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  padding: 10px;
+  border: 1px solid #333333;
+  background-color: #1b1b1b;
+  border-radius: 12px;
+
+  .game-status {
+    font-size: 0.9em;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    
+    &.playing {
+      background-color: v.$color-playing;
+    color: v.$text-color-playing;
+    }
+    &.completed {
+      background-color: v.$color-completed;
+      color: v.$text-color-completed;
+    }
+    &.wishlist {
+      background-color: v.$color-wishlist;
+      color: v.$text-color-wishlist;
+    }
+  }
+}
