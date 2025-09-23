@@ -1,0 +1,24 @@
+$dark-color: rgb(34, 34, 34);
+$light-color: rgb(231, 231, 231);
+
+.theme-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1rem;
+  padding: 0;
+
+  cursor: pointer;
+
+  background-color: $light-color;
+  color: $dark-color;
+
+  &.dark {
+    background-color: $dark-color;
+    color: $light-color;
+  }
+}

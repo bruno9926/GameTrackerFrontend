@@ -25,9 +25,8 @@ const FriendItem = ({ name, status, avatar, games }: FriendItemProps) => {
                 <span className={styles['friend-name']}>{name}</span>
             </div>
             <div className={styles['friends-games']}>
-                <span>Gaming with you</span>
+                <span>Playing with you</span>
                 <div className={styles['friends-games-list']}>
-                    {/* Here you can map through the games if needed */}
                     {games.map((game, index) => (
                         <div key={index} className={styles['friends-game']} title={game}>
                             <img src={gameImages[game]} alt={game} />
