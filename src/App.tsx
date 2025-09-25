@@ -12,11 +12,6 @@ function App() {
       <Header />
       <div className='main-content'>
         <Dashboard />
-        {/* <div>
-          <h1>
-            Página en construcción...
-          </h1>
-        </div> */}
       </div>
     </main>
   )

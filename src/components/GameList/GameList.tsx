@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-
+import Modal from '../Organisms/Modal/Modal';
+import Button from '../Atoms/Button/Button';
 import GameListItem from './GameListItem';
 //styles
 import styles from './GameList.module.scss';
@@ -20,6 +21,7 @@ const GameList = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+
   const loadGameList = async () => {
     try {
       setLoading(true);
@@ -39,14 +41,33 @@ const GameList = () => {
   }, [])
 
   return (
-    <section className={`${styles['game-list-section']} dashboard-container`}>
-      <h2>Game List</h2>
-      {
-        loading ? <Loading /> :
-          error ? <ErrorMessage message={error} retryAction={loadGameList} /> :
-            <List games={games} />
-      }
-    </section>
+    <>
+      <section className={`${styles['game-list-section']} dashboard-container`}>
+        <div className={styles.header}>
+          <h2>Game List</h2>
+          <AddGame />
+        </div>
+        {
+          loading ? <Loading /> :
+            error ? <ErrorMessage message={error} retryAction={loadGameList} /> :
+              <List games={games} />
+        }
+      </section>
+
+    </>
+  )
+}
+
+const AddGame = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Add</Button>
+      <Modal isOpen={open} title='Add game' close={() => setOpen(false)} positiveAction={() => setOpen(false)}>
+        This is the content
+      </Modal>
+    </>
   )
 }
 

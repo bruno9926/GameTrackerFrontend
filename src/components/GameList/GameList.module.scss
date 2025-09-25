@@ -6,6 +6,12 @@
     flex-shrink: 0;
   }
 
+  .header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
   .game-list {
     flex: 1;
     overflow-y: auto;

@@ -29,22 +29,16 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   color: var(--color-text);
   background-color: var(--color-bg);
+
+  &.modal-open {
+    overflow: hidden;
+  }
 }
 
 h1 {
   font-size: var(--title-font-size);
   line-height: 1.1;
   color: var(--color-title);
-}
-
-button {
-  background-color: var(--color-accent);
-  color: var(--color-text);
-
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
 }
 
 .app-layout {
