@@ -8,16 +8,18 @@ const ThemeToggle = () => {
 
     const [mode, setMode] = useState('dark')
 
+    const light = 'light'
+
     const toggleMode = () => {
-        setMode((prevMode) => (prevMode === 'dark' ? 'light' : 'dark'))
-        document.body.className = mode === 'dark' ? 'light' : 'dark'
+        setMode((prevMode) => (prevMode === 'dark' ? light : 'dark'))
+        document.body.className = mode === 'dark' ? light : 'dark'
     }
 
     return (
         <button
             className={`${styles['theme-toggle']} ${styles[mode]}`}
             onClick={() => toggleMode()}
-            title={`change to ${mode === 'dark' ? 'light' : 'dark'} theme`}
+            title={`change to ${mode === 'dark' ? light : 'dark'} theme`}
             >
             {
                 mode === 'dark' ? <IoMoon/> : <IoSunny />

@@ -16,6 +16,22 @@ async function fetchGames(): Promise<Game[]> {
   return json as Game[];
 }
 
+async function postGame(game: Omit<Game, 'id'>): Promise<Game[]> {
+  const res = await fetch('http://localhost:3000/games/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(game)
+  });
+  if (!res.ok) throw new Error(res.statusText);
+
+  const json = await res.json();
+  if (!Array.isArray(json)) throw new Error("Invalid response");
+  return json as Game[];
+
+}
+
 const GameList = () => {
 
   const [games, setGames] = useState<Game[]>([]);
@@ -61,11 +77,28 @@ const GameList = () => {
 
 const AddGame = () => {
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [status, setStatus] = useState('');
+
+  let validatedStatus = status as 'playing' | 'completed' | 'wishlist' | 'paused'
+
+  const submitGame = async () => {
+    try {
+      let game = {
+        name, status: validatedStatus
+      }
+      console.log(game)
+      await postGame(game)
+    } catch (error) {
+      console.log(error?.message)
+    }
+
+  }
 
   return (
     <>
       <Button onClick={() => setOpen(true)}>Add</Button>
-      <Modal isOpen={open} title='Add a game' close={() => setOpen(false)} positiveAction={() => setOpen(false)}>
+      <Modal isOpen={open} title='Add a game' close={() => setOpen(false)} positiveAction={submitGame}>
         <form action=""
           style={{
             display: "flex",
@@ -73,7 +106,8 @@ const AddGame = () => {
             gap: "8px"
           }}
         >
-          <Input label='name'/>
+          <Input label='name' value={name} onChange={(e) => setName(e.target.value)} />
+          <Input label='status' value={status} onChange={(e) => setStatus(e.target.value)} />
         </form>
       </Modal>
     </>
