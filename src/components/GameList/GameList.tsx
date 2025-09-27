@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Modal from '../Organisms/Modal/Modal';
 import Button from '../Atoms/Button/Button';
+import Input from '../Atoms/Input/Input';
 import GameListItem from './GameListItem';
 //styles
 import styles from './GameList.module.scss';
@@ -64,8 +65,16 @@ const AddGame = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Add</Button>
-      <Modal isOpen={open} title='Add game' close={() => setOpen(false)} positiveAction={() => setOpen(false)}>
-        This is the content
+      <Modal isOpen={open} title='Add a game' close={() => setOpen(false)} positiveAction={() => setOpen(false)}>
+        <form action=""
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px"
+          }}
+        >
+          <Input label='name'/>
+        </form>
       </Modal>
     </>
   )
