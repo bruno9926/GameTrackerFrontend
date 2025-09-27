@@ -8,53 +8,22 @@ import styles from './GameList.module.scss';
 import { VscError } from "react-icons/vsc";
 // data
 import type { Game } from '../../types/Game';
+// hooks
+import useGames from '../../hooks/useGames';
 
-async function fetchGames(): Promise<Game[]> {
-  const res = await fetch('http://localhost:3000/games/');
-  const json = await res.json();
-  if (!Array.isArray(json)) throw new Error("Invalid response");
-  return json as Game[];
-}
-
-async function postGame(game: Omit<Game, 'id'>): Promise<Game[]> {
-  const res = await fetch('http://localhost:3000/games/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(game)
-  });
-  if (!res.ok) throw new Error(res.statusText);
-
-  const json = await res.json();
-  if (!Array.isArray(json)) throw new Error("Invalid response");
-  return json as Game[];
-
-}
 
 const GameList = () => {
+  
+  const {
+    loading,
+    error,
+    games,
+    fetchGames
+  } = useGames();
 
-  const [games, setGames] = useState<Game[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-
-  const loadGameList = async () => {
-    try {
-      setLoading(true);
-      const games: Game[] = await fetchGames();
-      setGames(games);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(error.message);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }
 
   useEffect(() => {
-    loadGameList();
+    fetchGames();
   }, [])
 
   return (
@@ -66,7 +35,7 @@ const GameList = () => {
         </div>
         {
           loading ? <Loading /> :
-            error ? <ErrorMessage message={error} retryAction={loadGameList} /> :
+            error ? <ErrorMessage message={error} retryAction={fetchGames} /> :
               <List games={games} />
         }
       </section>
@@ -80,25 +49,23 @@ const AddGame = () => {
   const [name, setName] = useState('');
   const [status, setStatus] = useState('');
 
+  const {
+    submitGame
+  } = useGames();
+
   let validatedStatus = status as 'playing' | 'completed' | 'wishlist' | 'paused'
 
-  const submitGame = async () => {
-    try {
-      let game = {
+  const positiveAction = async () => {
+    let game = {
         name, status: validatedStatus
       }
-      console.log(game)
-      await postGame(game)
-    } catch (error) {
-      console.log(error?.message)
-    }
-
+    await submitGame(game)
   }
 
   return (
     <>
       <Button onClick={() => setOpen(true)}>Add</Button>
-      <Modal isOpen={open} title='Add a game' close={() => setOpen(false)} positiveAction={submitGame}>
+      <Modal isOpen={open} title='Add a game' close={() => setOpen(false)} positiveAction={positiveAction}>
         <form action=""
           style={{
             display: "flex",
