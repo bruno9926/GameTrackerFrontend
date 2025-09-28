@@ -4,6 +4,7 @@ import { useState, type FC } from "react";
 import useGames from "../../hooks/useGames";
 import styles from './AddGameModal.module.scss';
 import { Select, SelectItem } from "../Atoms/Select/";
+import { type GameStatus, DEFAULT_GAME_STATUS, GAME_STATUSES } from "../../types/Game";
 
 type AddGameModalProps = {
     open: boolean,
@@ -13,21 +14,17 @@ type AddGameModalProps = {
 
 const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) => {
     const [name, setName] = useState('');
-    const [status, setStatus] = useState('playing');
+    const [status, setStatus] = useState<GameStatus>(DEFAULT_GAME_STATUS);
 
     const clearFields = () => {
         setName('');
-        setStatus('');
+        setStatus(DEFAULT_GAME_STATUS);
     }
 
     const { submitGame, loading } = useGames();
 
     const postGame = async () => {
-        let game = {
-            name, status: status as 'playing' | 'completed' | 'wishlist' | 'paused'
-        }
-        console.log(game)
-        await submitGame(game);
+        await submitGame({ name, status });
         refreshAction();
         clearFields();
         setOpen(false)
@@ -52,15 +49,11 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
                 />
                 <Select
                     value={status}
-                    onChange={(e) => {
-                        console.log(e.target.value)
-
-                        setStatus(e.target.value)
-                    }}
+                    onChange={(e) => setStatus(e.target.value as GameStatus)}
                 >
                     {
-                        ["playing", "completed", "paused", "wishlist"].map((value, index) => (
-                            <SelectItem key={index} value={value}>{value}</SelectItem>
+                        Object.entries(GAME_STATUSES).map(([name, label]) => (
+                            <SelectItem key={name} value={name}>{label}</SelectItem>
                         ))
                     }
                 </Select>

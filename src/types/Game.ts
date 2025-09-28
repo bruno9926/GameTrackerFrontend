@@ -1,5 +1,16 @@
+export const GAME_STATUSES = {
+    playing: "Playing",
+    completed: "Completed",
+    wishlist: "Wishlist",
+    paused: "Paused"
+} as const;
+
+export type GameStatus = keyof typeof GAME_STATUSES;
+
 export type Game = {
     id: number,
     name: string, 
-    status : 'playing' | 'completed' | 'wishlist' | 'paused'
+    status : GameStatus
 }
+
+export const DEFAULT_GAME_STATUS = GAME_STATUSES.playing

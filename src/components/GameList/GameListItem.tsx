@@ -1,4 +1,4 @@
-import type {Game} from '../../types/Game'
+import {GAME_STATUSES, type Game} from '../../types/Game'
 // styles
 import styles from './GameListItem.module.scss'
 
@@ -9,7 +9,7 @@ const GameListItem = ({ name, status }: GameListItemProps) => {
     <div className={styles['game-list-item']}>
         <p className={styles['game-name']} title={name}>{name}</p>
         <div className={styles['game-status'] + ' ' + styles[status]}>
-            {status}
+            {GAME_STATUSES[status]} {/*use the label from the status name*/}
         </div>
     </div>
   )
