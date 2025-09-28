@@ -8,7 +8,7 @@ const ThemeToggle = () => {
 
     const [mode, setMode] = useState('dark')
 
-    const light = 'light'
+    const light = 'girly'
 
     const toggleMode = () => {
         setMode((prevMode) => (prevMode === 'dark' ? light : 'dark'))

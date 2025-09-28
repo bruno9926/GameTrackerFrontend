@@ -3,6 +3,7 @@ import Input from "../Atoms/Input/Input";
 import { useState, type FC } from "react";
 import useGames from "../../hooks/useGames";
 import styles from './AddGameModal.module.scss';
+import { Select, SelectItem } from "../Atoms/Select/";
 
 type AddGameModalProps = {
     open: boolean,
@@ -12,7 +13,7 @@ type AddGameModalProps = {
 
 const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) => {
     const [name, setName] = useState('');
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState('playing');
 
     const clearFields = () => {
         setName('');
@@ -21,12 +22,11 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
 
     const { submitGame, loading } = useGames();
 
-    let validatedStatus = status as 'playing' | 'completed' | 'wishlist' | 'paused'
-
     const postGame = async () => {
         let game = {
-            name, status: validatedStatus
+            name, status: status as 'playing' | 'completed' | 'wishlist' | 'paused'
         }
+        console.log(game)
         await submitGame(game);
         refreshAction();
         clearFields();
@@ -50,12 +50,20 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
                     onChange={(e) => setName(e.target.value)}
                     disabled={loading}
                 />
-                <Input
-                    label='status'
+                <Select
                     value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    disabled={loading}
-                />
+                    onChange={(e) => {
+                        console.log(e.target.value)
+
+                        setStatus(e.target.value)
+                    }}
+                >
+                    {
+                        ["playing", "completed", "paused", "wishlist"].map((value, index) => (
+                            <SelectItem key={index} value={value}>{value}</SelectItem>
+                        ))
+                    }
+                </Select>
             </form>
         </Modal>
     )
