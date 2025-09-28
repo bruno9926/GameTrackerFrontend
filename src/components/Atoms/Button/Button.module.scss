@@ -9,25 +9,35 @@
   --accent-darken-40: color-mix(in srgb, var(--color-accent), black 40%);
   --accent-darken-80: color-mix(in srgb, var(--color-accent), black 80%);
 
+  // Generate static CSS variables for accent-fade
+  @for $f from 10 through 90 {
+    --accent-fade-#{$f}: color-mix(in srgb, var(--color-accent), transparent #{$f + '%'});
+  }
+
 
   &:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: auto;
+  }
+
   &.primary {
     background: var(--color-accent);
     border: none;
 
-    &:hover {
-      background: var(--accent-darken-40);
+    &:hover:not(:disabled) {
+      background: var(--accent-fade-20);
     }
   }
   &.secondary {
     background-color: transparent;
 
-    &:hover {
-      background: var(--accent-darken-80);
+    &:hover:not(:disabled) {
+      background: var(--accent-fade-80);
     }
   }
   &.tertiary {

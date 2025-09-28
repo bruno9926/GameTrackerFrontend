@@ -8,6 +8,8 @@ const navigationItems = [
   { label: 'Settings' },
 ];
 
+import Logo from '../../assets/logo.png';
+
 const Navigation = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const toggleMenu = () => setShowMobileMenu(current => !current);
@@ -25,7 +27,7 @@ const Navigation = () => {
         className={`${styles.navigation} ${showMobileMenu ? styles['show-mobile-menu'] : ''}`}
       >
         <nav className={styles['navigation-menu']}>
-          <span>Gaming Tracker</span>
+          <img className={styles.logo} src={Logo} alt="GameTracker" />
           <div className={styles['nav-items']}>
             {navigationItems.map((item) => (
               <NavigationItem key={item.label} active={item.active}>

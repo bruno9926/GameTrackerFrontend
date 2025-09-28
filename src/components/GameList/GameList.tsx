@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import Modal from '../Organisms/Modal/Modal';
 import Button from '../Atoms/Button/Button';
-import Input from '../Atoms/Input/Input';
 import GameListItem from './GameListItem';
 //styles
 import styles from './GameList.module.scss';
@@ -10,10 +8,11 @@ import { VscError } from "react-icons/vsc";
 import type { Game } from '../../types/Game';
 // hooks
 import useGames from '../../hooks/useGames';
+import AddGameModal from '../AddGameModal/AddGameModal';
 
 
 const GameList = () => {
-  
+
   const {
     loading,
     error,
@@ -26,12 +25,15 @@ const GameList = () => {
     fetchGames();
   }, [])
 
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <section className={`${styles['game-list-section']} dashboard-container`}>
         <div className={styles.header}>
           <h2>Game List</h2>
-          <AddGame />
+          <Button onClick={() => setOpen(true)}>Add</Button>
+
         </div>
         {
           loading ? <Loading /> :
@@ -39,44 +41,7 @@ const GameList = () => {
               <List games={games} />
         }
       </section>
-
-    </>
-  )
-}
-
-const AddGame = () => {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [status, setStatus] = useState('');
-
-  const {
-    submitGame
-  } = useGames();
-
-  let validatedStatus = status as 'playing' | 'completed' | 'wishlist' | 'paused'
-
-  const positiveAction = async () => {
-    let game = {
-        name, status: validatedStatus
-      }
-    await submitGame(game)
-  }
-
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Add</Button>
-      <Modal isOpen={open} title='Add a game' close={() => setOpen(false)} positiveAction={positiveAction}>
-        <form action=""
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px"
-          }}
-        >
-          <Input label='name' value={name} onChange={(e) => setName(e.target.value)} />
-          <Input label='status' value={status} onChange={(e) => setStatus(e.target.value)} />
-        </form>
-      </Modal>
+      <AddGameModal open={open} setOpen={setOpen} refreshAction={() => fetchGames()} />
     </>
   )
 }

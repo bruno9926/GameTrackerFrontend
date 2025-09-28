@@ -21,7 +21,7 @@ const Input: FC<InputProps> = ({
 
     return (
         <div className={styles.wrapper}>
-            <label className={`${styles.label} ${focused ? styles.floated : ""}`}>
+            <label className={`${styles.label} ${focused || inputRef.current?.value ? styles.floated : ""}`}>
                 {label}
             </label>
             <input

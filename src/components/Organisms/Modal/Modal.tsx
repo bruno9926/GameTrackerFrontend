@@ -10,10 +10,11 @@ interface ModalProps {
     close: () => void,
     positiveAction?: () => void,
     children?: Readonly<ReactNode>,
-    isOpen: Boolean
+    isOpen: boolean,
+    loading?: boolean
 }
 
-const Modal: FC<ModalProps> = ({ title, children, positiveAction, isOpen, close }) => {
+const Modal: FC<ModalProps> = ({ title, children, positiveAction, isOpen, close, loading }) => {
 
     useEffect(() => {
         if (isOpen) {
@@ -51,10 +52,10 @@ const Modal: FC<ModalProps> = ({ title, children, positiveAction, isOpen, close 
                                 {children}
                             </div>
                             <div className={styles.footer}>
-                                <Button variant='secondary' onClick={close}>Close</Button>
+                                <Button loading={loading} variant='secondary' onClick={close}>Close</Button>
                                 {
                                     positiveAction &&
-                                    <Button onClick={() => positiveAction()}>Add</Button>
+                                    <Button disabled={loading} onClick={() => positiveAction()}>Add</Button>
                                 }
                             </div>
                         </motion.div>
