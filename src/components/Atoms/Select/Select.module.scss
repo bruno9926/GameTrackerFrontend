@@ -18,6 +18,74 @@
     &:hover:not(:disabled) {
       background-color: var(--color-border);
     }
+
+    option {
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      padding: 10px;
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--color-border);
+      }
+
+      &:first-of-type {
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+
+      &:last-of-type {
+        border-radius: 0 0 0.5rem 0.5rem;
+      }
+
+      &:not(:last-of-type) {
+        border-bottom: none;
+      }
+
+      &:checked {
+        background-color: var(--color-accent);
+        font-weight: bold;
+        color: var(--color-bg);
+      }
+
+      &::checkmark {
+        display: none;
+      }
+    }
+  }
+
+  select,
+  ::picker(select) {
+    appearance: base-select;
+  }
+
+  ::picker(select) {
+    top: calc(anchor(bottom) + 5px);
+    border: none;
+    background-color: transparent;
+    opacity: 0;
+    transition: all 200ms allow-discrete;
+  }
+
+  ::picker(select):popover-open {
+    opacity: 1;
+  }
+
+  @starting-style {
+    ::picker(select):popover-open {
+      opacity: 0;
+    }
+  }
+
+  select::picker-icon {
+    content: '▾';
+    color: var(--color-text);
+    transition: 300ms rotate;
+  }
+
+  select:open::picker-icon {
+    rotate: 180deg;
   }
 
   .label {

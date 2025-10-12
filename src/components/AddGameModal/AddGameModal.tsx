@@ -48,6 +48,7 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
                     disabled={loading}
                 />
                 <Select
+                    label="status"
                     value={status}
                     onChange={(e) => setStatus(e.target.value as GameStatus)}
                 >
