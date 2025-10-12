@@ -13,4 +13,4 @@ export type Game = {
     status : GameStatus
 }
 
-export const DEFAULT_GAME_STATUS = GAME_STATUSES.playing
+export const DEFAULT_GAME_STATUS = "playing" as GameStatus;
