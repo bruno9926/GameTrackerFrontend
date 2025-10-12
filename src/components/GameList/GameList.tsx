@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Button from '../Atoms/Button/Button';
 import GameListItem from './GameListItem';
+import ErrorMessage from '../Atoms/ErrorMessage/ErrorMessage';
 //styles
 import styles from './GameList.module.scss';
-import { VscError } from "react-icons/vsc";
 // data
 import type { Game } from '../../types/Game';
 // hooks
@@ -61,21 +61,6 @@ const List = ({ games }: { games: Game[] }) => (
 
 const Loading = () => (
   <span>Loading...</span>
-)
-
-const ErrorMessage = ({ message, retryAction }: { message: string, retryAction: () => void }) => (
-  <div className={styles['error-message']}>
-    <div className={styles['error-title']}>
-      <VscError />
-      <span>Error</span>
-    </div>
-    <div>
-      <span className={styles.error}>{message}, </span>
-      <button onClick={() => retryAction()}>
-        Retry
-      </button>
-    </div>
-  </div>
 )
 
 export default GameList;

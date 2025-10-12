@@ -34,15 +34,17 @@ const useGames = () => {
             setError(null);
             setLoading(true);
             const games = await gameService.postGame(game);
+            console.log(games)
 
             if(!Array.isArray(games)) throw new Error("Response is not an array");
             setGames(games);
-        } catch (error) {
-            if (error instanceof Error) {
-                setError(error.message);
+        } catch (exception) {
+            if (exception instanceof Error) {
+                setError(exception.message);
             } else {
-                setError(String(error));
+                setError(String(exception));
             }
+            throw exception;
         } finally {
             setLoading(false);
         }

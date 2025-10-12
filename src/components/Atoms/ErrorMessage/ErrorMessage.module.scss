@@ -1,0 +1,28 @@
+  .error-message {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid #b74949;
+    padding: 8px;
+    color: #b33636;
+
+    .error-title {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      span {
+        font-weight: 600;
+      }
+    }
+
+    button {
+      background-color: transparent;
+      width: fit-content;
+      text-decoration: underline;
+      padding: 0;
+      color: inherit;
+      font-weight: 600;
+      border: none;
+    }
+  }

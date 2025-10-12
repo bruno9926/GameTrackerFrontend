@@ -5,6 +5,7 @@ import useGames from "../../hooks/useGames";
 import styles from './AddGameModal.module.scss';
 import { Select, SelectItem } from "../Atoms/Select/";
 import { type GameStatus, DEFAULT_GAME_STATUS, GAME_STATUSES } from "../../types/Game";
+import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
 
 type AddGameModalProps = {
     open: boolean,
@@ -21,13 +22,17 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
         setStatus(DEFAULT_GAME_STATUS);
     }
 
-    const { submitGame, loading } = useGames();
+    const { submitGame, loading, error } = useGames();
 
     const postGame = async () => {
-        await submitGame({ name, status });
-        refreshAction();
-        clearFields();
-        setOpen(false)
+        try {
+            await submitGame({ name, status });
+            clearFields();
+            setOpen(false);
+            refreshAction();
+        } catch {
+            // dont close the modal
+        }
     }
     return (
         <Modal
@@ -40,7 +45,8 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
             positiveAction={postGame}
             loading={loading}
         >
-            <form className={styles.form}>
+            <div className={styles['modal-content']}>
+                <form className={styles.form}>
                 <Input
                     label='name'
                     value={name}
@@ -59,6 +65,10 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
                     }
                 </Select>
             </form>
+            {
+                error && <ErrorMessage message={error} />
+            }
+            </div>
         </Modal>
     )
 }

@@ -39,7 +39,15 @@ class GameService {
     }
 
     private async handleResponse<T>(res: Response): Promise<T> {
-        if (!res.ok) throw new Error("Error: " + res.statusText);
+        console.log(res.ok);
+        if (!res.ok) {
+            let message = res.statusText;
+            const data = await res.json();
+            if (data?.message) {
+                message = Array.isArray(data.message) ? data.message.join(', ') : data.message;
+            }
+            throw new Error('Error: ' + message);
+        }
         return res.json();
     }
 }
