@@ -1,20 +1,9 @@
-import Dashboard from './components/Dashboard/Dashboard';
-import Header from './components/Header/Header';
-import Navigation from './components/Navigation/Navigation';
+import MainLayout from "./layout/MainLayout";
 
-import './styles/main.scss'
-
+import "./styles/main.scss";
 
 function App() {
-  return (
-    <main className='app-layout'>
-      <Navigation />
-      <Header />
-      <div className='main-content'>
-        <Dashboard />
-      </div>
-    </main>
-  )
+  return <MainLayout />;
 }
 
-export default App
+export default App;
