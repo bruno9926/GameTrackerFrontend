@@ -50,9 +50,9 @@ const GameList = () => {
         )}
       </section>
       <AddGameModal
-        open={addModalOpen}
-        setOpen={setAddModalOpen}
-        refreshAction={() => fetchGames()}
+        isOpen={addModalOpen}
+        close={() => setAddModalOpen(false)}
+        onSubmit={() => fetchGames()}
       />
     </>
   );
