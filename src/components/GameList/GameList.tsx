@@ -4,6 +4,7 @@ import GameListItem from './GameListItem';
 import ErrorMessage from '../Atoms/ErrorMessage/ErrorMessage';
 //styles
 import styles from './GameList.module.scss';
+import { GoPlus } from "react-icons/go";
 // data
 import type { Game } from '../../types/Game';
 // hooks
@@ -32,7 +33,7 @@ const GameList = () => {
       <section className={`${styles['game-list-section']} dashboard-container`}>
         <div className={styles.header}>
           <h2>Game List</h2>
-          <Button onClick={() => setOpen(true)}>Add</Button>
+          <Button variant='secondary' onClick={() => setOpen(true)}><GoPlus /> Add Game</Button>
 
         </div>
         {

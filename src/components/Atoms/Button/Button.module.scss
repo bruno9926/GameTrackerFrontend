@@ -1,5 +1,5 @@
 .button {
-  border-radius: 8px;
+  border-radius: 18px;
   border: none;
   cursor: pointer;
   font-weight: 500;
@@ -36,6 +36,8 @@
   }
   &.secondary {
     background-color: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
 
     &:hover:not(:disabled) {
       background: var(--accent-fade-80);
