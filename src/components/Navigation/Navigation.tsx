@@ -30,7 +30,11 @@ const Navigation = () => {
           <img className={styles.logo} src={Logo} alt="GameTracker" />
           <div className={styles["nav-items"]}>
             {navigationItems.map((item) => (
-              <NavigationItem key={item.label} route={item.route}>
+              <NavigationItem
+                key={item.label}
+                route={item.route}
+                onClick={() => setShowMobileMenu(false)}
+              >
                 {item.label}
               </NavigationItem>
             ))}
@@ -42,14 +46,15 @@ const Navigation = () => {
   );
 };
 
-interface NavigationItemProps {
+type NavigationItemProps = {
   children: Readonly<React.ReactNode>;
   route: string;
-}
+} & React.HTMLAttributes<HTMLAnchorElement>;
 
-const NavigationItem = ({ children, route }: NavigationItemProps) => {
+const NavigationItem = ({ children, route, ...props }: NavigationItemProps) => {
   return (
     <NavLink
+      {...props}
       className={({ isActive }) =>
         `${styles["nav-item"]} ${isActive ? styles["active"] : ""}`
       }
