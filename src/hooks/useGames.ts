@@ -39,6 +39,12 @@ const useGames = () => {
         setGames(games);
     })
 
+    const deleteGame = async (id: number) => handleRequest(async () => {
+        const games =await gameService.deleteGame(id);
+        if (!Array.isArray(games)) throw new Error("Response is not an array");
+        setGames(games);
+    })
+
     const clearError = () => setError(null);
 
     return {
@@ -47,6 +53,7 @@ const useGames = () => {
         games,
         fetchGames,
         submitGame,
+        deleteGame,
         clearError,
     }
 

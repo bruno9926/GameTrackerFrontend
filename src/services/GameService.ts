@@ -38,6 +38,17 @@ class GameService {
         return this.handleResponse<Game[]>(res);
     }
 
+    async deleteGame(id: number): Promise<Game[]> {
+        if (!id || Number.isNaN(id)) {
+            throw new Error("The id provided is not valid");
+        }
+        const res = await fetch(`${API_URL}/${id}`, {
+            method: "DELETE",
+            headers: GameService.defaultHeaders
+        })
+        return this.handleResponse<Game[]>(res)
+    }
+
     private async handleResponse<T>(res: Response): Promise<T> {
         console.log(res.ok);
         if (!res.ok) {
