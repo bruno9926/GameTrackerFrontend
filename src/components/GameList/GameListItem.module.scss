@@ -9,6 +9,58 @@
   background-color: var(--color-card-bg);
   border-radius: 12px;
 
+  .right-element {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .options {
+      display: none;
+      position: relative;
+      color: var(--color-text);
+      transition: all 0.3s ease;
+
+      .options-menu {
+        display: none;
+        flex-direction: column;
+
+        position: absolute;
+        top: 100%;
+        right: -10px;
+        background-color: var(--color-card-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        white-space: nowrap;
+        z-index: 10;
+        min-width: 7rem;
+
+        .option {
+          padding: 8px 16px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--color-border);
+          }
+        }
+
+        &.open {
+          display: flex;
+        }
+      }
+
+      &.open {
+        display: flex;
+      }
+    }
+  }
+
+  &:hover {
+    .options {
+      display: flex;
+    }
+  }
+
   .game-name {
     white-space: nowrap;
     width: 16rem;
@@ -23,25 +75,41 @@
     font-weight: bold;
     color: black;
     cursor: pointer;
-      border: 1px solid;
+    border: 1px solid;
 
     &.playing {
-      background-color: color-mix(in srgb, var(--color-playing), transparent 90%);
+      background-color: color-mix(
+        in srgb,
+        var(--color-playing),
+        transparent 90%
+      );
       color: var(--color-playing);
       border-color: var(--color-playing);
     }
     &.completed {
-      background-color: color-mix(in srgb, var(--color-completed), transparent 90%);
+      background-color: color-mix(
+        in srgb,
+        var(--color-completed),
+        transparent 90%
+      );
       color: var(--color-completed);
       border-color: var(--color-completed);
     }
     &.wishlist {
-      background-color: color-mix(in srgb, var(--color-wishlist), transparent 90%);
+      background-color: color-mix(
+        in srgb,
+        var(--color-wishlist),
+        transparent 90%
+      );
       color: var(--color-wishlist);
       border-color: var(--color-wishlist);
     }
     &.paused {
-      background-color: color-mix(in srgb, var(--color-paused), transparent 90%);
+      background-color: color-mix(
+        in srgb,
+        var(--color-paused),
+        transparent 90%
+      );
       color: var(--color-paused);
       border-color: var(--color-paused);
     }
