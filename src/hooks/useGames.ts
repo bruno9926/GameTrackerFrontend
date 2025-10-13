@@ -5,39 +5,16 @@ import GameService from "../services/GameService";
 
 const useGames = () => {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>();
+    const [error, setError] = useState<string | null>(null);
     const [games, setGames] = useState<Game[]>([]);
 
     const gameService: GameService = GameService.getInstance();
 
-    const fetchGames = async () => {
+    const handleRequest = async (action: () => Promise<void>) => {
         try {
             setError(null);
             setLoading(true);
-            const games = await gameService.fetchGames();
-            
-            if(!Array.isArray(games)) throw new Error("Response is not an array");
-            setGames(games);
-        } catch (error) {
-            if (error instanceof Error) {
-                setError(error.message);
-            } else {
-                setError(String(error));
-            }
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    const submitGame = async (game: Omit<Game, 'id'>) => {
-        try {
-            setError(null);
-            setLoading(true);
-            const games = await gameService.postGame(game);
-            console.log(games)
-
-            if(!Array.isArray(games)) throw new Error("Response is not an array");
-            setGames(games);
+            await action();
         } catch (exception) {
             if (exception instanceof Error) {
                 setError(exception.message);
@@ -50,12 +27,27 @@ const useGames = () => {
         }
     }
 
+    const fetchGames = async () => handleRequest(async () => {
+        const games = await gameService.fetchGames();
+        if (!Array.isArray(games)) throw new Error("Response is not an array");
+        setGames(games);
+    })
+
+    const submitGame = async (game: Omit<Game, 'id'>) => handleRequest(async () => {
+        const games = await gameService.postGame(game);
+        if (!Array.isArray(games)) throw new Error("Response is not an array");
+        setGames(games);
+    })
+
+    const clearError = () => setError(null);
+
     return {
         loading,
         error,
         games,
         fetchGames,
-        submitGame
+        submitGame,
+        clearError,
     }
 
 }

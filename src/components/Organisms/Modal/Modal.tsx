@@ -8,13 +8,24 @@ import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 interface ModalProps {
     title: string,
     close: () => void,
-    positiveAction?: () => void,
+    onConfirm?: () => void,
+    confirmLabel?: string,
+    closeLabel?: string,
     children?: Readonly<ReactNode>,
     isOpen: boolean,
     loading?: boolean
 }
 
-const Modal: FC<ModalProps> = ({ title, children, positiveAction, isOpen, close, loading }) => {
+const Modal: FC<ModalProps> = ({
+    title,
+    children,
+    onConfirm,
+    isOpen,
+    close,
+    loading,
+    confirmLabel = "Confirm",
+    closeLabel = "Close"
+}) => {
 
     useEffect(() => {
         if (isOpen) {
@@ -52,10 +63,10 @@ const Modal: FC<ModalProps> = ({ title, children, positiveAction, isOpen, close,
                                 {children}
                             </div>
                             <div className={styles.footer}>
-                                <Button loading={loading} variant='secondary' onClick={close}>Close</Button>
+                                <Button loading={loading} variant='secondary' onClick={close}>{closeLabel}</Button>
                                 {
-                                    positiveAction &&
-                                    <Button disabled={loading} onClick={() => positiveAction()}>Add</Button>
+                                    onConfirm &&
+                                    <Button disabled={loading} onClick={() => onConfirm()}>{confirmLabel}</Button>
                                 }
                             </div>
                         </motion.div>

@@ -10,7 +10,7 @@ import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
 type AddGameModalProps = {
     open: boolean,
     setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    refreshAction: () => {}
+    refreshAction: () => void
 }
 
 const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) => {
@@ -22,12 +22,13 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
         setStatus(DEFAULT_GAME_STATUS);
     }
 
-    const { submitGame, loading, error } = useGames();
+    const { submitGame, loading, error, clearError } = useGames();
 
     const postGame = async () => {
         try {
             await submitGame({ name, status });
             clearFields();
+            clearError();
             setOpen(false);
             refreshAction();
         } catch {
@@ -40,9 +41,11 @@ const AddGameModal: FC<AddGameModalProps> = ({ open, setOpen, refreshAction }) =
             title='Add a game'
             close={() => {
                 clearFields();
+                clearError();
                 setOpen(false);
             }}
-            positiveAction={postGame}
+            onConfirm={postGame}
+            confirmLabel="Add"
             loading={loading}
         >
             <div className={styles['modal-content']}>

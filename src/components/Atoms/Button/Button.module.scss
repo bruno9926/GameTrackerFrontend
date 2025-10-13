@@ -5,6 +5,7 @@
   font-weight: 500;
   transition: background 0.2s ease;
   color: var(--color-text);
+  min-width: 6rem;
 
   --accent-darken-40: color-mix(in srgb, var(--color-accent), black 40%);
   --accent-darken-80: color-mix(in srgb, var(--color-accent), black 80%);
