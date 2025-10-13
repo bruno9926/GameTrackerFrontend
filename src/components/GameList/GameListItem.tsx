@@ -4,7 +4,7 @@ import { GAME_STATUSES, type Game } from "../../types/Game";
 // styles
 import styles from "./GameListItem.module.scss";
 
-type GameListItemProps = {} & Pick<Game, "name" | "status">;
+type GameListItemProps = {} & Game;
 
 type Option = { label: string; action: () => void };
 
