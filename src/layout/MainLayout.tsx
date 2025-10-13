@@ -1,6 +1,6 @@
-import Dashboard from "../pages/Dashboard/Dashboard";
 import Header from "../components/Header/Header";
 import Navigation from "../components/Navigation/Navigation";
+import { Outlet } from "react-router";
 
 import "../styles/main.scss";
 
@@ -10,7 +10,7 @@ function MainLayout() {
       <Navigation />
       <Header />
       <div className="main-content">
-        <Dashboard />
+        <Outlet />
       </div>
     </main>
   );
