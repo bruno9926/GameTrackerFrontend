@@ -23,18 +23,27 @@
     font-weight: bold;
     color: black;
     cursor: pointer;
+      border: 1px solid;
 
     &.playing {
-      background-color: var(--color-playing);
+      background-color: color-mix(in srgb, var(--color-playing), transparent 90%);
+      color: var(--color-playing);
+      border-color: var(--color-playing);
     }
     &.completed {
-      background-color: var(--color-completed);
+      background-color: color-mix(in srgb, var(--color-completed), transparent 90%);
+      color: var(--color-completed);
+      border-color: var(--color-completed);
     }
     &.wishlist {
-      background-color: var(--color-wishlist);
+      background-color: color-mix(in srgb, var(--color-wishlist), transparent 90%);
+      color: var(--color-wishlist);
+      border-color: var(--color-wishlist);
     }
     &.paused {
-      background-color: var(--color-paused);
+      background-color: color-mix(in srgb, var(--color-paused), transparent 90%);
+      color: var(--color-paused);
+      border-color: var(--color-paused);
     }
   }
 }
