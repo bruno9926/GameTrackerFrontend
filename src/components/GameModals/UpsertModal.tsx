@@ -7,6 +7,7 @@ import { Select, SelectItem } from "../Atoms/Select";
 import {
   type Game,
   type GameStatus,
+  type GameToUpdate,
   DEFAULT_GAME_STATUS,
   GAME_STATUSES,
 } from "../../types/Game";
@@ -15,11 +16,13 @@ import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
 export type UpsertModalProps = ModalProps & {
   mode: "add" | "edit";
   gameToEdit?: Game;
-  onSubmit: () => void;
+  onSubmit?: () => void;
+  updateGame?: (game: GameToUpdate) => void;
 };
 
 const UpsertModal: FC<UpsertModalProps> = ({
-  onSubmit,
+  onSubmit = () => {},
+  updateGame = () => {},
   gameToEdit,
   mode,
   ...modalProps
@@ -49,7 +52,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
     try {
       if (isEditMode && gameToEdit) {
         // Update existing game logic here
-        console.log("Editing game:", gameToEdit.id);
+        await updateGame({ id: gameToEdit.id, name, status });
       } else {
         // Add new game logic here
         await submitGame({ name, status });

@@ -1,4 +1,4 @@
-import type { Game } from "../types/Game";
+import type { Game, GameToUpdate, GameToCreate } from "../types/Game";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -27,9 +27,10 @@ class GameService {
 
   /**
    * adds a game into the users games
+   * @param game the game to add
    * @return all the games after the addition
    */
-  async postGame(game: Omit<Game, "id">): Promise<Game[]> {
+  async postGame(game: GameToCreate): Promise<Game[]> {
     const res = await fetch(API_URL, {
       method: "POST",
       headers: GameService.defaultHeaders,
@@ -38,6 +39,11 @@ class GameService {
     return this.handleResponse<Game[]>(res);
   }
 
+  /**
+   * deletes a game from the users games
+   * @param id the id of the game to delete
+   * @returns all the games after the deletion
+   */
   async deleteGame(id: string): Promise<Game[]> {
     if (!id) {
       throw new Error("The id provided is not valid");
@@ -45,6 +51,18 @@ class GameService {
     const res = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
       headers: GameService.defaultHeaders,
+    });
+    return this.handleResponse<Game[]>(res);
+  }
+
+  async updateGame(game: GameToUpdate): Promise<Game[]> {
+    if (!game.id) {
+      throw new Error("The id provided is not valid");
+    }
+    const res = await fetch(API_URL, {
+      method: "PUT",
+      headers: GameService.defaultHeaders,
+      body: JSON.stringify(game),
     });
     return this.handleResponse<Game[]>(res);
   }

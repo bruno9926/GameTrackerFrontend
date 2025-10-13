@@ -10,7 +10,8 @@ import { GoPlus } from "react-icons/go";
 import useGames from "../../hooks/useGames";
 
 const GameList = () => {
-  const { loading, error, games, fetchGames, deleteGame } = useGames();
+  const { loading, error, games, fetchGames, deleteGame, updateGame } =
+    useGames();
 
   useEffect(() => {
     fetchGames();
@@ -27,6 +28,7 @@ const GameList = () => {
           name={game.name}
           status={game.status}
           deleteGame={() => deleteGame(game.id)}
+          updateGame={async (game) => await updateGame(game)}
         />
       ))}
     </div>

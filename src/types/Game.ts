@@ -14,3 +14,6 @@ export type Game = {
 };
 
 export const DEFAULT_GAME_STATUS = "playing" as GameStatus;
+
+export type GameToCreate = Omit<Game, "id">;
+export type GameToUpdate = Partial<Game> & { id: string };

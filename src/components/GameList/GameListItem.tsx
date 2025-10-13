@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GAME_STATUSES, type Game } from "../../types/Game";
+import { GAME_STATUSES, type Game, type GameToUpdate } from "../../types/Game";
 import OptionsMenu from "../Organisms/OptionsMenu/OptionsMenu";
 import { DeleteGameModal, EditGameModal } from "../GameModals";
 // styles
@@ -7,9 +7,16 @@ import styles from "./GameListItem.module.scss";
 
 type GameListItemProps = {
   deleteGame: () => void;
+  updateGame: (game: GameToUpdate) => void;
 } & Game;
 
-const GameListItem = ({ id, name, status, deleteGame }: GameListItemProps) => {
+const GameListItem = ({
+  id,
+  name,
+  status,
+  deleteGame,
+  updateGame,
+}: GameListItemProps) => {
   const options = [
     {
       label: "Edit",
@@ -56,7 +63,10 @@ const GameListItem = ({ id, name, status, deleteGame }: GameListItemProps) => {
         gameToEdit={{ id, name, status }}
         isOpen={editModalOpen}
         close={() => setEditModalOpen(false)}
-        onSubmit={() => {}}
+        updateGame={(game: GameToUpdate) => {
+          updateGame(game);
+          setEditModalOpen(false);
+        }}
       />
     </div>
   );

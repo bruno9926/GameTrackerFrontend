@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Game } from "../types/Game";
+import type { Game, GameToCreate, GameToUpdate } from "../types/Game";
 import GameService from "../services/GameService";
 
 const useGames = () => {
@@ -33,7 +33,7 @@ const useGames = () => {
       setGames(games);
     });
 
-  const submitGame = async (game: Omit<Game, "id">) =>
+  const submitGame = async (game: GameToCreate) =>
     handleRequest(async () => {
       const games = await gameService.postGame(game);
       if (!Array.isArray(games)) throw new Error("Response is not an array");
@@ -47,6 +47,13 @@ const useGames = () => {
       setGames(games);
     });
 
+  const updateGame = async (game: GameToUpdate) =>
+    handleRequest(async () => {
+      const games = await gameService.updateGame(game);
+      if (!Array.isArray(games)) throw new Error("Response is not an array");
+      setGames(games);
+    });
+
   const clearError = () => setError(null);
 
   return {
@@ -56,6 +63,7 @@ const useGames = () => {
     fetchGames,
     submitGame,
     deleteGame,
+    updateGame,
     clearError,
   };
 };
