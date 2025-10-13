@@ -1,18 +1,26 @@
-import { useState, useRef, useEffect } from "react";
-import { SlOptions } from "react-icons/sl";
+import { useState } from "react";
+import DeleteGameModal from "../DeleteGameModal/DeleteGameModal";
 import { GAME_STATUSES, type Game } from "../../types/Game";
+import OptionsMenu from "../Organisms/OptionsMenu/OptionsMenu";
 // styles
 import styles from "./GameListItem.module.scss";
 
-type GameListItemProps = {} & Game;
+type GameListItemProps = {
+  deleteGame: () => void;
+} & Game;
 
-type Option = { label: string; action: () => void };
-
-const GameListItem = ({ name, status }: GameListItemProps) => {
-  const options: Option[] = [
+const GameListItem = ({ name, status, deleteGame }: GameListItemProps) => {
+  const options = [
     { label: "Edit", action: () => {} },
-    { label: "Delete", action: () => {} },
+    {
+      label: "Delete",
+      action: () => {
+        setDeleteModalOpen(true);
+      },
+    },
   ];
+
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   return (
     <div className={styles["game-list-item"]}>
@@ -23,59 +31,21 @@ const GameListItem = ({ name, status }: GameListItemProps) => {
         <div className={styles["game-status"] + " " + styles[status]}>
           {GAME_STATUSES[status]} {/*use the label from the status name*/}
         </div>
-        <Options options={options} />
+        <div className={styles.options}>
+          <OptionsMenu options={options} />
+        </div>
       </div>
-    </div>
-  );
-};
 
-const Options = ({ options }: { options: Option[] }) => {
-  const [open, setOpen] = useState(false);
-  const toggleOpen = () => {
-    console.log("toggling");
-    setOpen((prev) => !prev);
-  };
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
-
-    if (open) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [open]);
-
-  return (
-    <div
-      ref={ref}
-      className={`${styles["options"]} ${open ? styles["open"] : ""}`}
-    >
-      <SlOptions onClick={() => toggleOpen()} />
-      <div
-        className={`${styles["options-menu"]} ${open ? styles["open"] : ""}`}
-      >
-        {options.map((option) => (
-          <div
-            key={option.label}
-            className={styles["option"]}
-            onClick={() => {
-              option.action();
-              setOpen(false);
-            }}
-          >
-            {option.label}
-          </div>
-        ))}
-      </div>
+      <DeleteGameModal
+        isOpen={deleteModalOpen}
+        close={() => setDeleteModalOpen(false)}
+        confirmLabel="Delete"
+        gameName={name}
+        onConfirm={() => {
+          deleteGame();
+          setDeleteModalOpen(false);
+        }}
+      />
     </div>
   );
 };

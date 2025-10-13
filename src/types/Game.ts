@@ -8,7 +8,7 @@ export const GAME_STATUSES = {
 export type GameStatus = keyof typeof GAME_STATUSES;
 
 export type Game = {
-  id: number | string;
+  id: string;
   name: string;
   status: GameStatus;
 };

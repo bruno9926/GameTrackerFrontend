@@ -40,7 +40,7 @@ const useGames = () => {
       setGames(games);
     });
 
-  const deleteGame = async (id: number) =>
+  const deleteGame = async (id: string) =>
     handleRequest(async () => {
       const games = await gameService.deleteGame(id);
       if (!Array.isArray(games)) throw new Error("Response is not an array");

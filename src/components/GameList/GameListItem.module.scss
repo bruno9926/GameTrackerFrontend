@@ -16,48 +16,12 @@
 
     .options {
       display: none;
-      position: relative;
-      color: var(--color-text);
-      transition: all 0.3s ease;
-
-      .options-menu {
-        display: none;
-        flex-direction: column;
-
-        position: absolute;
-        top: 100%;
-        right: -10px;
-        background-color: var(--color-card-bg);
-        border: 1px solid var(--color-border);
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        white-space: nowrap;
-        z-index: 10;
-        min-width: 7rem;
-
-        .option {
-          padding: 8px 16px;
-          cursor: pointer;
-
-          &:hover {
-            background-color: var(--color-border);
-          }
-        }
-
-        &.open {
-          display: flex;
-        }
-      }
-
-      &.open {
-        display: flex;
-      }
     }
   }
 
   &:hover {
     .options {
-      display: flex;
+      display: block;
     }
   }
 
