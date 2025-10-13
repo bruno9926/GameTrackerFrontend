@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../Atoms/Button/Button";
 import GameListItem from "./GameListItem";
 import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
-import AddGameModal from "../AddGameModal/AddGameModal";
+import { AddGameModal } from "../GameModals";
 //styles
 import styles from "./GameList.module.scss";
 import { GoPlus } from "react-icons/go";

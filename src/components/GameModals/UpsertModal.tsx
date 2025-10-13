@@ -2,22 +2,33 @@ import Modal, { type ModalProps } from "../Organisms/Modal/Modal";
 import Input from "../Atoms/Input/Input";
 import { useState, type FC } from "react";
 import useGames from "../../hooks/useGames";
-import styles from "./AddGameModal.module.scss";
-import { Select, SelectItem } from "../Atoms/Select/";
+import styles from "./AddGameModal/AddGameModal.module.scss";
+import { Select, SelectItem } from "../Atoms/Select";
 import {
+  type Game,
   type GameStatus,
   DEFAULT_GAME_STATUS,
   GAME_STATUSES,
 } from "../../types/Game";
 import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
 
-type AddGameModalProps = ModalProps & {
+export type UpsertModalProps = ModalProps & {
+  mode: "add" | "edit";
+  gameToEdit?: Game;
   onSubmit: () => void;
 };
 
-const AddGameModal: FC<AddGameModalProps> = ({ onSubmit, ...modalProps }) => {
-  const [name, setName] = useState("");
-  const [status, setStatus] = useState<GameStatus>(DEFAULT_GAME_STATUS);
+const UpsertModal: FC<UpsertModalProps> = ({
+  onSubmit,
+  gameToEdit,
+  mode,
+  ...modalProps
+}) => {
+  const isEditMode = mode === "edit";
+  const [name, setName] = useState(gameToEdit?.name || "");
+  const [status, setStatus] = useState<GameStatus>(
+    gameToEdit?.status || DEFAULT_GAME_STATUS
+  );
 
   const clearFields = () => {
     setName("");
@@ -27,14 +38,22 @@ const AddGameModal: FC<AddGameModalProps> = ({ onSubmit, ...modalProps }) => {
   const { submitGame, loading, error, clearError } = useGames();
 
   const close = () => {
-    clearFields();
+    if (!isEditMode) {
+      clearFields();
+    }
     clearError();
     modalProps.close();
   };
 
   const postGame = async () => {
     try {
-      await submitGame({ name, status });
+      if (isEditMode && gameToEdit) {
+        // Update existing game logic here
+        console.log("Editing game:", gameToEdit.id);
+      } else {
+        // Add new game logic here
+        await submitGame({ name, status });
+      }
       clearFields();
       clearError();
       close();
@@ -45,12 +64,12 @@ const AddGameModal: FC<AddGameModalProps> = ({ onSubmit, ...modalProps }) => {
   };
   return (
     <Modal
-      title="Add a new game"
+      title={isEditMode ? "Edit game" : "Add a new game"}
       onConfirm={postGame}
-      confirmLabel="Add"
+      confirmLabel={isEditMode ? "Save" : "Add"}
       loading={loading}
       {...modalProps}
-      close={() => close()}
+      close={close}
     >
       <div className={styles["modal-content"]}>
         <form className={styles.form}>
@@ -78,4 +97,4 @@ const AddGameModal: FC<AddGameModalProps> = ({ onSubmit, ...modalProps }) => {
   );
 };
 
-export default AddGameModal;
+export default UpsertModal;

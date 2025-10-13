@@ -1,4 +1,4 @@
-import Modal, { type ModalProps } from "../Organisms/Modal/Modal";
+import Modal, { type ModalProps } from "../../Organisms/Modal/Modal";
 import { type FC } from "react";
 
 type DeleteGameModalProps = ModalProps & {
