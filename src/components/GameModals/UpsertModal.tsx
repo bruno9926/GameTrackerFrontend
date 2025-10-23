@@ -12,6 +12,7 @@ import {
   GAME_STATUSES,
 } from "../../types/Game";
 import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
+import toast from "../Atoms/Toast"; 
 
 export type UpsertModalProps = ModalProps & {
   mode: "add" | "edit";
@@ -61,10 +62,12 @@ const UpsertModal: FC<UpsertModalProps> = ({
       clearError();
       close();
       onSubmit();
+      toast.success(`Game ${isEditMode ? "updated" : "added"} successfully!`);
     } catch {
       // dont close the modal
     }
   };
+
   return (
     <Modal
       title={isEditMode ? "Edit game" : "Add a new game"}

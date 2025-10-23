@@ -5,6 +5,8 @@ import Games from "./pages/Games/Games";
 import Platforms from "./pages/Platforms/Platforms";
 import Settings from "./pages/Settings/Settings";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+// providers
+import { Toaster } from "./components/Atoms/Toast";
 
 import "./styles/main.scss";
 import type React from "react";
@@ -29,6 +31,8 @@ const defaultRoute = RoutePaths.DASHBOARD;
 
 function App() {
   return (
+    <>
+    <Toaster position="top-center"/>
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
@@ -39,6 +43,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </>
   );
 }
 
