@@ -28,7 +28,6 @@ const GameList = () => {
           name={game.name}
           status={game.status}
           deleteGame={() => deleteGame(game.id)}
-          updateGame={async (game) => await updateGame(game)}
         />
       ))}
     </div>
@@ -54,7 +53,6 @@ const GameList = () => {
       <AddGameModal
         isOpen={addModalOpen}
         close={() => setAddModalOpen(false)}
-        onSubmit={() => fetchGames()}
       />
     </>
   );

@@ -7,7 +7,6 @@ import styles from "./GameListItem.module.scss";
 
 type GameListItemProps = {
   deleteGame: () => void;
-  updateGame: (game: GameToUpdate) => void;
 } & Game;
 
 const GameListItem = ({
@@ -15,7 +14,6 @@ const GameListItem = ({
   name,
   status,
   deleteGame,
-  updateGame,
 }: GameListItemProps) => {
   const options = [
     {
@@ -52,7 +50,6 @@ const GameListItem = ({
       <DeleteGameModal
         isOpen={deleteModalOpen}
         close={() => setDeleteModalOpen(false)}
-        confirmLabel="Delete"
         gameName={name}
         onConfirm={() => {
           deleteGame();
@@ -63,10 +60,6 @@ const GameListItem = ({
         gameToEdit={{ id, name, status }}
         isOpen={editModalOpen}
         close={() => setEditModalOpen(false)}
-        updateGame={(game: GameToUpdate) => {
-          updateGame(game);
-          setEditModalOpen(false);
-        }}
       />
     </div>
   );

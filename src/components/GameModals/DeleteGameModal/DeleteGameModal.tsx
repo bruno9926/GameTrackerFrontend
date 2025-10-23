@@ -7,7 +7,7 @@ type DeleteGameModalProps = ModalProps & {
 
 const DeleteGameModal: FC<DeleteGameModalProps> = ({ gameName, ...props }) => {
   return (
-    <Modal {...props}>
+    <Modal confirmLabel="Delete" {...props}>
       Are you sure you want to delete <b>{gameName || "this game"}</b>?
     </Modal>
   );

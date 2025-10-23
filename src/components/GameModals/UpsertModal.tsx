@@ -17,13 +17,10 @@ import toast from "../Atoms/Toast";
 export type UpsertModalProps = ModalProps & {
   mode: "add" | "edit";
   gameToEdit?: Game;
-  onSubmit?: () => void;
   updateGame?: (game: GameToUpdate) => void;
 };
 
 const UpsertModal: FC<UpsertModalProps> = ({
-  onSubmit = () => {},
-  updateGame = () => {},
   gameToEdit,
   mode,
   ...modalProps
@@ -39,7 +36,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
     setStatus(DEFAULT_GAME_STATUS);
   };
 
-  const { submitGame, loading, error, clearError } = useGames();
+  const { submitGame, updateGame, loading, error, clearError, fetchGames } = useGames();
 
   const close = () => {
     if (!isEditMode) {
@@ -61,7 +58,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
       clearFields();
       clearError();
       close();
-      onSubmit();
+      fetchGames();
       toast.success(`Game ${isEditMode ? "updated" : "added"} successfully!`);
     } catch {
       // dont close the modal
