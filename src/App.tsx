@@ -9,14 +9,16 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import "./styles/main.scss";
 import type React from "react";
 
-enum RoutePaths {
-  DASHBOARD = "/dashboard",
-  GAMES = "/games",
-  PLATFORMS = "/platforms",
-  SETTINGS = "/settings",
-}
+const RoutePaths = {
+  DASHBOARD: "/dashboard",
+  GAMES: "/games",
+  PLATFORMS: "/platforms",
+  SETTINGS: "/settings",
+} as const;
 
-const routing: Record<RoutePaths, React.ReactNode> = {
+type RoutePath = typeof RoutePaths[keyof typeof RoutePaths];
+
+const routing: Record<RoutePath, React.ReactNode> = {
   [RoutePaths.DASHBOARD]: <Dashboard />,
   [RoutePaths.GAMES]: <Games />,
   [RoutePaths.PLATFORMS]: <Platforms />,
