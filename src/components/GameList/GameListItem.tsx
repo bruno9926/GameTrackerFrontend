@@ -1,20 +1,14 @@
 import { useState } from "react";
-import { GAME_STATUSES, type Game, type GameToUpdate } from "../../types/Game";
+import { GAME_STATUSES, type Game } from "../../types/Game";
 import OptionsMenu from "../Organisms/OptionsMenu/OptionsMenu";
 import { DeleteGameModal, EditGameModal } from "../GameModals";
+import useGames from "../../hooks/useGames";
 // styles
 import styles from "./GameListItem.module.scss";
 
-type GameListItemProps = {
-  deleteGame: () => void;
-} & Game;
+type GameListItemProps = Game;
 
-const GameListItem = ({
-  id,
-  name,
-  status,
-  deleteGame,
-}: GameListItemProps) => {
+const GameListItem = ({ id, name, status }: GameListItemProps) => {
   const options = [
     {
       label: "Edit",
@@ -32,6 +26,7 @@ const GameListItem = ({
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const { deleteGame } = useGames();
 
   return (
     <div className={styles["game-list-item"]}>
@@ -52,7 +47,7 @@ const GameListItem = ({
         close={() => setDeleteModalOpen(false)}
         gameName={name}
         onConfirm={() => {
-          deleteGame();
+          deleteGame(id);
           setDeleteModalOpen(false);
         }}
       />

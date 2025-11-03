@@ -12,8 +12,7 @@ import { GoPlus } from "react-icons/go";
 import useGames from "../../hooks/useGames";
 
 const GameList = () => {
-  const { loading, error, games, fetchGames, deleteGame, updateGame } =
-    useGames();
+  const { loading, error, games, fetchGames } = useGames();
 
   useEffect(() => {
     fetchGames();
@@ -29,7 +28,6 @@ const GameList = () => {
           id={game.id}
           name={game.name}
           status={game.status}
-          deleteGame={() => deleteGame(game.id)}
         />
       ))}
     </div>
