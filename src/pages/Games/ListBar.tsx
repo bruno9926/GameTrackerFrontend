@@ -3,8 +3,14 @@ import { FaSortAmountDown } from "react-icons/fa";
 import styles from "./ListBar.module.scss";
 import type { FC, ButtonHTMLAttributes } from "react";
 import Input from "../../components/Atoms/Input/Input";
+import type React from "react";
 
-const ListBar = () => (
+type ListBarProps = {
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const ListBar = ({ searchText, setSearchText }: ListBarProps) => (
   <div className={styles["list-bar"]}>
     <ListButton>
       <span>Filter</span>
@@ -14,7 +20,12 @@ const ListBar = () => (
       <span>Sort</span>
       <FaSortAmountDown />
     </ListButton>
-    <Input type="text" placeholder={"Search games..."} />
+    <Input
+      type="text"
+      placeholder={"Search games..."}
+      value={searchText}
+      onChange={(e) => setSearchText(e.target.value)}
+    />
   </div>
 );
 
