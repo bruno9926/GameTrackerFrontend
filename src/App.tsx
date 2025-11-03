@@ -4,16 +4,12 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Games from "./pages/Games/Games";
 import Platforms from "./pages/Platforms/Platforms";
 import Settings from "./pages/Settings/Settings";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import { routes as RoutePaths } from "./routes/routes";
-// providers
-import { Toaster } from "./components/Atoms/Toast";
-// redux
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
-
-import "./styles/main.scss";
+import Providers from "./Providers";
 import type React from "react";
+import "./styles/main.scss";
 
 type RoutePath = (typeof RoutePaths)[keyof typeof RoutePaths];
 
@@ -28,8 +24,7 @@ const defaultRoute = RoutePaths.DASHBOARD;
 
 function App() {
   return (
-    <Provider store={store}>
-      <Toaster position="top-center" />
+    <Providers>
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
@@ -40,7 +35,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </Provider>
+    </Providers>
   );
 }
 

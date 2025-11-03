@@ -3,8 +3,10 @@ import { GAME_STATUSES, type Game } from "../../types/Game";
 import OptionsMenu from "../Organisms/OptionsMenu/OptionsMenu";
 import { DeleteGameModal, EditGameModal } from "../GameModals";
 import useGames from "../../hooks/useGames";
+import Skeleton from "react-loading-skeleton";
 // styles
 import styles from "./GameListItem.module.scss";
+import "react-loading-skeleton/dist/skeleton.css";
 
 type GameListItemProps = Game;
 
@@ -58,6 +60,10 @@ const GameListItem = ({ id, name, status }: GameListItemProps) => {
       />
     </div>
   );
+};
+
+export const GameListItemSkeleton = () => {
+  return <Skeleton style={{ height: "80px", borderRadius: "12px" }} />;
 };
 
 export default GameListItem;
