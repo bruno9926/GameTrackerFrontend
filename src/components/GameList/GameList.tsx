@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "../Atoms/Button/Button";
-import GameListItem from "./GameListItem";
+import GameListItem, { GameListItemSkeleton } from "./GameListItem";
 import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
 import { AddGameModal } from "../GameModals";
 import { NavLink } from "react-router";
@@ -33,6 +33,14 @@ const GameList = () => {
     </div>
   );
 
+  const Loading = () => (
+    <div className={styles["game-list"]}>
+      {Array.from({ length: 5 }).map((_, index) => (
+        <GameListItemSkeleton key={index} />
+      ))}
+    </div>
+  );
+
   return (
     <>
       <section className={`${styles["game-list-section"]} dashboard-container`}>
@@ -59,7 +67,5 @@ const GameList = () => {
     </>
   );
 };
-
-const Loading = () => <span>Loading...</span>;
 
 export default GameList;

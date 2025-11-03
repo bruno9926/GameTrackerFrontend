@@ -28,15 +28,15 @@ const Games = () => {
   );
 
   const Loading = () => (
-    <>
+    <div className={styles["game-list"]}>
       {Array.from({ length: 5 }).map((_, index) => (
         <GameListItemSkeleton key={index} />
       ))}
-    </>
+    </div>
   );
 
   const getRenderedContent = useCallback(() => {
-    if (!loading) return <Loading />;
+    if (loading) return <Loading />;
     if (error) return <p>Error: {error}</p>;
     return <List />;
   }, [loading, error, games]);
@@ -44,7 +44,7 @@ const Games = () => {
   return (
     <AnimatedRoute>
       <h1>Games</h1>
-      <div className={styles["game-list"]}>{getRenderedContent()}</div>
+      {getRenderedContent()}
     </AnimatedRoute>
   );
 };
