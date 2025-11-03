@@ -3,6 +3,8 @@ import Button from "../Atoms/Button/Button";
 import GameListItem from "./GameListItem";
 import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
 import { AddGameModal } from "../GameModals";
+import { NavLink } from "react-router";
+import { routes } from "../../routes/routes";
 //styles
 import styles from "./GameList.module.scss";
 import { GoPlus } from "react-icons/go";
@@ -37,7 +39,9 @@ const GameList = () => {
     <>
       <section className={`${styles["game-list-section"]} dashboard-container`}>
         <div className={styles.header}>
-          <h2>Game List</h2>
+          <NavLink to={routes.GAMES}>
+            <h2>Game List</h2>
+          </NavLink>
           <Button variant="secondary" onClick={() => setAddModalOpen(true)}>
             <GoPlus /> Add Game
           </Button>

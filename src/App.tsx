@@ -5,6 +5,7 @@ import Games from "./pages/Games/Games";
 import Platforms from "./pages/Platforms/Platforms";
 import Settings from "./pages/Settings/Settings";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { routes as RoutePaths } from "./routes/routes";
 // providers
 import { Toaster } from "./components/Atoms/Toast";
 // redux
@@ -14,14 +15,7 @@ import { store } from "./redux/store";
 import "./styles/main.scss";
 import type React from "react";
 
-const RoutePaths = {
-  DASHBOARD: "/dashboard",
-  GAMES: "/games",
-  PLATFORMS: "/platforms",
-  SETTINGS: "/settings",
-} as const;
-
-type RoutePath = typeof RoutePaths[keyof typeof RoutePaths];
+type RoutePath = (typeof RoutePaths)[keyof typeof RoutePaths];
 
 const routing: Record<RoutePath, React.ReactNode> = {
   [RoutePaths.DASHBOARD]: <Dashboard />,

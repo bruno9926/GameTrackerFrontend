@@ -21,6 +21,12 @@
   width: 100vw;
 }
 
+a {
+  font-weight: 500;
+  text-decoration: underline;
+  color: inherit;
+}
+
 body {
   margin: 0;
   display: flex;
