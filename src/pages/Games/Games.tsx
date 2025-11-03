@@ -3,6 +3,9 @@ import GameListItem, {
   GameListItemSkeleton,
 } from "../../components/GameList/GameListItem";
 import styles from "./Games.module.scss";
+import { GoPlus } from "react-icons/go";
+import Button from "../../components/Atoms/Button/Button";
+import ListBar from "./ListBar";
 // hooks
 import useGames from "../../hooks/useGames";
 import { useCallback, useEffect } from "react";
@@ -13,6 +16,12 @@ const Games = () => {
   useEffect(() => {
     fetchGames();
   }, []);
+
+  const getRenderedContent = useCallback(() => {
+    if (loading) return <Loading />;
+    if (error) return <p>Error: {error}</p>;
+    return <List />;
+  }, [loading, error, games]);
 
   const List = () => (
     <div className={styles["game-list"]}>
@@ -35,15 +44,15 @@ const Games = () => {
     </div>
   );
 
-  const getRenderedContent = useCallback(() => {
-    if (loading) return <Loading />;
-    if (error) return <p>Error: {error}</p>;
-    return <List />;
-  }, [loading, error, games]);
-
   return (
     <AnimatedRoute>
-      <h1>Games</h1>
+      <div className={styles.header}>
+        <h1>Games</h1>
+        <Button variant="secondary">
+          <GoPlus /> Add Game
+        </Button>
+      </div>
+      <ListBar />
       {getRenderedContent()}
     </AnimatedRoute>
   );
