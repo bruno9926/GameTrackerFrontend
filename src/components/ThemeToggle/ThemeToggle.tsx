@@ -17,13 +17,17 @@ const ThemeToggle = () => {
   };
 
   return (
-    <button
-      className={`${styles["theme-toggle"]} ${styles[mode]}`}
-      onClick={() => toggleMode()}
-      title={`change to ${mode === "dark" ? light : "dark"} theme`}
-    >
-      {mode === "dark" ? <IoMoon /> : <IoSunny />}
-    </button>
+    <div className={`${styles["theme-toggle"]}`}>
+      <span>Change to {mode === "dark" ? light : "dark"} theme</span>
+      <button
+        className={`${styles[mode]}`}
+        onClick={() => toggleMode()}
+        title={`change to ${mode === "dark" ? light : "dark"} theme`}
+      >
+        {mode === "light" ? <IoMoon /> : <IoSunny />}
+      </button>
+    </div>
+
   );
 };
 
