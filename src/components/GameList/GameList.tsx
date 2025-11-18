@@ -43,7 +43,7 @@ const GameList = () => {
 
   return (
     <>
-      <section className={`${styles["game-list-section"]} dashboard-container`}>
+      <section className={`${styles["game-list-section"]} dashboard-tile-content`}>
         <div className={styles.header}>
           <NavLink to={routes.GAMES}>
             <h2>Game List</h2>

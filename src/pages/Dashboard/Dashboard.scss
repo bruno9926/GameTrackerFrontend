@@ -69,10 +69,10 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .dashboard-container {
+  .dashboard-tile-content {
     @extend .dashboard-tile;
-    padding: 20px;
-    padding-top: 0;
+    padding: 30px;
+    padding-top: 5px;
     max-height: 500px;
   }
 }
