@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Game, GameToCreate, GameToUpdate } from "../types/Game";
+import type { GameToCreate, GameToUpdate } from "../types/Game";
 import GameService from "../services/GameService";
 // redux
 import { useSelector, useDispatch } from "react-redux";

@@ -1,0 +1,17 @@
+.game-list {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  margin-top: 2rem;
+
+  h1 {
+    margin: 0;
+  }
+}

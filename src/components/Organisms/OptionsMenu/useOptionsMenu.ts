@@ -24,5 +24,16 @@ export default function useOptionsMenu() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) {
+        setOpen(false);
+      }
+    });
+    observer.observe(ref.current);
+  }, []);
+
   return { ref, toggleOpen, open, setOpen };
 }

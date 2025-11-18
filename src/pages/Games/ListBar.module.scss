@@ -1,0 +1,25 @@
+.list-bar {
+  display: flex;
+  padding: 0.5rem 0 1.6rem 0;
+  gap: 8px;
+  flex-direction: row-reverse;
+
+  button.list-button {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--color-card-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--color-accent);
+      color: var(--color-bg);
+    }
+  }
+}
