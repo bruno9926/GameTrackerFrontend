@@ -3,21 +3,21 @@
         "id": 1,
         "name": "Tina",
         "status": "online",
-        "avatar": "/src/assets/tina.jpeg",
+        "avatar": "/tina.jpeg",
         "games": ["Bioshock", "League of Legends"]
     },
     {
         "id": 2,
         "name": "Chaux",
         "status": "online",
-        "avatar": "/src/assets/chaux.jpg",
+        "avatar": "/chaux.jpg",
         "games": ["League of Legends", "The Legend of Zelda: Ocarina of Time"]
     },
     {
         "id": 3,
         "name": "Johan",
         "status": "online",
-        "avatar": "/src/assets/johan.jpg",
+        "avatar": "/johan.jpg",
         "games": ["Doom Eternal"]
     }
 ]
