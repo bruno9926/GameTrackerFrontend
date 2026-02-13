@@ -8,10 +8,10 @@ const gameImages: Record<string, string> = {
     "Final Fantasy 7 Rebirth": "/games/final-fantasy-7-rebirth.jpg",
     "God of War Ragnarök": "/games/god-of-war-ragnarok.jpg",
     "The Legend of Zelda: Tears of the Kingdom": "/games/zelda-tears-of-the-kingdom.jpg",
-    "Doom Eternal": "/src/assets/doom.png",
-    "The Legend of Zelda: Ocarina of Time": "/src/assets/zelda-ocarina.jpg",
-    "League of Legends": "/src/assets/lol.jpg",
-    "Bioshock": "/src/assets/bioshock.jpg",
+    "Doom Eternal": "/games/doom-eternal.jpg",
+    "The Legend of Zelda: Ocarina of Time": "/games/zelda-ocarina.jpg",
+    "League of Legends": "/games/lol.jpg",
+    "Bioshock": "/games/bioshock.jpg",
 };
 
 const FriendItem = ({ name, status, avatar, games }: FriendItemProps) => {
