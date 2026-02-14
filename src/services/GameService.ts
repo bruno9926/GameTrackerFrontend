@@ -7,6 +7,7 @@ class GameService {
 
   private static defaultHeaders = {
     "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "true"
   };
 
   static getInstance(): GameService {
@@ -21,7 +22,11 @@ class GameService {
    * @returns all the games
    */
   async fetchGames(): Promise<Game[]> {
-    const res = await fetch(API_URL);
+    console.log("Fetching games from API at:", API_URL);
+    const res = await fetch(API_URL, {
+      method: "GET",
+      headers: GameService.defaultHeaders,
+    });
     return this.handleResponse<Game[]>(res);
   }
 
