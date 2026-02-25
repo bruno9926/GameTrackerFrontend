@@ -1,6 +1,12 @@
-export const routes = {
+export const userRoutes = {
   DASHBOARD: "/dashboard",
   GAMES: "/games",
   PLATFORMS: "/platforms",
-  SETTINGS: "/settings",
+  SETTINGS: "/settings"
 } as const;
+
+export const publicRoutes = {
+  LOGIN: "/login"
+} as const;
+
+export const defaultRoute = userRoutes.DASHBOARD;

@@ -3,13 +3,35 @@ import { type RootState } from "../../redux/store";
 import styles from './User.module.scss';
 import useOptionsMenu from "../Organisms/OptionsMenu/useOptionsMenu";
 import { IoIosLogOut } from "react-icons/io";
+// routing
+import { useNavigate } from "react-router";
+import { publicRoutes as routes } from "../../routes/routes";
 
 const User = () => {
     const user = useSelector((state: RootState) => state.user.user);
 
-    const { name, profilePicture, email } = user ?? { name: '', profilePicture: undefined, email: '' };
+    const {
+        name,
+        profilePicture,
+        email
+    } = user ?? {
+        name: '',
+        profilePicture: undefined,
+        email: ''
+    };
 
-    const { ref, toggleOpen, open, setOpen } = useOptionsMenu();
+    const { ref, toggleOpen, open } = useOptionsMenu();
+    const navigate = useNavigate();
+
+    const LogoutButton = () => (
+        <button className={styles.logout}
+            onClick={() => {
+                navigate(routes.LOGIN);
+            }}>
+            <IoIosLogOut size={20} />
+            <span>Logout</span>
+        </button>
+    )
 
     return (
         <div className={styles.container} ref={ref}>
@@ -20,23 +42,18 @@ const User = () => {
                     <span className={`${styles.status} ${styles.online}`}>Online</span>
                 </div>
             </div>
-            {open && (
-                <div className={styles['user-menu']}>
-                    <div className={styles.user}>
-                        <Avatar profilePicture={profilePicture} name={name} />
-                        <div className={styles['user-info']}>
-                            <span>{email}</span>
+            {
+                open && (
+                    <div className={styles['user-menu']}>
+                        <div className={styles.user}>
+                            <Avatar profilePicture={profilePicture} name={name} />
+                            <div className={styles['user-info']}>
+                                <span>{email}</span>
+                            </div>
                         </div>
+                        <LogoutButton />
                     </div>
-                    <button className={styles.logout}
-                        onClick={() => {
-                            setOpen(false)
-                        }}>
-                        <IoIosLogOut size={20} />
-                        <span>Logout</span>
-                    </button>
-                </div>
-            )}
+                )}
 
         </div>
     )
@@ -48,7 +65,7 @@ const Avatar = ({ profilePicture, name }: { profilePicture?: string; name: strin
             {profilePicture ? (
                 <img src={profilePicture} alt={name} />
             ) : (
-                (name?.charAt(0) || '?').toUpperCase() 
+                (name?.charAt(0) || '?').toUpperCase()
             )}
         </div>
     )

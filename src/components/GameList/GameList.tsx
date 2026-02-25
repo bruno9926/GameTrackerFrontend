@@ -4,7 +4,7 @@ import GameListItem, { GameListItemSkeleton } from "./GameListItem";
 import ErrorMessage from "../Atoms/ErrorMessage/ErrorMessage";
 import { AddGameModal } from "../GameModals";
 import { NavLink } from "react-router";
-import { routes } from "../../routes/routes";
+import { userRoutes as routes } from "../../routes/routes";
 //styles
 import styles from "./GameList.module.scss";
 import { GoPlus } from "react-icons/go";
