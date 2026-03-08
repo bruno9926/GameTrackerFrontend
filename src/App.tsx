@@ -7,7 +7,7 @@ import Settings from "./pages/Settings/Settings";
 import Login from "./pages/LogIn/Login";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-import { userRoutes, publicRoutes, defaultRoute } from "./routes/routes";
+import { userRoutes, publicRoutes } from "./routes/routes";
 import Providers from "./Providers";
 import "./styles/main.scss";
 
@@ -31,7 +31,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<Navigate to={defaultRoute} replace />} />
+            <Route path="/" element={<Navigate to={publicRoutes.LOGIN} replace />} />
             {
               Object.entries(userRoutesMap).map(
                 ([path, element]) => (
