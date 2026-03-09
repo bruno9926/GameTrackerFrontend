@@ -11,7 +11,6 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const Input: FC<InputProps> = ({
-  type, //we destructure this just to avoid passing it to the input, find a better way to do this
   label = "",
   ...props
 }) => {

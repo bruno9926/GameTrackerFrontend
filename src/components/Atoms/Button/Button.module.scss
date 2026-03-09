@@ -1,5 +1,5 @@
 .button {
-  border-radius: 18px;
+  border-radius: 16px;
   border: none;
   cursor: pointer;
   font-weight: 500;
@@ -51,15 +51,15 @@
   }
 
   &.sm {
-    padding: 0.25rem 0.5rem;
+    padding: 0.3rem 0.5rem;
     font-size: 0.8rem;
   }
   &.md {
-    padding: 0.5rem 1rem;
+    padding: 0.65rem 1rem;
     font-size: 1rem;
   }
   &.lg {
-    padding: 0.75rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     font-size: 1.2rem;
   }
 }

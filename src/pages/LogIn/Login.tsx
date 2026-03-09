@@ -1,11 +1,14 @@
 // styles
 import styles from "./Login.module.scss";
 import logo from "../../assets/logo.png";
+
+import Button from "../../components/Atoms/Button/Button";
+import Input from "../../components/Atoms/Input/Input";
 // routing
 import { useNavigate } from "react-router";
 import { defaultRoute } from "../../routes/routes";
-import Button from "../../components/Atoms/Button/Button";
-import Input from "../../components/Atoms/Input/Input";
+import { Link } from "react-router";
+import { publicRoutes } from "../../routes/routes";
 
 import { useState } from "react";
 
@@ -41,6 +44,9 @@ const Login = () => {
                 }}>
                     Login
                 </Button>
+                <div className={styles["signup-link"]}>
+                    <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
+                </div>
             </div>
         </section>
     )

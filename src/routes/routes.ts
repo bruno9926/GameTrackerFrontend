@@ -6,7 +6,8 @@ export const userRoutes = {
 } as const;
 
 export const publicRoutes = {
-  LOGIN: "/login"
+  LOGIN: "/login",
+  SIGNUP: "/signup"
 } as const;
 
 export const defaultRoute = userRoutes.DASHBOARD;

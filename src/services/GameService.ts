@@ -1,6 +1,6 @@
 import type { Game, GameToUpdate, GameToCreate } from "../types/Game";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL + "/games";
 
 class GameService {
   private static instance: GameService;
