@@ -10,6 +10,17 @@ class GameService {
     "ngrok-skip-browser-warning": "true"
   };
 
+  private get authToken(): string | null {
+    return localStorage.getItem("authToken");
+  }
+
+  private get authenticatedHeaders() {
+    return {
+      ...GameService.defaultHeaders,
+      "Authorization": `Bearer ${this.authToken}`,
+    }
+  }
+
   static getInstance(): GameService {
     if (!GameService.instance) {
       GameService.instance = new GameService();
@@ -25,7 +36,7 @@ class GameService {
     console.log("Fetching games from API at:", API_URL);
     const res = await fetch(API_URL, {
       method: "GET",
-      headers: GameService.defaultHeaders,
+      headers: this.authenticatedHeaders,
     });
     return this.handleResponse<Game[]>(res);
   }
@@ -38,7 +49,7 @@ class GameService {
   async postGame(game: GameToCreate): Promise<Game[]> {
     const res = await fetch(API_URL, {
       method: "POST",
-      headers: GameService.defaultHeaders,
+      headers: this.authenticatedHeaders,
       body: JSON.stringify(game),
     });
     return this.handleResponse<Game[]>(res);
@@ -55,7 +66,7 @@ class GameService {
     }
     const res = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
-      headers: GameService.defaultHeaders,
+      headers: this.authenticatedHeaders,
     });
     return this.handleResponse<Game[]>(res);
   }
@@ -66,7 +77,7 @@ class GameService {
     }
     const res = await fetch(API_URL, {
       method: "PUT",
-      headers: GameService.defaultHeaders,
+      headers: this.authenticatedHeaders,
       body: JSON.stringify(game),
     });
     return this.handleResponse<Game[]>(res);

@@ -11,12 +11,30 @@ import { Link } from "react-router";
 import { publicRoutes } from "../../routes/routes";
 
 import { useState } from "react";
+import useLogin from "./useLogin";
 
 const Login = () => {
     const navigate = useNavigate();
+    const login = useLogin();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const handleLogin = async () => {
+        try {
+            await login({ email, password});
+            //console.log("Auth token received:", authToken);
+        } catch (error) {
+            alert(error);
+            return;
+        }
+
+        // clear fields
+        setEmail("");
+        setPassword("");
+
+        navigate(defaultRoute);
+    }
 
     return (
         <section className={styles["login-page"]}>
@@ -39,9 +57,7 @@ const Login = () => {
                     />
                 </div>
 
-                <Button onClick={() => {
-                    navigate(defaultRoute)
-                }}>
+                <Button onClick={handleLogin}>
                     Login
                 </Button>
                 <div className={styles["signup-link"]}>

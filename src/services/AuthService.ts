@@ -24,6 +24,15 @@ class AuthService {
         return this.handleResponse<void>(res);
     }
 
+    async login(body: LoginBody): Promise<TokenResponse> {
+        const res = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: AuthService.defaultHeaders,
+            body: JSON.stringify(body),
+        });
+        return this.handleResponse<TokenResponse>(res);
+    }
+
     private async handleResponse<T>(res: Response): Promise<T> {
         if (!res.ok) {
             let message = res.statusText;
@@ -45,6 +54,15 @@ type RegisterBody = {
     name: string;
     email: string;
     password: string;
+}
+
+type LoginBody = {
+    email: string;
+    password: string;
+}
+
+type TokenResponse = {
+    token: string;
 }
 
 export default AuthService;
