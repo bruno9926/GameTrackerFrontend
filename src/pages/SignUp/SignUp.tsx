@@ -1,4 +1,4 @@
-import styles from "./SignUp.module.scss";
+import styles from "./Signup.module.scss";
 import Input from "../../components/Atoms/Input/Input";
 import Button from "../../components/Atoms/Button/Button";
 import { Link } from "react-router";
