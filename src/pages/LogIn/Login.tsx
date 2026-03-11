@@ -22,7 +22,7 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            await login({ email, password});
+            await login({ email, password });
             //console.log("Auth token received:", authToken);
         } catch (error) {
             alert(error);
@@ -36,32 +36,50 @@ const Login = () => {
         navigate(defaultRoute);
     }
 
+    const Feature = ({text}: {text: string}) => (
+        <div className={styles["feature"]}>
+            <span className={styles["text"]}>{text}</span>
+        </div>
+    )
+
     return (
         <section className={styles["login-page"]}>
             <div className={styles["login-card"]}>
-                <div className={styles.header}>
+                <div className={styles["presentation"]}>
                     <img src={logo} alt="Gamer Dashboard Logo" />
+                    <span>The ultimate command center for your gaming stats, progressions and community connections.</span>
+                    <div className={styles["feature-row"]}>
+                        <Feature text="Build a Community"/>
+                        <Feature text="Track your Backlog"/>
+                    </div>
                 </div>
-                <div className={styles.body}>
-                    <Input
-                        type="email"
-                        label="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <Input
-                        type="password"
-                        label="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
+                <div className={styles["login-form"]}>
+                    <div className={styles["login-title"]}>
+                        <h2>Sign In</h2>
+                        <span>Welcome back. Enter your details to sync your progress.</span>
+                    </div>
 
-                <Button onClick={handleLogin}>
-                    Login
-                </Button>
-                <div className={styles["signup-link"]}>
-                    <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
+                    <div className={styles.body}>
+                        <Input
+                            type="email"
+                            label="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <Input
+                            type="password"
+                            label="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+
+                    <Button onClick={handleLogin}>
+                        Login
+                    </Button>
+                    <div className={styles["signup-link"]}>
+                        <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
+                    </div>
                 </div>
             </div>
         </section>
