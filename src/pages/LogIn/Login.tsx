@@ -1,12 +1,16 @@
 // styles
 import styles from "./Login.module.scss";
 import logo from "../../assets/logo.png";
+
 // feature icons
 import { IoPeople } from "react-icons/io5";
 import { MdChecklistRtl } from "react-icons/md";
 
 import Button from "../../components/Atoms/Button/Button";
 import { Input } from "@/components/ui/input";
+import { Field, FieldLabel } from "@/components/ui/field";
+import { PasswordField } from "../../components/Organisms/PasswordField";
+
 // routing
 import { useNavigate } from "react-router";
 import { defaultRoute } from "../../routes/routes";
@@ -34,7 +38,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             await login({ email, password });
-        } catch (e) {
+        } catch {
             return;
         }
 
@@ -46,7 +50,6 @@ const Login = () => {
     }
 
     return (
-
         <section className={styles["login-page"]}>
             <div className={styles["login-card"]}>
                 <div className={styles["presentation"]}>
@@ -57,35 +60,35 @@ const Login = () => {
                         <Feature text="Track your Backlog" icon={<MdChecklistRtl />} />
                     </div>
                 </div>
-                <div className={styles["login-form"]}>
+                <form className={styles["login-form"]}>
                     <div className={styles["login-title"]}>
                         <h2>Sign In</h2>
                         <span>Welcome back. Enter your details to sync your progress.</span>
                     </div>
 
                     <div className={styles.body}>
-                        <Input
-                            type="email"
-                            label="email"
-                            value={email}
-                            onChange={(e: any) => setEmail(e.target.value)}
-                        />
-                        <Input
-                            type="password"
-                            label="password"
-                            value={password}
-                            onChange={(e: any) => setPassword(e.target.value)}
-                        />
+                        <Field>
+                            <FieldLabel htmlFor="email">Email</FieldLabel>
+                            <Input
+                                id="email"
+                                name="email"
+                                type="email"
+                                value={email}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                            />
+                        </Field>
+
+                        <PasswordField password={password} setPassword={setPassword} />
                     </div>
 
-                    <Button onClick={handleLogin} disabled={loading}>
-                        {loading ? "Logging in..." : "Log In"}
+                    <Button onClick={handleLogin} disabled={loading} type="submit">
+                        {loading ? "Signing you in..." : "Sign In"}
                     </Button>
-                    {error && <span className={styles.error}>Error: {error}</span>}
+                    {error && <span className={styles.error}>{error}</span>}
                     <div className={styles["signup-link"]}>
                         <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
                     </div>
-                </div>
+                </form>
             </div>
         </section>
     )
