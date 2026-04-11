@@ -1,6 +1,9 @@
 // styles
 import styles from "./Login.module.scss";
 import logo from "../../assets/logo.png";
+// feature icons
+import { IoPeople } from "react-icons/io5";
+import { MdChecklistRtl } from "react-icons/md";
 
 import Button from "../../components/Atoms/Button/Button";
 import Input from "../../components/Atoms/Input/Input";
@@ -10,12 +13,20 @@ import { defaultRoute } from "../../routes/routes";
 import { Link } from "react-router";
 import { publicRoutes } from "../../routes/routes";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import useLogin from "./useLogin";
+
+
+const Feature = ({ text, icon }: { text: string, icon: ReactNode }) => (
+    <div className={styles["feature"]}>
+        <span className={styles["icon"]}>{icon}</span>
+        <span className={styles["text"]}>{text}</span>
+    </div>
+)
 
 const Login = () => {
     const navigate = useNavigate();
-    const login = useLogin();
+    const { login, loading, error} = useLogin();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,9 +34,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             await login({ email, password });
-            //console.log("Auth token received:", authToken);
-        } catch (error) {
-            alert(error);
+        } catch (e) {
             return;
         }
 
@@ -36,12 +45,6 @@ const Login = () => {
         navigate(defaultRoute);
     }
 
-    const Feature = ({text}: {text: string}) => (
-        <div className={styles["feature"]}>
-            <span className={styles["text"]}>{text}</span>
-        </div>
-    )
-
     return (
         <section className={styles["login-page"]}>
             <div className={styles["login-card"]}>
@@ -49,8 +52,8 @@ const Login = () => {
                     <img src={logo} alt="Gamer Dashboard Logo" />
                     <span>The ultimate command center for your gaming stats, progressions and community connections.</span>
                     <div className={styles["feature-row"]}>
-                        <Feature text="Build a Community"/>
-                        <Feature text="Track your Backlog"/>
+                        <Feature text="Build a Community" icon={<IoPeople />} />
+                        <Feature text="Track your Backlog" icon={<MdChecklistRtl />} />
                     </div>
                 </div>
                 <div className={styles["login-form"]}>
@@ -74,9 +77,10 @@ const Login = () => {
                         />
                     </div>
 
-                    <Button onClick={handleLogin}>
-                        Login
+                    <Button onClick={handleLogin} disabled={loading}>
+                        {loading ? "Logging in..." : "Log In"}
                     </Button>
+                    {error && <span className={styles.error}>Error: {error}</span>}
                     <div className={styles["signup-link"]}>
                         <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
                     </div>
