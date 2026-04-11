@@ -6,7 +6,7 @@ import { IoPeople } from "react-icons/io5";
 import { MdChecklistRtl } from "react-icons/md";
 
 import Button from "../../components/Atoms/Button/Button";
-import Input from "../../components/Atoms/Input/Input";
+import { Input } from "@/components/ui/input";
 // routing
 import { useNavigate } from "react-router";
 import { defaultRoute } from "../../routes/routes";
@@ -68,13 +68,13 @@ const Login = () => {
                             type="email"
                             label="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e: any) => setEmail(e.target.value)}
                         />
                         <Input
                             type="password"
                             label="password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e: any) => setPassword(e.target.value)}
                         />
                     </div>
 
