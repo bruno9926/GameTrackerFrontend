@@ -4,6 +4,7 @@ import AppRoutes from "./routes/AppRoutes";
 import Providers from "./Providers";
 // styles
 import "./styles/main.scss";
+import "./index.css";
 
 function App() {
   return (

@@ -26,7 +26,7 @@ const Feature = ({ text, icon }: { text: string, icon: ReactNode }) => (
 
 const Login = () => {
     const navigate = useNavigate();
-    const { login, loading, error} = useLogin();
+    const { login, loading, error } = useLogin();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -46,6 +46,7 @@ const Login = () => {
     }
 
     return (
+
         <section className={styles["login-page"]}>
             <div className={styles["login-card"]}>
                 <div className={styles["presentation"]}>

@@ -1,5 +1,6 @@
-@use 'breakpoints' as *;
+@use "breakpoints" as *;
 
+// SCSS Variables
 //Font Sizes
 $font-size-base: 16px;
 $font-size-small: 14px;
@@ -10,6 +11,7 @@ $spacing-small: 8px;
 $spacing-medium: 12px;
 $spacing-large: 16px;
 
+// CSS Variables
 :root {
   --color-title: #fff;
   --color-text: #fff;
@@ -27,29 +29,33 @@ $spacing-large: 16px;
   --color-error: #b33636;
 
   // gaming colors
-    --color-playing: #2f74b9;
-    --color-completed: #21a565;
-    --color-wishlist: #b82e81;
-    --color-paused: #b1883c;
+  --color-playing: #2f74b9;
+  --color-completed: #21a565;
+  --color-wishlist: #b82e81;
+  --color-paused: #b1883c;
 
+  // font sizes
+  --title-font-size: 3em;
+
+  --subtitle-font-size: 1.5em;
+  --subtitle-font-weight: 600;
+
+  // small
+  @media screen and (max-width: $breakpoint-sm) {
+    --title-font-size: 2em;
+  }
+  // medium
+  @media screen and ($breakpoint-sm < width < $breakpoint-md) {
+    --title-font-size: 2.5em;
+  }
+  // large
+  @media screen and ($breakpoint-md < width < $breakpoint-lg) {
     --title-font-size: 3em;
-
-    // small
-    @media screen and (max-width: $breakpoint-sm) {
-      --title-font-size: 2em;
-    }
-    // medium
-    @media screen and ($breakpoint-sm < width < $breakpoint-md) {
-      --title-font-size: 2.5em;
-    }
-    // large
-    @media screen and ($breakpoint-md < width < $breakpoint-lg) {
-      --title-font-size: 3em;
-    }
-    // xlarge
-    @media screen and (min-width: $breakpoint-lg) {
-      --title-font-size: 3em;
-    }
+  }
+  // xlarge
+  @media screen and (min-width: $breakpoint-lg) {
+    --title-font-size: 3em;
+  }
 }
 
 // color themes
@@ -68,7 +74,6 @@ body {
     --color-completed: #8de9bd;
     --color-wishlist: #e490c2;
     --color-paused: #fdce77;
-
   }
 }
 
@@ -83,9 +88,9 @@ body {
     --color-border: #cccccc;
 
     // gaming colors
-    --color-playing: #1E90FF;
-    --color-completed: #00FF85;
-    --color-wishlist: #FF0099;
-    --color-paused: #FFA500;
+    --color-playing: #1e90ff;
+    --color-completed: #00ff85;
+    --color-wishlist: #ff0099;
+    --color-paused: #ffa500;
   }
 }

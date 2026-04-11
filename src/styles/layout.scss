@@ -47,6 +47,13 @@ h1 {
   color: var(--color-title);
 }
 
+h2 {
+  font-size: var(--subtitle-font-size);
+  font-weight: var(--subtitle-font-weight);
+  line-height: 1.2;
+  color: var(--color-title);
+}
+
 .app-layout {
   height: 100dvh;
   display: grid;
