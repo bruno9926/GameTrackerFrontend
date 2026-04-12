@@ -1,6 +1,8 @@
 // styles
 import styles from "./Login.module.scss";
 import logo from "../../assets/logo.png";
+import { FaGoogle } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
 
 // feature icons
 import { IoPeople } from "react-icons/io5";
@@ -27,6 +29,41 @@ const Feature = ({ text, icon }: { text: string, icon: ReactNode }) => (
         <span className={styles["text"]}>{text}</span>
     </div>
 )
+
+const SocialAuth = () => (
+    <div className="flex flex-col w-full gap-4 mt-10">
+        {/* divider */}
+        <div className="flex items-center gap-2">
+            <div className="flex-1 h-px bg-[#929292]" />
+            <span className="text-center">Or connect with</span>
+            <div className="flex-1 h-px bg-[#929292]" />
+        </div>
+        {/* social buttons */}
+        <div className="flex gap-4">
+            <SocialButton provider="Google" icon={<FaGoogle />} color={providerColors.Google} />
+            <SocialButton provider="Discord" icon={<FaDiscord />} color={providerColors.Discord} />
+        </div>
+    </div>
+)
+
+const providerColors = {
+    "Google": "#4285f4",
+    "Discord": "#5865F2",
+    "default": "#e0e0e0"
+} as const;
+interface SocialButtonProps {
+    provider: string;
+    icon: ReactNode;
+    color?: typeof providerColors[keyof typeof providerColors];
+}
+const SocialButton = ({ provider, icon, color = providerColors.default }: SocialButtonProps) => {
+    const baseClass = "flex items-center justify-center gap-2 w-full py-2 border rounded-md cursor-pointer transition-colors text-white";
+    const hoverClass = `hover:bg-[${color}]`;
+    return (<button className={[baseClass, hoverClass].join(" ")}>
+        {icon}
+        <span>{provider}</span>
+    </button>)
+}
 
 const Login = () => {
     const navigate = useNavigate();
@@ -77,7 +114,6 @@ const Login = () => {
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                             />
                         </Field>
-
                         <PasswordField password={password} setPassword={setPassword} />
                     </div>
 
@@ -88,6 +124,8 @@ const Login = () => {
                     <div className={styles["signup-link"]}>
                         <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
                     </div>
+
+                    <SocialAuth />
                 </form>
             </div>
         </section>
