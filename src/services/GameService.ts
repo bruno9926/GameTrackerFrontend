@@ -1,4 +1,5 @@
 import type { Game, GameToUpdate, GameToCreate } from "../types/Game";
+import { authService } from "./AuthService";
 
 const API_URL = import.meta.env.VITE_API_URL + "/games";
 
@@ -10,14 +11,11 @@ class GameService {
     "ngrok-skip-browser-warning": "true"
   };
 
-  private get authToken(): string | null {
-    return localStorage.getItem("authToken");
-  }
-
   private get authenticatedHeaders() {
+    const authToken = authService.getToken();
     return {
       ...GameService.defaultHeaders,
-      "Authorization": `Bearer ${this.authToken}`,
+      "Authorization": `Bearer ${authToken}`,
     }
   }
 

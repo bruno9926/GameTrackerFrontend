@@ -48,6 +48,20 @@ class AuthService {
         return res.json();
     }
 
+    // token management
+    private static TOKEN_KEY = "authToken";
+
+    getToken(): string | null {
+        return localStorage.getItem(AuthService.TOKEN_KEY);
+    }
+
+    setToken(token: string): void {
+        localStorage.setItem(AuthService.TOKEN_KEY, token);
+    }
+
+    clearToken(): void {
+        localStorage.removeItem(AuthService.TOKEN_KEY);
+    }
 }
 
 type RegisterBody = {
@@ -66,3 +80,5 @@ type TokenResponse = {
 }
 
 export default AuthService;
+
+export const authService = AuthService.getInstance();

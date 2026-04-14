@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AuthService from "../../services/AuthService";
+import { authService } from "../../services/AuthService";
 
 const useLogin = () => {
     const [error, setError] = useState<string | null>(null);
@@ -9,14 +9,13 @@ const useLogin = () => {
 
         setLoading(true);
         setError(null);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         try {
-            const { token } = await AuthService.getInstance().login({
+            const { token } = await authService.login({
                 email: credentials.email,
                 password: credentials.password
             });
-            localStorage.setItem("authToken", token);
+            authService.setToken(token);
         } catch(e: any) {
             setError(e?.message || "Logion failed")
             throw e;

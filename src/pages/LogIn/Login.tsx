@@ -40,29 +40,33 @@ const SocialAuth = () => (
         </div>
         {/* social buttons */}
         <div className="flex gap-4">
-            <SocialButton provider="Google" icon={<FaGoogle />} color={providerColors.Google} />
-            <SocialButton provider="Discord" icon={<FaDiscord />} color={providerColors.Discord} />
+            <SocialButton provider="Google" icon={<FaGoogle />} />
+            <SocialButton provider="Discord" icon={<FaDiscord />} />
         </div>
     </div>
 )
 
-const providerColors = {
-    "Google": "#4285f4",
-    "Discord": "#5865F2",
-    "default": "#e0e0e0"
+const Provider = {
+    "GOOGLE": "Google",
+    "DISCORD": "Discord"
+} as const;
+const providerStyles = {
+    [Provider.GOOGLE]: "border-[#4285f4] text-[#4285f4] hover:bg-[#4285f4] hover:text-white",
+    [Provider.DISCORD]: "border-[#5865F2] text-[#5865F2] hover:bg-[#5865F2] hover:text-white",
 } as const;
 interface SocialButtonProps {
-    provider: string;
+    provider: (typeof Provider)[keyof typeof Provider];
     icon: ReactNode;
-    color?: typeof providerColors[keyof typeof providerColors];
 }
-const SocialButton = ({ provider, icon, color = providerColors.default }: SocialButtonProps) => {
-    const baseClass = "flex items-center justify-center gap-2 w-full py-2 border rounded-md cursor-pointer transition-colors text-white";
-    const hoverClass = `hover:bg-[${color}]`;
-    return (<button className={[baseClass, hoverClass].join(" ")}>
-        {icon}
-        <span>{provider}</span>
-    </button>)
+const SocialButton = ({ provider, icon }: SocialButtonProps) => {
+    const baseClass = "flex items-center justify-center gap-2 w-full py-2 border rounded-md cursor-pointer transition-all duration-200";
+    const hoverClass = providerStyles[provider] || providerStyles[Provider.GOOGLE];
+    return (
+        <button className={[baseClass, hoverClass].join(" ")} type="button">
+            {icon}
+            <span>{provider}</span>
+        </button>
+    )
 }
 
 const Login = () => {
@@ -97,7 +101,10 @@ const Login = () => {
                         <Feature text="Track your Backlog" icon={<MdChecklistRtl />} />
                     </div>
                 </div>
-                <form className={styles["login-form"]}>
+                <form className={styles["login-form"]} onSubmit={e => {
+                    e.preventDefault();
+                    handleLogin()
+                }}>
                     <div className={styles["login-title"]}>
                         <h2>Sign In</h2>
                         <span>Welcome back. Enter your details to sync your progress.</span>
@@ -117,7 +124,7 @@ const Login = () => {
                         <PasswordField password={password} setPassword={setPassword} />
                     </div>
 
-                    <Button onClick={handleLogin} disabled={loading} type="submit">
+                    <Button disabled={loading} type="submit">
                         {loading ? "Signing you in..." : "Sign In"}
                     </Button>
                     {error && <span className={styles.error}>{error}</span>}
