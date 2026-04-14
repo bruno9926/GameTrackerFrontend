@@ -3,11 +3,10 @@ import  { publicRoutes } from "./routes";
 import useAuth from "../hooks/useAuth";
 
 const PrivateRoute = () => {
-    const { user } = useAuth();
-    const logged = !!user;
+    const { isAuthenticated } = useAuth();
 
     return (
-        logged ? <Outlet/> : <Navigate to={publicRoutes.LOGIN}/>
+        isAuthenticated ? <Outlet/> : <Navigate to={publicRoutes.LOGIN}/>
     )
 }
 

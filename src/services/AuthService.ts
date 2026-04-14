@@ -42,7 +42,6 @@ class AuthService {
                     ? data.message.join(", ")
                     : data.message;
             }
-            console.log(data)
             throw new Error(message);
         }
         return res.json();

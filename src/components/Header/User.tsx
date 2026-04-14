@@ -1,15 +1,12 @@
 import { useSelector } from "react-redux";
 import { type RootState } from "../../redux/store";
+import { IoIosLogOut } from "react-icons/io";
 import styles from './User.module.scss';
 import useOptionsMenu from "../Organisms/OptionsMenu/useOptionsMenu";
-import { IoIosLogOut } from "react-icons/io";
-// routing
-import { useNavigate } from "react-router";
-import { publicRoutes as routes } from "../../routes/routes";
+import useLogout from "./useLogout";
 
 const User = () => {
     const user = useSelector((state: RootState) => state.user.user);
-
     const {
         name,
         profilePicture,
@@ -20,14 +17,13 @@ const User = () => {
         email: ''
     };
 
+    const { logout } = useLogout();
+
     const { ref, toggleOpen, open } = useOptionsMenu();
-    const navigate = useNavigate();
 
     const LogoutButton = () => (
         <button className={styles.logout}
-            onClick={() => {
-                navigate(routes.LOGIN);
-            }}>
+            onClick={() => logout()}>
             <IoIosLogOut size={20} />
             <span>Logout</span>
         </button>

@@ -31,7 +31,6 @@ class GameService {
    * @returns all the games
    */
   async fetchGames(): Promise<Game[]> {
-    console.log("Fetching games from API at:", API_URL);
     const res = await fetch(API_URL, {
       method: "GET",
       headers: this.authenticatedHeaders,

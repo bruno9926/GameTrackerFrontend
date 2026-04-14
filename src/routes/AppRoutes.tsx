@@ -3,7 +3,6 @@ import { defaultRoute, publicRoutes, userRoutes } from "./routes";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 
-
 import MainLayout from "../layout/MainLayout";
 // pages
 import Dashboard from "../pages/Dashboard/Dashboard";

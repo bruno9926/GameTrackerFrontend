@@ -3,11 +3,10 @@ import  { defaultRoute } from "./routes";
 import useAuth from "../hooks/useAuth";
 
 const PublicRoute = () => {
-    const { user } = useAuth();
-    const logged = !!user;
+    const { isAuthenticated } = useAuth();
 
     return (
-        logged ? <Navigate to={defaultRoute}/> : <Outlet/>
+        isAuthenticated ? <Navigate to={defaultRoute}/> : <Outlet/>
     )
 }
 
