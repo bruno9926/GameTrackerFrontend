@@ -68,6 +68,11 @@ class GameService {
     return this.handleResponse<Game[]>(res);
   }
 
+  /**
+   * updates a game from the users games
+   * @param game the game to update
+   * @returns all the games after the update
+   */
   async updateGame(game: GameToUpdate): Promise<Game[]> {
     if (!game.id) {
       throw new Error("The id provided is not valid");

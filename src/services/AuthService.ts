@@ -1,5 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL + "/auth";
+import type { User } from "../types/User";
 
+const API_URL = import.meta.env.VITE_API_URL + "/auth";
 class AuthService {
     private static instance: AuthService;
 
@@ -31,6 +32,17 @@ class AuthService {
             body: JSON.stringify(body),
         });
         return this.handleResponse<TokenResponse>(res);
+    }
+
+    async getMe(): Promise<User> {
+        const res = await fetch(`${API_URL}/me`, {
+            method: "GET",
+            headers: {
+                ...AuthService.defaultHeaders,
+                "Authorization": `Bearer ${this.getToken()}`
+            }
+        });
+        return this.handleResponse<User>(res);
     }
 
     private async handleResponse<T>(res: Response): Promise<T> {

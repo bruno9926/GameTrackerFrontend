@@ -3,10 +3,12 @@ import { authService } from "../../services/AuthService";
 // redux
 import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/authSlice";
+import { setUser } from "../../redux/userSlice";
 
 const useLogin = () => {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+
     const dispatch = useDispatch();
 
     const login = async (credentials: { email: string; password: string }) => {
@@ -21,8 +23,12 @@ const useLogin = () => {
 
             authService.setToken(token);
             dispatch(setToken(token));
+
+            const user = await authService.getMe();
+            dispatch(setUser(user));
+
         } catch(e: any) {
-            setError(e?.message || "Logion failed")
+            setError(e?.message || "Login failed")
             throw e;
         } finally {
             setLoading(false);
