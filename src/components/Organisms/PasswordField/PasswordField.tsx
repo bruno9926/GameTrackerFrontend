@@ -4,11 +4,12 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
-interface PasswordFieldProps {
+type PasswordFieldProps = {
     password: string;
     setPassword: React.Dispatch<React.SetStateAction<string>>;
-}
-const PasswordField = ({ password, setPassword }: PasswordFieldProps) => {
+} & React.InputHTMLAttributes<HTMLInputElement>;
+
+const PasswordField = ({ password, setPassword, ...props }: PasswordFieldProps) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +25,8 @@ const PasswordField = ({ password, setPassword }: PasswordFieldProps) => {
                     value={password}
                     onChange={handlePasswordChange}
                     name="password"
+                    autoComplete="current-password"
+                    {...props} // pass down any additional props (like disabled)
                 />
                 <InputGroupAddon align="inline-end" className="pl-2">
                     <button

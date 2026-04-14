@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { authService } from "../../services/AuthService";
+import { useNavigate, useLocation } from "react-router";
+import { defaultRoute } from "../../routes/routes";
 // redux
 import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/authSlice";
@@ -10,6 +12,9 @@ const useLogin = () => {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const login = async (credentials: { email: string; password: string }) => {
         setLoading(true);

@@ -14,7 +14,7 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import { PasswordField } from "../../components/Organisms/PasswordField";
 
 // routing
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { defaultRoute } from "../../routes/routes";
 import { Link } from "react-router";
 import { publicRoutes } from "../../routes/routes";
@@ -70,7 +70,9 @@ const SocialButton = ({ provider, icon }: SocialButtonProps) => {
 }
 
 const Login = () => {
+    const location = useLocation();
     const navigate = useNavigate();
+
     const { login, loading, error } = useLogin();
 
     const [email, setEmail] = useState("");
@@ -87,7 +89,8 @@ const Login = () => {
         setEmail("");
         setPassword("");
 
-        navigate(defaultRoute);
+        const from = (location.state as any)?.from?.pathname || defaultRoute;
+        navigate(from, { replace: true });
     }
 
     return (
@@ -116,12 +119,14 @@ const Login = () => {
                             <Input
                                 id="email"
                                 name="email"
+                                autoComplete="email"
                                 type="email"
                                 value={email}
+                                disabled={loading}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                             />
                         </Field>
-                        <PasswordField password={password} setPassword={setPassword} />
+                        <PasswordField password={password} setPassword={setPassword} disabled={loading} />
                     </div>
 
                     <Button disabled={loading} type="submit">
@@ -131,7 +136,6 @@ const Login = () => {
                     <div className={styles["signup-link"]}>
                         <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
                     </div>
-
                     <SocialAuth />
                 </form>
             </div>
