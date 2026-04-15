@@ -1,23 +1,12 @@
 import type { Game, GameToUpdate, GameToCreate } from "../types/Game";
-import { authService } from "./AuthService";
+import { apiClient } from "./apiClient";
 
 const API_URL = import.meta.env.VITE_API_URL + "/games";
 
 class GameService {
   private static instance: GameService;
 
-  private static defaultHeaders = {
-    "Content-Type": "application/json",
-    "ngrok-skip-browser-warning": "true"
-  };
-
-  private get authenticatedHeaders() {
-    const authToken = authService.getToken();
-    return {
-      ...GameService.defaultHeaders,
-      "Authorization": `Bearer ${authToken}`,
-    }
-  }
+  private constructor() {}
 
   static getInstance(): GameService {
     if (!GameService.instance) {
@@ -31,11 +20,7 @@ class GameService {
    * @returns all the games
    */
   async fetchGames(): Promise<Game[]> {
-    const res = await fetch(API_URL, {
-      method: "GET",
-      headers: this.authenticatedHeaders,
-    });
-    return this.handleResponse<Game[]>(res);
+    return apiClient(API_URL);
   }
 
   /**
@@ -44,12 +29,10 @@ class GameService {
    * @return all the games after the addition
    */
   async postGame(game: GameToCreate): Promise<Game[]> {
-    const res = await fetch(API_URL, {
+    return apiClient(API_URL, {
       method: "POST",
-      headers: this.authenticatedHeaders,
-      body: JSON.stringify(game),
+      body: game
     });
-    return this.handleResponse<Game[]>(res);
   }
 
   /**
@@ -61,11 +44,9 @@ class GameService {
     if (!id) {
       throw new Error("The id provided is not valid");
     }
-    const res = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
-      headers: this.authenticatedHeaders,
+    return apiClient(`${API_URL}/${id}`, {
+      method: "DELETE"
     });
-    return this.handleResponse<Game[]>(res);
   }
 
   /**
@@ -77,26 +58,10 @@ class GameService {
     if (!game.id) {
       throw new Error("The id provided is not valid");
     }
-    const res = await fetch(API_URL, {
+    return apiClient(API_URL, {
       method: "PUT",
-      headers: this.authenticatedHeaders,
       body: JSON.stringify(game),
     });
-    return this.handleResponse<Game[]>(res);
-  }
-
-  private async handleResponse<T>(res: Response): Promise<T> {
-    if (!res.ok) {
-      let message = res.statusText;
-      const data = await res.json();
-      if (data?.message) {
-        message = Array.isArray(data.message)
-          ? data.message.join(", ")
-          : data.message;
-      }
-      throw new Error("Error: " + message);
-    }
-    return res.json();
   }
 }
 

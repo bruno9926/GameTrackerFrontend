@@ -1,13 +1,11 @@
 import type { User } from "../types/User";
+import { apiClient } from "./apiClient";
 
 const API_URL = import.meta.env.VITE_API_URL + "/auth";
 class AuthService {
     private static instance: AuthService;
 
-    private static defaultHeaders = {
-        "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "true"
-    };
+    private constructor() {}
 
     static getInstance(): AuthService {
         if (!AuthService.instance) {
@@ -17,46 +15,23 @@ class AuthService {
     }
 
     async register(body: RegisterBody): Promise<void> {
-        const res = await fetch(`${API_URL}/register`, {
+        return apiClient(`${API_URL}/register`, {
             method: "POST",
-            headers: AuthService.defaultHeaders,
-            body: JSON.stringify(body),
+            body,
+            auth: false
         });
-        return this.handleResponse<void>(res);
     }
 
     async login(body: LoginBody): Promise<TokenResponse> {
-        const res = await fetch(`${API_URL}/login`, {
+        return apiClient(`${API_URL}/login`, {
             method: "POST",
-            headers: AuthService.defaultHeaders,
-            body: JSON.stringify(body),
+            body,
+            auth: false
         });
-        return this.handleResponse<TokenResponse>(res);
     }
 
     async getMe(): Promise<User> {
-        const res = await fetch(`${API_URL}/me`, {
-            method: "GET",
-            headers: {
-                ...AuthService.defaultHeaders,
-                "Authorization": `Bearer ${this.getToken()}`
-            }
-        });
-        return this.handleResponse<User>(res);
-    }
-
-    private async handleResponse<T>(res: Response): Promise<T> {
-        if (!res.ok) {
-            let message = res.statusText;
-            const data = await res.json();
-            if (data?.message) {
-                message = Array.isArray(data.message)
-                    ? data.message.join(", ")
-                    : data.message;
-            }
-            throw new Error(message);
-        }
-        return res.json();
+        return apiClient(`${API_URL}/me`);
     }
 
     // token management
