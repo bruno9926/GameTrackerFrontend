@@ -7,7 +7,8 @@ import authReducer from './authSlice';
 
 const preloadedState = {
     auth: {
-        token: authService.getToken()
+        token: authService.getToken(),
+        refreshToken: authService.getRefreshToken()
     }
 }
 

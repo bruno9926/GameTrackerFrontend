@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL + "/auth";
 class AuthService {
     private static instance: AuthService;
 
-    private constructor() {}
+    private constructor() { }
 
     static getInstance(): AuthService {
         if (!AuthService.instance) {
@@ -30,6 +30,14 @@ class AuthService {
         });
     }
 
+    async refresh(refreshToken: string): Promise<TokenResponse> {
+        return apiClient(`${API_URL}/refresh`, {
+            method: "POST",
+            body: { refreshToken },
+            auth: false
+        });
+    }
+
     async getMe(): Promise<User> {
         return apiClient(`${API_URL}/me`);
     }
@@ -48,6 +56,32 @@ class AuthService {
     clearToken(): void {
         localStorage.removeItem(AuthService.TOKEN_KEY);
     }
+
+    // refresh token management
+    private static REFRESH_TOKEN_KEY = "refreshToken";
+
+    getRefreshToken(): string | null {
+        return localStorage.getItem(AuthService.REFRESH_TOKEN_KEY);
+    }
+
+    setRefreshToken(token: string): void {
+        localStorage.setItem(AuthService.REFRESH_TOKEN_KEY, token);
+    }
+
+    clearRefreshToken(): void {
+        localStorage.removeItem(AuthService.REFRESH_TOKEN_KEY);
+    }
+
+    setAuth({ token, refreshToken }: { token: string; refreshToken: string }): void {
+        this.setToken(token);
+        this.setRefreshToken(refreshToken);
+    }
+
+    clearAuth(): void {
+        this.clearToken();
+        this.clearRefreshToken();
+    }
+
 }
 
 type RegisterBody = {
@@ -61,8 +95,9 @@ type LoginBody = {
     password: string;
 }
 
-type TokenResponse = {
+export type TokenResponse = {
     token: string;
+    refreshToken: string;
 }
 
 export default AuthService;

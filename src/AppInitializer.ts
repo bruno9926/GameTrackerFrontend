@@ -3,7 +3,7 @@ import { authService } from "./services/AuthService";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/userSlice";
-import { clearToken } from "./redux/authSlice";
+import { clearAuth } from "./redux/authSlice";
 
 const AppInitializer = ({ children }: { children: Readonly<React.ReactNode> }) => {
     const dispatch = useDispatch();
@@ -17,8 +17,9 @@ const AppInitializer = ({ children }: { children: Readonly<React.ReactNode> }) =
                     const user = await authService.getMe();
                     dispatch(setUser(user));
                 } catch (error) {
-                    dispatch(clearToken());
+                    dispatch(clearAuth());
                     authService.clearToken();
+                    authService.clearRefreshToken();
                 }
             }
         }

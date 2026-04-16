@@ -60,7 +60,7 @@ class GameService {
     }
     return apiClient(API_URL, {
       method: "PUT",
-      body: JSON.stringify(game),
+      body: game,
     });
   }
 }

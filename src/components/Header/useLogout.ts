@@ -1,6 +1,6 @@
 import { authService } from "../../services/AuthService";
 import { useDispatch } from "react-redux";
-import { clearToken } from "../../redux/authSlice";
+import { clearAuth } from "../../redux/authSlice";
 import { clearUser } from "../../redux/userSlice";
 // navigation
 import { useNavigate } from "react-router";
@@ -13,9 +13,9 @@ const useLogout = () => {
     const logout = () => {
         try {
             // clear in persistent storage
-            authService.clearToken();
+            authService.clearAuth();
             // clear in redux store
-            dispatch(clearToken());
+            dispatch(clearAuth());
             dispatch(clearUser());
         } finally {
             // navigate to login page
