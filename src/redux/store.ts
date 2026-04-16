@@ -5,10 +5,11 @@ import gamesReducer from './gamesSlice';
 import userReducer from './userSlice';
 import authReducer from './authSlice';
 
+const { token, refreshToken } = authService.getAuth();
 const preloadedState = {
     auth: {
-        token: authService.getToken(),
-        refreshToken: authService.getRefreshToken()
+        token: token,
+        refreshToken: refreshToken
     }
 }
 

@@ -18,8 +18,7 @@ const AppInitializer = ({ children }: { children: Readonly<React.ReactNode> }) =
                     dispatch(setUser(user));
                 } catch (error) {
                     dispatch(clearAuth());
-                    authService.clearToken();
-                    authService.clearRefreshToken();
+                    authService.clearAuth();
                 }
             }
         }

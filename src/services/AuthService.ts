@@ -1,5 +1,6 @@
 import type { User } from "../types/User";
 import { apiClient } from "./apiClient";
+import TokenProvider from "./tokenProvider";
 
 const API_URL = import.meta.env.VITE_API_URL + "/auth";
 class AuthService {
@@ -30,56 +31,22 @@ class AuthService {
         });
     }
 
-    async refresh(refreshToken: string): Promise<TokenResponse> {
-        return apiClient(`${API_URL}/refresh`, {
-            method: "POST",
-            body: { refreshToken },
-            auth: false
-        });
-    }
-
     async getMe(): Promise<User> {
         return apiClient(`${API_URL}/me`);
     }
 
     // token management
-    private static TOKEN_KEY = "authToken";
-
-    getToken(): string | null {
-        return localStorage.getItem(AuthService.TOKEN_KEY);
+    getAuth(): { token: string | null; refreshToken: string | null } {
+        return {
+            token: TokenProvider.getAccessToken(),
+            refreshToken: TokenProvider.getRefreshToken()
+        }
     }
-
-    setToken(token: string): void {
-        localStorage.setItem(AuthService.TOKEN_KEY, token);
-    }
-
-    clearToken(): void {
-        localStorage.removeItem(AuthService.TOKEN_KEY);
-    }
-
-    // refresh token management
-    private static REFRESH_TOKEN_KEY = "refreshToken";
-
-    getRefreshToken(): string | null {
-        return localStorage.getItem(AuthService.REFRESH_TOKEN_KEY);
-    }
-
-    setRefreshToken(token: string): void {
-        localStorage.setItem(AuthService.REFRESH_TOKEN_KEY, token);
-    }
-
-    clearRefreshToken(): void {
-        localStorage.removeItem(AuthService.REFRESH_TOKEN_KEY);
-    }
-
     setAuth({ token, refreshToken }: { token: string; refreshToken: string }): void {
-        this.setToken(token);
-        this.setRefreshToken(refreshToken);
+        TokenProvider.setTokens({ token, refreshToken });
     }
-
     clearAuth(): void {
-        this.clearToken();
-        this.clearRefreshToken();
+        TokenProvider.clearTokens();
     }
 
 }
@@ -95,7 +62,7 @@ type LoginBody = {
     password: string;
 }
 
-export type TokenResponse = {
+type TokenResponse = {
     token: string;
     refreshToken: string;
 }

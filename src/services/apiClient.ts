@@ -1,12 +1,32 @@
 import { publicRoutes } from "../routes/routes";
-import { authService } from "./AuthService"
+import TokenProvider from "./tokenProvider";
 
 type ApiOptions<B> = Omit<RequestInit, 'body'> & {
     auth?: boolean,
     body?: B
 }
 
+type Tokens = {
+    token: string;
+    refreshToken: string;
+}
+
 let refreshPromise: Promise<void> | null = null;
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+const refresh = async (refreshToken: string): Promise<Tokens> => {
+    const res = await fetch(`${API_URL}/refresh`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ refreshToken })
+    });
+
+    if (!res.ok) throw new Error("Refresh failed");
+    return res.json();
+}
 
 export const apiClient = async <T, B = unknown>(
     url: string,
@@ -17,7 +37,7 @@ export const apiClient = async <T, B = unknown>(
 
     // inner utilities
     const makeRequest = async (): Promise<Response> => {
-        const token = auth ? authService.getToken() : null;
+        const token = auth ? TokenProvider.getAccessToken() : null;
 
         const headers: HeadersInit = {
             'Content-Type': 'application/json',
@@ -34,17 +54,16 @@ export const apiClient = async <T, B = unknown>(
     }
 
     const handleRefresh = async () => {
-        const storedRefreshToken = authService.getRefreshToken();
+        const storedRefreshToken = TokenProvider.getRefreshToken();
 
         if (!storedRefreshToken) {
             throw new Error("Session expired. Please log in again.");
         }
 
         if (!refreshPromise) {
-            refreshPromise = authService
-                .refresh(storedRefreshToken)
+            refreshPromise = refresh(storedRefreshToken)
                 .then(({ token, refreshToken }) => {
-                    authService.setAuth({ token, refreshToken });
+                    TokenProvider.setTokens({ token, refreshToken });
                 })
                 .finally(() => {
                     refreshPromise = null;
@@ -55,7 +74,7 @@ export const apiClient = async <T, B = unknown>(
     }
 
     const forceLogout = () => {
-        authService.clearAuth();
+        TokenProvider.clearTokens();
         window.location.href = publicRoutes.LOGIN;
     }
 
