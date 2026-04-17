@@ -9,8 +9,8 @@ import Dashboard from "@pages/Dashboard/Dashboard";
 import Games from "@features/games/ui/Games/Games";
 import Platforms from "@pages/Platforms/Platforms";
 import Settings from "@pages/Settings/Settings";
-import Login from "@features/auth/ui/LogIn/Login";
-import SignUp from "@features/auth/ui/SignUp/SignUp";
+import SignUp from "@pages/SignUp/SignUp";
+import SignIn from "@pages/SignIn/SignIn";
 
 // user routes
 type UserRoutePath = (typeof userRoutes)[keyof typeof userRoutes];
@@ -23,7 +23,7 @@ const userRoutesMap: Record<UserRoutePath, React.ReactNode> = {
 // public routes
 type PublicRoutePath = (typeof publicRoutes)[keyof typeof publicRoutes];
 const publicRoutesMap: Record<PublicRoutePath, React.ReactNode> = {
-    [publicRoutes.LOGIN]: <Login />,
+    [publicRoutes.LOGIN]: <SignIn />,
     [publicRoutes.SIGNUP]: <SignUp />
 };
 

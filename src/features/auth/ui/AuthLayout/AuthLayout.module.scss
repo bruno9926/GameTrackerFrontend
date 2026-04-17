@@ -1,0 +1,25 @@
+.auth-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 1rem;
+
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at bottom left,
+        rgba(255, 70, 40, 0.3),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at top right,
+        rgba(255, 120, 60, 0.2),
+        transparent 40%
+      );
+    z-index: -1;
+  }
+}

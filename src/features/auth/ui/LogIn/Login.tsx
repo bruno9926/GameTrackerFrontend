@@ -94,52 +94,50 @@ const Login = () => {
     }
 
     return (
-        <section className={styles["login-page"]}>
-            <div className={styles["login-card"]}>
-                <div className={styles["presentation"]}>
-                    <img src={logo} alt="Gamer Dashboard Logo" />
-                    <span>The ultimate command center for your gaming stats, progressions and community connections.</span>
-                    <div className={styles["feature-row"]}>
-                        <Feature text="Build a Community" icon={<IoPeople />} />
-                        <Feature text="Track your Backlog" icon={<MdChecklistRtl />} />
-                    </div>
+        <div className={styles["login-card"]}>
+            <div className={styles["presentation"]}>
+                <img src={logo} alt="Gamer Dashboard Logo" />
+                <span>The ultimate command center for your gaming stats, progressions and community connections.</span>
+                <div className={styles["feature-row"]}>
+                    <Feature text="Build a Community" icon={<IoPeople />} />
+                    <Feature text="Track your Backlog" icon={<MdChecklistRtl />} />
                 </div>
-                <form className={styles["login-form"]} onSubmit={e => {
-                    e.preventDefault();
-                    handleLogin()
-                }}>
-                    <div className={styles["login-title"]}>
-                        <h2>Sign In</h2>
-                        <span>Welcome back. Enter your details to sync your progress.</span>
-                    </div>
-
-                    <div className={styles.body}>
-                        <Field>
-                            <FieldLabel htmlFor="email">Email</FieldLabel>
-                            <Input
-                                id="email"
-                                name="email"
-                                autoComplete="email"
-                                type="email"
-                                value={email}
-                                disabled={loading}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                            />
-                        </Field>
-                        <PasswordField password={password} setPassword={setPassword} disabled={loading} />
-                    </div>
-
-                    <Button disabled={loading} type="submit">
-                        {loading ? "Signing you in..." : "Sign In"}
-                    </Button>
-                    {error && <span className={styles.error}>{error}</span>}
-                    <div className={styles["signup-link"]}>
-                        <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
-                    </div>
-                    <SocialAuth />
-                </form>
             </div>
-        </section>
+            <form className={styles["login-form"]} onSubmit={e => {
+                e.preventDefault();
+                handleLogin()
+            }}>
+                <div className={styles["login-title"]}>
+                    <h2>Sign In</h2>
+                    <span>Welcome back. Enter your details to sync your progress.</span>
+                </div>
+
+                <div className={styles.body}>
+                    <Field>
+                        <FieldLabel htmlFor="email">Email</FieldLabel>
+                        <Input
+                            id="email"
+                            name="email"
+                            autoComplete="email"
+                            type="email"
+                            value={email}
+                            disabled={loading}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                        />
+                    </Field>
+                    <PasswordField password={password} setPassword={setPassword} disabled={loading} />
+                </div>
+
+                <Button disabled={loading} type="submit">
+                    {loading ? "Signing you in..." : "Sign In"}
+                </Button>
+                {error && <span className={styles.error}>{error}</span>}
+                <div className={styles["signup-link"]}>
+                    <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
+                </div>
+                <SocialAuth />
+            </form>
+        </div>
     )
 }
 
