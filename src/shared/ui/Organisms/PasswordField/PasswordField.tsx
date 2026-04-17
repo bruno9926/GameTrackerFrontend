@@ -1,5 +1,5 @@
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { Field, FieldLabel } from "@/components/ui/field";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@shared/ui/chadcn/input-group";
+import { Field, FieldLabel } from "@shared/ui/chadcn/field";
 
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";

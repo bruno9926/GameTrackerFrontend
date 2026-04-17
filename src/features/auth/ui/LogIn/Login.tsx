@@ -9,8 +9,8 @@ import { IoPeople } from "react-icons/io5";
 import { MdChecklistRtl } from "react-icons/md";
 
 import Button from "@shared/ui/Atoms/Button/Button";
-import { Input } from "@/components/ui/input";
-import { Field, FieldLabel } from "@/components/ui/field";
+import { Input } from "@shared/ui/chadcn/input";
+import { Field, FieldLabel } from "@shared/ui/chadcn/field";
 import { PasswordField } from "@shared/ui/Organisms/PasswordField";
 
 // routing
