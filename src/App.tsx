@@ -1,11 +1,11 @@
 // routing
-import AppRoutes from "./routes/AppRoutes";
+import AppRoutes from "@routes/AppRoutes";
 // context
-import Providers from "./Providers";
+import Providers from "./app/providers/Providers";
 // initialization
-import AppInitializer from "./AppInitializer";
+import AppInitializer from "./app/AppInitializer";
 // styles
-import "./styles/main.scss";
+import "./app/styles/main.scss";
 import "./index.css";
 
 function App() {

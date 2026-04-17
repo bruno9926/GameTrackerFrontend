@@ -1,6 +1,6 @@
-import GameList from "../../components/GameList/GameList";
-import Friends from "../../components/Friends/Friends";
-import GOTW from "../../components/GOTW/GOTW";
+import GameList from "@features/games/ui/GameList/GameList";
+import Friends from "@shared/ui/Friends/Friends";
+import GOTW from "../../shared/ui/GOTW/GOTW";
 import AnimatedRoute from "../AnimatedRoute";
 import "./Dashboard.scss";
 

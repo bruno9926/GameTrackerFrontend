@@ -1,5 +1,5 @@
 import AnimatedRoute from "../AnimatedRoute";
-import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
+import ThemeToggle from "@shared/ui/ThemeToggle/ThemeToggle";
 
 
 const Settings = () => {
