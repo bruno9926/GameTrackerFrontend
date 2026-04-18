@@ -42,15 +42,17 @@ const Login = () => {
     }
 
     return (
-        <div className="bg-card/50 rounded-md shadow-md border w-full max-w-312 h-[70%] grid grid-cols-2 items-center justify-center text-subtitle">
-            <div className="flex flex-col items-center justify-center p-16">
+        <div className="auth-card grid grid-cols-1 md:grid-cols-2 md:h-[70%]">
+            {/*info */}
+            <div className="flex flex-col items-center justify-center mb-4 p-6 md:p-10 lg:p-16 md:mb-0">
                 <img src={logo} alt="Gamer Dashboard Logo" className="h-20 mb-4" />
                 <span className="text-md text-center">The ultimate command center for your gaming stats, progressions and community connections.</span>
                 <div className="mt-10">
                     <Features/>
                 </div>
             </div>
-            <form className="h-full flex flex-col border-l justify-center p-16" onSubmit={e => {
+            {/*form */}
+            <form className="h-full flex flex-col justify-center p-6 mt-4 border-t md:border-t-0 md:border-l md:mt-0 lg:p-16" onSubmit={e => {
                 e.preventDefault();
                 handleLogin()
             }}>

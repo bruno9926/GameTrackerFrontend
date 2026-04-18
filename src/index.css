@@ -154,4 +154,8 @@ input:-webkit-autofill:focus {
   .link-primary {
     @apply text-brand no-underline hover:underline;
   }
+
+  .auth-card {
+    @apply bg-card/50 rounded-md shadow-md border w-full max-w-6xl items-center justify-center text-subtitle
+  }
 }
