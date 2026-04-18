@@ -14,8 +14,8 @@ const Provider = {
     "DISCORD": "Discord"
 } as const;
 const providerStyles = {
-    [Provider.GOOGLE]: "border-[#4285f4] text-[#4285f4] hover:bg-[#4285f4] hover:text-white",
-    [Provider.DISCORD]: "border-[#5865F2] text-[#5865F2] hover:bg-[#5865F2] hover:text-white",
+    [Provider.GOOGLE]: "border-google text-google hover:bg-google hover:text-white",
+    [Provider.DISCORD]: "border-discord text-discord hover:bg-discord hover:text-white",
 } as const;
 interface SocialButtonProps {
     provider: (typeof Provider)[keyof typeof Provider];

@@ -1,5 +1,3 @@
-// styles
-import styles from "./Login.module.scss";
 import logo from "@assets/logo.png";
 import SocialAuth from "./SocialAuth";
 import Features from "./Features";
@@ -15,7 +13,7 @@ import { defaultRoute } from "@routes/routes";
 import { Link } from "react-router";
 import { publicRoutes } from "@routes/routes";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import useLogin from "../../hooks/useLogin";
 
 
@@ -44,24 +42,24 @@ const Login = () => {
     }
 
     return (
-        <div className={styles["login-card"]}>
-            <div className={styles["presentation"]}>
-                <img src={logo} alt="Gamer Dashboard Logo" />
-                <span className="text-md">The ultimate command center for your gaming stats, progressions and community connections.</span>
+        <div className="bg-card/50 rounded-md shadow-md border w-full max-w-312 h-[70%] grid grid-cols-2 items-center justify-center text-subtitle">
+            <div className="flex flex-col items-center justify-center p-16">
+                <img src={logo} alt="Gamer Dashboard Logo" className="h-20 mb-4" />
+                <span className="text-md text-center">The ultimate command center for your gaming stats, progressions and community connections.</span>
                 <div className="mt-10">
                     <Features/>
                 </div>
             </div>
-            <form className={styles["login-form"]} onSubmit={e => {
+            <form className="h-full flex flex-col border-l justify-center p-16" onSubmit={e => {
                 e.preventDefault();
                 handleLogin()
             }}>
-                <div className={styles["login-title"]}>
-                    <h2 className="text-white">Sign In</h2>
+                <div className="mb-4">
+                    <h2 className="text-title mb-0">Sign In</h2>
                     <span>Welcome back. Enter your details to sync your progress.</span>
                 </div>
 
-                <div className={styles.body}>
+                <div className="py-6 flex flex-col gap-4">
                     <Field>
                         <FieldLabel htmlFor="email">Email</FieldLabel>
                         <Input
@@ -80,16 +78,16 @@ const Login = () => {
                 <Button disabled={loading} type="submit">
                     {loading ? "Signing you in..." : "Sign In"}
                 </Button>
-                {error && <span className={styles.error}>{error}</span>}
-                <div className={styles["signup-link"]}>
-                    <span>Don't have an account? <Link to={publicRoutes.SIGNUP}>Sign up</Link></span>
+                {error && <span className="mt-2 text-error text-sm text-center">{error}</span>}
+                <div className="mt-4 text-center text-sm text-subtitle font-normal">
+                    <span>Don't have an account? <Link to={publicRoutes.SIGNUP} className="link-primary">Sign up</Link></span>
                 </div>
                 <div className="flex flex-col w-full gap-4 mt-10">
                     {/* divider */}
                     <div className="flex items-center gap-2">
-                        <div className="flex-1 h-px bg-[#929292]" />
-                        <span className="text-center text-[#929292] text-sm">Or connect with</span>
-                        <div className="flex-1 h-px bg-[#929292]" />
+                        <div className="flex-1 h-px bg-subtitle" />
+                        <span className="text-center text-subtitle text-sm">Or connect with</span>
+                        <div className="flex-1 h-px bg-subtitle" />
                     </div>
                     <SocialAuth />
                 </div>

@@ -50,8 +50,13 @@
   --text-xxs: 10px;
   /*custom colors*/
   --color-brand: #cc4e45;
+  --color-title: #fff;
   --color-subtitle: #929292;
-  --color-card: #1b1b1b
+  --color-card: #1b1b1b;
+  --color-discord: #5865F2;
+  --color-google: #4285f4;
+
+  --color-error: #b33636;
 }
 
 :root {
