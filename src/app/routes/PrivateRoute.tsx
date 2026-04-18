@@ -7,7 +7,7 @@ const PrivateRoute = () => {
     const location = useLocation();
 
     return (
-        isAuthenticated ? <Outlet/> : <Navigate to={publicRoutes.LOGIN} state={{ from: location }} replace/>
+        isAuthenticated ? <Outlet/> : <Navigate to={publicRoutes.SIGNUP} state={{ from: location }} replace/>
     )
 }
 

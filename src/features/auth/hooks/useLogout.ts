@@ -18,8 +18,8 @@ const useLogout = () => {
             dispatch(clearAuth());
             dispatch(clearUser());
         } finally {
-            // navigate to login page
-            navigate(publicRoutes.LOGIN, { replace: true });
+            // navigate to sign up page
+            navigate(publicRoutes.SIGNUP, { replace: true });
         }
     }
 

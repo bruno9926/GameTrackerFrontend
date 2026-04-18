@@ -75,7 +75,7 @@ export const apiClient = async <T, B = unknown>(
 
     const forceLogout = () => {
         TokenProvider.clearTokens();
-        window.location.href = publicRoutes.LOGIN;
+        window.location.href = publicRoutes.SIGNUP;
     }
 
     const getErrorMessage = async (res: Response) => {
