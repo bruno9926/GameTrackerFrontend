@@ -152,10 +152,10 @@ input:-webkit-autofill:focus {
 
 @layer components {
   .link-primary {
-    @apply text-brand no-underline hover:underline;
+    @apply text-brand hover:underline no-underline;
   }
 
   .auth-card {
-    @apply bg-card/50 rounded-md shadow-md border w-full max-w-6xl items-center justify-center text-subtitle
+    @apply bg-card/50 rounded-md shadow-md border w-full max-w-6xl items-center justify-center text-subtitle;
   }
 }

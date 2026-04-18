@@ -3,6 +3,7 @@ import SocialAuth from "./SocialAuth";
 import Features from "./Features";
 
 import Button from "@shared/ui/Atoms/Button/Button";
+import TextDivider from "../TextDivider";
 import { Input } from "@shared/ui/chadcn/input";
 import { Field, FieldLabel } from "@shared/ui/chadcn/field";
 import { PasswordField } from "@shared/ui/Organisms/PasswordField";
@@ -42,26 +43,26 @@ const Login = () => {
     }
 
     return (
-        <div className="auth-card grid grid-cols-1 md:grid-cols-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 auth-card">
             {/*info */}
-            <div className="flex flex-col items-center justify-center mb-4 p-6 md:p-10 lg:p-16 md:mb-0">
-                <img src={logo} alt="Gamer Dashboard Logo" className="h-20 mb-4" />
+            <div className="flex flex-col justify-center items-center mb-4 md:mb-0 p-6 md:p-10 lg:p-16">
+                <img src={logo} alt="Gamer Dashboard Logo" className="mb-4 h-20" />
                 <span className="text-md text-center">The ultimate command center for your gaming stats, progressions and community connections.</span>
                 <div className="mt-10">
                     <Features/>
                 </div>
             </div>
             {/*form */}
-            <form className="h-full flex flex-col justify-center p-6 mt-4 border-t md:border-t-0 md:border-l md:mt-0 lg:p-16" onSubmit={e => {
+            <form className="flex flex-col justify-center mt-4 md:mt-0 p-6 lg:p-16 border-t md:border-t-0 md:border-l h-full" onSubmit={e => {
                 e.preventDefault();
                 handleLogin()
             }}>
                 <div className="mb-4">
-                    <h2 className="text-title mb-0">Sign In</h2>
+                    <h2 className="mb-0 text-title">Sign In</h2>
                     <span>Welcome back. Enter your details to sync your progress.</span>
                 </div>
 
-                <div className="py-6 flex flex-col gap-4">
+                <div className="flex flex-col gap-4 py-6">
                     <Field>
                         <FieldLabel htmlFor="email">Email</FieldLabel>
                         <Input
@@ -81,16 +82,12 @@ const Login = () => {
                     {loading ? "Signing you in..." : "Sign In"}
                 </Button>
                 {error && <span className="mt-2 text-error text-sm text-center">{error}</span>}
-                <div className="mt-4 text-center text-sm text-subtitle font-normal">
+                <div className="mt-4 font-normal text-subtitle text-sm text-center">
                     <span>Don't have an account? <Link to={publicRoutes.SIGNUP} className="link-primary">Sign up</Link></span>
                 </div>
-                <div className="flex flex-col w-full gap-4 mt-10">
+                <div className="flex flex-col gap-4 mt-10 w-full">
                     {/* divider */}
-                    <div className="flex items-center gap-2">
-                        <div className="flex-1 h-px bg-subtitle" />
-                        <span className="text-center text-subtitle text-sm">Or connect with</span>
-                        <div className="flex-1 h-px bg-subtitle" />
-                    </div>
+                    <TextDivider text="Or connect with"/>
                     <SocialAuth />
                 </div>
             </form>

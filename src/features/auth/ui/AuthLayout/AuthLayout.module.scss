@@ -1,14 +1,4 @@
 .auth-layout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: auto;
-  padding: 1rem;
-
-  @media screen and (min-width: 768px) {
-    height: 100vh;
-  }
-
   &::before {
     content: "";
     position: fixed;
