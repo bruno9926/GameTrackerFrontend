@@ -42,7 +42,7 @@ const Login = () => {
     }
 
     return (
-        <div className="auth-card grid grid-cols-1 md:grid-cols-2 md:h-[70%]">
+        <div className="auth-card grid grid-cols-1 md:grid-cols-2">
             {/*info */}
             <div className="flex flex-col items-center justify-center mb-4 p-6 md:p-10 lg:p-16 md:mb-0">
                 <img src={logo} alt="Gamer Dashboard Logo" className="h-20 mb-4" />
