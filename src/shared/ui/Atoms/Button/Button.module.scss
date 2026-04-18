@@ -36,7 +36,7 @@
   }
   &.secondary {
     background-color: transparent;
-    border: 2px solid var(--color-accent);
+    border: 1px solid var(--color-accent);
     color: var(--color-accent);
 
     &:hover:not(:disabled) {
@@ -55,7 +55,7 @@
     font-size: 0.8rem;
   }
   &.md {
-    padding: 0.65rem 1rem;
+    padding: 0.5rem 0.75rem;
     font-size: 1rem;
   }
   &.lg {

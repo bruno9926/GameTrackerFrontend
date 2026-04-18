@@ -1,9 +1,8 @@
 import Modal, { type ModalProps } from "@shared/ui/Organisms/Modal/Modal";
-import Input from "@shared/ui/Atoms/Input/Input";
+import { Input } from "@shared/ui/chadcn/input";
+import { Field, FieldLabel } from "@shared/ui/chadcn/field";
 import { useState, type FC } from "react";
 import useGames from "../../hooks/useGames";
-import styles from "./AddGameModal/AddGameModal.module.scss";
-import { Select, SelectItem } from "@shared/ui/Atoms/Select";
 import {
   type Game,
   type GameStatus,
@@ -12,12 +11,27 @@ import {
   GAME_STATUSES,
 } from "../../model/Game";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
-import toast from "@shared/ui/Atoms/Toast"; 
+import toast from "@shared/ui/Atoms/Toast";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@shared/ui/chadcn/select";
 
 export type UpsertModalProps = ModalProps & {
   mode: "add" | "edit";
   gameToEdit?: Game;
   updateGame?: (game: GameToUpdate) => void;
+};
+
+const statusColor: Record<string,string> = {
+  paused: "text-paused",
+  playing: "text-playing",
+  wishlist: "text-wishlist",
+  completed: "text-completed",
 };
 
 const UpsertModal: FC<UpsertModalProps> = ({
@@ -46,7 +60,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
     modalProps.close();
   };
 
-  const postGame = async () => {
+  const handleSubmit = async () => {
     try {
       if (isEditMode && gameToEdit) {
         // Update existing game logic here
@@ -68,31 +82,44 @@ const UpsertModal: FC<UpsertModalProps> = ({
   return (
     <Modal
       title={isEditMode ? "Edit game" : "Add a new game"}
-      onConfirm={postGame}
+      onConfirm={handleSubmit}
       confirmLabel={isEditMode ? "Save" : "Add"}
       loading={loading}
       {...modalProps}
       close={close}
     >
-      <div className={styles["modal-content"]}>
-        <form className={styles.form}>
-          <Input
-            label="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            disabled={loading}
-          />
-          <Select
-            label="status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value as GameStatus)}
-          >
-            {Object.entries(GAME_STATUSES).map(([name, label]) => (
-              <SelectItem key={name} value={name}>
-                {label}
-              </SelectItem>
-            ))}
-          </Select>
+      <div>
+        <form className="form-group mb-4">
+          <Field>
+            <FieldLabel htmlFor="name">Name</FieldLabel>
+            <Input
+              id="name"
+              name="name"
+              type="text"
+              value={name}
+              disabled={loading}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+            />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="status">Status</FieldLabel>
+            <Select value={status} onValueChange={(value) => setStatus(value as GameStatus)}>
+              <SelectTrigger id="status" className="w-full">
+                <SelectValue placeholder="Game Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {
+                    Object.entries(GAME_STATUSES).map(([name, label]) => (
+                      <SelectItem value={name} key={name}>
+                        <span className={statusColor[name]}>{label}</span>
+                      </SelectItem>
+                    ))
+                  }
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </Field>
         </form>
         {error && <ErrorMessage message={error} />}
       </div>

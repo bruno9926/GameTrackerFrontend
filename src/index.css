@@ -55,8 +55,15 @@
   --color-card: #1b1b1b;
   --color-discord: #5865F2;
   --color-google: #4285f4;
-
   --color-error: #b33636;
+
+  --z-modal: 100;
+  --z-modal-content: calc(var(--z-modal) + 1);
+
+  --color-playing: #2f74b9;
+  --color-completed: #21a565;
+  --color-wishlist: #b82e81;
+  --color-paused: #b1883c;
 }
 
 :root {
@@ -157,5 +164,9 @@ input:-webkit-autofill:focus {
 
   .auth-card {
     @apply bg-card/50 rounded-md shadow-md border w-full max-w-6xl items-center justify-center text-subtitle;
+  }
+
+  .form-group {
+    @apply flex flex-col gap-4;
   }
 }

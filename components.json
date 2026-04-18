@@ -14,7 +14,7 @@
   "rtl": false,
   "aliases": {
     "components": "@shared/ui/chadcn",
-    "utils": "@shared/lib",
+    "utils": "@shared/lib/utils",
     "ui": "@shared/ui/chadcn",
     "lib": "@shared/lib",
     "hooks": "@shared/hooks"

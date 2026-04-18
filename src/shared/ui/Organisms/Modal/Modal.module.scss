@@ -9,7 +9,7 @@
 
   height: 100dvh;
   width: 100dvw;
-  z-index: 998;
+  z-index: calc(var(--z-modal) - 1);
 
   .overlay {
     position: fixed;
@@ -23,7 +23,7 @@
   .modal-card {
     position: relative;
 
-    z-index: 999;
+    z-index: var(--z-modal);
     min-width: min(500px, 100%);
     height: fit-content;
 
