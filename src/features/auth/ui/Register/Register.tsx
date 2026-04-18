@@ -46,7 +46,7 @@ const Register = () => {
     }
 
     const Hero = () => (
-        <section className="relative flex flex-col md:flex-1 justify-center bg-cover bg-center p-6 md:p-9 w-full"
+        <section className="relative flex flex-col md:flex-1 justify-center bg-cover bg-center md:p-9 px-6 py-9 w-full"
             style={{ backgroundImage: "url('/hero.jpg')" }}>
             {/*backdrop*/}
             <div className="absolute inset-0 bg-linear-to-r from-black/90 to-black/50" />
