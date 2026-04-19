@@ -16,7 +16,7 @@ let refreshPromise: Promise<void> | null = null;
 const API_URL = import.meta.env.VITE_API_URL;
 
 const refresh = async (refreshToken: string): Promise<Tokens> => {
-    const res = await fetch(`${API_URL}/refresh`, {
+    const res = await fetch(`${API_URL}/auth/refresh`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
