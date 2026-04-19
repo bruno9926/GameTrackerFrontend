@@ -28,27 +28,4 @@
     height: 80%;
     background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
   }
-
-  .gotw-info {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-    z-index: 1;
-
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    justify-content: flex-start;
-
-    h2 {
-      margin: 0;
-      font-size: 1.5em;
-    }
-
-    p {
-      margin: 5px 0 0 0;
-      font-size: 1em;
-    }
-  }
 }

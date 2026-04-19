@@ -1,30 +1,40 @@
 // components
 import FriendItem from './FriendItem';
-// styles
-import styles from './Friends.module.scss';
+import { userRoutes } from '@app/routes/routes';
+import { useNavigate } from 'react-router';
 // data
-import type {Friend} from '@features/user/model/Friend';
+import type { Friend } from '@features/user/model/Friend';
 import friendsData from './friends.json';
 
 const friends = friendsData as Array<Friend>;
 
 const Friends = () => {
-  return (
-    <section className={`${styles['friends-section']} dashboard-tile-content`}>
-        <h2>Friends</h2>
-        <div className={styles['friends-list']}>
-            {friends.map(friend => (
-                <FriendItem
-                    key={friend.id}
-                    name={friend.name}
-                    status={friend.status}
-                    avatar={friend.avatar}
-                    games={friend.games}
-                />
-            ))}
-        </div>
-    </section>
-  )
+    const navigate = useNavigate();
+
+    return (
+        <section className="flex flex-col gap-5 dashboard-tile-content">
+            <div className='flex justify-between items-center'>
+                <h2>Online Friends</h2>
+                <span className='p-1 px-3 border rounded-xl text-subtitle text-sm'>3 Online</span>
+            </div>
+            <div className="gap-3 mb-3 card">
+                {friends.map(friend => (
+                    <FriendItem
+                        key={friend.id}
+                        name={friend.name}
+                        status={friend.status}
+                        avatar={friend.avatar}
+                        games={friend.games}
+                    />
+                ))}
+                <button
+                    onClick={() => navigate(userRoutes.GAMES)}
+                    className='hover:bg-brand active:bg-brand mt-3 p-3 border hover:border-transparent active:border-transparent rounded-xl w-full text-subtitle hover:text-white active:text-white transition-colors duration-300 cursor-pointer'>
+                    View all friends
+                </button>
+            </div>
+        </section>
+    )
 }
 
 export default Friends

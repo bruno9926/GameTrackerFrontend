@@ -7,12 +7,14 @@ import "./Dashboard.scss";
 const Dashboard = () => {
   return (
     <AnimatedRoute>
-      <h1>Gaming Dashboard</h1>
-      <p>Welcome to your gaming dashboard!</p>
-      <div className="dashboard-tiles">
-        <GOTW />
-        <GameList />
-        <Friends />
+      <GOTW />
+      <div className="gap-10 md:gap-3 grid grid-cols-1 md:grid-cols-7 p-4">
+        <div className="col-span-1 md:col-span-5">
+          <GameList />
+        </div>
+        <div className="col-span-1 md:col-span-2">
+          <Friends />
+        </div>
       </div>
     </AnimatedRoute>
   );

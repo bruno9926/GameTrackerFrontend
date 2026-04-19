@@ -46,6 +46,9 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /*custom*/
+
   /*sizing*/
   --text-xxs: 10px;
   /*custom colors*/
@@ -56,6 +59,7 @@
   --color-discord: #5865F2;
   --color-google: #4285f4;
   --color-error: #b33636;
+  --color-bg: #121212;
 
   --z-modal: 100;
   --z-modal-content: calc(var(--z-modal) + 1);
@@ -168,5 +172,9 @@ input:-webkit-autofill:focus {
 
   .form-group {
     @apply flex flex-col gap-4;
+  }
+
+  .card {
+    @apply flex flex-col bg-card p-3 border rounded-xl;
   }
 }

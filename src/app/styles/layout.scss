@@ -64,8 +64,6 @@ h2 {
 
   .main-content {
     grid-area: main;
-    padding: 2rem;
-    padding-top: 0;
   }
 
   @media screen and (width < $breakpoint-sm) {
@@ -75,9 +73,5 @@ h2 {
     grid-template-areas:
       "header"
       "main";
-
-    .main-content {
-      padding: 1rem;
-    }
   }
 }
