@@ -55,6 +55,7 @@
   --color-brand: #cc4e45;
   --color-title: #fff;
   --color-subtitle: #929292;
+  --color-body: #d8d8d8;
   --color-card: #1b1b1b;
   --color-discord: #5865F2;
   --color-google: #4285f4;
@@ -115,7 +116,7 @@ input:-webkit-autofill:focus {
 
 .dark {
   --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  --foreground: #d8d8d8;
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
@@ -160,6 +161,34 @@ input:-webkit-autofill:focus {
     @apply font-sans;
   }
 }
+/* Utilities */
+
+@utility badge {
+  @apply px-3 py-1 border rounded-xl text-sm w-fit
+}
+@utility game-status-badge {
+  @apply  font-bold badge;
+}
+
+@utility badge-playing {
+  @apply border-playing text-playing;
+  background-color: color-mix(in srgb, var(--color-playing), transparent 90%);
+}
+
+@utility badge-completed {
+  @apply border-completed text-completed;
+  background-color: color-mix(in srgb, var(--color-completed), transparent 90%);
+}
+
+@utility badge-wishlist {
+  @apply border-wishlist text-wishlist;
+  background-color: color-mix(in srgb, var(--color-wishlist), transparent 90%);
+}
+
+@utility badge-paused {
+  @apply border-paused text-paused;
+  background-color: color-mix(in srgb, var(--color-paused), transparent 90%);
+}
 
 @layer components {
   .link-primary {
@@ -176,5 +205,21 @@ input:-webkit-autofill:focus {
 
   .card {
     @apply flex flex-col bg-card p-3 border rounded-xl;
+  }
+
+  .game-status-badge-playing {
+    @apply game-status-badge badge-playing;
+  }
+
+  .game-status-badge-completed {
+    @apply game-status-badge badge-completed;
+  }
+
+  .game-status-badge-wishlist {
+    @apply game-status-badge badge-wishlist;
+  }
+
+  .game-status-badge-paused {
+    @apply game-status-badge badge-paused;
   }
 }

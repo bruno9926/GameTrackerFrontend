@@ -15,7 +15,7 @@ const Friends = () => {
         <section className="flex flex-col gap-5 dashboard-tile-content">
             <div className='flex justify-between items-center'>
                 <h2>Online Friends</h2>
-                <span className='p-1 px-3 border rounded-xl text-subtitle text-sm'>3 Online</span>
+                <span className='text-subtitle badge'>3 Online</span>
             </div>
             <div className="gap-3 mb-3 card">
                 {friends.map(friend => (

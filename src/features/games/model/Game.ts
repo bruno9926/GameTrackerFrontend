@@ -11,6 +11,7 @@ export type Game = {
   id: string;
   name: string;
   status: GameStatus;
+  coverUrl?: string
 };
 
 export const DEFAULT_GAME_STATUS = "playing" as GameStatus;

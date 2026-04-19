@@ -8,7 +8,7 @@ const Dashboard = () => {
   return (
     <AnimatedRoute>
       <GOTW />
-      <div className="gap-10 md:gap-3 grid grid-cols-1 md:grid-cols-7 p-4">
+      <div className="gap-10 md:gap-7 grid grid-cols-1 md:grid-cols-7 p-4 md:p-7">
         <div className="col-span-1 md:col-span-5">
           <GameList />
         </div>

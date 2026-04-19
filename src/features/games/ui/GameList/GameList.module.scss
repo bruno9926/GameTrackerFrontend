@@ -1,44 +1,4 @@
-.game-list-section {
-  display: flex;
-  flex-direction: column;
-
-  h2 {
-    flex-shrink: 0;
-  }
-
-  .header {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 1rem;
-  }
-
-  .game-list {
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    /* WebKit-specific styles for more detailed control */
-    &::-webkit-scrollbar {
-        width: 12px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: var(--color-card-bg);
-        border-radius: 10px;
-        border: 1px solid #2c2c2c;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: var(--color-scrollbar);
-        border-radius: 10px;
-    }
-  }
-
-  .error-message {
+.error-message {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -66,4 +26,3 @@
       border: none;
     }
   }
-}
