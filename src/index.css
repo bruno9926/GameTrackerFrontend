@@ -227,4 +227,8 @@ input:-webkit-autofill:focus {
   .game-status-badge-paused {
     @apply game-status-badge badge-paused;
   }
+
+  .navbar-icon {
+    @apply p-2 hover:bg-border active:bg-border rounded-full text-subtitle text-2xl transition-colors cursor-pointer animation-duration;
+  }
 }

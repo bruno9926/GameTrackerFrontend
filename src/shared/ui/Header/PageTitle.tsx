@@ -1,17 +1,16 @@
-import { userRoutes as routes } from "@app/routes/routes";
+import {
+    getUserRouteToken,
+    userPageNames as pageNames
+} from "@app/routes/routes";
 import { useLocation } from "react-router";
 
-type routePaths = (typeof routes)[keyof typeof routes];
-const pageNames: Record<routePaths, string> = {
-    "/dashboard": "Gaming Dashboard",
-    "/games": "Games",
-    "/platforms": "Platforms",
-    "/settings": "Settings"
-}
+const defaultTitle = "Welcome";
 
 const PageTitle = () => {
     const location = useLocation();
-    const pageName = pageNames[location.pathname as routePaths] ?? "Welcome"
+    const routeToken = getUserRouteToken(location.pathname);
+    const pageName = routeToken !== null ? pageNames[routeToken] : defaultTitle;
+    
     return (
         <div className="hidden md:block pl-6">
             <h1 className="font-bold text-body text-xl">
