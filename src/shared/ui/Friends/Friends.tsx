@@ -29,7 +29,7 @@ const Friends = () => {
                 ))}
                 <button
                     onClick={() => navigate(userRoutes.GAMES)}
-                    className='hover:bg-brand active:bg-brand mt-3 p-3 border hover:border-transparent active:border-transparent rounded-xl w-full text-subtitle hover:text-white active:text-white transition-colors duration-300 cursor-pointer'>
+                    className='hover:bg-brand active:bg-brand mt-3 p-3 border hover:border-transparent active:border-transparent rounded-xl w-full text-subtitle hover:text-white active:text-white transition-colors cursor-pointer animation-duration'>
                     View all friends
                 </button>
             </div>

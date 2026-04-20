@@ -22,7 +22,7 @@ interface SocialButtonProps {
     icon: ReactNode;
 }
 const SocialButton = ({ provider, icon }: SocialButtonProps) => {
-    const baseClass = "flex items-center justify-center gap-2 w-full py-2 border rounded-md cursor-pointer transition-all duration-200";
+    const baseClass = "flex items-center justify-center gap-2 w-full py-2 border rounded-md cursor-pointer transition-all animation-duration";
     const hoverClass = providerStyles[provider] || providerStyles[Provider.GOOGLE];
     return (
         <button className={[baseClass, hoverClass].join(" ")} type="button">
