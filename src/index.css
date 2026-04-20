@@ -61,6 +61,7 @@
   --color-google: #4285f4;
   --color-error: #b33636;
   --color-bg: #121212;
+  --color-online: #53ad4b;
 
   --z-modal: 100;
   --z-modal-content: calc(var(--z-modal) + 1);

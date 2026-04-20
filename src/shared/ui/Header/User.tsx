@@ -30,12 +30,12 @@ const User = () => {
     )
 
     return (
-        <div className={styles.container} ref={ref}>
-            <div className={styles.user} onClick={toggleOpen}>
+        <div className="relative" ref={ref}>
+            <div className="flex items-center gap-2 p-2 hover:bg-border active:bg-border rounded-xl transition-all cursor-pointer" onClick={toggleOpen}>
                 <Avatar profilePicture={profilePicture} name={name} />
-                <div className={styles['user-info']}>
+                <div className="flex flex-col">
                     <span>{name}</span>
-                    <span className={`${styles.status} ${styles.online}`}>Online</span>
+                    <span className="text-online text-xxs">Online</span>
                 </div>
             </div>
             {
@@ -50,19 +50,18 @@ const User = () => {
                         <LogoutButton />
                     </div>
                 )}
-
         </div>
     )
 }
 
 const Avatar = ({ profilePicture, name }: { profilePicture?: string; name: string }) => {
     return (
-        <div className={styles.avatar}>
-            {profilePicture ? (
-                <img src={profilePicture} alt={name} />
-            ) : (
-                (name?.charAt(0) || '?').toUpperCase()
-            )}
+        <div className="flex justify-center items-center bg-brand rounded-full w-9 aspect-square overflow-hidden align-center">
+            {
+                profilePicture ?
+                    <img className="w-full h-full object-cover" src={profilePicture} alt={name} />
+                    : ((name?.charAt(0) || '?').toUpperCase())
+            }
         </div>
     )
 }
