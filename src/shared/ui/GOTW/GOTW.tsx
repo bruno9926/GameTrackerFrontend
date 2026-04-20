@@ -4,7 +4,7 @@ import game from '@assets/silksong2.webp';
 
 const GOTW = () => {
   return (
-    <section className="group relative mb-4 h-125 lg:h-125 overflow-hidden cursor-pointer">
+    <section className="group relative mb-4 h-125 lg:h-155 overflow-hidden cursor-pointer">
       {/* Image */}
       <img
         src={game}
