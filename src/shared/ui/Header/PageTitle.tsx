@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 
 type routePaths = (typeof routes)[keyof typeof routes];
 const pageNames: Record<routePaths, string> = {
-    "/dashboard": "Dashboard",
+    "/dashboard": "Gaming Dashboard",
     "/games": "Games",
     "/platforms": "Platforms",
     "/settings": "Settings"
@@ -13,7 +13,7 @@ const PageTitle = () => {
     const location = useLocation();
     const pageName = pageNames[location.pathname as routePaths] ?? "Welcome"
     return (
-        <div className="pl-6">
+        <div className="hidden md:block pl-6">
             <h1 className="font-bold text-body text-xl">
                 {pageName}
             </h1>

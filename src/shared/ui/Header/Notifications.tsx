@@ -1,10 +1,10 @@
 import { IoIosNotifications } from "react-icons/io";
 
-const haveNotifications = false;
+const haveNotifications = true;
 
 const Notifications = () => {
     return (
-        <div className="p-2 hover:bg-border rounded-full transition-colors cursor-pointer animation-duration">
+        <div className="p-2 hover:bg-border active:bg-border rounded-full transition-colors cursor-pointer animation-duration">
             <div className="relative">
                 {
                     haveNotifications ?
