@@ -43,6 +43,7 @@ const Games = () => {
             id={game.id}
             name={game.name}
             status={game.status}
+            coverUrl={game.coverUrl}
           />
         ))
       ) : (

@@ -17,7 +17,12 @@ const gameStatusBadgeStyles: Record<GameStatus, string> = {
   paused: "game-status-badge-paused",
 }
 
-const GameListItem = ({ id, name, status, coverUrl = "/games/default-cover.jpg" }: GameListItemProps) => {
+const defaultImage = "/games/default-cover.jpg";
+
+const GameListItem = (props: GameListItemProps) => {
+  console.log(props)
+
+  const { id, name, status, coverUrl } = props;
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -39,10 +44,10 @@ const GameListItem = ({ id, name, status, coverUrl = "/games/default-cover.jpg" 
   ];
 
   return (
-    <div className="flex-row lg:flex-col gap-3 h-36 lg:h-auto cursor-pointer card">
+    <div className="flex-row md:flex-col gap-3 h-36 md:h-auto cursor-pointer card">
       {/* Image */}
-      <div className="relative rounded-lg w-30 lg:w-full h-full lg:h-50 overflow-hidden">
-        <img loading="lazy" src={coverUrl} alt={`cover of ${game}`} className="w-full h-full object-cover" />
+      <div className="relative rounded-lg w-30 md:w-full h-full md:h-50 overflow-hidden">
+        <img loading="lazy" src={coverUrl ?? defaultImage} alt={`cover of ${game}`} className="opacity-80 w-full h-full object-cover" />
         {/* options */}
         <div className="top-0 right-0 absolute p-2">
           <OptionsMenu options={options} />
