@@ -6,10 +6,11 @@ const AddGameButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (buttonProps)
     return (
         <Button
             variant="secondary"
-            className="flex flex-row items-center gap-2"
+            className="flex flex-row items-center gap-2 min-w-0"
             {...buttonProps}
         >
-            <GoPlus /> Add Game
+            <GoPlus />
+            <span className="md:block">Add Game</span>
         </Button>
     )
 }

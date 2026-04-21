@@ -69,7 +69,7 @@ const Games = () => {
     if (loading) return <Loading />
     if (error) return <p>Error: {error}</p>
     return (
-      <div className="mt-8 md:mt-0">
+      <div className="mt-6 md:mt-0">
         {visibleGames.length > 0 ? (
           <anim.FadeInUp
             key={`${searchText}-${statusFilter}-${sortBy}`}
