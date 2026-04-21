@@ -10,10 +10,9 @@ interface Props {
 
 const SortSelect = ({ value, onChange }: Props) => {
   return (
-    <FieldGroup className="w-full max-w-45">
+    <FieldGroup className="flex gap-3 w-fit">
       <Field orientation="horizontal">
-     
-          <FieldLabel>Sort by</FieldLabel>
+          <FieldLabel className="text-nowrap">Sort by</FieldLabel>
           <Select
             value={value}
             onValueChange={(v) => onChange(v as SortOption)}
