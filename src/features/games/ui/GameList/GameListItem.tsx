@@ -40,24 +40,25 @@ const GameListItem = ({ id, name, status, coverUrl }: GameListItemProps) => {
   ];
 
   return (
-    <div className="flex-row md:flex-col gap-0 md:gap-3 hover:shadow-lg p-0 h-36 md:h-auto overflow-hidden hover:scale-103 transition-all cursor-pointer animation-duration card">
-      {/* Image */}
-      <div className="relative w-35 md:w-full h-full md:h-50 overflow-hidden shrink-0">
-        <img loading="lazy" src={coverUrl ?? defaultImage} alt={`cover of ${game}`} className="opacity-80 w-full h-full object-cover" />
-        {/* options */}
-        <div className="top-0 right-0 absolute p-2">
-          <OptionsMenu options={options} />
+    <>
+      <div className="flex-row md:flex-col gap-0 md:gap-3 hover:shadow-lg p-0 h-36 md:h-auto overflow-hidden hover:scale-103 transition-all cursor-pointer animation-duration card">
+        {/* Image */}
+        <div className="relative w-35 md:w-full h-full md:h-50 overflow-hidden shrink-0">
+          <img loading="lazy" src={coverUrl ?? defaultImage} alt={`cover of ${game}`} className="opacity-80 w-full h-full object-cover" />
+          {/* options */}
+          <div className="top-0 right-0 absolute p-2">
+            <OptionsMenu options={options} />
+          </div>
+        </div>
+        <div className="flex flex-col gap-3 p-3">
+          <p className="md:w-full md:overflow-hidden text-sm md:text-xl md:text-ellipsis md:text-nowrap" title={name}>
+            {name}
+          </p>
+          <div className={gameStatusBadgeStyles[status]}>
+            {GAME_STATUS_LABELS[status]} {/*use the label from the status name*/}
+          </div>
         </div>
       </div>
-      <div className="flex flex-col gap-3 p-3">
-        <p className="md:w-full md:overflow-hidden text-sm md:text-xl md:text-ellipsis md:text-nowrap" title={name}>
-          {name}
-        </p>
-        <div className={gameStatusBadgeStyles[status]}>
-          {GAME_STATUS_LABELS[status]} {/*use the label from the status name*/}
-        </div>
-      </div>
-
       <DeleteGameModal
         isOpen={deleteModalOpen}
         close={() => setDeleteModalOpen(false)}
@@ -72,7 +73,8 @@ const GameListItem = ({ id, name, status, coverUrl }: GameListItemProps) => {
         isOpen={editModalOpen}
         close={() => setEditModalOpen(false)}
       />
-    </div>
+    </>
+
   );
 };
 
