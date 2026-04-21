@@ -6,7 +6,7 @@ import PrivateRoute from "./PrivateRoute";
 import MainLayout from "@shared/ui/layout/MainLayout";
 // pages
 import Dashboard from "@pages/Dashboard/Dashboard";
-import Games from "@features/games/ui/Games/Games";
+import Games from "@pages/Games/Games";
 import Platforms from "@pages/Platforms/Platforms";
 import Settings from "@pages/Settings/Settings";
 import SignUp from "@pages/SignUp/SignUp";

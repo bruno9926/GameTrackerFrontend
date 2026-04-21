@@ -63,7 +63,6 @@ export const apiClient = async <T, B = unknown>(
         if (!refreshPromise) {
             refreshPromise = refresh(storedRefreshToken)
                 .then(({ token, refreshToken }) => {
-                    console.log("tokens: ", { token, refreshToken })
                     TokenProvider.setTokens({ token, refreshToken });
                 })
                 .finally(() => {

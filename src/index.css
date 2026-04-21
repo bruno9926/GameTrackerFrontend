@@ -165,7 +165,7 @@ input:-webkit-autofill:focus {
 /* Utilities */
 
 @utility badge {
-  @apply px-3 py-1 border rounded-xl text-sm w-fit
+  @apply flex justify-center px-3 py-1 border rounded-xl w-fit min-w-15 text-sm shrink-0;
 }
 @utility game-status-badge {
   @apply  font-bold badge;
@@ -192,7 +192,15 @@ input:-webkit-autofill:focus {
 }
 
 @utility animation-duration {
-  @apply duration-300;
+  @apply duration-300 ease-in-out;
+}
+
+@utility games-grid {
+  @apply gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+@utility page-padding {
+  @apply p-4 md:p-7;
 }
 
 @layer components {

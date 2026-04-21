@@ -1,15 +1,10 @@
-import { motion } from "framer-motion";
+import { anim, type AnimationProps} from "@shared/ui/Animations";
 
-const AnimatedRoute = ({ children }: { children: React.ReactNode }) => {
+const AnimatedRoute = ({ children, ...props }: AnimationProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="dashboard"
-    >
+    <anim.FadeInUp {...props}>
       {children}
-    </motion.div>
+    </anim.FadeInUp>
   );
 };
 export default AnimatedRoute;

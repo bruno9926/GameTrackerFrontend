@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GAME_STATUSES, type Game, type GameStatus } from "../../model/Game";
+import { GAME_STATUS_LABELS, type Game, type GameStatus } from "../../model/Game";
 import OptionsMenu from "@shared/ui/Organisms/OptionsMenu/OptionsMenu";
 import { DeleteGameModal, EditGameModal } from "../GameModals";
 import useGames from "../../hooks/useGames";
@@ -19,11 +19,7 @@ const gameStatusBadgeStyles: Record<GameStatus, string> = {
 
 const defaultImage = "/games/default-cover.jpg";
 
-const GameListItem = (props: GameListItemProps) => {
-  console.log(props)
-
-  const { id, name, status, coverUrl } = props;
-
+const GameListItem = ({ id, name, status, coverUrl }: GameListItemProps) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const { deleteGame } = useGames();
@@ -44,21 +40,21 @@ const GameListItem = (props: GameListItemProps) => {
   ];
 
   return (
-    <div className="flex-row md:flex-col gap-3 h-36 md:h-auto cursor-pointer card">
+    <div className="flex-row md:flex-col gap-0 md:gap-3 hover:shadow-lg p-0 h-36 md:h-auto overflow-hidden hover:scale-103 transition-all cursor-pointer animation-duration card">
       {/* Image */}
-      <div className="relative rounded-lg w-30 md:w-full h-full md:h-50 overflow-hidden">
+      <div className="relative w-35 md:w-full h-full md:h-50 overflow-hidden shrink-0">
         <img loading="lazy" src={coverUrl ?? defaultImage} alt={`cover of ${game}`} className="opacity-80 w-full h-full object-cover" />
         {/* options */}
         <div className="top-0 right-0 absolute p-2">
           <OptionsMenu options={options} />
         </div>
       </div>
-      <div className="flex flex-col gap-3">
-        <p className="w-full overflow-hidden font-bold text-ellipsis text-nowrap" title={name}>
+      <div className="flex flex-col gap-3 p-3">
+        <p className="md:w-full md:overflow-hidden text-sm md:text-xl md:text-ellipsis md:text-nowrap" title={name}>
           {name}
         </p>
         <div className={gameStatusBadgeStyles[status]}>
-          {GAME_STATUSES[status]} {/*use the label from the status name*/}
+          {GAME_STATUS_LABELS[status]} {/*use the label from the status name*/}
         </div>
       </div>
 

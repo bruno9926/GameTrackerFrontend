@@ -63,6 +63,7 @@ h2 {
 
   .main-content {
     grid-area: main;
+    max-width: 100dvw;
   }
 
   @media screen and (width < $breakpoint-sm) {

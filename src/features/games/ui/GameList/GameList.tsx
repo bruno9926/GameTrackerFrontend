@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import Button from "@shared/ui/Atoms/Button/Button";
 import GameListItem, { GameListItemSkeleton } from "./GameListItem";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import { AddGameModal } from "../GameModals";
 import { NavLink } from "react-router";
 import { userRoutes as routes } from "@routes/routes";
-import { GoPlus } from "react-icons/go";
 // hooks
 import useGames from "../../hooks/useGames";
 import type { Game } from "@features/games/model/Game";
+import AddGameButton from "@shared/ui/Organisms/AddGamesButton/AddGamesButton";
 
 const GameList = () => {
   const { loading, error, games, fetchGames } = useGames();
@@ -20,7 +19,7 @@ const GameList = () => {
   const [addModalOpen, setAddModalOpen] = useState(false);
 
   const List = () => (
-    <div className="gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="games-grid">
       {games.slice(0,4).map((game: Game) => (
         <GameListItem
           key={game.id}
@@ -48,9 +47,7 @@ const GameList = () => {
           <NavLink to={routes.GAMES}>
             <h2>Recent Games</h2>
           </NavLink>
-          <Button variant="secondary"className="flex flex-row items-center gap-2" onClick={() => setAddModalOpen(true)}>
-            <GoPlus /> Add Game
-          </Button>
+          <AddGameButton onClick={() => setAddModalOpen(true)}/>
         </div>
         {
           loading ? <Loading /> :

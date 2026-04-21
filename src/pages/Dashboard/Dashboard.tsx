@@ -2,19 +2,19 @@ import GameList from "@features/games/ui/GameList/GameList";
 import Friends from "@shared/ui/Friends/Friends";
 import GOTW from "../../shared/ui/GOTW/GOTW";
 import AnimatedRoute from "../AnimatedRoute";
-import "./Dashboard.scss";
+import { anim } from "@shared/ui/Animations";
 
 const Dashboard = () => {
   return (
     <AnimatedRoute>
       <GOTW />
-      <div className="gap-10 md:gap-7 grid grid-cols-1 md:grid-cols-7 p-4 md:p-7">
-        <div className="col-span-1 md:col-span-5">
+      <div className="gap-10 md:gap-7 grid grid-cols-1 md:grid-cols-7 page-padding">
+        <anim.FadeInUp className="col-span-1 md:col-span-5">
           <GameList />
-        </div>
-        <div className="col-span-1 md:col-span-2">
+        </anim.FadeInUp>
+        <anim.FadeInUp className="col-span-1 md:col-span-2">
           <Friends />
-        </div>
+        </anim.FadeInUp>
       </div>
     </AnimatedRoute>
   );

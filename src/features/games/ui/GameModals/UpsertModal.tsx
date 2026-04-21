@@ -8,7 +8,7 @@ import {
   type GameStatus,
   type GameToUpdate,
   DEFAULT_GAME_STATUS,
-  GAME_STATUSES,
+  GAME_STATUS_LABELS,
 } from "../../model/Game";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import toast from "@shared/ui/Atoms/Toast";
@@ -110,7 +110,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
               <SelectContent>
                 <SelectGroup>
                   {
-                    Object.entries(GAME_STATUSES).map(([name, label]) => (
+                    Object.entries(GAME_STATUS_LABELS).map(([name, label]) => (
                       <SelectItem value={name} key={name}>
                         <span className={statusColor[name]}>{label}</span>
                       </SelectItem>
