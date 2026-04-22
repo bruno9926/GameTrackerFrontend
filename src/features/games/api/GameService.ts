@@ -63,6 +63,18 @@ class GameService {
       body: game,
     });
   }
+
+  /**
+   * search a game title by name
+   * @param name the game title name to do the search
+   * @returns all the games titles that contains the name
+   */
+  async searchGameTitle(name: string) : Promise<any[]> {
+    if (!name) {
+      throw new Error("A search query is required");
+    }
+    return apiClient(`${API_URL}/search?q=${name}`);
+  }
 }
 
 export default GameService;

@@ -1,8 +1,8 @@
 import Modal, { type ModalProps } from "@shared/ui/Organisms/Modal/Modal";
-import { Input } from "@shared/ui/chadcn/input";
 import { Field, FieldLabel } from "@shared/ui/chadcn/field";
 import { useState, type FC } from "react";
 import useGames from "../../hooks/useGames";
+import GameTitleSearch from "./GameTitleSearch";
 import {
   type Game,
   type GameStatus,
@@ -27,7 +27,7 @@ export type UpsertModalProps = ModalProps & {
   updateGame?: (game: GameToUpdate) => void;
 };
 
-const statusColor: Record<string,string> = {
+const statusColor: Record<string, string> = {
   paused: "text-paused",
   playing: "text-playing",
   wishlist: "text-wishlist",
@@ -41,6 +41,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
 }) => {
   const isEditMode = mode === "edit";
   const [name, setName] = useState(gameToEdit?.name || "");
+  const [cover, setCover] = useState<string | null>(null);
   const [status, setStatus] = useState<GameStatus>(
     gameToEdit?.status || DEFAULT_GAME_STATUS
   );
@@ -59,15 +60,22 @@ const UpsertModal: FC<UpsertModalProps> = ({
     clearError();
     modalProps.close();
   };
-
+  
   const handleSubmit = async () => {
     try {
       if (isEditMode && gameToEdit) {
         // Update existing game logic here
-        await updateGame({ id: gameToEdit.id, name, status });
+        await updateGame({
+          ...{ id: gameToEdit.id, name, status },
+          ...(cover !== null ? { coverUrl: cover } : {})
+        });
       } else {
+        console.log(name)
         // Add new game logic here
-        await submitGame({ name, status });
+        await submitGame({
+          ...{ name, status },
+          ...(cover !== null ? { coverUrl: cover } : {})
+        });
       }
       clearFields();
       clearError();
@@ -78,6 +86,27 @@ const UpsertModal: FC<UpsertModalProps> = ({
       // dont close the modal
     }
   };
+  const StatusSelect = () => (
+    <Field>
+      <FieldLabel htmlFor="status">Status</FieldLabel>
+      <Select value={status} onValueChange={(value) => setStatus(value as GameStatus)}>
+        <SelectTrigger id="status" className="w-full">
+          <SelectValue placeholder="Game Status" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {
+              Object.entries(GAME_STATUS_LABELS).map(([name, label]) => (
+                <SelectItem value={name} key={name}>
+                  <span className={statusColor[name]}>{label}</span>
+                </SelectItem>
+              ))
+            }
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </Field>
+  )
 
   return (
     <Modal
@@ -90,36 +119,11 @@ const UpsertModal: FC<UpsertModalProps> = ({
     >
       <div>
         <form className="form-group mb-4">
-          <Field>
-            <FieldLabel htmlFor="name">Name</FieldLabel>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              value={name}
-              disabled={loading}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-            />
-          </Field>
-          <Field>
-            <FieldLabel htmlFor="status">Status</FieldLabel>
-            <Select value={status} onValueChange={(value) => setStatus(value as GameStatus)}>
-              <SelectTrigger id="status" className="w-full">
-                <SelectValue placeholder="Game Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {
-                    Object.entries(GAME_STATUS_LABELS).map(([name, label]) => (
-                      <SelectItem value={name} key={name}>
-                        <span className={statusColor[name]}>{label}</span>
-                      </SelectItem>
-                    ))
-                  }
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </Field>
+          <GameTitleSearch onSelectValue={(gameTitle) => {
+            setName(gameTitle.name);
+            setCover(gameTitle.cover);
+          }}/>
+          <StatusSelect />
         </form>
         {error && <ErrorMessage message={error} />}
       </div>

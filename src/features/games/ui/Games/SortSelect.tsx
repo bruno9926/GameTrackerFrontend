@@ -10,7 +10,7 @@ interface Props {
 
 const SortSelect = ({ value, onChange }: Props) => {
   return (
-    <FieldGroup className="max-w-45">
+    <FieldGroup className="max-w-50">
       <Field orientation="horizontal">
           <FieldLabel>Sort by</FieldLabel>
           <Select

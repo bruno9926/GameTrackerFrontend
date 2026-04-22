@@ -4,10 +4,10 @@ import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import { AddGameModal } from "../GameModals";
 import { NavLink } from "react-router";
 import { userRoutes as routes } from "@routes/routes";
-// hooks
-import useGames from "../../hooks/useGames";
 import type { Game } from "@features/games/model/Game";
 import AddGameButton from "@shared/ui/Organisms/AddGamesButton/AddGamesButton";
+// hooks
+import useGames from "../../hooks/useGames";
 
 const GameList = () => {
   const { loading, error, games, fetchGames } = useGames();
@@ -20,7 +20,7 @@ const GameList = () => {
 
   const List = () => (
     <div className="games-grid">
-      {games.slice(0,4).map((game: Game) => (
+      {games.slice(0,5).map((game: Game) => (
         <GameListItem
           key={game.id}
           id={game.id}
