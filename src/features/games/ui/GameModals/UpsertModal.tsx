@@ -1,6 +1,6 @@
 import Modal, { type ModalProps } from "@shared/ui/Organisms/Modal/Modal";
 import { Field, FieldLabel } from "@shared/ui/chadcn/field";
-import { useState, type FC } from "react";
+import { useState, useEffect, type FC } from "react";
 import useGames from "../../hooks/useGames";
 import GameTitleSearch from "./GameTitleSearch";
 import {
@@ -10,6 +10,7 @@ import {
   DEFAULT_GAME_STATUS,
   GAME_STATUS_LABELS,
 } from "../../model/Game";
+import type { GameTitle } from "@features/games/model/GameTitle";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import toast from "@shared/ui/Atoms/Toast";
 import {
@@ -20,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@shared/ui/chadcn/select";
+import { IoMdClose } from "react-icons/io";
 
 export type UpsertModalProps = ModalProps & {
   mode: "add" | "edit";
@@ -40,14 +42,27 @@ const UpsertModal: FC<UpsertModalProps> = ({
   ...modalProps
 }) => {
   const isEditMode = mode === "edit";
-  const [name, setName] = useState(gameToEdit?.name || "");
-  const [cover, setCover] = useState<string | null>(null);
+
+  const [searchString, setSearchString] = useState("");
+  const [selectedGameTitle, setSelectedGameTitle] = useState<GameTitle | null>(null);
   const [status, setStatus] = useState<GameStatus>(
     gameToEdit?.status || DEFAULT_GAME_STATUS
   );
 
+  useEffect(() => {
+    if (isEditMode && gameToEdit) {
+      // first population of selected game, it is build from the game data
+      setSelectedGameTitle({
+        id: gameToEdit.id,
+        name: gameToEdit.name,
+        cover: gameToEdit.coverUrl ?? null
+      });
+    }
+  }, [gameToEdit, isEditMode]);
+
   const clearFields = () => {
-    setName("");
+    setSelectedGameTitle(null);
+    setSearchString("");
     setStatus(DEFAULT_GAME_STATUS);
   };
 
@@ -60,22 +75,13 @@ const UpsertModal: FC<UpsertModalProps> = ({
     clearError();
     modalProps.close();
   };
-  
+
   const handleSubmit = async () => {
     try {
       if (isEditMode && gameToEdit) {
-        // Update existing game logic here
-        await updateGame({
-          ...{ id: gameToEdit.id, name, status },
-          ...(cover !== null ? { coverUrl: cover } : {})
-        });
+        await handleUpdate(gameToEdit.id);
       } else {
-        console.log(name)
-        // Add new game logic here
-        await submitGame({
-          ...{ name, status },
-          ...(cover !== null ? { coverUrl: cover } : {})
-        });
+        await handleCreate();
       }
       clearFields();
       clearError();
@@ -86,6 +92,37 @@ const UpsertModal: FC<UpsertModalProps> = ({
       // dont close the modal
     }
   };
+
+  const handleUpdate = async (id: string) => {
+    if (selectedGameTitle === null) {
+      // future UI error
+      alert("you should select a game title");
+      return;
+    }
+    const name = selectedGameTitle.name;
+    const cover = selectedGameTitle.cover;
+
+    await updateGame({
+      ...{ id, name, status },
+      ...(cover !== null ? { coverUrl: cover } : {})
+    });
+  }
+
+  const handleCreate = async () => {
+    if (selectedGameTitle === null) {
+      // future UI error
+      alert("you should select a game title");
+      return;
+    }
+    const name = selectedGameTitle.name;
+    const cover = selectedGameTitle.cover;
+
+    await submitGame({
+      ...{ name, status },
+      ...(cover !== null ? { coverUrl: cover } : {})
+    });
+  }
+
   const StatusSelect = () => (
     <Field>
       <FieldLabel htmlFor="status">Status</FieldLabel>
@@ -108,6 +145,30 @@ const UpsertModal: FC<UpsertModalProps> = ({
     </Field>
   )
 
+  const SelectedGamePreview = () => (
+    <>
+      {
+        selectedGameTitle &&
+        <div className="flex flex-row justify-between items-center card">
+          <div className="flex flex-row items-center gap-4">
+            <img
+              className="items-center rounded-sm w-10"
+              src={selectedGameTitle.cover ?? ""}
+              alt={selectedGameTitle.name}
+            />
+            <span>{selectedGameTitle.name}</span>
+          </div>
+          <button className="cursor-pointer" onClick={() => {
+            setSelectedGameTitle(null);
+            setSearchString("");
+          }}>
+            <IoMdClose />
+          </button>
+        </div>
+      }
+    </>
+  )
+
   return (
     <Modal
       title={isEditMode ? "Edit game" : "Add a new game"}
@@ -119,10 +180,14 @@ const UpsertModal: FC<UpsertModalProps> = ({
     >
       <div>
         <form className="form-group mb-4">
-          <GameTitleSearch onSelectValue={(gameTitle) => {
-            setName(gameTitle.name);
-            setCover(gameTitle.cover);
-          }}/>
+          <GameTitleSearch
+            selectedGameTitle={selectedGameTitle}
+            searchString={searchString}
+            setSearchString={setSearchString}
+            onSelectValue={(gameTitle) => {
+              setSelectedGameTitle(gameTitle)
+            }} />
+          <SelectedGamePreview />
           <StatusSelect />
         </form>
         {error && <ErrorMessage message={error} />}

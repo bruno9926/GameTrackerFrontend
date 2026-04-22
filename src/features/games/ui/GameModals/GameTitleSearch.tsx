@@ -12,13 +12,20 @@ import { Field, FieldLabel } from "@shared/ui/chadcn/field";
 import type { GameTitle } from "@features/games/model/GameTitle";
 
 interface GameTitleSearchProps {
-    onSelectValue: (value: GameTitle) => void
+    searchString: string,
+    setSearchString: (searchString: string) => void
+    onSelectValue: (value: GameTitle | null) => void,
+    selectedGameTitle: GameTitle | null
 }
-const GameTitleSearch: FC<GameTitleSearchProps> = ({ onSelectValue }) => {
+const GameTitleSearch: FC<GameTitleSearchProps> = ({
+    searchString,
+    setSearchString,
+    onSelectValue,
+    selectedGameTitle
+}) => {
     const [gameTitles, setGameTitles] = useState<GameTitle[]>([]);
     const clearSearchResults = () => setGameTitles([]);
 
-    const [searchString, setSearchString] = useState<string>("");
     const [open, setOpen] = useState(false);
 
     const [waitingInput, setWaitingInput] = useState(false);
@@ -63,16 +70,18 @@ const GameTitleSearch: FC<GameTitleSearchProps> = ({ onSelectValue }) => {
             <FieldLabel>Name</FieldLabel>
             <Combobox
                 items={gameTitles}
-                inputValue={searchString}
+                inputValue={selectedGameTitle?.name ?? searchString}
                 onInputValueChange={(value) => {
-                    setOpen(true);
                     setSearchString(value);
+                    // this ensure the selected game matches with the input content
+                    if (selectedGameTitle !== null) onSelectValue(null);
                 }}
                 onValueChange={(value) => {
                     let gameTitle = value as GameTitle
+                    setSearchString("")
                     onSelectValue(gameTitle);
                 }}
-                itemToStringLabel={gameTitle => (gameTitle as GameTitle).name }
+                itemToStringLabel={gameTitle => (gameTitle as GameTitle).name}
                 open={open}
                 onOpenChange={setOpen}
             >
