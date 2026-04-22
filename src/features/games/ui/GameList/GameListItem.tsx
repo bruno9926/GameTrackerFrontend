@@ -19,7 +19,8 @@ const gameStatusBadgeStyles: Record<GameStatus, string> = {
 
 const defaultImage = "/games/default-cover.jpg";
 
-const GameListItem = ({ id, name, status, coverUrl }: GameListItemProps) => {
+const GameListItem = (game: GameListItemProps) => {
+  const { id, name, status, coverUrl} = game;
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const { deleteGame } = useGames();
@@ -69,7 +70,7 @@ const GameListItem = ({ id, name, status, coverUrl }: GameListItemProps) => {
         }}
       />
       <EditGameModal
-        gameToEdit={{ id, name, status }}
+        gameToEdit={{...game}}
         isOpen={editModalOpen}
         close={() => setEditModalOpen(false)}
       />
