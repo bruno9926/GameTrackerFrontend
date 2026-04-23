@@ -79,6 +79,7 @@ export const apiClient = async <T, B = unknown>(
         window.location.href = publicRoutes.SIGNUP;
     }
 
+    /*
     const getErrorMessage = async (res: Response) => {
         let message = res.statusText;
         try {
@@ -92,7 +93,7 @@ export const apiClient = async <T, B = unknown>(
             }
         } catch { }
         return message;
-    }
+    }*/
 
     const parseApiError = async (res: Response): Promise<ApiError> => {
         try {

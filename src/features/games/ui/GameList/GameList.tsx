@@ -23,10 +23,7 @@ const GameList = () => {
       {games.slice(0,5).map((game: Game) => (
         <GameListItem
           key={game.id}
-          id={game.id}
-          name={game.name}
-          status={game.status}
-          coverUrl={game.coverUrl}
+          {...game}
         />
       ))}
     </div>
