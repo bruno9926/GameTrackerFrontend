@@ -8,6 +8,7 @@ import {
     ComboboxInput,
 } from "@shared/ui/chadcn/combobox";
 import useGameTitleSearch from "@features/games/hooks/useGameTitleSearch";
+import { useDebouncedInput } from "@shared/hooks/useDebouncedInput";
 import { Field, FieldLabel, FieldDescription } from "@shared/ui/chadcn/field";
 import type { GameTitle } from "@features/games/model/GameTitle";
 
@@ -32,29 +33,18 @@ const GameTitleSearch: FC<GameTitleSearchProps> = ({
 
     const [open, setOpen] = useState(false);
 
-    const [waitingInput, setWaitingInput] = useState(false);
-    const [debouncedSearch, setDebouncedSearch] = useState("");
-    const debounceTime = 500; //in milliseconds
-    const minSearchLenght = 2;
+    const { searchGame, loading } = useGameTitleSearch();
 
-    const { searchGame, loading } = useGameTitleSearch()
-
-    useEffect(() => {
-        setWaitingInput(true);
-        const timeout = setTimeout(() => {
-            setDebouncedSearch(searchString);
-            setWaitingInput(false);
-        }, debounceTime);
-
-        return () => clearTimeout(timeout);
-    }, [searchString]);
+    const { debouncedInput: debouncedSearch, waitingInput } = useDebouncedInput(searchString, {
+        debounceTime: 500,
+        minLength: 2,
+    });
 
     useEffect(() => {
         if (debouncedSearch == "") {
             clearSearchResults();
             return;
         }
-        if (debouncedSearch.length < minSearchLenght) return;
 
         let currentSearch = debouncedSearch;
         const asyncSearch = async () => {

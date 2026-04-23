@@ -10,6 +10,7 @@ import { AddGameModal } from "../GameModals";
 import { anim } from "@shared/ui/Animations";
 // hooks
 import useGames from "../../hooks/useGames";
+import { useDebouncedInput } from "@shared/hooks/useDebouncedInput";
 import { useEffect, useState } from "react";
 import { Input } from "@shared/ui/chadcn/input";
 
@@ -19,9 +20,13 @@ const Games = () => {
   const [statusFilter, setStatusFilter] = useState<StatusOption>(null);
   const [sortBy, setSortBy] = useState<SortOption>("name-asc");
   const [addModalOpen, setAddModalOpen] = useState(false);
+  
+  const { debouncedInput: debouncedSearch, waitingInput } = useDebouncedInput(searchText, {
+    debounceTime: 500,
+  });
 
   // filters
-  const normalizedSearch = searchText.toLowerCase();
+  const normalizedSearch = debouncedSearch.toLowerCase();
   const byName = (game: Game) => {
     if (!normalizedSearch) return true;
     return game.name.toLowerCase().includes(normalizedSearch)
@@ -70,11 +75,12 @@ const Games = () => {
   const renderContent = () => {
     if (loading) return <Loading />
     if (error) return <p>Error: {error}</p>
+    if (waitingInput) return <p>Searching...</p>
     return (
       <div className="mt-6 md:mt-0">
         {visibleGames.length > 0 ? (
           <anim.FadeInUp
-            key={`${searchText}-${statusFilter}-${sortBy}`}
+            key={`${debouncedSearch}-${statusFilter}-${sortBy}`}
             className="games-grid">{
               visibleGames.map((game) =>
                 <GameListItem key={game.id} {...game} />
@@ -82,8 +88,8 @@ const Games = () => {
           </anim.FadeInUp>
         ) :
           <p>{
-            searchText ?
-              <span>No results found for: <b>{searchText}</b></span>
+            debouncedSearch ?
+              <span>No results found for: <b>{debouncedSearch}</b></span>
               : <span>No games found</span>
           }
           </p>
