@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import type { Friend } from '@features/user/model/Friend';
 import { BsJoystick } from "react-icons/bs";
 

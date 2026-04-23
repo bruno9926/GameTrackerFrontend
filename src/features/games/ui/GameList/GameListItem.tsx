@@ -6,8 +6,6 @@ import useGames from "../../hooks/useGames";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import game from "@assets/silksong.webp";
-
 type GameListItemProps = Game;
 
 const gameStatusBadgeStyles: Record<GameStatus, string> = {

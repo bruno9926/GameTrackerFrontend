@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Game } from "../features/games/model/Game";
+import type { Game } from "../model/Game";
 
 export interface GamesState{
     list: Game[]
