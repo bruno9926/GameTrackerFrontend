@@ -1,5 +1,6 @@
 import { useState } from "react";
 import GameService from "../api/GameService";
+import { getErrorMessage } from "@shared/lib/error-messages";
 import type { GameTitle } from "../model/GameTitle";
 
 const useGameTitleSearch = () => {
@@ -12,28 +13,13 @@ const useGameTitleSearch = () => {
     try {
       setError(null);
       setLoading(true);
-
-      const result = await gameService.searchGameTitle(name);
-      return mapToGameTitle(result);
-    } catch (exception) {
-      if (exception instanceof Error) {
-        setError(exception.message);
-      } else {
-        setError(String(exception));
-      }
-      throw exception;
+      return await gameService.searchGameTitle(name);
+    } catch (error) {
+      setError(getErrorMessage(error))
+      throw error;
     } finally {
       setLoading(false);
     }
-  }
-
-  const mapToGameTitle = (result: any[]): GameTitle[] => {
-    return result.map(result => ({
-      id: result.id,
-      name: result.name,
-      cover: result?.cover?.image_id ?
-        `https://images.igdb.com/igdb/image/upload/t_cover_big/${result.cover.image_id}.jpg` : null
-    }))
   }
 
   return {

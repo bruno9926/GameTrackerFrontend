@@ -1,5 +1,6 @@
 import { publicRoutes } from "@routes/routes";
 import TokenProvider from "@shared/api/TokenProvider";
+import type { ApiError } from "./ApiError";
 
 type ApiOptions<B> = Omit<RequestInit, 'body'> & {
     auth?: boolean,
@@ -86,9 +87,29 @@ export const apiClient = async <T, B = unknown>(
                 message = Array.isArray(data.message) ?
                     data.message.join(", ") :
                     data.message;
+            } else {
+                message = "Unknown error";
             }
         } catch { }
         return message;
+    }
+
+    const parseApiError = async (res: Response): Promise<ApiError> => {
+        try {
+            const clone = res.clone();
+            const data = await clone.json();
+            return {
+                message: data?.message ?? 'Unknown error',
+                code: data?.code ?? 'UNKNOWN_ERROR',
+                status: res.status,
+            };
+        } catch {
+            return {
+                message: 'Unknown error',
+                code: 'UNKNOWN_ERROR',
+                status: res.status,
+            };
+        }
     }
 
     // execute request with automatic token refresh
@@ -104,9 +125,12 @@ export const apiClient = async <T, B = unknown>(
     }
 
     if (!res.ok) {
-        let message = await getErrorMessage(res);
-        throw new Error(message);
+        //let message = await getErrorMessage(res);
+        //throw new Error(message);
+        const error = await parseApiError(res);
+        throw error;
     }
 
-    return res.json();
+    const data = await res.json();
+    return data;
 }

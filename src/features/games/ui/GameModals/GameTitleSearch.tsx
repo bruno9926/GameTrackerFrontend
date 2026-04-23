@@ -81,8 +81,8 @@ const GameTitleSearch: FC<GameTitleSearchProps> = ({
                 open={open}
                 onOpenChange={setOpen}
             >
-                
-                <ComboboxInput placeholder="Search for a game title" aria-invalid={!!selectionError}/>
+
+                <ComboboxInput placeholder="Search for a game title" aria-invalid={!!selectionError} />
                 {selectionError && <FieldDescription className="text-error">{selectionError}</FieldDescription>}
                 <ComboboxContent>
                     <ComboboxEmpty>{
@@ -93,7 +93,9 @@ const GameTitleSearch: FC<GameTitleSearchProps> = ({
                         {(item) => {
                             let gameTitle = item as GameTitle;
                             return (
-                                <ComboboxItem key={gameTitle.id} value={gameTitle} className="cursor-pointer">
+                                <ComboboxItem
+                                    key={gameTitle.sourceId} value={gameTitle}
+                                    className="cursor-pointer">
                                     {gameTitle.name}
                                 </ComboboxItem>
                             )

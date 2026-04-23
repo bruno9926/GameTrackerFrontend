@@ -5,6 +5,7 @@ import GameService from "../api/GameService";
 import { useSelector, useDispatch } from "react-redux";
 import { type RootState } from "../../../app/store/store";
 import { setGames } from "../state";
+import { getErrorMessage } from "@shared/lib/error-messages";
 
 const useGames = () => {
   const [loading, setLoading] = useState(false);
@@ -21,11 +22,7 @@ const useGames = () => {
       setLoading(true);
       await action();
     } catch (exception) {
-      if (exception instanceof Error) {
-        setError(exception.message);
-      } else {
-        setError(String(exception));
-      }
+      setError(getErrorMessage(exception))
       throw exception;
     } finally {
       setLoading(false);

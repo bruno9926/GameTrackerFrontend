@@ -13,7 +13,7 @@ const ErrorMessage = ({ message, retryAction }: ErrorMessageProps) => (
       <span>Error</span>
     </div>
     <div>
-      <span className={styles.error}>{message}, </span>
+      <span className={styles.error}>{message}</span>
       {retryAction && (
         <button onClick={() => retryAction()}>
           Retry

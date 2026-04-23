@@ -4,7 +4,8 @@
 export type GameTitleId = string;
 
 export type GameTitle = {
-    id: GameTitleId;
+    sourceId: GameTitleId,
+    source: string,
     name: string,
     cover: string | null, //an url for the image
 }

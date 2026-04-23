@@ -200,7 +200,7 @@ input:-webkit-autofill:focus {
 }
 
 @utility page-padding {
-  @apply p-4 md:p-7;
+  @apply p-4 md:p-10;
 }
 
 @layer components {

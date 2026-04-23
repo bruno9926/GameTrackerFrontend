@@ -1,3 +1,5 @@
+import type { GameTitleId } from "./GameTitle";
+
 export const GAME_STATUSES = {
   playing: "playing",
   completed: "completed",
@@ -21,6 +23,7 @@ export type Game = {
   name: string;
   status: GameStatus;
   coverUrl?: string
+  gameTitleId: GameTitleId | null
 };
 
 export const DEFAULT_GAME_STATUS = GAME_STATUSES.playing;

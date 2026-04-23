@@ -51,10 +51,12 @@ const UpsertModal: FC<UpsertModalProps> = ({
   );
 
   useEffect(() => {
-    if (isEditMode && gameToEdit) {
+    if (isEditMode && gameToEdit && gameToEdit.gameTitleId) {
       // first population of selected game, it is build from the game data
+      // improve the way to build the game title
       setSelectedGameTitle({
-        id: gameToEdit.id,
+        sourceId: gameToEdit.gameTitleId,
+        source: "igdb",
         name: gameToEdit.name,
         cover: gameToEdit.coverUrl ?? null
       });
@@ -83,8 +85,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
       return;
     }
     setSelectionError(null);
-    const name = selectedGameTitle.name;
-    const cover = selectedGameTitle.cover;
+    const { name, cover, sourceId: gameTitleId } = selectedGameTitle;
 
     try {
       if (isEditMode && gameToEdit) {
@@ -94,7 +95,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
         });
       } else {
         await submitGame({
-          ...{ name, status },
+          ...{ name, status, gameTitleId },
           ...(cover !== null ? { coverUrl: cover } : {})
         });
       }

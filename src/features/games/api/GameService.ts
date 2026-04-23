@@ -1,5 +1,6 @@
 import type { Game, GameToUpdate, GameToCreate } from "../model/Game";
 import { apiClient } from "@shared/api/apiClient";
+import type { GameTitle } from "../model/GameTitle";
 
 const API_URL = import.meta.env.VITE_API_URL + "/games";
 
@@ -69,7 +70,7 @@ class GameService {
    * @param name the game title name to do the search
    * @returns all the games titles that contains the name
    */
-  async searchGameTitle(name: string) : Promise<any[]> {
+  async searchGameTitle(name: string) : Promise<GameTitle[]> {
     if (!name) {
       throw new Error("A search query is required");
     }
