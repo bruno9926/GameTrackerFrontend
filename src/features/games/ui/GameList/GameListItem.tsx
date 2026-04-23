@@ -52,7 +52,7 @@ const GameListItem = (game: GameListItemProps) => {
           </div>
         </div>
         <div className="flex flex-col gap-3 p-3">
-          <p className="md:w-full md:overflow-hidden text-sm md:text-xl md:text-ellipsis md:text-nowrap" title={name}>
+          <p className="md:w-full md:overflow-hidden text-sm md:text-lg md:text-ellipsis md:text-nowrap" title={name}>
             {name}
           </p>
           <div className={gameStatusBadgeStyles[status]}>

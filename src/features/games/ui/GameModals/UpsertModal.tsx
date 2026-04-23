@@ -45,6 +45,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
 
   const [searchString, setSearchString] = useState("");
   const [selectedGameTitle, setSelectedGameTitle] = useState<GameTitle | null>(null);
+  const [selectionError, setSelectionError] = useState<string | null>(null);
   const [status, setStatus] = useState<GameStatus>(
     gameToEdit?.status || DEFAULT_GAME_STATUS
   );
@@ -77,11 +78,25 @@ const UpsertModal: FC<UpsertModalProps> = ({
   };
 
   const handleSubmit = async () => {
+    if (selectedGameTitle === null) {
+      setSelectionError("Please select a game title");
+      return;
+    }
+    setSelectionError(null);
+    const name = selectedGameTitle.name;
+    const cover = selectedGameTitle.cover;
+
     try {
       if (isEditMode && gameToEdit) {
-        await handleUpdate(gameToEdit.id);
+        await updateGame({
+          ...{ id: gameToEdit.id, name, status },
+          ...(cover !== null ? { coverUrl: cover } : {})
+        });
       } else {
-        await handleCreate();
+        await submitGame({
+          ...{ name, status },
+          ...(cover !== null ? { coverUrl: cover } : {})
+        });
       }
       clearFields();
       clearError();
@@ -92,36 +107,6 @@ const UpsertModal: FC<UpsertModalProps> = ({
       // dont close the modal
     }
   };
-
-  const handleUpdate = async (id: string) => {
-    if (selectedGameTitle === null) {
-      // future UI error
-      alert("you should select a game title");
-      return;
-    }
-    const name = selectedGameTitle.name;
-    const cover = selectedGameTitle.cover;
-
-    await updateGame({
-      ...{ id, name, status },
-      ...(cover !== null ? { coverUrl: cover } : {})
-    });
-  }
-
-  const handleCreate = async () => {
-    if (selectedGameTitle === null) {
-      // future UI error
-      alert("you should select a game title");
-      return;
-    }
-    const name = selectedGameTitle.name;
-    const cover = selectedGameTitle.cover;
-
-    await submitGame({
-      ...{ name, status },
-      ...(cover !== null ? { coverUrl: cover } : {})
-    });
-  }
 
   const StatusSelect = () => (
     <Field>
@@ -186,7 +171,10 @@ const UpsertModal: FC<UpsertModalProps> = ({
             setSearchString={setSearchString}
             onSelectValue={(gameTitle) => {
               setSelectedGameTitle(gameTitle)
-            }} />
+            }}
+            selectionError={selectionError}
+            setSelectionError={setSelectionError}
+          />
           <SelectedGamePreview />
           <StatusSelect />
         </form>

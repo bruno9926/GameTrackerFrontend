@@ -6,6 +6,7 @@ import type { Game } from "../../model/Game";
 import StatusFilter, { type StatusOption } from "./StatusFilter";
 import AddGameButton from "@shared/ui/Organisms/AddGamesButton/AddGamesButton";
 import SortSelect, { type SortOption } from "./SortSelect";
+import { AddGameModal } from "../GameModals";
 import { anim } from "@shared/ui/Animations";
 // hooks
 import useGames from "../../hooks/useGames";
@@ -17,6 +18,7 @@ const Games = () => {
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusOption>(null);
   const [sortBy, setSortBy] = useState<SortOption>("name-asc");
+  const [addModalOpen, setAddModalOpen] = useState(false);
 
   // filters
   const normalizedSearch = searchText.toLowerCase();
@@ -96,7 +98,7 @@ const Games = () => {
         {/*page title just for mobile */}
         <h1 className="md:hidden mb-5 font-bold text-title text-4xl">Games</h1>
         <div className="flex flex-row gap-4 w-full">
-          <AddGameButton />
+          <AddGameButton onClick={() => setAddModalOpen(true)} />
           <Input
             className="flex-1"
             type="text"
@@ -112,6 +114,10 @@ const Games = () => {
         </div>
         {renderContent()}
       </div>
+      <AddGameModal
+        isOpen={addModalOpen}
+        close={() => setAddModalOpen(false)}
+      />
     </AnimatedRoute>
   );
 };

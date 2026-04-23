@@ -8,20 +8,24 @@ import {
     ComboboxInput,
 } from "@shared/ui/chadcn/combobox";
 import useGameTitleSearch from "@features/games/hooks/useGameTitleSearch";
-import { Field, FieldLabel } from "@shared/ui/chadcn/field";
+import { Field, FieldLabel, FieldDescription } from "@shared/ui/chadcn/field";
 import type { GameTitle } from "@features/games/model/GameTitle";
 
 interface GameTitleSearchProps {
     searchString: string,
     setSearchString: (searchString: string) => void
     onSelectValue: (value: GameTitle | null) => void,
-    selectedGameTitle: GameTitle | null
+    selectedGameTitle: GameTitle | null,
+    selectionError: string | null,
+    setSelectionError: (error: string | null) => void
 }
 const GameTitleSearch: FC<GameTitleSearchProps> = ({
     searchString,
     setSearchString,
     onSelectValue,
-    selectedGameTitle
+    selectedGameTitle,
+    selectionError,
+    setSelectionError
 }) => {
     const [gameTitles, setGameTitles] = useState<GameTitle[]>([]);
     const clearSearchResults = () => setGameTitles([]);
@@ -67,25 +71,29 @@ const GameTitleSearch: FC<GameTitleSearchProps> = ({
 
     return (
         <Field>
-            <FieldLabel>Name</FieldLabel>
+            <FieldLabel className={selectionError ? "text-error" : ""}>Name</FieldLabel>
             <Combobox
                 items={gameTitles}
                 inputValue={selectedGameTitle?.name ?? searchString}
                 onInputValueChange={(value) => {
                     setSearchString(value);
+                    setSelectionError(null);
                     // this ensure the selected game matches with the input content
                     if (selectedGameTitle !== null) onSelectValue(null);
                 }}
                 onValueChange={(value) => {
                     let gameTitle = value as GameTitle
                     setSearchString("")
+                    setSelectionError(null);
                     onSelectValue(gameTitle);
                 }}
                 itemToStringLabel={gameTitle => (gameTitle as GameTitle).name}
                 open={open}
                 onOpenChange={setOpen}
             >
-                <ComboboxInput placeholder="Search for a game title" />
+                
+                <ComboboxInput placeholder="Search for a game title" aria-invalid={!!selectionError}/>
+                {selectionError && <FieldDescription className="text-error">{selectionError}</FieldDescription>}
                 <ComboboxContent>
                     <ComboboxEmpty>{
                         (loading || waitingInput) ? "Searching..."
