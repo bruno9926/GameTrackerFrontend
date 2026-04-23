@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { type RootState } from "../../../app/store/store";
 import { IoIosLogOut } from "react-icons/io";
-import styles from './User.module.scss';
 import useOptionsMenu from "../Organisms/OptionsMenu/useOptionsMenu";
 import useLogout from "@features/auth/hooks/useLogout";
 
@@ -9,8 +8,7 @@ const User = () => {
     const user = useSelector((state: RootState) => state.user.user);
     const {
         name,
-        profilePicture,
-        email
+        profilePicture
     } = user ?? {
         name: '',
         profilePicture: undefined,
@@ -22,7 +20,7 @@ const User = () => {
     const { ref, toggleOpen, open } = useOptionsMenu();
 
     const LogoutButton = () => (
-        <button className={styles.logout}
+        <button className="flex items-center gap-2 bg-card p-2 hover:bg-border rounded-lg transition-all cursor-pointer animation-duration"
             onClick={() => logout()}>
             <IoIosLogOut size={20} />
             <span>Logout</span>
@@ -31,20 +29,21 @@ const User = () => {
 
     return (
         <div className="relative" ref={ref}>
-            <div className="flex items-center gap-2 p-2 hover:bg-border active:bg-border rounded-xl transition-all cursor-pointer" onClick={toggleOpen}>
+            <button 
+                className="hover:opacity-80 active:opacity-70 p-1 rounded-xl transition-opacity cursor-pointer"
+                onClick={toggleOpen}
+                aria-label="User menu"
+            >
                 <Avatar profilePicture={profilePicture} name={name} />
-                <div className="flex flex-col">
-                    <span>{name}</span>
-                    <span className="text-online text-xxs">Online</span>
-                </div>
-            </div>
+            </button>
             {
                 open && (
-                    <div className={styles['user-menu']}>
-                        <div className={styles.user}>
+                    <div className="top-full right-0 z-(--z-modal) absolute flex flex-col gap-2 bg-card mt-2 p-2 pb-4 border rounded-lg min-w-60">
+                        <div className="flex items-center gap-2 bg-card-bg p-2 hover:bg-border rounded-lg transition-all cursor-pointer animation-duration">
                             <Avatar profilePicture={profilePicture} name={name} />
-                            <div className={styles['user-info']}>
-                                <span>{email}</span>
+                            <div className="flex flex-col">
+                                <span>{name}</span>
+                                <span className="text-online text-xxs">Online</span>
                             </div>
                         </div>
                         <LogoutButton />
