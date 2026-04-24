@@ -161,6 +161,11 @@ input:-webkit-autofill:focus {
   html {
     @apply font-sans;
   }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
 }
 /* Utilities */
 
