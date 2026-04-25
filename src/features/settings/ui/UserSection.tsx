@@ -18,7 +18,7 @@ const UserSection = () => {
 
     return (
         <SettingsSection title="User Info" id="user">
-            <div className="flex lg:flex-row flex-col lg:justify-center gap-5 lg:gap-15">
+            <div className="flex lg:flex-row flex-col gap-5 lg:gap-15">
                 {/* Top Section */}
                 <div className="flex md:flex-row flex-col md:items-center gap-2 md:gap-6 h-fit">
                     {/* Avatar */}
