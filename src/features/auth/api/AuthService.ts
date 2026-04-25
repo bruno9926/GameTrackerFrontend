@@ -1,4 +1,4 @@
-import type { User } from "../model/User";
+import type { User } from "@features/user/model/User";
 import { apiClient } from "@shared/api/apiClient";
 import TokenProvider from "@shared/api/TokenProvider";
 
