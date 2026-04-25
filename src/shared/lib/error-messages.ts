@@ -14,7 +14,10 @@ export const getErrorMessage = (error: unknown): string => {
 }
 
 const getUserError = (error: ApiError) => {
-    return errorMessages[error.code] || error.message || errorMessages["UNKNOWN_ERROR"];
+  if (error.code == 'UNKNOWN_ERROR') {
+    return error.message || errorMessages[error.code];
+  }
+  return errorMessages[error.code] || error.message || errorMessages["UNKNOWN_ERROR"];
 }
 
 export default errorMessages;

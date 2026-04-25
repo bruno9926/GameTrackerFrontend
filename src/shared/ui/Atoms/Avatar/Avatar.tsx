@@ -10,13 +10,13 @@ interface AvatarProps {
 const width: Record<Sizes, string> = {
     'sm': 'w-9',
     'md': 'w-10',
-    'lg': 'w-20',
+    'lg': 'w-35',
 }
 
 const fontSize: Record<Sizes, string> = {
     'sm': 'text-md',
     'md': 'text-xl',
-    'lg': 'text-4xl',
+    'lg': 'text-5xl',
 }
 
 const Avatar = ({ profilePicture, name, size = 'sm' }: AvatarProps) => {

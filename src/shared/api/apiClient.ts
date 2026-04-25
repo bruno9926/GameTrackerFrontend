@@ -79,25 +79,26 @@ export const apiClient = async <T, B = unknown>(
         window.location.href = publicRoutes.SIGNUP;
     }
 
-    const getErrorMessage = async (res: Response) => {
-        let message = res.statusText;
-        try {
-            const data = await res.json();
-            if (data?.message) {
-                message = Array.isArray(data.message) ?
-                    data.message.join(", ") :
-                    data.message;
-            } else {
-                message = "Unknown error";
-            }
-        } catch { }
-        return message;
-    }
+    // const getErrorMessage = async (res: Response) => {
+    //     let message = res.statusText;
+    //     try {
+    //         const data = await res.json();
+    //         if (data?.message) {
+    //             message = Array.isArray(data.message) ?
+    //                 data.message.join(", ") :
+    //                 data.message;
+    //         } else {
+    //             message = "Unknown error";
+    //         }
+    //     } catch { }
+    //     return message;
+    // }
 
     const parseApiError = async (res: Response): Promise<ApiError> => {
         try {
             const clone = res.clone();
             const data = await clone.json();
+            console.log(data)
             return {
                 message: data?.message ?? 'Unknown error',
                 code: data?.code ?? 'UNKNOWN_ERROR',

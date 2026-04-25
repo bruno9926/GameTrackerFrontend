@@ -4,3 +4,5 @@ export type User = {
     email: string,
     profilePicture?: string
 }
+
+export type UserInfo = Pick<User, "name" | "email">;

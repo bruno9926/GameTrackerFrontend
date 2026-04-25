@@ -10,11 +10,11 @@ const defaultOptions = {
     duration: 4000
 }
 
-const backgroundColor = (color: string) => `color-mix(in srgb, ${color}, transparent 90%)`;
+const backgroundColor = (color: string) => `color-mix(in srgb, ${color}, transparent 20%)`;
 
 const styleOptions = (color: string) => ({
     style: {
-        color: color,
+        color: 'white',
         backgroundColor: backgroundColor(color),
     },
     iconTheme: {
