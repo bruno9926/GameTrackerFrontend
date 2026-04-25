@@ -6,7 +6,7 @@ import useGames from "../../hooks/useGames";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-type GameListItemProps = Game;
+type GameListItemProps = Omit<Game, "gameTitleId">;
 
 const gameStatusBadgeStyles: Record<GameStatus, string> = {
   playing: "game-status-badge-playing",

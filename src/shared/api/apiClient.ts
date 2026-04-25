@@ -99,6 +99,7 @@ export const apiClient = async <T, B = unknown>(
         try {
             const clone = res.clone();
             const data = await clone.json();
+            console.log(data)
             return {
                 message: data?.message ?? 'Unknown error',
                 code: data?.code ?? 'UNKNOWN_ERROR',
