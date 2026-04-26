@@ -2,7 +2,6 @@ import AnimatedRoute from "../AnimatedRoute";
 import ThemeToggle from "@shared/ui/ThemeToggle/ThemeToggle";
 import SettingsSection from "@features/settings/ui/SettingsSection";
 import UserSection from "@features/settings/ui/UserSection";
-import Button from "@shared/ui/Atoms/Button/Button";
 
 const Settings = () => {
   return (
