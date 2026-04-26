@@ -11,11 +11,13 @@ import { Skeleton } from "@shared/ui/chadcn/skeleton";
 const UserSection = () => {
     const userState = useSelector((state: RootState) => state.user);
     const { user, loading } = userState;
-
-    const { name, username, email } = user || {};
-    const profilePicture = user?.profilePicture ?? '';
-
     const [isEditing, setIsEditing] = useState(false);
+
+    if (!user) return null;
+
+    const { name, username, email } = user;
+    const profilePicture = user.profilePicture ?? '';
+
 
     const AvatarButton = () => {
         if (loading) {
@@ -41,7 +43,7 @@ const UserSection = () => {
     }
 
     const UserInfo = () => {
-        const baseClass = "flex flex-col md:justify-between items-center md:items-start gap-1 md:text-left text-center grow";
+        const baseClass = "flex flex-col md:justify-between items-center gap-1 md:items-start md:text-left text-center grow";
 
         if (loading) return (
             <div className={baseClass}>
@@ -51,8 +53,9 @@ const UserSection = () => {
         )
         return (
             <div className={baseClass}>
-                <span className="font-semibold text-lg">{username}</span>
-                <span className="text-muted-foreground text-sm">{email}</span>
+                <span className="font-semibold text-2xl">{name}</span>
+                <span className="text-muted-foreground text-sm">@{username}</span>
+
                 {!isEditing && (
                     <div className="mt-5">
                         <Button
@@ -76,7 +79,7 @@ const UserSection = () => {
                 </div>
                 {/* Form */}
                 {
-                    isEditing && name && email && username &&(
+                    isEditing && (
                         <div className="flex-1 max-w-xl">
                             <EditInfoForm
                                 initialUsername={username}
