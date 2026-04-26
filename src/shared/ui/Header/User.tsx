@@ -8,7 +8,8 @@ import { userRoutes } from "@app/routes/routes";
 import Avatar from "../Atoms/Avatar/Avatar";
 
 const User = () => {
-    const user = useSelector((state: RootState) => state.user.user);
+    const userState = useSelector((state: RootState) => state.user);
+    const { user, loading } = userState;
     const {
         name,
         profilePicture
@@ -48,8 +49,9 @@ const User = () => {
                 className="hover:opacity-80 active:opacity-70 p-1 rounded-xl transition-opacity cursor-pointer"
                 onClick={toggleOpen}
                 aria-label="User menu"
+                disabled={loading}
             >
-                <Avatar profilePicture={profilePicture} name={name} />
+                <Avatar profilePicture={profilePicture} name={name} loading={loading}/>
             </button>
             {
                 open && (
