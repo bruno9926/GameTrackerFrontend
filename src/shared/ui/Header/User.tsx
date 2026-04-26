@@ -10,18 +10,18 @@ import Avatar from "../Atoms/Avatar/Avatar";
 const User = () => {
     const userState = useSelector((state: RootState) => state.user);
     const { user, loading } = userState;
+    const { ref, toggleOpen, open } = useOptionsMenu();
+
+    if (!user) return null;
+
     const {
         name,
-        profilePicture
-    } = user ?? {
-        name: '',
-        profilePicture: undefined,
-        email: ''
-    };
+        username,
+        profilePicture,
+    } = user;
 
     const { logout } = useLogout();
 
-    const { ref, toggleOpen, open } = useOptionsMenu();
 
     const LogoutButton = () => (
         <button className="flex items-center gap-2 bg-card p-2 hover:bg-border rounded-lg transition-all cursor-pointer animation-duration"
@@ -36,7 +36,7 @@ const User = () => {
             <div className="flex items-center gap-2 bg-card-bg p-2 hover:bg-border rounded-lg transition-all cursor-pointer animation-duration">
                 <Avatar profilePicture={profilePicture} name={name} />
                 <div className="flex flex-col">
-                    <span>{name}</span>
+                    <span>{username}</span>
                     <span className="text-online text-xxs">Online</span>
                 </div>
             </div>
