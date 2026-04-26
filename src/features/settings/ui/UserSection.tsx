@@ -12,8 +12,7 @@ const UserSection = () => {
     const userState = useSelector((state: RootState) => state.user);
     const { user, loading } = userState;
 
-    const name = user?.name;
-    const email = user?.email;
+    const { name, username, email } = user || {};
     const profilePicture = user?.profilePicture ?? '';
 
     const [isEditing, setIsEditing] = useState(false);
@@ -52,7 +51,7 @@ const UserSection = () => {
         )
         return (
             <div className={baseClass}>
-                <span className="font-semibold text-lg">{name}</span>
+                <span className="font-semibold text-lg">{username}</span>
                 <span className="text-muted-foreground text-sm">{email}</span>
                 {!isEditing && (
                     <div className="mt-5">
@@ -77,9 +76,10 @@ const UserSection = () => {
                 </div>
                 {/* Form */}
                 {
-                    isEditing && name && email && (
+                    isEditing && name && email && username &&(
                         <div className="flex-1 max-w-xl">
                             <EditInfoForm
+                                initialUsername={username}
                                 initialName={name}
                                 initialEmail={email}
                                 onCancel={() => setIsEditing(false)}

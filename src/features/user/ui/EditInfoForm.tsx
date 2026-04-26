@@ -4,30 +4,36 @@ import { Input } from "@shared/ui/chadcn/input";
 import Button from "@shared/ui/Atoms/Button/Button";
 import useUpdateUserInfo from "@features/user/hooks/useUpdateUserInfo";
 import { setUser } from "@features/user/state";
-import type { UserInfo } from "@features/user/model/User";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import toast from "@shared/ui/Atoms/Toast";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type UserInfoChanges = Partial<UserInfo>;
-
 interface EditInfoFormProps {
     initialName: string;
+    initialUsername: string;
     initialEmail: string;
     onEdit: () => void;
     onCancel: () => void;
 }
 
 const schema = z.object({
-    name: z.string().min(8, "Username must have at least 8 characters"),
-    email: z.email("This is not a valid email"),
+    username: z
+        .string()
+        .min(3, "Username must have at least 3 characters")
+        .max(20, "Username must have at most 20 characters")
+        .regex(/^[a-zA-Z0-9_]+$/, "Only letters, numbers and underscores"),
+    name: z.string()
+        .min(1, "Name is required")
+        .max(50, "Name is too long")
+        .trim(),
+    email: z.email("Invalid email"),
 });
 
 type FormFields = z.infer<typeof schema>;
 
-const EditInfoForm = ({ initialName, initialEmail, onCancel, onEdit }: EditInfoFormProps) => {
+const EditInfoForm = ({ initialName, initialEmail, initialUsername, onCancel, onEdit }: EditInfoFormProps) => {
 
     const {
         register,
@@ -38,7 +44,8 @@ const EditInfoForm = ({ initialName, initialEmail, onCancel, onEdit }: EditInfoF
         resolver: zodResolver(schema),
         defaultValues: {
             name: initialName,
-            email: initialEmail
+            email: initialEmail,
+            username: initialUsername
         }
     });
 
@@ -46,11 +53,18 @@ const EditInfoForm = ({ initialName, initialEmail, onCancel, onEdit }: EditInfoF
     const dispatch = useDispatch();
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
-        const { name: editedName, email: editedEmail } = data;
-        const userInfo: UserInfoChanges = {};
+        const {
+            name: editedName,
+            email: editedEmail,
+            username: editedUsername
+        } = data;
 
-        if (editedName !== initialName) userInfo.name = editedName;
-        if (editedEmail !== initialEmail) userInfo.email = editedEmail;
+        const userInfo = {
+            ...(editedName !== initialName && { name: editedName }),
+            ...(editedEmail !== initialEmail && { email: editedEmail }),
+            ...(editedUsername.toLowerCase() !== initialUsername.toLowerCase()
+                && { username: editedUsername }),
+        };
 
         if (Object.keys(userInfo).length === 0) {
             onEdit();
@@ -73,7 +87,22 @@ const EditInfoForm = ({ initialName, initialEmail, onCancel, onEdit }: EditInfoF
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <Field>
-                <FieldLabel htmlFor="name">Username</FieldLabel>
+                <FieldLabel htmlFor="username">Username</FieldLabel>
+                <Input
+                    id="username"
+                    autoComplete="username"
+                    aria-invalid={!!errors.username}
+                    disabled={isSubmitting}
+                    {...register("username")}
+                />
+                {
+                    errors.username &&
+                    <FieldDescription className="text-error" role="alert">{errors.username.message}</FieldDescription>
+                }
+            </Field>
+
+            <Field>
+                <FieldLabel htmlFor="name">Name</FieldLabel>
                 <Input
                     id="name"
                     autoComplete="name"
