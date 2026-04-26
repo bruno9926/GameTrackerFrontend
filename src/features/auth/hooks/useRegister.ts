@@ -1,39 +1,29 @@
-import { useState } from "react";
-import AuthService from "../api/AuthService";
+import { authService } from "../api/AuthService";
+import type { UserInfo } from "@features/user/model/User";
+import { getErrorMessage } from "@shared/lib/error-messages";
 
-type userToRegister = {
-    username: string;
-    email: string;
-    password: string;
+type userToRegister = UserInfo & {
+    password: string
 }
 
 const useRegister = () => {
-    const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
 
     const register = async (user: userToRegister) => {
-        setLoading(true);
-        setError(null);
-
         try {
-            await AuthService.getInstance().register({
-                name: user.username,
+            await authService.register({
+                name: user.name,
+                username: user.username ?
+                    user.username.toLowerCase() :
+                    user.name.toLowerCase(), // temporal, only for migration
                 email: user.email,
                 password: user.password
             })
-        } catch (e: unknown) {
-            setError((e as Error)?.message || "Registration failed");
-            throw e;
-        } finally {
-            setLoading(false);
+        } catch (error) {
+            throw getErrorMessage(error);
         }
     }
 
-    return {
-        register,
-        error,
-        loading
-    };
+    return { register };
 }
 
 export default useRegister;
