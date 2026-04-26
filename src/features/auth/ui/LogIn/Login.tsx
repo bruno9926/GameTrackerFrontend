@@ -75,7 +75,7 @@ const Login = () => {
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                         />
                     </Field>
-                    <PasswordField password={password} setPassword={setPassword} disabled={loading} />
+                    <PasswordField value={password} onChange={(e) => setPassword(e.target.value)} disabled={loading} />
                 </div>
 
                 <Button disabled={loading} type="submit">

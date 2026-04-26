@@ -12,6 +12,7 @@ const useLogin = () => {
     const dispatch = useDispatch();
 
     const login = async (credentials: { email: string; password: string }) => {
+        console.log(credentials)
         setLoading(true);
         setError(null);
 
