@@ -13,6 +13,7 @@ const AppInitializer = ({ children }: { children: Readonly<React.ReactNode> }) =
     const initializeUser = async () => {
         try {
             dispatch(setLoading(true));
+            await new Promise(resolve => setTimeout(resolve, 2 * 1000))
             const user = await authService.getMe();
             dispatch(setUser(user));
         } catch (error) {

@@ -20,7 +20,9 @@ const UserSection = () => {
 
     const AvatarButton = () => {
         if (loading) {
-            return <Avatar size="lg" loading />;
+            return <div className="flex justify-center md:justify-start">
+                <Avatar size="lg" loading />
+            </div>;
         }
 
         return (
