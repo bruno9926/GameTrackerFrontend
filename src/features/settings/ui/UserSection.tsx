@@ -58,8 +58,8 @@ const UserSection = () => {
                 {isEditing && (
                     <div className="flex-1 max-w-xl">
                         <EditInfoForm
-                            name={name}
-                            email={email}
+                            initialName={name}
+                            initialEmail={email}
                             onCancel={() => setIsEditing(false)}
                             onEdit={() => setIsEditing(false)}
                         />
