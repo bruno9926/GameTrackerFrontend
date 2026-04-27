@@ -1,12 +1,11 @@
-import Avatar from "@shared/ui/Atoms/Avatar/Avatar";
 import SettingsSection from "./SettingsSection";
-import { useSelector } from "react-redux";
 import type { RootState } from "@app/store/store";
-import { MdEdit } from "react-icons/md";
-import { useState } from "react";
 import EditInfoForm from "@features/user/ui/EditInfoForm";
 import Button from "@shared/ui/Atoms/Button/Button";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
+import UpdateAvatar from "./UpdateAvatar";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const UserSection = () => {
     const userState = useSelector((state: RootState) => state.user);
@@ -16,31 +15,6 @@ const UserSection = () => {
     if (!user) return null;
 
     const { name, username, email } = user;
-    const avatarUrl = user.avatarUrl ?? '';
-
-
-    const AvatarButton = () => {
-        if (loading) {
-            return <div className="flex justify-center md:justify-start">
-                <Avatar size="lg" loading />
-            </div>;
-        }
-
-        return (
-            <div className="flex justify-center md:justify-start">
-                <div className="group relative w-fit cursor-pointer">
-                    <div className="group-hover:opacity-50 transition-opacity">
-                        <Avatar
-                            name={name}
-                            avatarUrl={avatarUrl}
-                            size="lg"
-                        />
-                    </div>
-                    <MdEdit className="absolute inset-0 opacity-0 group-hover:opacity-100 m-auto text-2xl transition-opacity pointer-events-none" />
-                </div>
-            </div>
-        )
-    }
 
     const UserInfo = () => {
         const baseClass = "flex flex-col md:justify-between items-center gap-1 md:items-start md:text-left text-center grow";
@@ -74,7 +48,7 @@ const UserSection = () => {
             <div className="flex lg:flex-row flex-col gap-5 lg:gap-15 p-7 lg:p-10 card">
                 {/* Top Section */}
                 <div className="flex md:flex-row flex-col md:items-center gap-2 md:gap-6 h-fit">
-                    <AvatarButton />
+                    <UpdateAvatar />
                     <UserInfo />
                 </div>
                 {/* Form */}

@@ -6,4 +6,4 @@ export type User = {
     avatarUrl?: string
 }
 
-export type UserInfo = Pick<User, "name" | "email" | "username">;
+export type UserInfo = Pick<User, "name" | "email" | "username" | "avatarUrl">;
