@@ -78,7 +78,7 @@ const Login = () => {
                     <PasswordField value={password} onChange={(e) => setPassword(e.target.value)} disabled={loading} />
                 </div>
 
-                <Button disabled={loading} type="submit">
+                <Button disabled={loading} type="submit" fullWidth>
                     {loading ? "Signing you in..." : "Sign In"}
                 </Button>
                 {error && <span className="mt-2 text-error text-sm text-center">{error}</span>}

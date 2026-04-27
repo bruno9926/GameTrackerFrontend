@@ -105,7 +105,7 @@ const RegisterForm = () => {
                 {...register("password")}
             />
 
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isSubmitting} fullWidth>
                 {isSubmitting ? "Signing you up..." : "Sign Up"}
             </Button>
 
