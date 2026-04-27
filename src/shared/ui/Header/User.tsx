@@ -11,6 +11,7 @@ const User = () => {
     const userState = useSelector((state: RootState) => state.user);
     const { user, loading } = userState;
     const { ref, toggleOpen, open } = useOptionsMenu();
+    const { logout } = useLogout();
 
     if (!user) return null;
 
@@ -19,9 +20,6 @@ const User = () => {
         username,
         profilePicture,
     } = user;
-
-    const { logout } = useLogout();
-
 
     const LogoutButton = () => (
         <button className="flex items-center gap-2 bg-card p-2 hover:bg-border rounded-lg transition-all cursor-pointer animation-duration"
