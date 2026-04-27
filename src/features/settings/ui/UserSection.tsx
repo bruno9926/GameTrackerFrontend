@@ -16,7 +16,7 @@ const UserSection = () => {
     if (!user) return null;
 
     const { name, username, email } = user;
-    const profilePicture = user.profilePicture ?? '';
+    const avatarUrl = user.avatarUrl ?? '';
 
 
     const AvatarButton = () => {
@@ -32,7 +32,7 @@ const UserSection = () => {
                     <div className="group-hover:opacity-50 transition-opacity">
                         <Avatar
                             name={name}
-                            profilePicture={profilePicture}
+                            avatarUrl={avatarUrl}
                             size="lg"
                         />
                     </div>

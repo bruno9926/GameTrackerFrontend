@@ -3,7 +3,7 @@ import { Skeleton } from "@shared/ui/chadcn/skeleton";
 
 type Sizes = 'sm' | 'md' | 'lg'
 interface AvatarProps {
-    profilePicture?: string;
+    avatarUrl?: string;
     name?: string,
     size?: Sizes,
     loading?: boolean
@@ -21,7 +21,7 @@ const fontSize: Record<Sizes, string> = {
     'lg': 'text-5xl',
 }
 
-const Avatar = ({ profilePicture, name = "User", size = 'sm', loading = false }: AvatarProps) => {
+const Avatar = ({ avatarUrl, name = "User", size = 'sm', loading = false }: AvatarProps) => {
     const DefaultPicture = () => (
         <div className={clsx([
             "flex justify-center items-center bg-brand w-full h-full",
@@ -40,8 +40,8 @@ const Avatar = ({ profilePicture, name = "User", size = 'sm', loading = false }:
             {
                 loading ?
                     <Skeleton className="rounded-full w-full h-full" />
-                    : profilePicture ?
-                        <img className="w-full h-full object-cover" src={profilePicture} alt={name} />
+                    : avatarUrl ?
+                        <img className="w-full h-full object-cover" src={avatarUrl} alt={name} />
                         : <DefaultPicture />
             }
         </div>

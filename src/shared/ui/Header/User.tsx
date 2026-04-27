@@ -17,7 +17,7 @@ const User = () => {
     const {
         name,
         username,
-        profilePicture,
+        avatarUrl,
     } = user;
 
     const { logout } = useLogout();
@@ -34,7 +34,7 @@ const User = () => {
     const UserInfo = () => (
         <Link to={userRoutes.SETTINGS} onClick={() => toggleOpen()}>
             <div className="flex items-center gap-2 bg-card-bg p-2 hover:bg-border rounded-lg transition-all cursor-pointer animation-duration">
-                <Avatar profilePicture={profilePicture} name={name} />
+                <Avatar avatarUrl={avatarUrl} name={name} />
                 <div className="flex flex-col">
                     <span>{username}</span>
                     <span className="text-online text-xxs">Online</span>
@@ -51,7 +51,7 @@ const User = () => {
                 aria-label="User menu"
                 disabled={loading}
             >
-                <Avatar profilePicture={profilePicture} name={name} loading={loading}/>
+                <Avatar avatarUrl={avatarUrl} name={name} loading={loading}/>
             </button>
             {
                 open && (
