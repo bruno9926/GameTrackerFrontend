@@ -3,6 +3,11 @@ import { apiClient } from "@shared/api/apiClient";
 
 const API_URL = import.meta.env.VITE_API_URL + "/users";
 
+type PasswordChangeRequest = {
+    currentPassword: string,
+    newPassword: string
+}
+
 class UserService {
     private static instance: UserService;
 
@@ -20,6 +25,13 @@ class UserService {
             method: "PATCH",
             body
         });
+    }
+
+    async changePassword(body: PasswordChangeRequest) {
+        return apiClient(`${API_URL}/password`, {
+            method: "PATCH",
+            body
+        })
     }
 }
 

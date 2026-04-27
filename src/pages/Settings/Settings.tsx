@@ -2,6 +2,7 @@ import AnimatedRoute from "../AnimatedRoute";
 import ThemeToggle from "@shared/ui/ThemeToggle/ThemeToggle";
 import SettingsSection from "@features/settings/ui/SettingsSection";
 import UserSection from "@features/settings/ui/UserSection";
+import AccountAndSecuritySection from "@features/settings/ui/AccountAndSecuritySection";
 
 const Settings = () => {
   return (
@@ -15,15 +16,8 @@ const Settings = () => {
           </div>
 
           <UserSection />
+          <AccountAndSecuritySection />
           <AppearanceSection />
-          {/* <SettingsSection title="Password">
-            <div className="card">
-              <input type="text" value="Old Password"/>
-              <input type="text" value="New Password"/>
-              <input type="text" value="Confirm New Password"/>
-              <Button variant="tertiary">Change Password</Button>
-            </div>
-          </SettingsSection> */}
         </div>
       </div>
     </AnimatedRoute>
@@ -33,7 +27,9 @@ const Settings = () => {
 const AppearanceSection = () => {
   return (
     <SettingsSection title="Appearance" id="appearance">
-      <ThemeToggle />
+      <div className="card">
+        <ThemeToggle />
+      </div>
     </SettingsSection>
   )
 }
