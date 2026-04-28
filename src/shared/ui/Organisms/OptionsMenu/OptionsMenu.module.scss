@@ -1,7 +1,7 @@
 .options {
   display: flex;
   position: relative;
-  color: var(--color-text);
+  color: var(--foreground);
   transition: all 0.3s ease;
 
   .options-menu {
@@ -11,8 +11,8 @@
     position: absolute;
     top: 100%;
     right: -10px;
-    background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
+    background-color: var(--card);
+    border: 1px solid var(--border);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
@@ -24,7 +24,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: var(--color-border);
+        background-color: var(--border);
       }
     }
 

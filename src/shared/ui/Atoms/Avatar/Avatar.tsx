@@ -34,7 +34,7 @@ const Avatar = ({ avatarUrl, name = "User", size = 'sm', loading = false }: Avat
     return (
 
         <div className={clsx([
-            "rounded-full aspect-square overflow-hidden",
+            "rounded-full aspect-square overflow-hidden border",
             width[size]
         ])}>
             {

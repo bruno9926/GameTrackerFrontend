@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 import ChangePasswordForm from "@features/user/ui/ChangePasswordForm";
+import clsx from "clsx";
 
 const AccountAndSecuritySection = () => {
 
@@ -23,7 +24,11 @@ const PasswordChangeSection = () => {
             {!isEditing ? (
                 <button
                     onClick={() => setIsEditing(true)}
-                    className='flex justify-between items-center p-3 border rounded-xl w-full text-subtitle hover:text-white active:text-white transition-colors cursor-pointer animation-duration'>
+                    className={clsx(
+                        "flex justify-between items-center p-3 border rounded-xl w-full text-muted-foreground",
+                        "hover:text-foreground active:text-foreground",
+                        "transition-color cursor-pointer animation-duration"
+                    )}>
                     Change Password
                     <FaArrowRight />
                 </button>

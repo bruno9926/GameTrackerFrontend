@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/figtree";
 
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *)); */
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -51,44 +51,48 @@
 
   /*sizing*/
   --text-xxs: 10px;
+
   /*custom colors*/
-  --color-brand: #cc4e45;
-  --color-title: #fff;
-  --color-subtitle: #929292;
-  --color-body: #d8d8d8;
-  --color-card: #1b1b1b;
-  --color-discord: #5865F2;
-  --color-google: #4285f4;
-  --color-error: #b33636;
-  --color-bg: #121212;
-  --color-online: #53ad4b;
+  --color-brand: var(--brand);
+  --color-scrollbar: var(--scrollbar);
+  --color-discord: var(--discord);
+  --color-google: var(--google);
+  --color-online: var(--online);
+
+  --color-title: var(--title);
+  --color-subtitle: var(--subtitle);
+
+  /*status colors*/
+  --color-error: var(--error);
+  --color-success: var(--success);
+
+  /*game statuses*/
+  --color-playing: var(--playing);
+  --color-completed: var(--completed);
+  --color-wishlist: var(--wishlist);
+  --color-paused: var(--paused);
 
   --z-modal: 100;
   --z-modal-content: calc(var(--z-modal) + 1);
-
-  --color-playing: #2f74b9;
-  --color-completed: #21a565;
-  --color-wishlist: #b82e81;
-  --color-paused: #b1883c;
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
+  --background: #eeeeee;
+  --foreground: #333;
+  --card: oklch(93.403% 0.00011 271.152);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: var(--brand);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: var(--primary);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #2c2c2c;
+  --border: #c4c4c4;
   --input: oklch(80.152% 0.00009 271.152);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.87 0 0);
@@ -105,6 +109,26 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /*custom colors*/
+  --brand: #cc4e45;
+  --discord: #5865F2;
+  --google: #4285f4;
+  --scrollbar: #bbbbbb;
+  --online: #53ad4b;
+
+  --title: #333;
+  --subtitle: #929292;
+
+  /*status colors*/
+  --error: #b33636;
+  --success: #21a565;
+
+  /*game statuses*/
+  --playing: #1e90ff;
+  --completed: #21a565;
+  --wishlist: #ff0099;
+  --paused: #ffa500;
 }
 
 input:-webkit-autofill,
@@ -116,19 +140,16 @@ input:-webkit-autofill:focus {
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #121212;
   --foreground: #d8d8d8;
-  --card: oklch(0.205 0 0);
+  --card: #1b1b1b;
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: #2c2c2c;
@@ -147,6 +168,53 @@ input:-webkit-autofill:focus {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /*custom colors*/
+  --scrollbar: #3b3b3b;
+
+  --title: #fff;
+  --subtitle: #929292;
+
+  /*game statuses*/
+  --playing: #2f74b9;
+  --completed: #21a565;
+  --wishlist: #b82e81;
+  --paused: #b1883c;
+}
+
+.theme-girly {
+  --background: #fff0f6;
+  --foreground: #5a3e5c;
+
+  --card: #ffe6f0;
+  --card-foreground: #5a3e5c;
+
+  --primary: #ff85c0;
+  --primary-foreground: #ffffff;
+
+  --secondary: #ffe0eb;
+  --secondary-foreground: #5a3e5c;
+
+  --accent: #ff85c0;
+  --accent-foreground: #ffffff;
+
+  --border: #d6d6d6;
+  --input: #fcd6e6;
+  --ring: #ff85c0;
+
+  --muted: #ffeaf2;
+  --muted-foreground: #a06a8c;
+
+  /* custom */
+  --title: #5a3e5c;
+  --subtitle: #a06a8c;
+  --scrollbar: #ff85c0;
+
+  /* gaming colors */
+  --playing: #88bbee;
+  --completed: #8de9bd;
+  --wishlist: #e490c2;
+  --paused: #fdce77;
 }
 
 @layer base {
@@ -167,13 +235,15 @@ input:-webkit-autofill:focus {
     font-weight: 700;
   }
 }
+
 /* Utilities */
 
 @utility badge {
   @apply flex justify-center px-3 py-1 border rounded-xl w-fit min-w-15 text-sm shrink-0;
 }
+
 @utility game-status-badge {
-  @apply  font-bold badge;
+  @apply font-bold badge;
 }
 
 @utility badge-playing {

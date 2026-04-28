@@ -13,7 +13,7 @@ const PageTitle = () => {
     
     return (
         <div className="hidden md:block pl-6">
-            <h1 className="font-bold text-body text-xl">
+            <h1 className="font-bold text-xl">
                 {pageName}
             </h1>
         </div>

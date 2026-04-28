@@ -4,7 +4,7 @@ import type { RootState } from "@app/store/store";
 import { MdEdit } from "react-icons/md";
 import { useRef, useState } from "react";
 import { uploadAvatar } from "../api/uploadAvatar";
-import toast from "react-hot-toast";
+import toast from "@shared/ui/Atoms/Toast";
 import { getErrorMessage } from "@shared/lib/error-messages";
 import { setUser } from "@features/user/state";
 import clsx from "clsx";

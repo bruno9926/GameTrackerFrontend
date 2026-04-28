@@ -4,20 +4,11 @@
   cursor: pointer;
   font-weight: 500;
   transition: background 0.2s ease;
-  color: var(--color-text);
   min-width: 100px;
-
-  --accent-darken-40: color-mix(in srgb, var(--color-accent), black 40%);
-  --accent-darken-80: color-mix(in srgb, var(--color-accent), black 80%);
-
-  // Generate static CSS variables for accent-fade
-  @for $f from 10 through 90 {
-    --accent-fade-#{$f}: color-mix(in srgb, var(--color-accent), transparent #{$f + '%'});
-  }
-
+  font-weight: 400;
 
   &:focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--primary);
     outline-offset: 2px;
   }
 
@@ -27,7 +18,8 @@
   }
 
   &.primary {
-    background: var(--color-accent);
+    color: var(--primary-foreground);
+    background-color: var(--primary);
     border: none;
 
     &:hover:not(:disabled) {
@@ -36,11 +28,11 @@
   }
   &.secondary {
     background-color: transparent;
-    border: 1px solid var(--color-accent);
-    color: var(--color-accent);
+    border: 1px solid var(--primary);
+    color: var(--primary);
 
     &:hover:not(:disabled) {
-      background: var(--accent-fade-80);
+      background: color-mix(in srgb, var(--primary), transparent 80%);
     }
   }
   &.tertiary {

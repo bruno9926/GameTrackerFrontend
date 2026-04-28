@@ -26,9 +26,9 @@ body {
   display: flex;
   place-items: center;
 
-  transition: background-color 0.3s ease, color 0.3s ease;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  //transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--foreground);
+  background-color: var(--background);
 
   &.modal-open {
     overflow: hidden;
@@ -37,14 +37,14 @@ body {
 
 h1 {
   line-height: 1.1;
-  color: var(--color-title);
+  color: var(--title);
 }
 
 h2 {
   font-size: var(--subtitle-font-size);
   font-weight: var(--subtitle-font-weight);
   line-height: 1.2;
-  //color: var(--color-title);
+  color: var(--title);
 }
 
 .app-layout {

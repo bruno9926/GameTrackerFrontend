@@ -6,7 +6,7 @@ import Search from './Search';
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center gap-4 bg-background p-2 border">
+    <header className="flex justify-between items-center gap-4 bg-background p-2 border border-x-0">
       <div className='flex items-center gap-8'>
         <PageTitle />
       </div>

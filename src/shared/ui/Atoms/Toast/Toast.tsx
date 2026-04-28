@@ -26,11 +26,11 @@ const styleOptions = (color: string) => ({
 const toastAdapter: Toast = {
     success: (message: string) => hotToast.success(message, {
         ...defaultOptions,
-        ...styleOptions('var(--color-success)'),
+        ...styleOptions('var(--success)'),
     }),
     error: (message: string) => hotToast.error(message, {
         ...defaultOptions,
-        ...styleOptions('var(--color-error)'),
+        ...styleOptions('var(--error)'),
 
     })
 };

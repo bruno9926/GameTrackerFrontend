@@ -27,8 +27,8 @@
     min-width: min(500px, 100%);
     height: fit-content;
 
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
+    background-color: var(--background);
+    border: 1px solid var(--border);
     padding: 1rem;
     border-radius: 8px;
 
@@ -47,7 +47,7 @@
 
       .closeButton {
         font-size: 1.5rem;
-        color: var(--color-text);
+        color: var(--foreground);
         cursor: pointer;
       }
     }
