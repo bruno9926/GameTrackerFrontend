@@ -4,17 +4,6 @@ import { BsJoystick } from "react-icons/bs";
 
 type FriendItemProps = {} & Omit<Friend, 'id'>;
 
-// const gameImages: Record<string, string> = {
-//     "Hollow Knight: Silksong": "/games/hollow-knight-silksong.jpg",
-//     "Final Fantasy 7 Rebirth": "/games/final-fantasy-7-rebirth.jpg",
-//     "God of War Ragnarök": "/games/god-of-war-ragnarok.jpg",
-//     "The Legend of Zelda: Tears of the Kingdom": "/games/zelda-tears-of-the-kingdom.jpg",
-//     "Doom Eternal": "/games/doom-eternal.jpg",
-//     "The Legend of Zelda: Ocarina of Time": "/games/zelda-ocarina.jpg",
-//     "League of Legends": "/games/lol.jpg",
-//     "Bioshock": "/games/bioshock.jpg",
-// };
-
 const FriendItem = ({ name, avatar }: FriendItemProps) => {
     return (
         <div className="flex justify-between items-center p-2 cursor-pointer">
@@ -36,18 +25,6 @@ const FriendItem = ({ name, avatar }: FriendItemProps) => {
                 </div>
 
             </div>
-            {/*
-            <div className={styles['friends-games']}>
-                <span>Playing with you</span>
-                <div className={styles['friends-games-list']}>
-                    {games.map((game, index) => (
-                        <div key={index} className={styles['friends-game']} title={game}>
-                            <img src={gameImages[game]} alt={game} />
-                        </div>
-                    ))}
-                </div>
-            </div>
-            */}
         </div>
     )
 }

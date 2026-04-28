@@ -3,6 +3,7 @@ import Friends from "@shared/ui/Friends/Friends";
 import GOTW from "../../shared/ui/GOTW/GOTW";
 import AnimatedRoute from "../AnimatedRoute";
 import { anim } from "@shared/ui/Animations";
+import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 
 const Dashboard = () => {
   return (
@@ -15,6 +16,8 @@ const Dashboard = () => {
         <anim.FadeInUp className="col-span-1 md:col-span-2">
           <Friends />
         </anim.FadeInUp>
+        <ErrorMessage message="testing" retryAction={() => {}}/>
+
       </div>
     </AnimatedRoute>
   );
