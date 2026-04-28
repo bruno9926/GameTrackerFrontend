@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { authService } from "@features/auth/api/AuthService";
 // redux
 import { useDispatch, useSelector } from "react-redux";
@@ -23,11 +23,22 @@ const AppInitializer = ({ children }: { children: Readonly<React.ReactNode> }) =
         }
     }
 
+    const initializeTheme = () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+            document.documentElement.classList.add(savedTheme);
+        }
+    }
+
     useEffect(() => {
         if (token) {
             initializeUser();
         }
     }, [token])
+
+    useLayoutEffect(() => {
+        initializeTheme();
+    }, [])
 
     return children;
 }
