@@ -9,8 +9,6 @@ const navigationItems = [
   { label: "Settings", route: "/settings" },
 ];
 
-import Logo from "@assets/logo.png";
-
 const Navigation = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const toggleMenu = () => setShowMobileMenu((current) => !current);
@@ -27,7 +25,9 @@ const Navigation = () => {
         }`}
       >
         <nav className={styles["navigation-menu"]}>
-          <img className={styles.logo} src={Logo} alt="GameTracker" />
+          
+          <img className="w-40 logo" alt="GameTracker" />
+
           <div className={styles["nav-items"]}>
             {navigationItems.map((item) => (
               <NavigationItem

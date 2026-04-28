@@ -9,7 +9,7 @@ type Theme = "light" | "dark" | "theme-girly";
 const themes: { key: Theme; icon: React.JSX.Element; label: string }[] = [
   { key: "light", icon: <IoSunny />, label: "Light" },
   { key: "dark", icon: <IoMoon />, label: "Dark" },
-  //{ key: "theme-girly", icon: <span>🌸</span>, label: "Girly" },
+  { key: "theme-girly", icon: <span>🌸</span>, label: "Girly" },
 ];
 
 const ThemeToggle = () => {

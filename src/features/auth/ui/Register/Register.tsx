@@ -16,7 +16,7 @@ const Hero = () => (
         <div className="z-10 relative flex flex-col gap-4">
             <h2 className="m-0 text-brand">GameTracker</h2>
             <div className="flex flex-col gap-1 max-w-xl">
-                <h1 className="font-semibold text-5xl md:text-7xl">
+                <h1 className="font-semibold text-white text-5xl md:text-7xl">
                     Join the <span className="text-brand">Ultimate</span> Gamer Community
                 </h1>
             </div>

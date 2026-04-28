@@ -48,7 +48,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 
   /*custom*/
-
+  --text-white: #d8d8d8;
   /*sizing*/
   --text-xxs: 10px;
 
@@ -134,8 +134,8 @@
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px #241b19 inset;
-  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px var(--card) inset;
+  -webkit-text-fill-color: var(--foreground);
   transition: background-color 9999s ease-in-out 0s;
 }
 
@@ -198,7 +198,7 @@ input:-webkit-autofill:focus {
   --accent: #ff85c0;
   --accent-foreground: #ffffff;
 
-  --border: #d6d6d6;
+  --border: #e4d2d9;
   --input: #fcd6e6;
   --ring: #ff85c0;
 
@@ -233,6 +233,10 @@ input:-webkit-autofill:focus {
   h1 {
     font-size: 2rem;
     font-weight: 700;
+  }
+
+  h1, h2 {
+    @apply text-title;
   }
 }
 
@@ -314,4 +318,16 @@ input:-webkit-autofill:focus {
   .navbar-icon {
     @apply p-2 hover:bg-border active:bg-border rounded-full text-subtitle text-2xl transition-colors cursor-pointer animation-duration;
   }
+}
+
+.logo {
+  content: url("/logo-light.png");
+}
+
+.dark .logo {
+  content: url("/logo-dark.png");
+}
+
+.theme-girly .logo {
+  content: url("/logo-girly.png");
 }

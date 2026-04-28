@@ -11,9 +11,9 @@ const Features = () => (
 )
 
 const Feature = ({ text, icon }: { text: string, icon: ReactNode }) => (
-    <div className="flex flex-col items-center justify-center border rounded-lg w-28 h-16 p-1 bg-gray-500/10">
-        <span className="text-2xl text-brand mb-1">{icon}</span>
-        <span className="text-xxs uppercase font-bold text-center">{text}</span>
+    <div className="flex flex-col justify-center items-center bg-gray-500/10 p-1 border border-foreground rounded-lg w-28 h-16 text-brand">
+        <span className="mb-1 text-2xl">{icon}</span>
+        <span className="font-bold text-xxs text-center uppercase">{text}</span>
     </div>
 )
 

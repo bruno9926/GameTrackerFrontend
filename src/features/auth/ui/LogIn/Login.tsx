@@ -1,4 +1,4 @@
-import logo from "@assets/logo.png";
+
 import SocialAuth from "./SocialAuth";
 import Features from "./Features";
 
@@ -46,7 +46,7 @@ const Login = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 auth-card">
             {/*info */}
             <div className="flex flex-col justify-center items-center mb-4 md:mb-0 p-6 md:p-10 lg:p-16">
-                <img src={logo} alt="Gamer Dashboard Logo" className="mb-4 h-20" />
+                <img alt="Gamer Dashboard Logo" className="mb-4 h-20 logo" />
                 <span className="text-md text-center">The ultimate command center for your gaming stats, progressions and community connections.</span>
                 <div className="mt-10">
                     <Features/>

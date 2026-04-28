@@ -15,7 +15,6 @@ function App() {
         <AppRoutes />
       </AppInitializer>
     </Providers>
-
   );
 }
 

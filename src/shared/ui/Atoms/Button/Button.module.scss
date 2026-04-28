@@ -23,7 +23,7 @@
     border: none;
 
     &:hover:not(:disabled) {
-      background: var(--accent-fade-20);
+      background: color-mix(in srgb, var(--primary), transparent 20%);
     }
   }
   &.secondary {

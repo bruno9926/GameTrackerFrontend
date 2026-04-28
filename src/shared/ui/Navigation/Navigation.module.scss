@@ -19,10 +19,6 @@ $mobile-controller-size: 40px;
     background-color: var(--background);
     border-right: 1px solid var(--border);
 
-    .logo {
-      width: 160px;
-    }
-
     .nav-items {
       margin-top: 1.5rem;
 
@@ -38,7 +34,9 @@ $mobile-controller-size: 40px;
         border-radius: 8px;
         padding: 8px 8px 8px 16px; // dejamos espacio para la barrita
 
-        transition: color 0.2s ease, background-color 0.2s ease;
+        transition:
+          color 0.2s ease,
+          background-color 0.2s ease;
 
         &::before {
           content: "";
