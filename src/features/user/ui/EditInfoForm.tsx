@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Field, FieldLabel, FieldDescription } from "@shared/ui/chadcn/field";
 import { Input } from "@shared/ui/chadcn/input";
 import Button from "@shared/ui/Atoms/Button/Button";
@@ -9,6 +9,8 @@ import toast from "@shared/ui/Atoms/Toast";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { RootState } from "@app/store/store";
+import type { User } from "../model/User";
 
 interface EditInfoFormProps {
     initialName: string;
@@ -34,6 +36,9 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const EditInfoForm = ({ initialName, initialEmail, initialUsername, onCancel, onEdit }: EditInfoFormProps) => {
+
+    const userState = useSelector((state: RootState) => state.user);
+    const { user: actualUser } = userState;
 
     const {
         register,
@@ -72,8 +77,8 @@ const EditInfoForm = ({ initialName, initialEmail, initialUsername, onCancel, on
         }
 
         try {
-            const user = await updateUserInfo(userInfo);
-            dispatch(setUser(user));
+            const updatedUser = await updateUserInfo(userInfo);
+            dispatch(setUser({...actualUser, ...updatedUser} as User));
             toast.success("Your data has been updated!");
             onEdit();
         } catch (error) {

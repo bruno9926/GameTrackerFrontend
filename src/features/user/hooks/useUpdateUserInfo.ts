@@ -1,9 +1,9 @@
-import type { User, UserInfo } from "../model/User";
+import type { UserInfo } from "../model/User";
 import { getErrorMessage } from "@shared/lib/error-messages";
 import { userService } from "../api/UserService";
 
 const useUpdateUserInfo = () => {
-    const updateUserInfo = async (userInfoChanges: Partial<UserInfo>): Promise<User> => {
+    const updateUserInfo = async (userInfoChanges: Partial<UserInfo>): Promise<UserInfo> => {
         try {
             return await userService.setUserInfo(userInfoChanges);
         } catch (error) {
