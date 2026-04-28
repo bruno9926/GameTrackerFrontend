@@ -40,16 +40,21 @@ export const apiClient = async <T, B = unknown>(
     const makeRequest = async (): Promise<Response> => {
         const token = auth ? TokenProvider.getAccessToken() : null;
 
+        const isFormData = body instanceof FormData;
+
         const headers: HeadersInit = {
-            'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': 'true',
+            ...(!isFormData && body ? { 'Content-Type': 'application/json' } : {}),
             ...(fetchOptions.headers || {}),
             ...(token ? { 'Authorization': `Bearer ${token}` } : {})
         };
 
+        const preparedBody = isFormData ? body :
+            body ? JSON.stringify(body) : undefined;
+
         return fetch(url, {
             ...fetchOptions,
-            body: body ? JSON.stringify(body) : undefined,
+            body: preparedBody,
             headers
         })
     }

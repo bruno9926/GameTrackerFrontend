@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@app/store/store";
 import { MdEdit } from "react-icons/md";
 import { useRef, useState } from "react";
-import { uploadAvatar } from "./uploadAvatar";
+import { uploadAvatar } from "../api/uploadAvatar";
 import toast from "react-hot-toast";
 import { getErrorMessage } from "@shared/lib/error-messages";
-import useUpdateUserInfo from "@features/user/hooks/useUpdateUserInfo";
 import { setUser } from "@features/user/state";
 import clsx from "clsx";
 
@@ -14,7 +13,6 @@ const UpdateAvatar = () => {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [updating, setUpdating] = useState(false);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const { updateUserInfo } = useUpdateUserInfo();
 
     const dispatch = useDispatch();
     const userState = useSelector((state: RootState) => state.user);
@@ -22,7 +20,7 @@ const UpdateAvatar = () => {
 
     if (!user) return null;
 
-    const { id: userId, name, avatarUrl } = user;
+    const { name, avatarUrl } = user;
     const displayedUrl = previewUrl ?? avatarUrl;
 
     if (loading) {
@@ -39,10 +37,8 @@ const UpdateAvatar = () => {
 
         setUpdating(true);
         try {
-            const url = await uploadAvatar(file, userId)
-            await updateUserInfo({ avatarUrl: url });
+            const { avatarUrl: url } = await uploadAvatar(file);
             dispatch(setUser({ ...user, avatarUrl: url }));
-
             toast.success("Your picture has been updated!")
         } catch (e) {
             toast.error(getErrorMessage(e))

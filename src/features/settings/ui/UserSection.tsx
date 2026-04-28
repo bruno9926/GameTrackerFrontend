@@ -3,7 +3,7 @@ import type { RootState } from "@app/store/store";
 import EditInfoForm from "@features/user/ui/EditInfoForm";
 import Button from "@shared/ui/Atoms/Button/Button";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
-import UpdateAvatar from "./UpdateAvatar";
+import UpdateAvatar from "../../user/ui/UpdateAvatar";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 

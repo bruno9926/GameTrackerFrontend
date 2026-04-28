@@ -20,17 +20,27 @@ class UserService {
         return UserService.instance;
     }
 
-    async setUserInfo(body: Partial<UserInfo>): Promise<User> {
+    async setUserInfo(body: Partial<UserInfo>): Promise<UserInfo> {
         return apiClient(`${API_URL}/me`, {
             method: "PATCH",
             body
         });
     }
 
-    async changePassword(body: PasswordChangeRequest) {
+    async changePassword(body: PasswordChangeRequest): Promise<void> {
         return apiClient(`${API_URL}/password`, {
             method: "PATCH",
             body
+        })
+    }
+
+    async updateAvatar(file: File): Promise<UserInfo> {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return apiClient(`${API_URL}/avatar`, {
+            method: "POST",
+            body: formData
         })
     }
 }
