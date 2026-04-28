@@ -231,11 +231,13 @@ input:-webkit-autofill:focus {
   }
 
   h1 {
+    line-height: 1.1;
     font-size: 2rem;
     font-weight: 700;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     @apply text-title;
   }
 }
