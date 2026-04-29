@@ -4,6 +4,7 @@
 @import "@fontsource-variable/figtree";
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant girly (&:is(.theme-girly *));
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -297,6 +298,12 @@ input:-webkit-autofill:focus {
   @apply p-4 md:p-10;
 }
 
+@utility card {
+  @apply flex flex-col bg-card p-3 border rounded-xl;
+}
+
+
+
 @utility app-layout {
   display: grid;
   height: 100dvh;
@@ -339,8 +346,8 @@ input:-webkit-autofill:focus {
     @apply flex flex-col gap-4;
   }
 
-  .card {
-    @apply flex flex-col bg-card p-3 border rounded-xl;
+  .game-card-layout {
+    @apply flex-row md:flex-col gap-0 md:gap-3 p-0 h-36 md:h-auto overflow-hidden card;
   }
 
   .game-status-badge-playing {
@@ -362,16 +369,4 @@ input:-webkit-autofill:focus {
   .navbar-icon {
     @apply p-2 hover:bg-border active:bg-border rounded-full text-subtitle text-2xl transition-colors cursor-pointer animation-duration;
   }
-}
-
-.logo {
-  content: url("/logo-light.png");
-}
-
-.dark .logo {
-  content: url("/logo-dark.png");
-}
-
-.theme-girly .logo {
-  content: url("/logo-girly.png");
 }

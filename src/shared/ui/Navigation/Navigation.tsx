@@ -26,7 +26,12 @@ const Navigation = () => {
       >
         <nav className={styles["navigation-menu"]}>
           
-          <img className="w-40 logo" alt="GameTracker" />
+          <div className="relative w-40 h-15">
+            <img src="/logo-light.png" alt="GameTracker" className="dark:hidden girly:hidden absolute inset-0" />
+            <img src="/logo-dark.png" alt="GameTracker" className="hidden dark:block absolute inset-0" />
+            <img src="/logo-girly.png" alt="GameTracker" className="hidden girly:block absolute inset-0" />
+          </div>
+
 
           <div className={styles["nav-items"]}>
             {navigationItems.map((item) => (

@@ -3,8 +3,8 @@ import { GAME_STATUS_LABELS, type Game, type GameStatus } from "../../model/Game
 import OptionsMenu from "@shared/ui/Organisms/OptionsMenu/OptionsMenu";
 import { DeleteGameModal, EditGameModal } from "../GameModals";
 import useGames from "../../hooks/useGames";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { Skeleton } from "@shared/ui/chadcn/skeleton";
 
 type GameListItemProps = Game;
 
@@ -40,10 +40,10 @@ const GameListItem = (game: GameListItemProps) => {
 
   return (
     <>
-      <div className="flex-row md:flex-col gap-0 md:gap-3 hover:shadow-lg p-0 h-36 md:h-auto overflow-hidden hover:scale-103 transition-all cursor-pointer animation-duration card">
+      <div className="transition-all cursor-pointer game-card-layout animation-duration">
         {/* Image */}
         <div className="relative w-35 md:w-full h-full md:h-50 overflow-hidden shrink-0">
-          <img loading="lazy" src={coverUrl ?? defaultImage} alt={`cover of ${game}`} className="opacity-80 w-full h-full object-cover" />
+          <img loading="lazy" src={coverUrl ?? defaultImage} alt={`cover of ${name}`} className="opacity-80 w-full h-full object-cover" />
           {/* options */}
           <div className="top-0 right-0 absolute p-2">
             <OptionsMenu options={options} />
@@ -78,7 +78,15 @@ const GameListItem = (game: GameListItemProps) => {
 };
 
 export const GameListItemSkeleton = () => {
-  return <Skeleton style={{ height: "80px", borderRadius: "12px" }} />;
+  return (
+    <div className="game-card-layout">
+      <Skeleton className="rounded-none w-35 md:w-full h-full md:h-50 shrink-0" />
+      <div className="flex flex-col gap-3 p-3 w-full">
+        <Skeleton className="w-3/4 md:w-full h-5" />
+        <Skeleton className="rounded-full w-20 h-6" />
+      </div>
+    </div>
+  );
 };
 
 export default GameListItem;
