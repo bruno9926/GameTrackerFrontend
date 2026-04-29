@@ -1,32 +1,41 @@
 // components
-import FriendItem from './FriendItem';
+import FriendItem, { FriendListItemSkeleton } from './FriendItem';
 import { userRoutes } from '@app/routes/routes';
 import { useNavigate } from 'react-router';
-// data
-import type { Friend } from '@features/user/model/Friend';
-import friendsData from './friends.json';
-
-const friends = friendsData as Array<Friend>;
+import { useFriends } from '../hook/useFriends';
 
 const Friends = () => {
     const navigate = useNavigate();
+
+    const { friends, loading, error} = useFriends();
+
+    const states = {
+        loading: (
+            <div className="flex flex-col gap-3">
+                {Array.from({ length: 3 }).map((_, i) => <FriendListItemSkeleton key={i} />)}
+            </div>
+        ),
+        error: (error && <div className="p-2 text-destructive text-xs">{error}</div>),
+        empty: <EmptyFriendsList />,
+        success: (
+            <div className="flex flex-col gap-3">
+                {friends.map(({ id, ...data }) => (
+                    <FriendItem key={id} {...data} />
+                ))}
+            </div>
+        ),
+    };
+
+    const activeState = loading ? 'loading' : error ? 'error' : friends.length === 0 ? 'empty' : 'success';
 
     return (
         <section className="flex flex-col gap-5 dashboard-tile-content">
             <div className='flex justify-between items-center'>
                 <h2>Online Friends</h2>
-                <span className='text-subtitle badge'>3 Online</span>
+                <span className='text-subtitle badge'>{friends.length} Online</span>
             </div>
             <div className="gap-3 mb-3 card">
-                {friends.map(friend => (
-                    <FriendItem
-                        key={friend.id}
-                        name={friend.name}
-                        status={friend.status}
-                        avatar={friend.avatar}
-                        games={friend.games}
-                    />
-                ))}
+                {states[activeState]}
                 <button
                     onClick={() => navigate(userRoutes.GAMES)}
                     className='hover:bg-accent active:bg-accent mt-3 p-3 border hover:border-transparent active:border-transparent rounded-xl w-full text-subtitle hover:text-white active:text-white transition-colors cursor-pointer animation-duration'>
@@ -36,5 +45,17 @@ const Friends = () => {
         </section>
     )
 }
+
+const EmptyFriendsList = () => (
+    <div className="flex flex-col justify-center items-center px-4 py-8 border-2 border-border border-dashed rounded-xl">
+        <span className="opacity-80 mb-2 text-2xl">😶‍🌫️</span>
+        <p className="font-medium text-subtitle text-sm text-center">
+            All quiet for now...
+        </p>
+        <p className="mt-1 text-subtitle text-xxs">
+            Your online friends will appear here
+        </p>
+    </div>
+);
 
 export default Friends
