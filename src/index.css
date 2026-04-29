@@ -321,6 +321,7 @@ input:-webkit-autofill:focus {
   & .main-content {
     grid-area: main;
     max-width: 100%;
+    min-width: 0;
   }
 
   /* Desktop: a partir de 640px (equivalente a sm en Tailwind) */

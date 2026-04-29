@@ -15,7 +15,7 @@ const gameStatusBadgeStyles: Record<GameStatus, string> = {
 interface StatusFilterProps { statusFilter: GameStatus | null, setStatusFilter: (status: GameStatus | null) => void }
 const StatusFilter: React.FC<StatusFilterProps> = ({ statusFilter, setStatusFilter }) => {
   return (
-    <div className="flex gap-2 md:gap-4 py-4 max-w-full overflow-x-auto no-scrollbar">
+    <div className="flex gap-2 md:gap-4 py-4 w-full min-w-0 overflow-x-auto no-scrollbar">
       <button
         className={clsx({
           "cursor-pointer badge": true,
