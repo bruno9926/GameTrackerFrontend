@@ -7,7 +7,7 @@ import AccountAndSecuritySection from "@features/settings/ui/AccountAndSecurityS
 const Settings = () => {
   return (
     <AnimatedRoute>
-      <div className="flex flex-col gap-5 page-padding">
+      <div className="flex flex-col gap-5 page-padding heading-safe=area">
         {/* Settings Sections */}
         <div className="flex flex-col gap-7">
           {/* Only Mobile */}

@@ -1,84 +1,54 @@
-import styles from "./Navigation.module.scss";
-import { useState } from "react";
 import { NavLink } from "react-router";
+import { userRoutes as routes, userPageNames, type UserRouteToken } from "@app/routes/routes";
 
-const navigationItems = [
-  { label: "Dashboard", route: "/dashboard" },
-  { label: "Games", route: "/games" },
-  { label: "Platforms", route: "/platforms" },
-  { label: "Settings", route: "/settings" },
-];
+const navigationItems = Object.entries(routes).map(([token, path]) => (
+  { label: userPageNames[token as UserRouteToken], route: path }
+))
 
 const Navigation = () => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const toggleMenu = () => setShowMobileMenu((current) => !current);
-
   return (
-    <>
-      {showMobileMenu && (
-        <div className={styles.overlay} onClick={toggleMenu} />
-      )}
+    <aside className="hidden md:block bg-background p-4 border-border border-r min-w-62 h-full [grid-area:navigation]">
+      <nav className="flex flex-col h-full">
 
-      <div
-        className={`${styles.navigation} ${
-          showMobileMenu ? styles["show-mobile-menu"] : ""
-        }`}
-      >
-        <nav className={styles["navigation-menu"]}>
-          
-          <div className="relative w-40 h-15">
-            <img src="/logo-light.png" alt="GameTracker" className="dark:hidden girly:hidden absolute inset-0" />
-            <img src="/logo-dark.png" alt="GameTracker" className="hidden dark:block absolute inset-0" />
-            <img src="/logo-girly.png" alt="GameTracker" className="hidden girly:block absolute inset-0" />
-          </div>
+        {/* Logos con soporte para temas */}
+        <div className="relative mb-6 w-40 h-15">
+          <img src="/logo-light.png" alt="GameTracker" className="dark:hidden girly:hidden absolute inset-0" />
+          <img src="/logo-dark.png" alt="GameTracker" className="hidden dark:block absolute inset-0" />
+          <img src="/logo-girly.png" alt="GameTracker" className="hidden girly:block absolute inset-0" />
+        </div>
 
-
-          <div className={styles["nav-items"]}>
-            {navigationItems.map((item) => (
-              <NavigationItem
-                key={item.label}
-                route={item.route}
-                onClick={() => setShowMobileMenu(false)}
-              >
-                {item.label}
-              </NavigationItem>
-            ))}
-          </div>
-        </nav>
-        <MobileController toggleMenu={toggleMenu} />
-      </div>
-    </>
+        {/* Lista de Navegación */}
+        <div className="flex flex-col gap-2">
+          {navigationItems.map((item) => (
+            <NavigationItem key={item.label} route={item.route}>
+              {item.label}
+            </NavigationItem>
+          ))}
+        </div>
+      </nav>
+    </aside>
   );
 };
 
-type NavigationItemProps = {
-  children: Readonly<React.ReactNode>;
-  route: string;
-} & React.HTMLAttributes<HTMLAnchorElement>;
-
-const NavigationItem = ({ children, route, ...props }: NavigationItemProps) => {
+const NavigationItem = ({ children, route }: { children: React.ReactNode; route: string }) => {
   return (
     <NavLink
-      {...props}
-      className={({ isActive }) =>
-        `${styles["nav-item"]} ${isActive ? styles["active"] : ""}`
-      }
       to={route}
+      className={({ isActive }) => `
+        relative block py-2 pl-4 pr-2 rounded-lg font-medium transition-all duration-200
+        hover:text-brand hover:bg-card
+        
+        before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 
+        before:w-1 before:h-[70%] before:bg-brand before:rounded-full before:transition-transform before:duration-200
+
+        ${isActive 
+          ? 'text-brand bg-card before:scale-y-100' 
+          : 'text-foreground before:scale-y-0'
+        }
+      `}
     >
       {children}
     </NavLink>
-  );
-};
-
-interface MobileControllerProps {
-  toggleMenu: () => void;
-}
-
-const MobileController = ({ toggleMenu }: MobileControllerProps) => {
-  return (
-    <div className={styles["mobile-controller"]} onClick={toggleMenu}>
-      <span>☰</span>
-    </div>
   );
 };
 

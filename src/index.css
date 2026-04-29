@@ -75,6 +75,9 @@
 
   --z-modal: 100;
   --z-modal-content: calc(var(--z-modal) + 1);
+  /* we choose 40 for the navbar layer because chadcn uses 50 for dialogs,
+  and those dialogs should show above the navbar, handle this dependency carefully */
+  --z-navbar: 40;
 }
 
 :root {
@@ -295,7 +298,23 @@ input:-webkit-autofill:focus {
 }
 
 @utility page-padding {
-  @apply p-4 md:p-10;
+  /* We use the variable for the top padding */
+  padding: var(--page-top-offset, 1rem) 1rem 1rem 1rem;
+
+  @media (min-width: 768px) {
+    /* On desktop, we ensure the horizontal/bottom padding is 2.5rem */
+    padding: var(--page-top-offset, 2.5rem) 2.5rem 2.5rem 2.5rem;
+  }
+}
+
+@utility header-safe-area {
+  /* Mobile: Space for the fixed header (h-20 = 5rem) */
+  --page-top-offset: 5rem; 
+
+  @media (min-width: 768px) {
+    /* Desktop: Revert to the standard p-10 top padding */
+    --page-top-offset: 2.5rem;
+  }
 }
 
 @utility card {

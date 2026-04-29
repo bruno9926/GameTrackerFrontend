@@ -3,7 +3,7 @@ import AnimatedRoute from "../AnimatedRoute";
 const Platforms = () => {
   return (
     <AnimatedRoute>
-      <h1>Platforms</h1>
+      <div className="page-padding header-safe-area"></div>
     </AnimatedRoute>
   );
 };
