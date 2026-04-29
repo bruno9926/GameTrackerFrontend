@@ -1,5 +1,5 @@
 import GameList from "@features/games/ui/GameList/GameList";
-import Friends from "@shared/ui/Friends/Friends";
+import Friends from "@features/friends/ui/Friends";
 import GOTW from "../../shared/ui/GOTW/GOTW";
 import AnimatedRoute from "../AnimatedRoute";
 import { anim } from "@shared/ui/Animations";

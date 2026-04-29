@@ -20,6 +20,7 @@ const useGames = () => {
     try {
       setError(null);
       setLoading(true);
+      //await new Promise(resolve => setTimeout(resolve, 5 * 1000))
       await action();
     } catch (exception) {
       setError(getErrorMessage(exception))
