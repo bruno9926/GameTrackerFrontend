@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/figtree";
 
-/* @custom-variant dark (&:is(.dark *)); */
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -218,22 +218,39 @@ input:-webkit-autofill:focus {
 }
 
 @layer base {
+  :root {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    color-scheme: light dark;
+  }
+
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 box-border;
   }
 
   body {
     @apply bg-background text-foreground;
+    margin: 0;
+    min-height: 100vh
   }
 
   html {
     @apply font-sans;
+    scrollbar-gutter: stable;
   }
 
   h1 {
-    line-height: 1.1;
-    font-size: 2rem;
+    font-size: 2em;
     font-weight: 700;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: 1.2;
   }
 
   h1,
@@ -253,23 +270,19 @@ input:-webkit-autofill:focus {
 }
 
 @utility badge-playing {
-  @apply border-playing text-playing;
-  background-color: color-mix(in srgb, var(--color-playing), transparent 90%);
+  @apply border-playing text-playing bg-playing/10;
 }
 
 @utility badge-completed {
-  @apply border-completed text-completed;
-  background-color: color-mix(in srgb, var(--color-completed), transparent 90%);
+  @apply border-completed text-completed bg-completed/10;
 }
 
 @utility badge-wishlist {
-  @apply border-wishlist text-wishlist;
-  background-color: color-mix(in srgb, var(--color-wishlist), transparent 90%);
+  @apply border-wishlist text-wishlist bg-wishlist/10;
 }
 
 @utility badge-paused {
-  @apply border-paused text-paused;
-  background-color: color-mix(in srgb, var(--color-paused), transparent 90%);
+  @apply border-paused text-paused bg-paused/10;
 }
 
 @utility animation-duration {
@@ -282,6 +295,35 @@ input:-webkit-autofill:focus {
 
 @utility page-padding {
   @apply p-4 md:p-10;
+}
+
+@utility app-layout {
+  display: grid;
+  height: 100dvh;
+  /* Por defecto: una sola columna (móvil) */
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "main";
+
+  & header {
+    grid-area: header;
+  }
+
+  & .main-content {
+    grid-area: main;
+    max-width: 100%;
+  }
+
+  /* Desktop: a partir de 640px (equivalente a sm en Tailwind) */
+  @media (width >=640px) {
+    grid-template-columns: 270px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "navigation header"
+      "navigation main";
+  }
 }
 
 @layer components {
