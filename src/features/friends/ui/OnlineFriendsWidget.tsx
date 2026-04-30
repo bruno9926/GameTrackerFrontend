@@ -7,7 +7,7 @@ import { useFriends } from '../hook/useFriends';
 const Friends = () => {
     const navigate = useNavigate();
 
-    const { friends, loading, error} = useFriends();
+    const { onlineFriends, loading, error} = useFriends();
 
     const states = {
         loading: (
@@ -19,20 +19,20 @@ const Friends = () => {
         empty: <EmptyFriendsList />,
         success: (
             <div className="flex flex-col gap-3">
-                {friends.map(({ id, ...data }) => (
+                {onlineFriends.map(({ id, ...data }) => (
                     <FriendItem key={id} {...data} />
                 ))}
             </div>
         ),
     };
 
-    const activeState = loading ? 'loading' : error ? 'error' : friends.length === 0 ? 'empty' : 'success';
+    const activeState = loading ? 'loading' : error ? 'error' : onlineFriends.length === 0 ? 'empty' : 'success';
 
     return (
         <section className="flex flex-col gap-5 dashboard-tile-content">
             <div className='flex justify-between items-center'>
                 <h2>Online Friends</h2>
-                <span className='text-subtitle badge'>{friends.length} Online</span>
+                <span className='text-subtitle badge'>{onlineFriends.length} Online</span>
             </div>
             <div className="gap-3 mb-3 card">
                 {states[activeState]}

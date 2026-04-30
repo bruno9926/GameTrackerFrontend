@@ -4,15 +4,21 @@ import { Skeleton } from "@shared/ui/chadcn/skeleton";
 
 type FriendItemProps = {} & Omit<Friend, 'id'>;
 
-const FriendItem = ({ name, avatar }: FriendItemProps) => {
+const statusIndicator: Record<Friend['status'], string> = {
+    online: 'bg-online',
+    busy: 'bg-busy',
+    offline: 'bg-background border-2 border-offline',
+};
+
+const FriendItem = ({ name, avatar, status }: FriendItemProps) => {
     return (
-        <div className="flex justify-between items-center p-2 cursor-pointer">
+        <div className={`flex justify-between items-center p-2 cursor-pointer ${status === "offline" ? "opacity-60" : ""}`}>
             <div className="flex flex-1 items-center gap-4 min-w-0">
                 <div className='relative'>
                     <div className="rounded-xl w-12 aspect-square overflow-hidden">
                         {avatar ? <img className="w-full h-full object-cover" src={avatar} alt={`${name}'s avatar`} /> : name.charAt(0).toUpperCase()}
                     </div>
-                    <span className="block right-0 -bottom-1 absolute bg-green-500 rounded-full w-3.5 aspect-square" />
+                    <span className={`block right-0 -bottom-1 absolute rounded-full w-3.5 aspect-square outline-3 outline-background ${statusIndicator[status]}`} />
                 </div>
                 <div className='flex flex-col flex-1 min-w-0'>
                     <span className="text-lg">{name}</span>

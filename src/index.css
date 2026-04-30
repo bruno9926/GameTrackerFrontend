@@ -60,6 +60,10 @@
   --color-google: var(--google);
   --color-online: var(--online);
 
+  /*online status colors*/
+  --color-offline: var(--offline);
+  --color-busy: var(--busy);
+
   --color-title: var(--title);
   --color-subtitle: var(--subtitle);
 
@@ -119,7 +123,11 @@
   --discord: #5865F2;
   --google: #4285f4;
   --scrollbar: #bbbbbb;
+
+  /*online status colors*/
   --online: #53ad4b;
+  --offline: #8a8a8a;
+  --busy: #e67e22;
 
   --title: #333;
   --subtitle: #929292;
@@ -184,6 +192,10 @@ input:-webkit-autofill:focus {
   --completed: #21a565;
   --wishlist: #b82e81;
   --paused: #b1883c;
+
+  /*online status colors*/
+  --offline: #5a5a5a;
+  --busy: #c0672a;
 }
 
 .theme-girly {
