@@ -1,5 +1,5 @@
 import GameList from "@features/games/ui/GameList/GameList";
-import Friends from "@features/friends/ui/Friends";
+import OnlineFriendsWidget from "@features/friends/ui/OnlineFriendsWidget";
 import GOTW from "../../shared/ui/GOTW/GOTW";
 import AnimatedRoute from "../AnimatedRoute";
 import { anim } from "@shared/ui/Animations";
@@ -13,7 +13,7 @@ const Dashboard = () => {
           <GameList />
         </anim.FadeInUp>
         <anim.FadeInUp className="col-span-1 md:col-span-2">
-          <Friends />
+          <OnlineFriendsWidget />
         </anim.FadeInUp>
       </div>
     </AnimatedRoute>
