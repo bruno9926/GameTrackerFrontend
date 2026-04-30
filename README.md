@@ -1,69 +1,64 @@
-# React + TypeScript + Vite
+# GameTracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web app for gamers to manage their gaming backlog, track what they're playing, and follow what their friends are up to. Built with a social layer in mind — users can add friends and browse each other's libraries.
 
-Currently, two official plugins are available:
+This repository is the frontend. The backend is a separate NestJS API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## Expanding the ESLint configuration
+| Area | Technology |
+|---|---|
+| Framework | React 19 + TypeScript |
+| Build | Vite |
+| Styling | Tailwind CSS v4 |
+| State | Redux Toolkit |
+| Routing | React Router v7 |
+| UI Components | shadcn/ui (Radix UI) |
+| Animations | Framer Motion |
+| Forms | React Hook Form + Zod |
+| Auth | JWT (access + refresh tokens, auto-refresh) |
+| Deployment | Vercel |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Project Structure
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── app/              # Store, routing, providers, app initialization
+├── features/         # Domain modules: auth, games, user, friends, settings
+├── pages/            # Route-level page containers
+└── shared/           # API client, token management, shared UI and hooks
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Each feature module follows the same structure: `api/` → `state/` → `hooks/` → `model/` → `ui/`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
+
+Create a `.env.local` file with:
+
+```
+VITE_API_URL=
+```
+
+## Available Scripts
+
+```bash
+npm run dev       # Development server
+npm run build     # Type-check + production build
+npm run lint      # ESLint
+npm run preview   # Preview production build
+```
+
+## Features
+
+- **Backlog management** — add, organize, and track games across platforms
+- **Game search** — look up games by title to add to your library
+- **Friends** — add friends and see what they're currently playing
+- **Dark / light theme** — persisted across sessions
+- **Authentication** — JWT-based with automatic token refresh
+
+> The social features (friend activity feed, game sharing) are currently in progress.
