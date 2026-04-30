@@ -46,10 +46,14 @@ const Login = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 auth-card">
             {/*info */}
             <div className="flex flex-col justify-center items-center mb-4 md:mb-0 p-6 md:p-10 lg:p-16">
-                <img alt="Gamer Dashboard Logo" className="mb-4 h-20 logo" />
+                <div className="relative mb-6 w-70 h-25">
+                    <img src="/logo-light.png" alt="GameTracker" className="dark:hidden girly:hidden absolute inset-0" />
+                    <img src="/logo-dark.png" alt="GameTracker" className="hidden dark:block absolute inset-0" />
+                    <img src="/logo-girly.png" alt="GameTracker" className="hidden girly:block absolute inset-0" />
+                </div>
                 <span className="text-md text-center">The ultimate command center for your gaming stats, progressions and community connections.</span>
                 <div className="mt-10">
-                    <Features/>
+                    <Features />
                 </div>
             </div>
             {/*form */}
@@ -87,7 +91,7 @@ const Login = () => {
                 </div>
                 <div className="flex flex-col gap-4 mt-10 w-full">
                     {/* divider */}
-                    <TextDivider text="Or connect with"/>
+                    <TextDivider text="Or connect with" />
                     <SocialAuth />
                 </div>
             </form>
