@@ -37,7 +37,7 @@ const Friends = () => {
             <div className="gap-3 mb-3 card">
                 {states[activeState]}
                 <button
-                    onClick={() => navigate(userRoutes.GAMES)}
+                    onClick={() => navigate(userRoutes.FRIENDS)}
                     className='hover:bg-accent active:bg-accent mt-3 p-3 border hover:border-transparent active:border-transparent rounded-xl w-full text-subtitle hover:text-white active:text-white transition-colors cursor-pointer animation-duration'>
                     View all friends
                 </button>
