@@ -1,7 +1,6 @@
 export const userRoutes = {
   DASHBOARD: "/dashboard",
   GAMES: "/games",
-  PLATFORMS: "/platforms",
   SETTINGS: "/settings"
 } as const;
 
@@ -19,7 +18,6 @@ export type PublicRouteToken = keyof typeof publicRoutes;
 export const userPageNames: Record<UserRouteToken, string> = {
     DASHBOARD: "Gaming Dashboard",
     GAMES: "Games",
-    PLATFORMS: "Platforms",
     SETTINGS: "Settings"
 };
 

@@ -7,7 +7,6 @@ import MainLayout from "@shared/ui/layout/MainLayout";
 // pages
 import Dashboard from "@pages/Dashboard/Dashboard";
 import Games from "@pages/Games/Games";
-import Platforms from "@pages/Platforms/Platforms";
 import Settings from "@pages/Settings/Settings";
 import SignUp from "@pages/SignUp/SignUp";
 import SignIn from "@pages/SignIn/SignIn";
@@ -17,7 +16,6 @@ type UserRoutePath = (typeof userRoutes)[keyof typeof userRoutes];
 const userRoutesMap: Record<UserRoutePath, React.ReactNode> = {
     [userRoutes.DASHBOARD]: <Dashboard />,
     [userRoutes.GAMES]: <Games />,
-    [userRoutes.PLATFORMS]: <Platforms />,
     [userRoutes.SETTINGS]: <Settings />
 };
 // public routes

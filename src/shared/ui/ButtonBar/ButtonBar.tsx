@@ -12,20 +12,15 @@ const BottomBar = () => {
       path: userRoutes.DASHBOARD, 
       icon: <HiHome size={22} /> 
     },
-    { 
-      label: 'Games', 
-      path: userRoutes.GAMES, 
-      icon: <RiGamepadLine size={22} /> 
+    {
+      label: 'Games',
+      path: userRoutes.GAMES,
+      icon: <RiGamepadLine size={22} />
     },
     {
-      label: 'Platforms', 
-      path: userRoutes.PLATFORMS, 
-      icon: <RiGroupLine size={22} /> 
-    },
-    { 
-      label: 'Settings', 
-      path: userRoutes.SETTINGS, 
-      icon: <RiSettings4Line size={22} /> 
+      label: 'Settings',
+      path: userRoutes.SETTINGS,
+      icon: <RiSettings4Line size={22} />
     },
   ];
 
