@@ -18,6 +18,11 @@ const BottomBar = () => {
       icon: <RiGamepadLine size={22} />
     },
     {
+      label: 'Friends',
+      path: userRoutes.FRIENDS,
+      icon: <RiGroupLine size={22} />
+    },
+    {
       label: 'Settings',
       path: userRoutes.SETTINGS,
       icon: <RiSettings4Line size={22} />
