@@ -8,13 +8,19 @@
     },
     {
         "id": 2,
+        "name": "Victor",
+        "status": "online",
+        "games": ["Bioshock", "League of Legends"]
+    },
+    {
+        "id": 3,
         "name": "Chaux",
         "status": "offline",
         "avatar": "/chaux.jpg",
         "games": ["League of Legends", "The Legend of Zelda: Ocarina of Time"]
     },
     {
-        "id": 3,
+        "id": 4,
         "name": "Johan",
         "status": "busy",
         "avatar": "/johan.jpg",
