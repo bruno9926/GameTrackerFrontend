@@ -333,6 +333,10 @@ input:-webkit-autofill:focus {
   @apply flex flex-col bg-card p-3 border rounded-xl;
 }
 
+@utility empty-box {
+  @apply flex flex-col justify-center items-center px-4 py-8 border-2 border-border border-dashed rounded-xl;
+}
+
 
 
 @utility app-layout {

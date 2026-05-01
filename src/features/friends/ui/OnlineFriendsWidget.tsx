@@ -47,7 +47,7 @@ const Friends = () => {
 }
 
 const EmptyFriendsList = () => (
-    <div className="flex flex-col justify-center items-center px-4 py-8 border-2 border-border border-dashed rounded-xl">
+    <div className="empty-box">
         <span className="opacity-80 mb-2 text-2xl">😶‍🌫️</span>
         <p className="font-medium text-subtitle text-sm text-center">
             All quiet for now...
