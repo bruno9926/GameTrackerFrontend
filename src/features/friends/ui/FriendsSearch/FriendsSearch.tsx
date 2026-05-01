@@ -4,16 +4,17 @@ import { RiSearchLine } from "react-icons/ri";
 interface FriendsSearchProps {
   value: string;
   onChange: (value: string) => void;
+  placeholder?: string;
 }
 
-const FriendsSearch = ({ value, onChange }: FriendsSearchProps) => {
+const FriendsSearch = ({ value, onChange, placeholder = "Search friends..." }: FriendsSearchProps) => {
   return (
     <InputGroup>
       <InputGroupAddon>
         <RiSearchLine />
       </InputGroupAddon>
       <InputGroupInput
-        placeholder="Search friends..."
+        placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

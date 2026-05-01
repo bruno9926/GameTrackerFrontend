@@ -14,7 +14,7 @@ export const useFriendRequests = () => {
     try {
       setLoading(true);
       await new Promise(resolve => setTimeout(resolve, 2 * 1000));
-      setData(storedRequests);
+      setData(storedRequests.filter(r => r.status === 'pending'));
     } catch (e) {
       setError(getErrorMessage(e));
     } finally {
@@ -26,5 +26,5 @@ export const useFriendRequests = () => {
     fetchRequests();
   }, []);
 
-  return { requests: data, loading, error };
+  return { requests: data, loading, error, fetchRequests };
 };

@@ -1,6 +1,7 @@
 import type { Friend } from '@features/user/model/Friend';
 import { BsJoystick } from "react-icons/bs";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
+import UserAvatar from './UserAvatar/UserAvatar';
 
 type FriendItemProps = {} & Omit<Friend, 'id'>;
 
@@ -15,12 +16,7 @@ const FriendItem = ({ name, avatar, status }: FriendItemProps) => {
         <div className={`flex justify-between items-center p-2 cursor-pointer ${status === "offline" ? "opacity-60" : ""}`}>
             <div className="flex flex-1 items-center gap-4 min-w-0">
                 <div className='relative'>
-                    <div className="rounded-xl w-12 aspect-square overflow-hidden">
-                        {avatar
-                            ? <img className="w-full h-full object-cover" src={avatar} alt={`${name}'s avatar`} />
-                            : <div className="flex justify-center items-center bg-primary w-full h-full font-bold text-primary-foreground">{name.charAt(0).toUpperCase()}</div>
-                        }
-                    </div>
+                    <UserAvatar name={name} avatarUrl={avatar} />
                     <span className={`block right-0 -bottom-1 absolute rounded-full w-3.5 aspect-square outline-3 outline-background ${statusIndicator[status]}`} />
                 </div>
                 <div className='flex flex-col flex-1 min-w-0'>

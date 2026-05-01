@@ -3,12 +3,15 @@ import AnimatedRoute from "../AnimatedRoute";
 import FriendCodeCard from "@features/friends/ui/FriendCodeCard/FriendCodeCard";
 import FriendsSearch from "@features/friends/ui/FriendsSearch/FriendsSearch";
 import FriendsList from "@features/friends/ui/FriendsList/FriendsList";
+import FriendRequestsList from "@features/friends/ui/FriendRequestsList/FriendRequestsList";
 import { useDebouncedInput } from "@shared/hooks/useDebouncedInput";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@shared/ui/chadcn/tabs";
 
 const Friends = () => {
   const [searchText, setSearchText] = useState("");
+  const [requestSearch, setRequestSearch] = useState("");
   const { debouncedInput: debouncedSearch } = useDebouncedInput(searchText, { debounceTime: 300 });
+  const { debouncedInput: debouncedRequestSearch } = useDebouncedInput(requestSearch, { debounceTime: 300 });
 
   return (
     <AnimatedRoute>
@@ -24,8 +27,12 @@ const Friends = () => {
             <FriendsSearch value={searchText} onChange={setSearchText} />
             <FriendsList search={debouncedSearch} />
           </TabsContent>
-          <TabsContent value="requests" className="flex flex-col gap-4 mt-2">
+          <TabsContent value="requests" className="flex flex-col gap-6 mt-2">
             <FriendCodeCard code="GT4X-K29R" />
+            <div className="flex flex-col gap-3">
+              <FriendsSearch value={requestSearch} onChange={setRequestSearch} placeholder="Search requests..." />
+              <FriendRequestsList search={debouncedRequestSearch} />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
