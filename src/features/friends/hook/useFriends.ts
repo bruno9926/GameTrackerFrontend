@@ -38,5 +38,5 @@ export const useFriends = () => {
     { online: [], offline: [], busy: [] } as Record<Friend['status'], Friend[]>
   );
 
-  return { friends: data, onlineFriends, offlineFriends, busyFriends, loading, error };
+  return { friends: data, onlineFriends, offlineFriends, busyFriends, loading, error, fetchFriends };
 };

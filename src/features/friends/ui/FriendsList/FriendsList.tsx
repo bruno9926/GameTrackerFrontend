@@ -4,6 +4,7 @@ import { useFriends } from "../../hook/useFriends";
 import type { Friend } from "@features/user/model/Friend";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
 import { anim } from "@shared/ui/Animations";
+import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 
 const FriendsGroupSkeleton = ({ count }: { count: number }) => (
   <div className="flex flex-col gap-1">
@@ -13,7 +14,7 @@ const FriendsGroupSkeleton = ({ count }: { count: number }) => (
 );
 
 const FriendsList = ({ search = "" }: { search?: string }) => {
-  const { friends, onlineFriends, busyFriends, offlineFriends, loading, error } = useFriends();
+  const { friends, onlineFriends, busyFriends, offlineFriends, loading, error, fetchFriends } = useFriends();
 
   const filterByName = (list: Friend[]) => {
     if (!search) return list;
@@ -28,9 +29,7 @@ const FriendsList = ({ search = "" }: { search?: string }) => {
     </div>
   );
 
-  if (error) return (
-    <div className="p-2 text-destructive text-xs">{error}</div>
-  );
+  if (error) return <ErrorMessage message={error} retryAction={fetchFriends} />;
 
   if (friends.length === 0) return <EmptyFriendsList />;
 
