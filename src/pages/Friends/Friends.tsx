@@ -14,9 +14,8 @@ const Friends = () => {
     <AnimatedRoute>
       <div className="flex flex-col gap-4 page-padding header-safe-area">
         <h1 className="md:hidden mb-1 font-bold text-title text-4xl">Friends</h1>
-        <FriendCodeCard code="GT4X-K29R" />
 
-        <Tabs defaultValue="friends" className="mt-2">
+        <Tabs defaultValue="friends">
           <TabsList className="w-full">
             <TabsTrigger value="friends" className="flex-1">Friends</TabsTrigger>
             <TabsTrigger value="requests" className="flex-1">Requests</TabsTrigger>
@@ -25,7 +24,8 @@ const Friends = () => {
             <FriendsSearch value={searchText} onChange={setSearchText} />
             <FriendsList search={debouncedSearch} />
           </TabsContent>
-          <TabsContent value="requests">
+          <TabsContent value="requests" className="flex flex-col gap-4 mt-2">
+            <FriendCodeCard code="GT4X-K29R" />
           </TabsContent>
         </Tabs>
       </div>

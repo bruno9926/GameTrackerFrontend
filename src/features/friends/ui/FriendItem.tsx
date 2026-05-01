@@ -18,7 +18,7 @@ const FriendItem = ({ name, avatar, status }: FriendItemProps) => {
                     <div className="rounded-xl w-12 aspect-square overflow-hidden">
                         {avatar
                             ? <img className="w-full h-full object-cover" src={avatar} alt={`${name}'s avatar`} />
-                            : <div className="flex justify-center items-center bg-accent w-full h-full font-bold text-accent-foreground">{name.charAt(0).toUpperCase()}</div>
+                            : <div className="flex justify-center items-center bg-primary w-full h-full font-bold text-primary-foreground">{name.charAt(0).toUpperCase()}</div>
                         }
                     </div>
                     <span className={`block right-0 -bottom-1 absolute rounded-full w-3.5 aspect-square outline-3 outline-background ${statusIndicator[status]}`} />
