@@ -3,6 +3,7 @@ import FriendItem, { FriendListItemSkeleton } from "../FriendItem";
 import { useFriends } from "../../hook/useFriends";
 import type { Friend } from "@features/user/model/Friend";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
+import { anim } from "@shared/ui/Animations";
 
 const FriendsGroupSkeleton = ({ count }: { count: number }) => (
   <div className="flex flex-col gap-1">
@@ -40,11 +41,11 @@ const FriendsList = ({ search = "" }: { search?: string }) => {
   if (filteredOnline.length + filteredBusy.length + filteredOffline.length === 0) return <NoResults />;
 
   return (
-    <div className="flex flex-col gap-4">
+    <anim.FadeInUp key={search} className="flex flex-col gap-4">
       <FriendsGroup title={<span className="text-online">Online · {filteredOnline.length}</span>} friends={filteredOnline} />
       <FriendsGroup title={<span className="text-busy">Busy · {filteredBusy.length}</span>} friends={filteredBusy} />
       <FriendsGroup title={<span className="text-offline">Offline · {filteredOffline.length}</span>} friends={filteredOffline} />
-    </div>
+    </anim.FadeInUp>
   );
 };
 
