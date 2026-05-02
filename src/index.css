@@ -67,6 +67,14 @@
   --color-title: var(--title);
   --color-subtitle: var(--subtitle);
 
+  /*avatar colors*/
+  --color-avatar-1: var(--avatar-1);
+  --color-avatar-2: var(--avatar-2);
+  --color-avatar-3: var(--avatar-3);
+  --color-avatar-4: var(--avatar-4);
+  --color-avatar-5: var(--avatar-5);
+  --color-avatar-6: var(--avatar-6);
+
   /*status colors*/
   --color-error: var(--error);
   --color-success: var(--success);
@@ -123,6 +131,14 @@
   --discord: #5865F2;
   --google: #4285f4;
   --scrollbar: #bbbbbb;
+
+  /*avatar colors*/
+  --avatar-1: #3d9665;
+  --avatar-2: #9d5dc2;
+  --avatar-3: #e4cb42;
+  --avatar-4: #b63535;
+  --avatar-5: #df5c83;
+  --avatar-6: #54acc2;
 
   /*online status colors*/
   --online: #53ad4b;
