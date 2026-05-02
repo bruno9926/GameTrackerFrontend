@@ -4,6 +4,7 @@ import { authService } from "../../features/auth/api/AuthService";
 import { gamesReducer } from '@features/games/state';
 import { userReducer } from '@features/user/state';
 import { authReducer } from '@features/auth/state';
+import { friendsReducer } from '@features/friends/state';
 
 const { token, refreshToken } = authService.getAuth();
 const preloadedState = {
@@ -17,7 +18,8 @@ export const store = configureStore({
     reducer: {
         games: gamesReducer,
         user: userReducer,
-        auth: authReducer
+        auth: authReducer,
+        friends: friendsReducer,
     },
     devTools: true,
     preloadedState

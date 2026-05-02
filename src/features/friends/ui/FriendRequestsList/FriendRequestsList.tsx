@@ -29,8 +29,8 @@ const FriendRequestsList = ({ search = "" }: { search?: string }) => {
 
     return (
         <anim.FadeInUp key={search} className="flex flex-col gap-3">
-            {filtered.map(({ id, ...data }) => (
-                <FriendRequestItem key={id} {...data} />
+            {filtered.map((request) => (
+                <FriendRequestItem key={request.id} {...request} />
             ))}
         </anim.FadeInUp>
     );
