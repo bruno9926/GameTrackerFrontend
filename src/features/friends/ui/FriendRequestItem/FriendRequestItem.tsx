@@ -26,9 +26,9 @@ const FriendRequestItem = ({ sender }: FriendRequestItemProps) => {
                             <span className="text-subtitle text-sm">@{sender.username}</span>
                         </div>
                     </div>
-                    <div className="flex gap-2">
-                        <Button variant="secondary" size="sm" fullWidth>Ignore</Button>
-                        <Button variant="primary" size="sm" fullWidth onClick={() => setAccepted(true)}>Accept</Button>
+                    <div className="flex justify-end gap-2">
+                        <Button variant="secondary" size="sm">Ignore</Button>
+                        <Button variant="primary" size="sm" onClick={() => setAccepted(true)}>Accept</Button>
                     </div>
                 </>
             )}

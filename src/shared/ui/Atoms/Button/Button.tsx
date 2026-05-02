@@ -36,7 +36,7 @@ const Button: FC<ButtonProps> = ({
     <button
       className={clsx(
         // base styles
-        "rounded-[32px] cursor-pointer font-normal min-w-25 transition-colors animation-duration",
+        "rounded-[32px] cursor-pointer font-normal min-w-20 transition-colors animation-duration",
         "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2",
         "disabled:opacity-50 disabled:cursor-default",
 
