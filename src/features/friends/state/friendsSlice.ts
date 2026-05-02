@@ -1,6 +1,8 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
 import type { Friend } from "@features/user/model/Friend";
 import type { FriendRequest } from "@features/user/model/FriendRequest";
+import friendsData from "../ui/friends.json";
+import requestsData from "../ui/requests.json";
 
 export interface FriendsState {
     friends: Friend[];
@@ -20,38 +22,53 @@ const initialState: FriendsState = {
     requestsError: null,
 };
 
+export const fetchFriends = createAsyncThunk("friends/fetchFriends", async () => {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    return friendsData as Friend[];
+});
+
+export const fetchRequests = createAsyncThunk("friends/fetchRequests", async () => {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    return (requestsData as FriendRequest[]).filter(r => r.status === "pending");
+});
+
 const friendsSlice = createSlice({
     name: "friends",
     initialState,
     reducers: {
-        setFriends: (state, action: PayloadAction<Friend[]>) => {
-            state.friends = action.payload;
-        },
-        setFriendsLoading: (state, action: PayloadAction<boolean>) => {
-            state.friendsLoading = action.payload;
-        },
-        setFriendsError: (state, action: PayloadAction<string | null>) => {
-            state.friendsError = action.payload;
-        },
-        setRequests: (state, action: PayloadAction<FriendRequest[]>) => {
-            state.requests = action.payload;
-        },
-        setRequestsLoading: (state, action: PayloadAction<boolean>) => {
-            state.requestsLoading = action.payload;
-        },
-        setRequestsError: (state, action: PayloadAction<string | null>) => {
-            state.requestsError = action.payload;
-        },
         acceptRequest: (state, action: PayloadAction<number>) => {
             const request = state.requests.find(r => r.id === action.payload);
-            if (request) request.status = 'accepted';
+            if (request) request.status = "accepted";
         },
+    },
+    extraReducers: builder => {
+        builder
+            .addCase(fetchFriends.pending, state => {
+                state.friendsLoading = true;
+                state.friendsError = null;
+            })
+            .addCase(fetchFriends.fulfilled, (state, action) => {
+                state.friendsLoading = false;
+                state.friends = action.payload;
+            })
+            .addCase(fetchFriends.rejected, (state, action) => {
+                state.friendsLoading = false;
+                state.friendsError = action.error.message ?? "Failed to load friends";
+            })
+            .addCase(fetchRequests.pending, state => {
+                state.requestsLoading = true;
+                state.requestsError = null;
+            })
+            .addCase(fetchRequests.fulfilled, (state, action) => {
+                state.requestsLoading = false;
+                state.requests = action.payload;
+            })
+            .addCase(fetchRequests.rejected, (state, action) => {
+                state.requestsLoading = false;
+                state.requestsError = action.error.message ?? "Failed to load requests";
+            });
     },
 });
 
-export const {
-    setFriends, setFriendsLoading, setFriendsError,
-    setRequests, setRequestsLoading, setRequestsError,
-    acceptRequest,
-} = friendsSlice.actions;
+export const { acceptRequest } = friendsSlice.actions;
 export default friendsSlice.reducer;

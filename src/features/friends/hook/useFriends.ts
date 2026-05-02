@@ -1,34 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import type { Friend } from '@features/user/model/Friend';
-import friendsData from '../ui/friends.json';
-import { getErrorMessage } from '@shared/lib/error-messages';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '@app/store/store';
-import { setFriends } from '../state';
-
-const storedFriends = friendsData as Array<Friend>;
+import type { RootState, AppDispatch } from '@app/store/store';
+import { fetchFriends } from '../state';
 
 export const useFriends = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
+  const dispatch = useDispatch<AppDispatch>();
   const friends = useSelector((state: RootState) => state.friends.friends);
-  const dispatch = useDispatch();
-
-  const fetchFriends = async () => {
-    try {
-      setLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 2 * 1000));
-      dispatch(setFriends(storedFriends));
-    } catch (e) {
-      setError(getErrorMessage(e));
-    } finally {
-      setLoading(false);
-    }
-  };
+  const loading = useSelector((state: RootState) => state.friends.friendsLoading);
+  const error = useSelector((state: RootState) => state.friends.friendsError);
 
   useEffect(() => {
-    fetchFriends();
+    dispatch(fetchFriends());
   }, []);
 
   const {
@@ -43,5 +26,5 @@ export const useFriends = () => {
     { online: [], offline: [], busy: [] } as Record<Friend['status'], Friend[]>
   );
 
-  return { friends, onlineFriends, offlineFriends, busyFriends, loading, error, fetchFriends };
+  return { friends, onlineFriends, offlineFriends, busyFriends, loading, error };
 };
