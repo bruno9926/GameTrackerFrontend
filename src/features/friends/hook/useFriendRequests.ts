@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@app/store/store';
-import { fetchRequests, acceptRequest, rejectRequest } from '../state';
+import { fetchRequests, acceptRequest, rejectRequest, fetchFriends } from '../state';
 
 export const useFriendRequests = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -9,7 +9,10 @@ export const useFriendRequests = () => {
   const error = useSelector((state: RootState) => state.friends.requestsError);
 
   const fetch = () => dispatch(fetchRequests());
-  const accept = (id: string) => dispatch(acceptRequest(id));
+  const accept = async (id: string) => {
+    await dispatch(acceptRequest(id));
+    dispatch(fetchFriends());
+  };
   const reject = (id: string) => dispatch(rejectRequest(id));
 
   return { requests, loading, error, fetch, accept, reject };
