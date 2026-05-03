@@ -11,16 +11,19 @@ const statusIndicator: Record<Friend['status'], string> = {
     offline: 'bg-background border-2 border-offline',
 };
 
-const FriendItem = ({ name, avatar, status }: FriendItemProps) => {
+const FriendItem = ({ name, username, avatarUrl, status = "online" }: FriendItemProps) => {
     return (
         <div className={`flex justify-between items-center p-2 cursor-pointer ${status === "offline" ? "opacity-60" : ""}`}>
             <div className="flex flex-1 items-center gap-4 min-w-0">
                 <div className='relative'>
-                    <UserAvatar name={name} avatarUrl={avatar} />
+                    <UserAvatar name={name} avatarUrl={avatarUrl} />
                     <span className={`block right-0 -bottom-1 absolute rounded-full w-3.5 aspect-square outline-3 outline-background ${statusIndicator[status]}`} />
                 </div>
                 <div className='flex flex-col flex-1 min-w-0'>
-                    <span className="text-lg">{name}</span>
+                    <div className="flex items-baseline gap-2 min-w-0">
+                        <h3 className="text-lg">{name}</h3>
+                        <span className="text-sm text-subtitle truncate">@{username}</span>
+                    </div>
                     <div className='flex gap-2 text-subtitle'>
                         <BsJoystick />
                         <span className='text-sm truncate'>

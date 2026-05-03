@@ -1,7 +1,5 @@
-export type Friend = {
-    id: number,
-    name: string,
+import type { User } from "./User";
+
+export type Friend = User & {
     status: 'online' | 'offline' | 'busy',
-    avatar: string,
-    games: string[]
 }

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
 import type { Friend } from "@features/user/model/Friend";
 import type { FriendRequest } from "@features/user/model/FriendRequest";
-import friendsData from "../ui/friends.json";
+import { friendsService } from "../api/FriendsService";
 import requestsData from "../ui/requests.json";
 
 export interface FriendsState {
@@ -23,8 +23,7 @@ const initialState: FriendsState = {
 };
 
 export const fetchFriends = createAsyncThunk("friends/fetchFriends", async () => {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    return friendsData as Friend[];
+    return friendsService.fetchFriends();
 });
 
 export const fetchRequests = createAsyncThunk("friends/fetchRequests", async () => {
