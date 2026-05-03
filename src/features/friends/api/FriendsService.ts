@@ -27,8 +27,8 @@ class FriendsService {
     return apiClient(API_URL + "/requests")
   }
 
-  async sendFriendRequest(receiverId: string): Promise<void> {
-    return apiClient(`${API_URL}/requests`, { method: "POST", body: { receiverId } })
+  async sendFriendRequest(friendCode: string): Promise<void> {
+    return apiClient(`${API_URL}/requests`, { method: "POST", body: { friendCode } })
   }
 
   async rejectFriendRequest(requestId: string): Promise<void> {

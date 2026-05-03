@@ -18,8 +18,8 @@ export const useFriendRequests = () => {
 
   const reject = (id: string) => dispatch(rejectRequest(id));
   
-  const sendFriendRequest = async (receiverId: string) => {
-    const result = await dispatch(sendRequest(receiverId));
+  const sendFriendRequest = async (friendId: string) => {
+    const result = await dispatch(sendRequest(friendId));
     if (sendRequest.fulfilled.match(result)) {
       toast.success('Friend request sent!');
     }
