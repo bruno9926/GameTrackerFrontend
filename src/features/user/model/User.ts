@@ -3,7 +3,8 @@ export type User = {
     name: string,
     username: string,
     email: string,
-    avatarUrl?: string
+    avatarUrl?: string,
+    friendCode: string,
 }
 
 export type UserInfo = Pick<User, "name" | "email" | "username" | "avatarUrl">;

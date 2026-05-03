@@ -3,13 +3,17 @@ import { Input } from "@shared/ui/chadcn/input";
 import { RiArrowRightLine } from "react-icons/ri";
 import { LuCopy, LuCopyCheck } from "react-icons/lu";
 import { useFriendRequests } from "@features/friends/hook/useFriendRequests";
+import { useSelector } from "react-redux";
+import type { RootState } from "@app/store/store";
 
-const FriendCodeCard = ({ code }: { code: string }) => {
+const FriendCodeCard = () => {
+  const code = useSelector((state: RootState) => state.user.user?.friendCode);
   const [friendCode, setFriendCode] = useState("");
   const [copied, setCopied] = useState(false);
   const { sendFriendRequest } = useFriendRequests();
 
   const handleCopy = () => {
+    if (!code) return;
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -31,7 +35,7 @@ const FriendCodeCard = ({ code }: { code: string }) => {
       <div className="flex justify-between items-center">
         <div className="flex flex-col gap-0.5">
           <span className="font-semibold text-subtitle text-xxs uppercase">Your code</span>
-          <span className="font-bold text-title text-xl">{code}</span>
+          <span className="font-bold text-title text-xl">{code ?? '—'}</span>
         </div>
         <button
           onClick={handleCopy}

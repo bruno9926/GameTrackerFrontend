@@ -23,7 +23,7 @@ const RequestsPanel = () => {
   const { debouncedInput } = useDebouncedInput(search, { debounceTime: 300 });
   return (
     <div className="flex flex-col gap-6">
-      <FriendCodeCard code="GT4X-K29R" />
+      <FriendCodeCard />
       <div className="flex flex-col gap-3">
         <FriendsSearch value={search} onChange={setSearch} placeholder="Search requests..." />
         <FriendRequestsList search={debouncedInput} />
