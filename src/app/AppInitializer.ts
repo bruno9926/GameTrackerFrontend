@@ -4,10 +4,11 @@ import { authService } from "@features/auth/api/AuthService";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, setLoading } from "@features/user/state";
 import { clearAuth } from "@features/auth/state";
-import type { RootState } from "./store/store";
+import { fetchFriends, fetchRequests } from "@features/friends/state";
+import type { AppDispatch, RootState } from "./store/store";
 
 const AppInitializer = ({ children }: { children: Readonly<React.ReactNode> }) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const token = useSelector((state: RootState) => state.auth.token);
 
     const initializeUser = async () => {
@@ -15,6 +16,8 @@ const AppInitializer = ({ children }: { children: Readonly<React.ReactNode> }) =
             dispatch(setLoading(true));
             const user = await authService.getMe();
             dispatch(setUser(user));
+            dispatch(fetchFriends());
+            dispatch(fetchRequests());
         } catch (error) {
             dispatch(clearAuth());
             authService.clearAuth();
