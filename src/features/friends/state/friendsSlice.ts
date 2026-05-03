@@ -37,6 +37,10 @@ export const rejectRequest = createAsyncThunk("friends/rejectRequest", async (re
     return friendsService.rejectFriendRequest(requestId)
 });
 
+export const sendRequest = createAsyncThunk("friends/sendRequest", async (receiverId: string) => {
+    return friendsService.sendFriendRequest(receiverId)
+});
+
 const friendsSlice = createSlice({
     name: "friends",
     initialState,

@@ -2,15 +2,12 @@ import { useState } from "react";
 import { Input } from "@shared/ui/chadcn/input";
 import { RiArrowRightLine } from "react-icons/ri";
 import { LuCopy, LuCopyCheck } from "react-icons/lu";
+import { useFriendRequests } from "@features/friends/hook/useFriendRequests";
 
-interface FriendCodeCardProps {
-  code: string;
-  onAddFriend?: (code: string) => void;
-}
-
-const FriendCodeCard = ({ code, onAddFriend }: FriendCodeCardProps) => {
+const FriendCodeCard = ({ code }: { code: string }) => {
   const [friendCode, setFriendCode] = useState("");
   const [copied, setCopied] = useState(false);
+  const { sendFriendRequest } = useFriendRequests();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code);
@@ -20,7 +17,7 @@ const FriendCodeCard = ({ code, onAddFriend }: FriendCodeCardProps) => {
 
   const handleSubmit = () => {
     if (!friendCode.trim()) return;
-    onAddFriend?.(friendCode.trim());
+    sendFriendRequest(friendCode.trim());
     setFriendCode("");
   };
 

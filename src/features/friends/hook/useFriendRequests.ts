@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@app/store/store';
-import { fetchRequests, acceptRequest, rejectRequest, fetchFriends } from '../state';
+import { fetchRequests, acceptRequest, rejectRequest, fetchFriends, sendRequest } from '../state';
 
 export const useFriendRequests = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,6 +14,7 @@ export const useFriendRequests = () => {
     dispatch(fetchFriends());
   };
   const reject = (id: string) => dispatch(rejectRequest(id));
+  const sendFriendRequest = (receiverId: string) => dispatch(sendRequest(receiverId));
 
-  return { requests, loading, error, fetch, accept, reject };
+  return { requests, loading, error, fetch, accept, reject, sendFriendRequest };
 };
