@@ -1,5 +1,6 @@
 import { apiClient } from "@shared/api/apiClient";
 import type { Friend } from "@features/user/model/Friend";
+import type { FriendRequest } from "@features/user/model/FriendRequest";
 
 const API_URL = import.meta.env.VITE_API_URL + "/friends";
 
@@ -19,6 +20,18 @@ class FriendsService {
     const friends: Friend[] = await apiClient(API_URL);
     // temporal fix, we dont have status from the server
     return friends.map(f => ({...f, status: "online"}))
+  }
+
+  async fetchFriendRequest(): Promise<FriendRequest[]> {
+    return apiClient(API_URL + "/requests")
+  }
+
+  async rejectFriendRequest(requestId: string): Promise<void> {
+    return apiClient(`${API_URL}/requests/${requestId}/reject`, { method: "PATCH" })
+  }
+
+  async acceptFriendRequest(requestId: string): Promise<void> {
+    return apiClient(`${API_URL}/requests/${requestId}/accept`, { method: "PATCH" })
   }
 }
 
