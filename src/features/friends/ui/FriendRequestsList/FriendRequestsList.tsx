@@ -1,10 +1,15 @@
+import { useEffect } from 'react';
 import FriendRequestItem, { FriendRequestItemSkeleton } from '../FriendRequestItem/FriendRequestItem';
 import { useFriendRequests } from '../../hook/useFriendRequests';
 import { anim } from '@shared/ui/Animations';
 import ErrorMessage from '@shared/ui/Atoms/ErrorMessage/ErrorMessage';
 
 const FriendRequestsList = ({ search = "" }: { search?: string }) => {
-    const { requests, loading, error, fetchRequests } = useFriendRequests();
+    const { requests, loading, error, fetch } = useFriendRequests();
+
+    useEffect(() => {
+        fetch();
+    }, []);
 
     if (loading) return (
         <div className="flex flex-col gap-3">
@@ -12,19 +17,18 @@ const FriendRequestsList = ({ search = "" }: { search?: string }) => {
         </div>
     );
 
-    if (error) return <ErrorMessage message={error} retryAction={fetchRequests} />;
+    if (error) return <ErrorMessage message={error} retryAction={fetch} />;
 
-    if (requests.length === 0) return <EmptyRequestsList />;
+    if (requests.length === 0) return (
+        <EmptyRequestsList title='No pending requests' message='Share your code to connect with friends'/>
+    );
 
     const filtered = search
         ? requests.filter(r => r.sender.name.toLowerCase().includes(search.toLowerCase()))
         : requests;
 
     if (filtered.length === 0) return (
-        <div className="empty-box">
-            <p className="font-medium text-subtitle text-base text-center">No requests found</p>
-            <p className="mt-1 text-subtitle text-xs">Try a different name</p>
-        </div>
+        <EmptyRequestsList title='No requests requests' message='Try a different name'/>
     );
 
     return (
@@ -36,10 +40,10 @@ const FriendRequestsList = ({ search = "" }: { search?: string }) => {
     );
 };
 
-const EmptyRequestsList = () => (
+const EmptyRequestsList = ({ title, message }: { title: string, message: string}) => (
     <div className="empty-box">
-        <p className="font-medium text-subtitle text-base text-center">No pending requests</p>
-        <p className="mt-1 text-subtitle text-xs">Share your code to connect with friends</p>
+        <p className="font-medium text-subtitle text-base text-center">{title}</p>
+        <p className="mt-1 text-subtitle text-xs text-center">{message}</p>
     </div>
 );
 

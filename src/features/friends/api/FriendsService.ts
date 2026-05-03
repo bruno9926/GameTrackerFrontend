@@ -23,6 +23,7 @@ class FriendsService {
   }
 
   async fetchFriendRequest(): Promise<FriendRequest[]> {
+    // the server returns only the pending requests
     return apiClient(API_URL + "/requests")
   }
 

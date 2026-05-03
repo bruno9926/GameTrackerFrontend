@@ -1,8 +1,7 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { Friend } from "@features/user/model/Friend";
 import type { FriendRequest } from "@features/user/model/FriendRequest";
 import { friendsService } from "../api/FriendsService";
-import requestsData from "../ui/requests.json";
 
 export interface FriendsState {
     friends: Friend[];
@@ -27,19 +26,21 @@ export const fetchFriends = createAsyncThunk("friends/fetchFriends", async () =>
 });
 
 export const fetchRequests = createAsyncThunk("friends/fetchRequests", async () => {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    return (requestsData as FriendRequest[]).filter(r => r.status === "pending");
+    return friendsService.fetchFriendRequest();
+});
+
+export const acceptRequest = createAsyncThunk("friends/acceptRequest", async (requestId: string) => {
+    return friendsService.acceptFriendRequest(requestId)
+});
+
+export const rejectRequest = createAsyncThunk("friends/rejectRequest", async (requestId: string) => {
+    return friendsService.rejectFriendRequest(requestId)
 });
 
 const friendsSlice = createSlice({
     name: "friends",
     initialState,
-    reducers: {
-        acceptRequest: (state, action: PayloadAction<number>) => {
-            const request = state.requests.find(r => r.id === action.payload);
-            if (request) request.status = "accepted";
-        },
-    },
+    reducers: {},
     extraReducers: builder => {
         builder
             .addCase(fetchFriends.pending, state => {
@@ -65,9 +66,15 @@ const friendsSlice = createSlice({
             .addCase(fetchRequests.rejected, (state, action) => {
                 state.requestsLoading = false;
                 state.requestsError = action.error.message ?? "Failed to load requests";
+            })
+            .addCase(acceptRequest.fulfilled, (state, action) => {
+                const request = state.requests.find(r => r.id === action.meta.arg);
+                if (request) request.status = "accepted";
+            })
+            .addCase(rejectRequest.fulfilled, (state, action) => {
+                state.requests = state.requests.filter(r => r.id !== action.meta.arg);
             });
     },
 });
 
-export const { acceptRequest } = friendsSlice.actions;
 export default friendsSlice.reducer;

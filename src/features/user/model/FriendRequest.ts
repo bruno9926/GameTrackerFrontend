@@ -3,7 +3,7 @@ import type { User } from './User';
 export type FriendRequestStatus = 'pending' | 'accepted' | 'rejected';
 
 export type FriendRequest = {
-    id: number;
+    id: string;
     sender: User;
     status: FriendRequestStatus;
 }

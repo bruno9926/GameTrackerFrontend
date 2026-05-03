@@ -1,19 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
 import type { FriendRequest } from '@features/user/model/FriendRequest';
 import { Skeleton } from '@shared/ui/chadcn/skeleton';
 import Button from '@shared/ui/Atoms/Button/Button';
 import UserAvatar from '../UserAvatar/UserAvatar';
 import { cn } from '@shared/lib/utils';
-import { acceptRequest } from '@features/friends/state';
-import type { RootState } from '@app/store/store';
+import { useFriendRequests } from '@features/friends/hook/useFriendRequests';
 
-type FriendRequestItemProps = Omit<FriendRequest, 'status'>;
-
-const FriendRequestItem = ({ id, sender }: FriendRequestItemProps) => {
-    const dispatch = useDispatch();
-    const accepted = useSelector((state: RootState) =>
-        state.friends.requests.find(r => r.id === id)?.status === 'accepted'
-    );
+const FriendRequestItem = ({ id, sender, status }: FriendRequest) => {
+    const { accept, reject } = useFriendRequests();
+    const accepted = status === 'accepted';
 
     return (
         <article className={cn('flex flex-col gap-3 card', accepted && 'border-online/30')}>
@@ -32,8 +26,8 @@ const FriendRequestItem = ({ id, sender }: FriendRequestItemProps) => {
                         </div>
                     </div>
                     <div className="flex justify-end gap-2">
-                        <Button variant="secondary" size="sm">Ignore</Button>
-                        <Button variant="primary" size="sm" onClick={() => dispatch(acceptRequest(id))}>Accept</Button>
+                        <Button variant="secondary" size="sm" onClick={() => reject(id)}>Ignore</Button>
+                        <Button variant="primary" size="sm" onClick={() => accept(id)}>Accept</Button>
                     </div>
                 </>
             )}
