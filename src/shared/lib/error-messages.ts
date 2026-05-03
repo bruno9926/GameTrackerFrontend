@@ -21,3 +21,8 @@ const getUserError = (error: ApiError) => {
 }
 
 export default errorMessages;
+
+export const withErrorMessage = <T, A = void>(fn: (arg: A) => Promise<T>) => async (arg: A): Promise<T> => {
+    try { return await fn(arg); }
+    catch (e) { throw new Error(getErrorMessage(e)); }
+};

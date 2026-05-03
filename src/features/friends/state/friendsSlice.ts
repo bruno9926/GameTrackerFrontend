@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { Friend } from "@features/user/model/Friend";
 import type { FriendRequest } from "@features/user/model/FriendRequest";
 import { friendsService } from "../api/FriendsService";
+import { withErrorMessage } from "@shared/lib/error-messages";
 
 export interface FriendsState {
     friends: Friend[];
@@ -21,25 +22,11 @@ const initialState: FriendsState = {
     requestsError: null,
 };
 
-export const fetchFriends = createAsyncThunk("friends/fetchFriends", async () => {
-    return friendsService.fetchFriends();
-});
-
-export const fetchRequests = createAsyncThunk("friends/fetchRequests", async () => {
-    return friendsService.fetchFriendRequest();
-});
-
-export const acceptRequest = createAsyncThunk("friends/acceptRequest", async (requestId: string) => {
-    return friendsService.acceptFriendRequest(requestId)
-});
-
-export const rejectRequest = createAsyncThunk("friends/rejectRequest", async (requestId: string) => {
-    return friendsService.rejectFriendRequest(requestId)
-});
-
-export const sendRequest = createAsyncThunk("friends/sendRequest", async (receiverId: string) => {
-    return friendsService.sendFriendRequest(receiverId)
-});
+export const fetchFriends = createAsyncThunk("friends/fetchFriends", withErrorMessage(() => friendsService.fetchFriends()));
+export const fetchRequests = createAsyncThunk("friends/fetchRequests", withErrorMessage(() => friendsService.fetchFriendRequest()));
+export const acceptRequest = createAsyncThunk("friends/acceptRequest", withErrorMessage((id: string) => friendsService.acceptFriendRequest(id)));
+export const rejectRequest = createAsyncThunk("friends/rejectRequest", withErrorMessage((id: string) => friendsService.rejectFriendRequest(id)));
+export const sendRequest = createAsyncThunk("friends/sendRequest", withErrorMessage((id: string) => friendsService.sendFriendRequest(id)));
 
 const friendsSlice = createSlice({
     name: "friends",
