@@ -57,11 +57,11 @@ const Friends = () => {
       <div className="hidden lg:flex flex-col gap-6 mx-auto w-full max-w-6xl page-padding header-safe-area">
         <div className="gap-6 grid grid-cols-3">
           <div className="flex flex-col gap-4 col-span-2">
-            <h2>Friendship Requests</h2>
+            <h2>Your Friends</h2>
             <FriendsPanel />
           </div>
           <div className="flex flex-col gap-4 col-span-1">
-            <h2>Your Friends</h2>
+            <h2>Friendship Requests</h2>
             <RequestsPanel />
           </div>
         </div>
