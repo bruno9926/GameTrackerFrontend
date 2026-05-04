@@ -10,8 +10,10 @@ export const useFriends = () => {
   const loading = useSelector((state: RootState) => state.friends.friendsLoading);
   const error = useSelector((state: RootState) => state.friends.friendsError);
 
+  const fetch = () => dispatch(fetchFriends())
+
   useEffect(() => {
-    dispatch(fetchFriends());
+    fetch();
   }, []);
 
   const {
@@ -26,5 +28,13 @@ export const useFriends = () => {
     { online: [], offline: [], busy: [] } as Record<Friend['status'], Friend[]>
   );
 
-  return { friends, onlineFriends, offlineFriends, busyFriends, loading, error };
+  return {
+    friends,
+    onlineFriends,
+    offlineFriends,
+    busyFriends,
+    loading,
+    error,
+    fetchFriends: fetch
+  };
 };
