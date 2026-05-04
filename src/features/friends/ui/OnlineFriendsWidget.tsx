@@ -19,8 +19,8 @@ const Friends = () => {
         empty: <EmptyFriendsList />,
         success: (
             <div className="flex flex-col gap-3">
-                {onlineFriends.map(({ id, ...data }) => (
-                    <FriendItem key={id} {...data} />
+                {onlineFriends.map(friend => (
+                    <FriendItem key={friend.id} {...friend} />
                 ))}
             </div>
         ),

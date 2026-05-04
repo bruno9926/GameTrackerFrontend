@@ -54,8 +54,8 @@ const FriendsGroup = ({ title, friends }: { title: React.ReactNode; friends: Fri
   return (
     <div className="flex flex-col gap-1">
       <h3 className="mb-1 font-semibold text-xs uppercase">{title}</h3>
-      {friends.map(({ id, ...data }) => (
-        <FriendItem key={id} {...data} />
+      {friends.map(friend => (
+        <FriendItem key={friend.id} {...friend} />
       ))}
     </div>
   );

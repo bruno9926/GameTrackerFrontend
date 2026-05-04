@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router";
-import { BsJoystick } from "react-icons/bs";
 import { RiArrowLeftLine } from "react-icons/ri";
 import AnimatedRoute from "../AnimatedRoute";
 import UserAvatar from "@features/friends/ui/UserAvatar/UserAvatar";
@@ -8,12 +7,8 @@ import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
 import { userRoutes } from "@routes/routes";
 import type { Friend as FriendType } from "@features/user/model/Friend";
+import Button from "@shared/ui/Atoms/Button/Button";
 
-const statusLabel: Record<FriendType["status"], string> = {
-  online: "Online",
-  busy: "Busy",
-  offline: "Offline",
-};
 
 const Friend = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,39 +40,30 @@ const Friend = () => {
 };
 
 const FriendProfile = ({ friend }: { friend: FriendType }) => {
-  const { name, username, avatarUrl, friendCode, status } = friend;
+  const { name, username, avatarUrl, status } = friend;
 
   return (
     <section className="flex flex-col gap-6">
-      <div className="flex sm:flex-row flex-col items-center sm:items-start gap-5 card">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-row items-center gap-5">
+          <UserAvatar name={name} avatarUrl={avatarUrl} size="lg" status={status} className="hidden md:block" />
+          <UserAvatar name={name} avatarUrl={avatarUrl} size="md" status={status} className="md:hidden block" />
 
-        <UserAvatar name={name} avatarUrl={avatarUrl} size="lg"/>
-
-        <div className="flex flex-col flex-1 gap-2 min-w-0 sm:text-left text-center">
-          <div className="flex sm:flex-row flex-col items-center sm:items-baseline gap-2">
-            <h1 className="text-3xl">{name}</h1>
-            <span className="text-subtitle truncate">@{username}</span>
-          </div>
-
-          <div className="flex justify-center sm:justify-start items-center gap-2">
-            <span className={`badge ${status === "online" ? "border-online text-online bg-online/10" : status === "busy" ? "border-busy text-busy bg-busy/10" : "border-offline text-offline bg-offline/10"}`}>
-              {statusLabel[status]}
-            </span>
-          </div>
-
-          <div className="flex justify-center sm:justify-start items-center gap-2 text-subtitle">
-            <BsJoystick />
-            <span className="text-sm">Playing League of Legends</span>
+          <div className="flex flex-col flex-1 gap-2 min-w-0 h-full">
+            <div className="flex flex-col items-start gap-0">
+              <h1 className="text-3xl">{name}</h1>
+              <span className="text-subtitle truncate">@{username}</span>
+            </div>
           </div>
         </div>
       </div>
+      {/* actions */}
+      <Button>Remove from friends</Button>
+      <section className="">
+        <h2>{name}'s Games</h2>
 
-      <div className="flex justify-between items-center card">
-        <div className="flex flex-col gap-0.5">
-          <span className="font-semibold text-subtitle text-xxs uppercase">Friend code</span>
-          <span className="font-bold text-title text-xl">{friendCode ?? "—"}</span>
-        </div>
-      </div>
+      </section>
+
     </section>
   );
 };

@@ -8,6 +8,7 @@ import MainLayout from "@shared/ui/layout/MainLayout";
 import Dashboard from "@pages/Dashboard/Dashboard";
 import Games from "@pages/Games/Games";
 import Friends from "@pages/Friends/Friends";
+import Friend from "@pages/Friend/Friend";
 import Settings from "@pages/Settings/Settings";
 import SignUp from "@pages/SignUp/SignUp";
 import SignIn from "@pages/SignIn/SignIn";
@@ -35,6 +36,8 @@ const AppRoutes = () => {
                 <Route element={<PrivateRoute />}>
                     <Route element={<MainLayout />}>
                         <Route path="/" element={<Navigate to={defaultRoute} replace />} />
+                        <Route path={userRoutes.FRIENDS + '/:id'} element={<Friend />} />
+
                         {
                             Object.entries(userRoutesMap).map(
                                 ([path, element]) => (
