@@ -1,28 +1,24 @@
 import type { Friend } from '@features/user/model/Friend';
 import { BsJoystick } from "react-icons/bs";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
+import { Link } from "react-router";
+import { userRoutes } from "@routes/routes";
 import UserAvatar from './UserAvatar/UserAvatar';
 
-type FriendItemProps = {} & Omit<Friend, 'id'>;
+type FriendItemProps = Friend;
 
-const statusIndicator: Record<Friend['status'], string> = {
-    online: 'bg-online',
-    busy: 'bg-busy',
-    offline: 'bg-background border-2 border-offline',
-};
-
-const FriendItem = ({ name, username, avatarUrl, status = "online" }: FriendItemProps) => {
+const FriendItem = ({ id, name, username, avatarUrl, status = "online" }: FriendItemProps) => {
     return (
-        <div className={`flex justify-between items-center p-2 cursor-pointer ${status === "offline" ? "opacity-60" : ""}`}>
+        <Link
+            to={`${userRoutes.FRIENDS}/${id}`}
+            className={`flex justify-between items-center p-2 rounded-lg hover:bg-card transition-colors ${status === "offline" ? "opacity-60" : ""}`}
+        >
             <div className="flex flex-1 items-center gap-4 min-w-0">
-                <div className='relative'>
-                    <UserAvatar name={name} avatarUrl={avatarUrl} />
-                    <span className={`block right-0 -bottom-1 absolute rounded-full w-3.5 aspect-square outline-3 outline-background ${statusIndicator[status]}`} />
-                </div>
+                <UserAvatar name={name} avatarUrl={avatarUrl} status={status}/>
                 <div className='flex flex-col flex-1 min-w-0'>
                     <div className="flex items-baseline gap-2 min-w-0">
                         <h3 className="text-lg">{name}</h3>
-                        <span className="text-sm text-subtitle truncate">@{username}</span>
+                        <span className="text-subtitle text-sm truncate">@{username}</span>
                     </div>
                     <div className='flex gap-2 text-subtitle'>
                         <BsJoystick />
@@ -33,7 +29,7 @@ const FriendItem = ({ name, username, avatarUrl, status = "online" }: FriendItem
                 </div>
 
             </div>
-        </div>
+        </Link>
     )
 }
 

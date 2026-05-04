@@ -1,3 +1,7 @@
+import type { FriendStatus } from "@features/user/model/Friend";
+import { cn } from "@shared/lib/utils";
+import { cva } from "class-variance-authority";
+
 const avatarColors = [
     'bg-avatar-1',
     'bg-avatar-2',
@@ -12,20 +16,58 @@ const getAvatarColor = (name: string) => {
     return avatarColors[hash % avatarColors.length];
 };
 
+type AvatarSizes = "sm" | "md" | "lg";
+
 type UserAvatarProps = {
     name: string;
     avatarUrl?: string;
+    status?: FriendStatus;
+    size?: AvatarSizes
 };
 
-const UserAvatar = ({ name, avatarUrl }: UserAvatarProps) => {
+// style variants
+const avatarStyles = cva(
+    "rounded-xl aspect-square overflow-hidden shrink-0",
+    {
+        variants: {
+            size: {
+                "sm": "w-12",
+                "md": "w-24",
+                "lg": "w-40",
+            }
+        }
+    }
+)
+
+const statusStyles = cva(
+    "block right-0 -bottom-1 absolute rounded-full outline-3 outline-background w-3.5 aspect-square",
+    {
+        variants: {
+            status: {
+                online: "bg-online",
+                busy: "bg-busy",
+                offline: "bg-background border-2 border-offline",
+            }
+        }
+    }
+)
+
+const UserAvatar = ({ name, avatarUrl, status, size = "sm" }: UserAvatarProps) => {
     const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 
-    return (
-        <div className="rounded-xl w-12 aspect-square overflow-hidden shrink-0">
+    const AvatarImage = () => (
+        <div className={avatarStyles({ size })}>
             {avatarUrl
                 ? <img className="w-full h-full object-cover" src={avatarUrl} alt={`${name}'s avatar`} />
-                : <div className={`flex justify-center items-center w-full h-full font-bold text-white ${getAvatarColor(name)}`}>{initials}</div>
+                : <div className={cn("flex justify-center items-center w-full h-full font-bold text-white", getAvatarColor(name))}>{initials}</div>
             }
+        </div>
+    )
+
+    return (
+        <div className='relative'>
+            <AvatarImage />
+            {status && <span className={statusStyles({ status })} />}
         </div>
     );
 };
