@@ -3,6 +3,7 @@ import { RiArrowLeftLine } from "react-icons/ri";
 import AnimatedRoute from "../AnimatedRoute";
 import UserAvatar from "@features/friends/ui/UserAvatar/UserAvatar";
 import { useFriends } from "@features/friends/hook/useFriends";
+import { useFriend } from "@features/friends/hook/useFriend";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
 import { userRoutes } from "@routes/routes";
@@ -15,9 +16,8 @@ import { IoPersonRemoveSharp } from "react-icons/io5";
 const Friend = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { friends, loading, error, fetchFriends, removeFriend } = useFriends();
-
-  const friend = friends.find(f => f.id === id);
+  const { removeFriend } = useFriends();
+  const { friend, loading, error, fetchFriend } = useFriend(id);
 
   const handleRemoveFriend = async () => {
     if (!id) return;
@@ -38,7 +38,7 @@ const Friend = () => {
 
         {loading && <FriendSkeleton />}
 
-        {!loading && error && <ErrorMessage message={error} retryAction={fetchFriends} />}
+        {!loading && error && <ErrorMessage message={error} retryAction={fetchFriend} />}
 
         {!loading && !error && !friend && <NotFound />}
 
@@ -55,8 +55,8 @@ const FriendProfile = ({ friend, onRemove }: { friend: FriendType; onRemove: () 
     <section className="flex flex-col gap-6">
       <div className="flex flex-col gap-4">
         <div className="flex flex-row items-center gap-5">
-          <UserAvatar name={name} avatarUrl={avatarUrl} size="lg" status={status} className="hidden md:block" />
-          <UserAvatar name={name} avatarUrl={avatarUrl} size="md" status={status} className="md:hidden block" />
+          <UserAvatar name={name} avatarUrl={avatarUrl} size="lg" status={'busy'} className="hidden md:block" />
+          <UserAvatar name={name} avatarUrl={avatarUrl} size="md" status={'busy'} className="md:hidden block" />
 
           <div className="flex flex-col flex-1 gap-2 min-w-0 h-full">
             <div className="flex flex-col items-start gap-0">

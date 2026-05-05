@@ -17,7 +17,7 @@ const FriendItem = ({ id, name, username, avatarUrl, status = "online" }: Friend
                 <UserAvatar name={name} avatarUrl={avatarUrl} status={status}/>
                 <div className='flex flex-col flex-1 min-w-0'>
                     <div className="flex items-baseline gap-2 min-w-0">
-                        <h3 className="text-lg">{name}</h3>
+                        <h3 className="text-lg leading-tight">{name}</h3>
                         <span className="text-subtitle text-sm truncate">@{username}</span>
                     </div>
                     <div className='flex gap-2 text-subtitle'>

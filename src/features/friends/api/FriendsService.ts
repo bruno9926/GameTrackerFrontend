@@ -39,6 +39,10 @@ class FriendsService {
     return apiClient(`${API_URL}/requests/${requestId}/accept`, { method: "PATCH" })
   }
 
+  async fetchFriend(friendId: string): Promise<Friend> {
+    return apiClient(`${API_URL}/${friendId}`)
+  }
+
   async removeFriend(friendId: string): Promise<void> {
     return apiClient(`${API_URL}/${friendId}`, { method: "DELETE" })
   }

@@ -50,8 +50,8 @@ const statusStyles = cva(
                 offline: "bg-background border-2 border-offline",
             },
             size: {
-                "sm": "w-3.5 outline-3",
-                "md": "w-5 outline-4",
+                "sm": "w-3.5 outline-3 right-0 bottom-0",
+                "md": "w-5 outline-4 right-1 bottom-1",
                 "lg": "w-6 outline-6 right-3 bottom-1",
             }
         }
