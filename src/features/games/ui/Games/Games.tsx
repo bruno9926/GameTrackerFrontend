@@ -100,7 +100,7 @@ const Games = () => {
 
   return (
     <AnimatedRoute>
-      <div className="page-padding header-safe-area">
+      <div className="page-padding header-safe-area desktop-x-padding">
         {/*page title just for mobile */}
         <h1 className="md:hidden mb-5 font-bold text-title text-4xl">Games</h1>
         <div className="flex flex-row gap-4 w-full">
