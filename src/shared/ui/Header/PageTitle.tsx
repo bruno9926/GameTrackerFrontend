@@ -4,7 +4,7 @@ import {
 } from "@app/routes/routes";
 import { useLocation } from "react-router";
 
-const defaultTitle = "Welcome";
+const defaultTitle = "GameTracker";
 
 const PageTitle = () => {
     const location = useLocation();
