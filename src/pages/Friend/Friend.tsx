@@ -92,7 +92,7 @@ const FriendGames = ({ friend }: { friend: FriendType }) => {
         {friend.games && friend.games.length > 0 ? (
           <anim.FadeInUp className="games-grid">
             {friend.games.map((game) =>
-              <GameListItem key={game.id} {...game} />
+              <GameListItem key={game.id} {...game} readOnly />
             )}
           </anim.FadeInUp>
         ) : (

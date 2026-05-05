@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { GAME_STATUS_LABELS, type Game, type GameStatus } from "../../model/Game";
-import OptionsMenu from "@shared/ui/Organisms/OptionsMenu/OptionsMenu";
 import { DeleteGameModal, EditGameModal } from "../GameModals";
 import useGames from "../../hooks/useGames";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
+import { SlOptions } from "react-icons/sl";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@shared/ui/chadcn/dropdown-menu";
 
-type GameListItemProps = Game;
+type GameListItemProps = Game & { readOnly?: boolean };
 
 const gameStatusBadgeStyles: Record<GameStatus, string> = {
   playing: "game-status-badge-playing",
@@ -18,25 +24,10 @@ const gameStatusBadgeStyles: Record<GameStatus, string> = {
 const defaultImage = "/games/default-cover.jpg";
 
 const GameListItem = (game: GameListItemProps) => {
-  const { id, name, status, coverUrl} = game;
+  const { id, name, status, coverUrl, readOnly } = game;
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const { deleteGame } = useGames();
-
-  const options = [
-    {
-      label: "Edit",
-      action: () => {
-        setEditModalOpen(true);
-      },
-    },
-    {
-      label: "Delete",
-      action: () => {
-        setDeleteModalOpen(true);
-      },
-    },
-  ];
 
   return (
     <>
@@ -45,9 +36,21 @@ const GameListItem = (game: GameListItemProps) => {
         <div className="relative w-35 md:w-full h-full md:h-50 overflow-hidden shrink-0">
           <img loading="lazy" src={coverUrl ?? defaultImage} alt={`cover of ${name}`} className="opacity-80 w-full h-full object-cover" />
           {/* options */}
-          <div className="top-0 right-0 absolute p-2">
-            <OptionsMenu options={options} />
-          </div>
+          {!readOnly && (
+            <div className="top-0 right-0 absolute p-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="text-foreground cursor-pointer">
+                    <SlOptions />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onSelect={() => setEditModalOpen(true)}>Edit</DropdownMenuItem>
+                  <DropdownMenuItem variant="destructive" onSelect={() => setDeleteModalOpen(true)}>Delete</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-3 p-3">
           <p className="md:w-full md:overflow-hidden text-sm md:text-lg md:text-ellipsis md:text-nowrap" title={name}>
