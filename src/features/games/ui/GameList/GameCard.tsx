@@ -1,0 +1,57 @@
+import type { ReactNode } from "react";
+import { GAME_STATUS_LABELS, type GameStatus } from "../../model/Game";
+import { Skeleton } from "@shared/ui/chadcn/skeleton";
+
+type GameCardProps = {
+  name: string;
+  status: GameStatus;
+  coverUrl?: string;
+  actions?: ReactNode;
+};
+
+const gameStatusBadgeStyles: Record<GameStatus, string> = {
+  playing: "game-status-badge-playing",
+  completed: "game-status-badge-completed",
+  wishlist: "game-status-badge-wishlist",
+  paused: "game-status-badge-paused",
+};
+
+const defaultImage = "/games/default-cover.jpg";
+
+const GameCard = ({ name, status, coverUrl, actions }: GameCardProps) => (
+  <div className="transition-all cursor-pointer game-card-layout animation-duration">
+    <div className="relative w-35 md:w-full h-full md:h-50 overflow-hidden shrink-0">
+      <img
+        loading="lazy"
+        src={coverUrl ?? defaultImage}
+        alt={`cover of ${name}`}
+        className="opacity-80 w-full h-full object-cover"
+      />
+      {actions && (
+        <div className="top-0 right-0 absolute p-2">
+          {actions}
+        </div>
+      )}
+    </div>
+    <div className="flex flex-col gap-3 p-3">
+      <p className="md:w-full md:overflow-hidden text-sm md:text-lg md:text-ellipsis md:text-nowrap" title={name}>
+        {name}
+      </p>
+      <div className={gameStatusBadgeStyles[status]}>
+        {GAME_STATUS_LABELS[status]} {/*use the label from the status name*/}
+      </div>
+    </div>
+  </div>
+);
+
+export const GameItemSkeleton = () => (
+  <div className="game-card-layout">
+    <Skeleton className="rounded-none w-35 md:w-full h-full md:h-50 shrink-0" />
+    <div className="flex flex-col gap-3 p-3 w-full">
+      <Skeleton className="w-3/4 md:w-full h-5" />
+      <Skeleton className="rounded-full w-20 h-6" />
+    </div>
+  </div>
+);
+
+export default GameCard;

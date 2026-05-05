@@ -1,7 +1,6 @@
 import AnimatedRoute from "../../../../pages/AnimatedRoute";
-import GameListItem, {
-  GameListItemSkeleton,
-} from "../GameList/GameListItem";
+import GameItem from "../GameList/GameItem";
+import { GameItemSkeleton } from "../GameList/GameCard";
 import type { Game } from "../../model/Game";
 import StatusFilter, { type StatusOption } from "./StatusFilter";
 import AddGameButton from "@shared/ui/Organisms/AddGamesButton/AddGamesButton";
@@ -60,7 +59,7 @@ const Games = () => {
   const Loading = () => (
     <div className="games-grid">
       {Array.from({ length: 5 }).map((_, index) => (
-        <GameListItemSkeleton key={index} />
+        <GameItemSkeleton key={index} />
       ))}
     </div>
   );
@@ -83,7 +82,7 @@ const Games = () => {
             key={`${debouncedSearch}-${statusFilter}-${sortBy}`}
             className="games-grid">{
               visibleGames.map((game) =>
-                <GameListItem key={game.id} {...game} />
+                <GameItem key={game.id} {...game} />
               )}
           </anim.FadeInUp>
         ) :

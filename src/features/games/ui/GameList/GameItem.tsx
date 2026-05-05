@@ -1,0 +1,55 @@
+import { useState } from "react";
+import type { Game } from "../../model/Game";
+import { DeleteGameModal, EditGameModal } from "../GameModals";
+import useGames from "../../hooks/useGames";
+import { SlOptions } from "react-icons/sl";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@shared/ui/chadcn/dropdown-menu";
+import GameCard from "./GameCard";
+
+const GameItem = (game: Game) => {
+  const { id, name, status, coverUrl } = game;
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const { deleteGame } = useGames();
+
+  const actions = (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className="text-foreground cursor-pointer">
+          <SlOptions />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onSelect={() => setEditModalOpen(true)}>Edit</DropdownMenuItem>
+        <DropdownMenuItem variant="destructive" onSelect={() => setDeleteModalOpen(true)}>Delete</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  return (
+    <>
+      <GameCard name={name} status={status} coverUrl={coverUrl} actions={actions} />
+      <DeleteGameModal
+        isOpen={deleteModalOpen}
+        close={() => setDeleteModalOpen(false)}
+        gameName={name}
+        onConfirm={() => {
+          deleteGame(id);
+          setDeleteModalOpen(false);
+        }}
+      />
+      <EditGameModal
+        gameToEdit={{ ...game }}
+        isOpen={editModalOpen}
+        close={() => setEditModalOpen(false)}
+      />
+    </>
+  );
+};
+
+export default GameItem;

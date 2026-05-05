@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import GameListItem, { GameListItemSkeleton } from "./GameListItem";
+import GameItem from "./GameItem";
+import { GameItemSkeleton } from "./GameCard";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import { AddGameModal } from "../GameModals";
 import { NavLink } from "react-router";
@@ -20,14 +21,14 @@ const GameList = () => {
   const states = {
     loading: (
       <div className="games-grid">
-        {Array.from({ length: 5 }).map((_, i) => <GameListItemSkeleton key={i} />)}
+        {Array.from({ length: 5 }).map((_, i) => <GameItemSkeleton key={i} />)}
       </div>
     ),
     error: (error && <ErrorMessage message={error} retryAction={fetchGames} />),
     empty: <EmptyGameList />,
     success: (
       <div className="games-grid">
-        {games.slice(0, 5).map((game) => <GameListItem key={game.id} {...game} />)}
+        {games.slice(0, 5).map((game) => <GameItem key={game.id} {...game} />)}
       </div>
     ),
   };
