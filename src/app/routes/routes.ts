@@ -34,7 +34,9 @@ const userRoutesReverse = Object.entries(userRoutes).reduce(
 
 // Function para obtener el token desde un path
 export function getUserRouteToken(path: string): UserRouteToken | null {
-  return userRoutesReverse[path] ?? null;
+  console.log("Getting route token for path:", path);
+  let mainPath = path.match(/^\/[a-zA-Z0-9_-]+/)?.[0];
+  return mainPath ? userRoutesReverse[mainPath] : null;
 }
 
 export const defaultRoute = userRoutes.DASHBOARD;
