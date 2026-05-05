@@ -11,7 +11,8 @@ import type { Friend as FriendType } from "@features/user/model/Friend";
 import Button from "@shared/ui/Atoms/Button/Button";
 import { IoPersonRemoveSharp } from "react-icons/io5";
 import { anim } from "@shared/ui/Animations";
-import GameListItem, { GameListItemSkeleton } from "@features/games/ui/GameList/GameListItem";
+import FriendGameItem from "@features/games/ui/GameList/FriendGameItem";
+import { GameItemSkeleton } from "@features/games/ui/GameList/GameCard";
 
 
 
@@ -92,7 +93,7 @@ const FriendGames = ({ friend }: { friend: FriendType }) => {
         {friend.games && friend.games.length > 0 ? (
           <anim.FadeInUp className="games-grid">
             {friend.games.map((game) =>
-              <GameListItem key={game.id} {...game} readOnly />
+              <FriendGameItem key={game.id} {...game} />
             )}
           </anim.FadeInUp>
         ) : (
@@ -124,7 +125,7 @@ const FriendSkeleton = () => (
       <Skeleton className="mb-6 w-56 h-7" />
       <div className="games-grid">
         {Array.from({ length: 5 }).map((_, i) => (
-          <GameListItemSkeleton key={i} />
+          <GameItemSkeleton key={i} />
         ))}
       </div>
     </div>
