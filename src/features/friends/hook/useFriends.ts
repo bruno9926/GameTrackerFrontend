@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import type { Friend } from '@features/user/model/Friend';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@app/store/store';
-import { fetchFriends } from '../state';
+import { fetchFriends, removeFriend } from '../state';
 
 export const useFriends = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -10,7 +10,8 @@ export const useFriends = () => {
   const loading = useSelector((state: RootState) => state.friends.friendsLoading);
   const error = useSelector((state: RootState) => state.friends.friendsError);
 
-  const fetch = () => dispatch(fetchFriends())
+  const fetch = () => dispatch(fetchFriends());
+  const removeFriendById = (id: string) => dispatch(removeFriend(id));
 
   useEffect(() => {
     fetch();
@@ -35,6 +36,7 @@ export const useFriends = () => {
     busyFriends,
     loading,
     error,
-    fetchFriends: fetch
+    fetchFriends: fetch,
+    removeFriend: removeFriendById,
   };
 };

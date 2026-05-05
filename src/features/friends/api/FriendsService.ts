@@ -38,6 +38,10 @@ class FriendsService {
   async acceptFriendRequest(requestId: string): Promise<void> {
     return apiClient(`${API_URL}/requests/${requestId}/accept`, { method: "PATCH" })
   }
+
+  async removeFriend(friendId: string): Promise<void> {
+    return apiClient(`${API_URL}/${friendId}`, { method: "DELETE" })
+  }
 }
 
 export default FriendsService;

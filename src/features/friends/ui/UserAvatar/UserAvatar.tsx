@@ -28,7 +28,7 @@ type UserAvatarProps = {
 
 // style variants
 const avatarStyles = cva(
-    "rounded-2xl aspect-square overflow-hidden shrink-0",
+    "rounded-full aspect-square overflow-hidden shrink-0",
     {
         variants: {
             size: {
@@ -52,7 +52,7 @@ const statusStyles = cva(
             size: {
                 "sm": "w-3.5 outline-3",
                 "md": "w-5 outline-4",
-                "lg": "w-6 outline-6",
+                "lg": "w-6 outline-6 right-3 bottom-1",
             }
         }
     }

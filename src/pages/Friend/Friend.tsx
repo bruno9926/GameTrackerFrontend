@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import { RiArrowLeftLine } from "react-icons/ri";
 import AnimatedRoute from "../AnimatedRoute";
 import UserAvatar from "@features/friends/ui/UserAvatar/UserAvatar";
@@ -8,13 +8,22 @@ import { Skeleton } from "@shared/ui/chadcn/skeleton";
 import { userRoutes } from "@routes/routes";
 import type { Friend as FriendType } from "@features/user/model/Friend";
 import Button from "@shared/ui/Atoms/Button/Button";
+import { IoPersonRemoveSharp } from "react-icons/io5";
+
 
 
 const Friend = () => {
   const { id } = useParams<{ id: string }>();
-  const { friends, loading, error, fetchFriends } = useFriends();
+  const navigate = useNavigate();
+  const { friends, loading, error, fetchFriends, removeFriend } = useFriends();
 
   const friend = friends.find(f => f.id === id);
+
+  const handleRemoveFriend = async () => {
+    if (!id) return;
+    await removeFriend(id);
+    navigate(userRoutes.FRIENDS);
+  };
 
   return (
     <AnimatedRoute>
@@ -33,13 +42,13 @@ const Friend = () => {
 
         {!loading && !error && !friend && <NotFound />}
 
-        {!loading && !error && friend && <FriendProfile friend={friend} />}
+        {!loading && !error && friend && <FriendProfile friend={friend} onRemove={handleRemoveFriend} />}
       </div>
     </AnimatedRoute>
   );
 };
 
-const FriendProfile = ({ friend }: { friend: FriendType }) => {
+const FriendProfile = ({ friend, onRemove }: { friend: FriendType; onRemove: () => void }) => {
   const { name, username, avatarUrl, status } = friend;
 
   return (
@@ -58,8 +67,11 @@ const FriendProfile = ({ friend }: { friend: FriendType }) => {
         </div>
       </div>
       {/* actions */}
-      <Button>Remove from friends</Button>
-      <section className="">
+      <Button variant="secondary" onClick={onRemove} className="flex items-center gap-2">
+        <IoPersonRemoveSharp />
+        Remove friend
+      </Button>
+      <section className="mt-10">
         <h2>{name}'s Games</h2>
 
       </section>

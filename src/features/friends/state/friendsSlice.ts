@@ -27,6 +27,7 @@ export const fetchRequests = createAsyncThunk("friends/fetchRequests", withError
 export const acceptRequest = createAsyncThunk("friends/acceptRequest", withErrorMessage((id: string) => friendsService.acceptFriendRequest(id)));
 export const rejectRequest = createAsyncThunk("friends/rejectRequest", withErrorMessage((id: string) => friendsService.rejectFriendRequest(id)));
 export const sendRequest = createAsyncThunk("friends/sendRequest", withErrorMessage((id: string) => friendsService.sendFriendRequest(id)));
+export const removeFriend = createAsyncThunk("friends/removeFriend", withErrorMessage((id: string) => friendsService.removeFriend(id)));
 
 const friendsSlice = createSlice({
     name: "friends",
@@ -64,6 +65,9 @@ const friendsSlice = createSlice({
             })
             .addCase(rejectRequest.fulfilled, (state, action) => {
                 state.requests = state.requests.filter(r => r.id !== action.meta.arg);
+            })
+            .addCase(removeFriend.fulfilled, (state, action) => {
+                state.friends = state.friends.filter(f => f.id !== action.meta.arg);
             });
     },
 });
