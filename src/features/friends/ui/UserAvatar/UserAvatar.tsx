@@ -1,6 +1,7 @@
 import type { FriendStatus } from "@features/user/model/Friend";
 import { cn } from "@shared/lib/utils";
 import { cva } from "class-variance-authority";
+import { Skeleton } from "@shared/ui/chadcn/skeleton";
 
 const avatarColors = [
     'bg-avatar-1',
@@ -41,7 +42,7 @@ const avatarStyles = cva(
 )
 
 const statusStyles = cva(
-    "block right-0 -bottom-1 absolute rounded-full outline-background aspect-square",
+    "absolute rounded-full outline-background aspect-square",
     {
         variants: {
             status: {
@@ -77,5 +78,9 @@ const UserAvatar = ({ name, avatarUrl, status, size = "sm", className = "" }: Us
         </div>
     );
 };
+
+export const UserAvatarSkeleton = ({ size = "sm", className = "" }: { size?: AvatarSizes; className?: string }) => (
+    <Skeleton className={cn(avatarStyles({ size }), className)} />
+);
 
 export default UserAvatar;
