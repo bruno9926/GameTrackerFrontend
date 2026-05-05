@@ -86,6 +86,10 @@ Three slices: `auth` (tokens), `user` (current user), `games` (games list). All 
 - Styling: Tailwind v4 + `clsx` + `tailwind-merge` + `class-variance-authority`
 - Animations: Framer Motion (`motion` package)
 
+### Error Handling
+
+In catch blocks inside hooks, always use `getErrorMessage(e)` from `@shared/lib/error-messages` — never `e.message` directly.
+
 ### Environment
 
 `VITE_API_URL` sets the API base URL. Deployment target is Vercel (`vercel.json` present).
