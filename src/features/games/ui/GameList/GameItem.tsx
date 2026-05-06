@@ -3,6 +3,7 @@ import type { Game } from "../../model/Game";
 import { DeleteGameModal, EditGameModal } from "../GameModals";
 import useGames from "../../hooks/useGames";
 import { SlOptions } from "react-icons/sl";
+import { RiEditLine, RiDeleteBinLine } from "react-icons/ri";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -25,8 +26,14 @@ const GameItem = (game: Game) => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onSelect={() => setEditModalOpen(true)}>Edit</DropdownMenuItem>
-        <DropdownMenuItem variant="destructive" onSelect={() => setDeleteModalOpen(true)}>Delete</DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => setEditModalOpen(true)}>
+          <RiEditLine />
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem variant="destructive" onSelect={() => setDeleteModalOpen(true)}>
+          <RiDeleteBinLine />
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
