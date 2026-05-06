@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cva } from "class-variance-authority";
 import { GAME_STATUS_LABELS, type GameStatus } from "../../model/Game";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
 
@@ -9,12 +10,16 @@ type GameCardProps = {
   actions?: ReactNode;
 };
 
-const gameStatusBadgeStyles: Record<GameStatus, string> = {
-  playing: "game-status-badge-playing",
-  completed: "game-status-badge-completed",
-  wishlist: "game-status-badge-wishlist",
-  paused: "game-status-badge-paused",
-};
+const gameStatusBadgeVariants = cva("", {
+  variants: {
+    status: {
+      playing: "game-status-badge-playing",
+      completed: "game-status-badge-completed",
+      wishlist: "game-status-badge-wishlist",
+      paused: "game-status-badge-paused",
+    },
+  },
+});
 
 const defaultImage = "/games/default-cover.jpg";
 
@@ -37,7 +42,7 @@ const GameCard = ({ name, status, coverUrl, actions }: GameCardProps) => (
       <p className="md:w-full md:overflow-hidden text-sm md:text-lg md:text-ellipsis md:text-nowrap" title={name}>
         {name}
       </p>
-      <div className={gameStatusBadgeStyles[status]}>
+      <div className={gameStatusBadgeVariants({ status })}>
         {GAME_STATUS_LABELS[status]} {/*use the label from the status name*/}
       </div>
     </div>

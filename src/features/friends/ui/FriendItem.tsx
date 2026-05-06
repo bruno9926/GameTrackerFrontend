@@ -1,4 +1,5 @@
 import type { Friend } from '@features/user/model/Friend';
+import { cn } from "@shared/lib/utils";
 import { BsJoystick } from "react-icons/bs";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
 import { Link } from "react-router";
@@ -11,7 +12,7 @@ const FriendItem = ({ id, name, username, avatarUrl, status = "online" }: Friend
     return (
         <Link
             to={`${userRoutes.FRIENDS}/${id}`}
-            className={`flex justify-between items-center p-2 rounded-lg hover:bg-card transition-colors ${status === "offline" ? "opacity-60" : ""}`}
+            className={cn("flex justify-between items-center p-2 rounded-lg hover:bg-card transition-colors", status === "offline" && "opacity-60")}
         >
             <div className="flex flex-1 items-center gap-4 min-w-0">
                 <UserAvatar name={name} avatarUrl={avatarUrl} status={status}/>

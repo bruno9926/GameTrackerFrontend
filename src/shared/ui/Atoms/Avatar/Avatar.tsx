@@ -1,42 +1,43 @@
-import clsx from "clsx";
+import { cva, type VariantProps } from "class-variance-authority";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
 
-type Sizes = 'sm' | 'md' | 'lg'
-interface AvatarProps {
+const avatarVariants = cva("border rounded-full aspect-square overflow-hidden", {
+    variants: {
+        size: {
+            sm: "w-9",
+            md: "w-10",
+            lg: "w-35",
+        },
+    },
+    defaultVariants: { size: "sm" },
+});
+
+const avatarInitialsVariants = cva("flex justify-center items-center bg-brand w-full h-full", {
+    variants: {
+        size: {
+            sm: "text-md",
+            md: "text-xl",
+            lg: "text-5xl",
+        },
+    },
+    defaultVariants: { size: "sm" },
+});
+
+type AvatarProps = VariantProps<typeof avatarVariants> & {
     avatarUrl?: string;
-    name?: string,
-    size?: Sizes,
-    loading?: boolean
-}
-
-const width: Record<Sizes, string> = {
-    'sm': 'w-9',
-    'md': 'w-10',
-    'lg': 'w-35',
-}
-
-const fontSize: Record<Sizes, string> = {
-    'sm': 'text-md',
-    'md': 'text-xl',
-    'lg': 'text-5xl',
-}
+    name?: string;
+    loading?: boolean;
+};
 
 const Avatar = ({ avatarUrl, name = "User", size = 'sm', loading = false }: AvatarProps) => {
     const DefaultPicture = () => (
-        <div className={clsx([
-            "flex justify-center items-center bg-brand w-full h-full",
-            fontSize[size]
-        ])}>
+        <div className={avatarInitialsVariants({ size })}>
             {(name?.charAt(0) || '?').toUpperCase()}
         </div>
     )
 
     return (
-
-        <div className={clsx([
-            "rounded-full aspect-square overflow-hidden border",
-            width[size]
-        ])}>
+        <div className={avatarVariants({ size })}>
             {
                 loading ?
                     <Skeleton className="rounded-full w-full h-full" />
@@ -45,7 +46,6 @@ const Avatar = ({ avatarUrl, name = "User", size = 'sm', loading = false }: Avat
                         : <DefaultPicture />
             }
         </div>
-
     )
 }
 
