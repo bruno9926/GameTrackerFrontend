@@ -10,7 +10,6 @@ import Button from "@shared/ui/Atoms/Button/Button";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 
 import useRegister from "../../hooks/useRegister";
-import { getErrorMessage } from "@shared/lib/error-messages";
 import { useNavigate } from "react-router";
 import { publicRoutes } from "@routes/routes";
 
@@ -49,7 +48,7 @@ const RegisterForm = () => {
             navigate(publicRoutes.LOGIN);
         } catch (error) {
             setError("root", {
-                message: getErrorMessage(error)
+                message: error as string
             });
         }
     };
