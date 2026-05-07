@@ -11,7 +11,7 @@ const Settings = () => {
         {/* Settings Sections */}
         <div className="flex flex-col gap-7">
           {/* Only Mobile */}
-          <div className="md:hidden block mx-auto w-full max-w-4xl">
+          <div className="md:hidden block">
             <h1>Settings</h1>
           </div>
 

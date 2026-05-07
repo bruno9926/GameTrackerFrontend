@@ -217,21 +217,23 @@ input:-webkit-autofill:focus {
 .theme-girly {
   --background: #181114;
   --foreground: #f6d9df;
+  --popover: var(--card);
+  --popover-foreground: var(--card-foreground);
 
   --card: #24181d;
   --card-foreground: #f6d9df;
 
-  --primary: #ff3b6b;
+  --primary: #e4476e;
   --primary-foreground: #ffffff;
 
   --secondary: #322028;
   --secondary-foreground: #f2c9d3;
 
-  --accent: #ff3b6b;
+  --accent: var(--primary);
   --accent-foreground: #ffffff;
 
   --border: #49303a;
-  --input: #2c1d24;
+  --input: #7c5064;
   --ring: #ff3b6b;
 
   --muted: #22171b;

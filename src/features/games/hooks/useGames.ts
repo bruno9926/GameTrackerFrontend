@@ -18,11 +18,11 @@ const useGames = () => {
     fetchGames: 
       () => dispatch(fetchGames()),
     submitGame:
-      (game: GameToCreate) => dispatch(submitGame(game)),
+      (game: GameToCreate) => dispatch(submitGame(game)).unwrap(),
     deleteGame:
-      (id: string) => dispatch(deleteGame(id)),
+      (id: string) => dispatch(deleteGame(id)).unwrap(),
     updateGame:
-      (game: GameToUpdate) => dispatch(updateGame(game))
+      (game: GameToUpdate) => dispatch(updateGame(game)).unwrap()
   };
 };
 
