@@ -12,7 +12,8 @@ import Button from "@shared/ui/Atoms/Button/Button";
 import { IoPersonRemoveSharp } from "react-icons/io5";
 import { anim } from "@shared/ui/Animations";
 import FriendGameItem from "@features/games/ui/GameList/FriendGameItem";
-import { GameItemSkeleton } from "@features/games/ui/GameList/GameCard";
+import GameCard, { GameItemSkeleton } from "@features/games/ui/GameList/GameCard";
+import type { Game } from "@features/games/model/Game";
 
 
 
@@ -20,7 +21,7 @@ const Friend = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { removeFriend } = useFriends();
-  const { friend, loading, error, fetchFriend } = useFriend(id);
+  const { friend, loading, error, fetchFriend, gamesInCommon } = useFriend(id);
 
   const handleRemoveFriend = async () => {
     if (!id) return;
@@ -32,10 +33,12 @@ const Friend = () => {
     if (loading) return <FriendSkeleton />;
     if (error) return <ErrorMessage message={error} retryAction={fetchFriend} />;
     if (!friend) return <NotFound />;
+    
     return (
       <section className="flex flex-col gap-6">
         <FriendProfile friend={friend} onRemove={handleRemoveFriend} />
         <FriendGames friend={friend} />
+        <GamesInCommon games={gamesInCommon} />
       </section>
     );
   };
@@ -81,6 +84,24 @@ const FriendProfile = ({ friend, onRemove }: { friend: FriendType; onRemove: () 
     </div>
   );
 };
+
+const GamesInCommon = ({ games }: { games: Game[] }) => (
+  <section className="mt-10">
+    <h2>Games in common</h2>
+    <div className="mt-6">
+      {games && games.length > 0 ? (
+        <anim.FadeInUp className="games-grid">
+          {games.map(game => <GameCard key={game.id} {...game} />)}
+        </anim.FadeInUp>
+      ) : (
+        <div className="empty-box">
+          <p className="font-medium text-subtitle text-base text-center">No games in common yet</p>
+          <p className="mt-1 text-subtitle text-xs text-center">Games you both track will show up here</p>
+        </div>
+      )}
+    </div>
+  </section>
+);
 
 const FriendGames = ({ friend }: { friend: FriendType }) => {
   const firstName = friend.name.split(' ')[0];
