@@ -57,8 +57,6 @@ npm run preview   # Preview production build
 
 - **Backlog management** — add, organize, and track games across platforms
 - **Game search** — look up games by title to add to your library
-- **Friends** — add friends and see what they're currently playing
+- **Friends** — send and manage friend requests, browse friends' game libraries, and copy games into your own library
 - **Dark / light theme** — persisted across sessions
 - **Authentication** — JWT-based with automatic token refresh
-
-> The social features (friend activity feed, game sharing) are currently in progress.
