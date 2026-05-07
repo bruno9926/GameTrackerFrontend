@@ -1,29 +1,24 @@
-import { authService } from "../api/AuthService";
 import type { UserInfo } from "@features/user/model/User";
-import { getErrorMessage } from "@shared/lib/error-messages";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "@app/store/store";
+import { registerUser } from "../state";
 
 type userToRegister = UserInfo & {
     password: string
 }
 
 const useRegister = () => {
+    const dispatch = useDispatch<AppDispatch>();
 
-    const register = async (user: userToRegister) => {
-        try {
-            await authService.register({
-                name: user.name,
-                username: user.username ?
-                    user.username.toLowerCase() :
-                    user.name.toLowerCase(), // temporal, only for migration
-                email: user.email,
-                password: user.password
-            })
-        } catch (error) {
-            throw getErrorMessage(error);
-        }
-    }
+    const register = (user: userToRegister) =>
+        dispatch(registerUser({
+            name: user.name,
+            username: user.username.toLowerCase(),
+            email: user.email,
+            password: user.password
+        })).unwrap();
 
     return { register };
-}
+};
 
 export default useRegister;

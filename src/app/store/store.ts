@@ -10,7 +10,9 @@ const { token, refreshToken } = authService.getAuth();
 const preloadedState = {
     auth: {
         token: token,
-        refreshToken: refreshToken
+        refreshToken: refreshToken,
+        loading: false,
+        error: null
     }
 }
 
