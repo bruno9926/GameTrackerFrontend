@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/bruno/Documents/Development/Nest/gametracker-backend/**)",
+      "Bash(npm run *)"
+    ]
+  }
+}

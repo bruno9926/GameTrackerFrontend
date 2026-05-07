@@ -57,7 +57,7 @@ feature/
 └── ui/      # Feature components
 ```
 
-API calls are made inside hooks (not thunks). Services follow the singleton pattern (`getInstance()`).
+Services follow the singleton pattern (`getInstance()`). API calls are made in thunks for shared state, or directly in hooks for local state (see State section).
 
 ### API Layer
 
@@ -76,7 +76,11 @@ API calls are made inside hooks (not thunks). Services follow the singleton patt
 
 ### State (Redux)
 
-Three slices: `auth` (tokens), `user` (current user), `games` (games list). All slices are minimal — reducers expose simple set/clear actions; async logic lives in hooks.
+Three slices: `auth` (tokens), `user` (current user), `games` (games list). Slices expose async thunks (via `createAsyncThunk`) for operations that update shared state; hooks dispatch these thunks.
+
+**When to use a thunk vs. a direct service call:**
+- **Thunk in slice** — the result is shared across multiple components, persists across navigation, or other parts of the app depend on it (e.g. fetching the games list, logging in to set auth tokens).
+- **Direct service call in hook** — the operation is self-contained: a single component owns the state, it's a form submission with no shared side effects, or the result doesn't need to live in the store (e.g. changing a password, registering a new user).
 
 ### UI Components
 
