@@ -36,13 +36,13 @@ const NavigationItem = ({ children, route }: { children: React.ReactNode; route:
       to={route}
       className={({ isActive }) => `
         relative block py-2 pl-4 pr-2 rounded-lg font-medium transition-all duration-200
-        hover:text-brand hover:bg-card
+        hover:text-accent hover:bg-card
         
         before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 
-        before:w-1 before:h-[70%] before:bg-brand before:rounded-full before:transition-transform before:duration-200
+        before:w-1 before:h-[70%] before:bg-accent before:rounded-full before:transition-transform before:duration-200
 
         ${isActive 
-          ? 'text-brand bg-card before:scale-y-100' 
+          ? 'text-accent bg-card before:scale-y-100' 
           : 'text-foreground before:scale-y-0'
         }
       `}

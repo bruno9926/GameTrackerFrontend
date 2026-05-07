@@ -39,7 +39,7 @@ const Header = () => {
           "md:hidden flex justify-center items-center w-8 h-8 transition-opacity duration-300",
           isScrolled ? "opacity-100" : "opacity-60"
         )}>
-          <span className="font-extrabold text-brand text-xl italic tracking-tighter">GT</span>
+          <span className="font-extrabold text-accent text-xl italic tracking-tighter">GT</span>
         </div>
         
         {/* Page title component handles its own visibility/styling for desktop */}

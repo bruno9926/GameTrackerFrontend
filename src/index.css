@@ -215,38 +215,36 @@ input:-webkit-autofill:focus {
 }
 
 .theme-girly {
-  --background: #fff0f6;
-  --foreground: #5a3e5c;
+  --background: #181114;
+  --foreground: #f6d9df;
 
-  --card: #ffe6f0;
-  --card-foreground: #5a3e5c;
+  --card: #24181d;
+  --card-foreground: #f6d9df;
 
-  --primary: #ff85c0;
+  --primary: #ff3b6b;
   --primary-foreground: #ffffff;
 
-  --secondary: #ffe0eb;
-  --secondary-foreground: #5a3e5c;
+  --secondary: #322028;
+  --secondary-foreground: #f2c9d3;
 
-  --accent: #ff85c0;
+  --accent: #ff3b6b;
   --accent-foreground: #ffffff;
 
-  --border: #e4d2d9;
-  --input: #fcd6e6;
-  --ring: #ff85c0;
+  --border: #49303a;
+  --input: #2c1d24;
+  --ring: #ff3b6b;
 
-  --muted: #ffeaf2;
-  --muted-foreground: #a06a8c;
+  --muted: #22171b;
+  --muted-foreground: #aa7f8c;
 
-  /* custom */
-  --title: #5a3e5c;
-  --subtitle: #a06a8c;
-  --scrollbar: #ff85c0;
+  --title: #ffe8ee;
+  --subtitle: #aa7f8c;
+  --scrollbar: #ff3b6b;
 
-  /* gaming colors */
-  --playing: #88bbee;
-  --completed: #8de9bd;
-  --wishlist: #e490c2;
-  --paused: #fdce77;
+  --playing: #7cb7ff;
+  --completed: #6fd9a0;
+  --wishlist: #ff70a6;
+  --paused: #ffc76a;
 }
 
 @layer base {

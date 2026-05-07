@@ -38,7 +38,7 @@ const BottomBar = () => {
             to={item.path}
             className={({ isActive }) => `
               flex flex-col items-center gap-1 transition-colors duration-200
-              ${isActive ? 'text-brand' : 'text-subtitle/60 hover:text-subtitle'}
+              ${isActive ? 'text-accent' : 'text-subtitle/60 hover:text-subtitle'}
             `}
           >
             {item.icon}

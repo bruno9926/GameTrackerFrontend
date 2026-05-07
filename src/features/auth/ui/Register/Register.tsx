@@ -14,10 +14,10 @@ const Hero = () => (
         <div className="absolute inset-0 bg-linear-to-r from-black/90 to-black/50" />
 
         <div className="z-10 relative flex flex-col gap-4">
-            <h2 className="m-0 text-brand">GameTracker</h2>
+            <h2 className="m-0 text-accent">GameTracker</h2>
             <div className="flex flex-col gap-1 max-w-xl">
                 <h1 className="font-semibold text-white text-5xl md:text-7xl">
-                    Join the <span className="text-brand">Ultimate</span> Gamer Community
+                    Join the <span className="text-accent">Ultimate</span> Gamer Community
                 </h1>
             </div>
             <span className="w-xl max-w-full text-subtitle text-sm md:text-xl">

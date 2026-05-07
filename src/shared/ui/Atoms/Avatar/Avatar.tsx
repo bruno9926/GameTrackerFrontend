@@ -12,7 +12,7 @@ const avatarVariants = cva("border rounded-full aspect-square overflow-hidden", 
     defaultVariants: { size: "sm" },
 });
 
-const avatarInitialsVariants = cva("flex justify-center items-center bg-brand w-full h-full", {
+const avatarInitialsVariants = cva("flex justify-center items-center bg-accent w-full h-full", {
     variants: {
         size: {
             sm: "text-md",

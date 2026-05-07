@@ -19,7 +19,7 @@ const StatusFilter: React.FC<StatusFilterProps> = ({ statusFilter, setStatusFilt
       <button
         className={clsx({
           "cursor-pointer badge": true,
-          "border-brand text-brand": statusFilter === null
+          "border-accent text-accent": statusFilter === null
         })}
         onClick={() => setStatusFilter(null)}
       >
