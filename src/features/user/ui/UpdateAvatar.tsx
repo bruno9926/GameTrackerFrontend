@@ -1,12 +1,11 @@
 import Avatar from "@shared/ui/Atoms/Avatar/Avatar";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@app/store/store";
+import type { AppDispatch, RootState } from "@app/store/store";
 import { MdEdit } from "react-icons/md";
 import { useRef, useState } from "react";
-import { uploadAvatar } from "../api/uploadAvatar";
+import { uploadAvatar } from "@features/user/state";
 import toast from "@shared/ui/Atoms/Toast";
 import { getErrorMessage } from "@shared/lib/error-messages";
-import { setUser } from "@features/user/state";
 import clsx from "clsx";
 
 const UpdateAvatar = () => {
@@ -14,7 +13,7 @@ const UpdateAvatar = () => {
     const [updating, setUpdating] = useState(false);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const userState = useSelector((state: RootState) => state.user);
     const { user, loading } = userState;
 
@@ -37,8 +36,7 @@ const UpdateAvatar = () => {
 
         setUpdating(true);
         try {
-            const { avatarUrl: url } = await uploadAvatar(file);
-            dispatch(setUser({ ...user, avatarUrl: url }));
+            await dispatch(uploadAvatar(file)).unwrap();
             toast.success("Your picture has been updated!")
         } catch (e) {
             toast.error(getErrorMessage(e))

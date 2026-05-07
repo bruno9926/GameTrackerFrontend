@@ -1,17 +1,17 @@
 import type { UserInfo } from "../model/User";
-import { getErrorMessage } from "@shared/lib/error-messages";
-import { userService } from "../api/UserService";
+import { useDispatch } from "react-redux";
+import { updateUserInfo } from "../state/userSlice";
+import type { AppDispatch } from "@app/store/store";
 
 const useUpdateUserInfo = () => {
-    const updateUserInfo = async (userInfoChanges: Partial<UserInfo>): Promise<UserInfo> => {
-        try {
-            return await userService.setUserInfo(userInfoChanges);
-        } catch (error) {
-            throw getErrorMessage(error);
-        }
-    }
+    const dispatch = useDispatch<AppDispatch>();
 
-    return { updateUserInfo }
+    const updateInfo = (userInfoChanges: Partial<UserInfo>) =>
+        dispatch(updateUserInfo(userInfoChanges)).unwrap()
+
+    return {
+        updateUserInfo: updateInfo,
+    }
 }
 
 export default useUpdateUserInfo;
