@@ -9,6 +9,9 @@ export const getErrorMessage = (error: unknown): string => {
   if (isApiError(error)) return getUserError(error);
 
   if (error instanceof Error) return error.message;
+  if (error instanceof Object && "message" in error && typeof error.message === "string") {
+    return error.message;
+  }
 
   return String(error);
 }
