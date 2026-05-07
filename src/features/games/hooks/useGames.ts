@@ -1,74 +1,28 @@
-import { useState } from "react";
 import type { GameToCreate, GameToUpdate } from "../model/Game";
-import GameService from "../api/GameService";
 // redux
 import { useSelector, useDispatch } from "react-redux";
-import { type RootState } from "../../../app/store/store";
-import { setGames } from "../state";
-import { getErrorMessage } from "@shared/lib/error-messages";
+import type { AppDispatch, RootState } from "../../../app/store/store";
+import { clearError, deleteGame, fetchGames, submitGame, updateGame } from "../state";
 
 const useGames = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
   const games = useSelector((state: RootState) => state.games.list);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const gameService: GameService = GameService.getInstance();
-
-  const handleRequest = async (action: () => Promise<void>) => {
-    try {
-      setError(null);
-      setLoading(true);
-      //await new Promise(resolve => setTimeout(resolve, 5 * 1000))
-      await action();
-    } catch (exception) {
-      setError(getErrorMessage(exception))
-      throw exception;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchGames = async () =>
-    handleRequest(async () => {
-      const games = await gameService.fetchGames();
-      if (!Array.isArray(games)) throw new Error("Response is not an array");
-      dispatch(setGames(games));
-    });
-
-  const submitGame = async (game: GameToCreate) =>
-    handleRequest(async () => {
-      const games = await gameService.postGame(game);
-      if (!Array.isArray(games)) throw new Error("Response is not an array");
-      dispatch(setGames(games));
-    });
-
-  const deleteGame = async (id: string) =>
-    handleRequest(async () => {
-      const games = await gameService.deleteGame(id);
-      if (!Array.isArray(games)) throw new Error("Response is not an array");
-      dispatch(setGames(games));
-    });
-
-  const updateGame = async (game: GameToUpdate) =>
-    handleRequest(async () => {
-      const games = await gameService.updateGame(game);
-      if (!Array.isArray(games)) throw new Error("Response is not an array");
-      dispatch(setGames(games));
-    });
-
-  const clearError = () => setError(null);
+  const { loading, error} = useSelector((state: RootState) => state.games);
 
   return {
     loading,
     error,
     games,
-    fetchGames,
-    submitGame,
-    deleteGame,
-    updateGame,
-    clearError,
+    clearError: () => dispatch(clearError()),
+    fetchGames: 
+      () => dispatch(fetchGames()),
+    submitGame:
+      (game: GameToCreate) => dispatch(submitGame(game)),
+    deleteGame:
+      (id: string) => dispatch(deleteGame(id)),
+    updateGame:
+      (game: GameToUpdate) => dispatch(updateGame(game))
   };
 };
 

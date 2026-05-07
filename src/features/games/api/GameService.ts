@@ -79,3 +79,5 @@ class GameService {
 }
 
 export default GameService;
+
+export const gameService = GameService.getInstance();
