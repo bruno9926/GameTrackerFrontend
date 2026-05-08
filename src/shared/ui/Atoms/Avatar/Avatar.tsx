@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
 
-const avatarVariants = cva("border rounded-full aspect-square overflow-hidden", {
+const avatarVariants = cva("rounded-full aspect-square overflow-hidden", {
     variants: {
         size: {
             sm: "w-9",

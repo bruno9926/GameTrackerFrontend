@@ -18,7 +18,7 @@ const Header = () => {
   }, []);
 
   // Shared styles across all viewports
-  const baseStyles = "w-full flex justify-between items-center gap-4 p-4 z-(--z-navbar) transition-all duration-300";
+  const baseStyles = "w-full flex justify-between items-center gap-4 p-2 z-(--z-navbar) transition-all duration-300";
 
   // Mobile specific logic: Fixed position and scroll-dependent appearance
   const mobileStyles = clsx(
@@ -29,7 +29,7 @@ const Header = () => {
   );
 
   // Desktop specific logic: Revert to static flow and reset mobile-only styles
-  const desktopStyles = "md:static md:top-auto md:h-20 md:bg-transparent md:border-none md:px-4 md:pb-2";
+  const desktopStyles = "md:static md:top-auto md:h-20 md:bg-transparent md:border-none md:px-4 md:pb-2 md:pt-4";
 
   return (
     <header className={clsx(baseStyles, mobileStyles, desktopStyles)}>
