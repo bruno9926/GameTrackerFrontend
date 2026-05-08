@@ -1,6 +1,5 @@
-import type { Game, GameToUpdate, GameToCreate } from "../model/Game";
+import type { Game, GameToUpdate, GameToCreate, GameTitle, GameOfTheWeek } from "../model";
 import { apiClient } from "@shared/api/apiClient";
-import type { GameTitle } from "../model/GameTitle";
 
 const API_URL = import.meta.env.VITE_API_URL + "/games";
 
@@ -75,6 +74,10 @@ class GameService {
       throw new Error("A search query is required");
     }
     return apiClient(`${API_URL}/search?q=${name}`);
+  }
+
+  async fetchGOTW(): Promise<GameOfTheWeek> {
+    return apiClient(`${API_URL}/gotw`);
   }
 }
 
