@@ -1,23 +1,15 @@
 import { useParams, Link, useNavigate } from "react-router";
-import { useState } from "react";
-import clsx from "clsx";
 import { RiArrowLeftLine } from "react-icons/ri";
 import AnimatedRoute from "../AnimatedRoute";
-import UserAvatar, { UserAvatarSkeleton } from "@features/friends/ui/UserAvatar/UserAvatar";
 import { useFriends } from "@features/friends/hook/useFriends";
 import { useFriend } from "@features/friends/hook/useFriend";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
-import { Skeleton } from "@shared/ui/chadcn/skeleton";
 import { userRoutes } from "@routes/routes";
-import type { Friend as FriendType } from "@features/user/model/Friend";
-import Button from "@shared/ui/Atoms/Button/Button";
-import { IoPersonRemoveSharp } from "react-icons/io5";
-import { anim } from "@shared/ui/Animations";
-import FriendGameItem from "@features/games/ui/GameList/FriendGameItem";
+import FriendProfile from "@features/friends/ui/FriendProfile/FriendProfile";
+import FriendGames from "@features/friends/ui/FriendGames/FriendGames";
+import { UserAvatarSkeleton } from "@features/friends/ui/UserAvatar/UserAvatar";
+import { Skeleton } from "@shared/ui/chadcn/skeleton";
 import { GameItemSkeleton } from "@features/games/ui/GameList/GameCard";
-import type { Game } from "@features/games/model/Game";
-import useStatusFilter from "@features/games/hooks/useStatusFilter";
-import StatusFilter from "@features/games/ui/Games/StatusFilter";
 
 const Friend = () => {
   const { id } = useParams<{ id: string }>();
@@ -58,84 +50,6 @@ const Friend = () => {
         {renderContent()}
       </div>
     </AnimatedRoute>
-  );
-};
-
-const FriendProfile = ({ friend, onRemove }: { friend: FriendType; onRemove: () => void }) => {
-  const { name, username, avatarUrl } = friend;
-
-  return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-row items-center gap-5">
-        <UserAvatar name={name} avatarUrl={avatarUrl} size="lg" status={'busy'} className="hidden md:block" />
-        <UserAvatar name={name} avatarUrl={avatarUrl} size="md" status={'busy'} className="md:hidden block" />
-
-        <div className="flex flex-col flex-1 gap-2 min-w-0 h-full">
-          <div className="flex flex-col items-start gap-0">
-            <h1 className="text-3xl">{name}</h1>
-            <span className="text-subtitle truncate">@{username}</span>
-          </div>
-        </div>
-      </div>
-      {/* actions */}
-      <Button variant="secondary" onClick={onRemove} className="flex items-center gap-2">
-        <IoPersonRemoveSharp />
-        Remove friend
-      </Button>
-    </div>
-  );
-};
-
-const FriendGames = ({ friend, gamesInCommon }: { friend: FriendType, gamesInCommon: Game[] }) => {
-  const firstName = friend.name.split(' ')[0];
-  const [showInCommon, setShowInCommon] = useState(false);
-
-  const { statusFilters, toggleStatusFilter, selectAll, filterByStatus } = useStatusFilter();
-
-  const inCommonTitleIds = new Set(gamesInCommon.map(g => g.gameTitleId));
-  const visibleGames = filterByStatus(friend.games ?? [])
-    .filter(game => !showInCommon || inCommonTitleIds.has(game.gameTitleId));
-
-  const filtersKey = `${Object.entries(statusFilters).map(([s, a]) => `${s}:${a}`).join(",")}-${showInCommon}`;
-
-  return (
-    <section className="mt-4 md:mt-6">
-      <h2>Games {firstName} is tracking</h2>
-      <div className="flex items-center gap-2 md:gap-4 py-4 w-full min-w-0 overflow-x-auto no-scrollbar">
-        <button
-          className={clsx({
-            "cursor-pointer badge": true,
-            "border-accent text-accent": showInCommon
-          })}
-          onClick={() => setShowInCommon(v => !v)}
-        >
-          In Common
-        </button>
-        <StatusFilter statusFilters={statusFilters} toggleStatusFilter={toggleStatusFilter} selectAll={selectAll} />
-      </div>
-
-      <div className="mt-2 md:mt-4">
-        {friend.games && friend.games.length > 0 ? (
-          visibleGames.length > 0 ? (
-            <anim.FadeInUp key={filtersKey} className="games-grid">
-              {visibleGames.map((game) =>
-                <FriendGameItem key={game.id} {...game} />
-              )}
-            </anim.FadeInUp>
-          ) : (
-            <div className="empty-box">
-              <p className="font-medium text-subtitle text-base text-center">No games match the selected filters</p>
-            </div>
-          )
-        ) : (
-          <div className="empty-box">
-            <span className="opacity-80 mb-2 text-2xl">🎮</span>
-            <p className="font-medium text-subtitle text-base text-center">{firstName} isn't tracking any games yet</p>
-            <p className="mt-1 text-subtitle text-xs">Check back later</p>
-          </div>
-        )}
-      </div>
-    </section>
   );
 };
 

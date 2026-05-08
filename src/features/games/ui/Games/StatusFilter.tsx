@@ -19,7 +19,7 @@ const StatusFilter: React.FC<StatusFilterProps> = ({statusFilters, toggleStatusF
   const allSelected = gameStatuses.every(status => statusFilters[status]);
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 md:gap-4">
       <button
         className={clsx({
           "cursor-pointer badge": true,
