@@ -17,9 +17,9 @@ const Games = () => {
   const { loading, error, games, fetchGames } = useGames();
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusOption>(null);
-  const [sortBy, setSortBy] = useState<SortOption>("name-asc");
+  const [sortBy, setSortBy] = useState<SortOption>("more-recent");
   const [addModalOpen, setAddModalOpen] = useState(false);
-  
+
   const { debouncedInput: debouncedSearch, waitingInput } = useDebouncedInput(searchText, {
     debounceTime: 500,
   });
@@ -79,8 +79,9 @@ const Games = () => {
     if (loading) return <Loading />
     if (error) return <p>Error: {error}</p>
     if (waitingInput) return <p>Searching...</p>
+
     return (
-      <div className="mt-6 md:mt-0">
+      <>
         {visibleGames.length > 0 ? (
           <anim.FadeInUp
             key={`${debouncedSearch}-${statusFilter}-${sortBy}`}
@@ -97,7 +98,7 @@ const Games = () => {
           }
           </p>
         }
-      </div>
+      </>
     )
   }
 
@@ -121,7 +122,9 @@ const Games = () => {
           <StatusFilter statusFilter={statusFilter} setStatusFilter={handleStatusChange} />
           <SortSelect value={sortBy} onChange={setSortBy} />
         </div>
-        {renderContent()}
+        <div className="mt-6 md:mt-0">
+          {renderContent()}
+        </div>
       </div>
       <AddGameModal
         isOpen={addModalOpen}
