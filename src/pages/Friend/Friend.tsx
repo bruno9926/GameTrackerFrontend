@@ -14,6 +14,8 @@ import { anim } from "@shared/ui/Animations";
 import FriendGameItem from "@features/games/ui/GameList/FriendGameItem";
 import GameCard, { GameItemSkeleton } from "@features/games/ui/GameList/GameCard";
 import type { Game } from "@features/games/model/Game";
+import useStatusFilter from "@features/games/hooks/useStatusFilter";
+import StatusFilter from "@features/games/ui/Games/StatusFilter";
 
 
 
@@ -105,18 +107,28 @@ const GamesInCommon = ({ games }: { games: Game[] }) => (
 
 const FriendGames = ({ friend }: { friend: FriendType }) => {
   const firstName = friend.name.split(' ')[0];
+  const { statusFilters, toggleStatusFilter, selectAll, filterByStatus } = useStatusFilter();
+  const visibleGames = filterByStatus(friend.games ?? []);
+  const statusFiltersHash = Object.entries(statusFilters).map(([status, isActive]) => `${status}:${isActive}`).join(",");
 
   return (
     <section className="mt-10">
       <h2>Games {firstName} is tracking</h2>
+      <StatusFilter statusFilters={statusFilters} toggleStatusFilter={toggleStatusFilter} selectAll={selectAll} />
 
       <div className="mt-6">
         {friend.games && friend.games.length > 0 ? (
-          <anim.FadeInUp className="games-grid">
-            {friend.games.map((game) =>
-              <FriendGameItem key={game.id} {...game} />
-            )}
-          </anim.FadeInUp>
+          visibleGames.length > 0 ? (
+            <anim.FadeInUp key={statusFiltersHash} className="games-grid">
+              {visibleGames.map((game) =>
+                <FriendGameItem key={game.id} {...game} />
+              )}
+            </anim.FadeInUp>
+          ) : (
+            <div className="empty-box">
+              <p className="font-medium text-subtitle text-base text-center">No games match the selected filters</p>
+            </div>
+          )
         ) : (
           <div className="empty-box">
             <span className="opacity-80 mb-2 text-2xl">🎮</span>

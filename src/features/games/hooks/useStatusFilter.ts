@@ -6,7 +6,7 @@ const useStatusFilter = () => {
     playing: true,
     completed: true,
     wishlist: true,
-    paused: false,
+    paused: true,
   });
 
   const toggleStatusFilter = (status: GameStatus) =>
