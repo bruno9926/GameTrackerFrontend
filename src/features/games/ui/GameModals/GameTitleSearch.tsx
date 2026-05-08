@@ -64,6 +64,7 @@ const GameTitleSearch: FC<GameTitleSearchProps> = ({
             <FieldLabel className={selectionError ? "text-error" : ""}>Name</FieldLabel>
             <Combobox
                 items={gameTitles}
+                filter={null}
                 inputValue={selectedGameTitle?.name ?? searchString}
                 onInputValueChange={(value) => {
                     setSearchString(value);
