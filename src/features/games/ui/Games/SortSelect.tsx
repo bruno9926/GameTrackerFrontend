@@ -9,7 +9,7 @@ interface Props {
 
 const SortSelect = ({ value, onChange }: Props) => {
   return (
-    <div className="flex items-baseline gap-4 shrink-0">
+    <div className="flex justify-between items-baseline gap-4 w-full md:w-fit shrink-0">
       <span>Sort by</span>
       <Select
         value={value}
