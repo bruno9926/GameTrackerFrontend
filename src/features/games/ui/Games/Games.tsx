@@ -1,8 +1,8 @@
 import AnimatedRoute from "../../../../pages/AnimatedRoute";
 import GameItem from "../GameList/GameItem";
 import { GameItemSkeleton } from "../GameList/GameCard";
-import type { Game } from "../../model/Game";
-import StatusFilter, { type StatusOption } from "./StatusFilter";
+import { gameStatuses, type Game, type GameStatus } from "../../model/Game";
+import StatusFilter from "./StatusFilter";
 import AddGameButton from "@shared/ui/Organisms/AddGamesButton/AddGamesButton";
 import SortSelect, { type SortOption } from "./SortSelect";
 import { AddGameModal } from "../GameModals";
@@ -16,9 +16,28 @@ import { Input } from "@shared/ui/chadcn/input";
 const Games = () => {
   const { loading, error, games, fetchGames } = useGames();
   const [searchText, setSearchText] = useState("");
-  const [statusFilter, setStatusFilter] = useState<StatusOption>(null);
   const [sortBy, setSortBy] = useState<SortOption>("more-recent");
   const [addModalOpen, setAddModalOpen] = useState(false);
+
+  const [statusFilters, setStatusFilters] = useState<Record<GameStatus, boolean>>({
+    playing: true,
+    completed: true,
+    wishlist: true,
+    paused: false,
+  })
+
+  // create a hash of the status filters to use as a key for the animated list
+  const statusFiltersHash = Object.entries(statusFilters).map(([status, isActive]) => `${status}:${isActive}`).join(",");
+
+  const toggleStatusFilter = (status: GameStatus) => {
+    setStatusFilters(current => ({
+      ...current,
+      [status]: !current[status]
+    }))
+  }
+
+  const selectAll = () =>
+    setStatusFilters(Object.fromEntries(gameStatuses.map(s => [s, true])) as Record<GameStatus, boolean>);
 
   const { debouncedInput: debouncedSearch, waitingInput } = useDebouncedInput(searchText, {
     debounceTime: 500,
@@ -31,8 +50,7 @@ const Games = () => {
     return game.name.toLowerCase().includes(normalizedSearch)
   }
   const byStatus = (game: Game) => {
-    if (statusFilter == null) return true;
-    return game.status === statusFilter
+    return statusFilters[game.status]
   };
 
   // sort
@@ -68,13 +86,6 @@ const Games = () => {
     </div>
   );
 
-  const handleStatusChange = (status: StatusOption) => {
-    setStatusFilter(current => {
-      if (current === status) return null;
-      return status;
-    })
-  }
-
   const renderContent = () => {
     if (loading) return <Loading />
     if (error) return <p>Error: {error}</p>
@@ -84,7 +95,7 @@ const Games = () => {
       <>
         {visibleGames.length > 0 ? (
           <anim.FadeInUp
-            key={`${debouncedSearch}-${statusFilter}-${sortBy}`}
+            key={`${debouncedSearch}-${statusFiltersHash}-${sortBy}`}
             className="games-grid">{
               visibleGames.map((game) =>
                 <GameItem key={game.id} {...game} />
@@ -119,7 +130,7 @@ const Games = () => {
         </div>
         {/* filtering and sorting */}
         <div className="flex md:flex-row flex-col justify-between items-start md:items-center">
-          <StatusFilter statusFilter={statusFilter} setStatusFilter={handleStatusChange} />
+          <StatusFilter statusFilters={statusFilters} toggleStatusFilter={toggleStatusFilter} selectAll={selectAll}/>
           <SortSelect value={sortBy} onChange={setSortBy} />
         </div>
         <div className="mt-6 md:mt-0">

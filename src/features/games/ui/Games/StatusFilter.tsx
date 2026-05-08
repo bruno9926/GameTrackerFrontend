@@ -2,8 +2,6 @@ import clsx from "clsx";
 import { GAME_STATUS_LABELS, gameStatuses } from "../../model/Game";
 import type { GameStatus } from "../../model/Game";
 
-export type StatusOption = GameStatus | null;
-
 const gameStatusBadgeStyles: Record<GameStatus, string> = {
   playing: "game-status-badge-playing",
   completed: "game-status-badge-completed",
@@ -12,16 +10,25 @@ const gameStatusBadgeStyles: Record<GameStatus, string> = {
 }
 
 
-interface StatusFilterProps { statusFilter: GameStatus | null, setStatusFilter: (status: GameStatus | null) => void }
-const StatusFilter: React.FC<StatusFilterProps> = ({ statusFilter, setStatusFilter }) => {
+interface StatusFilterProps {
+  statusFilters: Record<GameStatus, boolean>,
+  toggleStatusFilter: (status: GameStatus) => void,
+  selectAll: () => void,
+}
+const StatusFilter: React.FC<StatusFilterProps> = ({statusFilters, toggleStatusFilter, selectAll }) => {
+
+  const allSelected = gameStatuses.every(status => statusFilters[status]);
+
+  
+
   return (
     <div className="flex gap-2 md:gap-4 py-4 w-full min-w-0 overflow-x-auto no-scrollbar">
       <button
         className={clsx({
           "cursor-pointer badge": true,
-          "border-accent text-accent": statusFilter === null
+          "border-accent text-accent": allSelected
         })}
-        onClick={() => setStatusFilter(null)}
+        onClick={() => selectAll()}
       >
         All
       </button>
@@ -30,10 +37,10 @@ const StatusFilter: React.FC<StatusFilterProps> = ({ statusFilter, setStatusFilt
           <button
             key={gameStatus}
             className={clsx(
-              statusFilter === gameStatus ? gameStatusBadgeStyles[gameStatus] : "badge",
+              statusFilters[gameStatus] ? gameStatusBadgeStyles[gameStatus] : "badge",
               "cursor-pointer"
             )}
-            onClick={() => setStatusFilter(gameStatus)}
+            onClick={() => toggleStatusFilter(gameStatus)}
           >
             {GAME_STATUS_LABELS[gameStatus]}
           </button>
