@@ -1,7 +1,7 @@
 import AnimatedRoute from "../../../../pages/AnimatedRoute";
 import GameItem from "../GameList/GameItem";
 import { GameItemSkeleton } from "../GameList/GameCard";
-import { gameStatuses, type Game, type GameStatus } from "../../model/Game";
+import type { Game } from "../../model/Game";
 import StatusFilter from "./StatusFilter";
 import AddGameButton from "@shared/ui/Organisms/AddGamesButton/AddGamesButton";
 import SortSelect, { type SortOption } from "./SortSelect";
@@ -9,6 +9,7 @@ import { AddGameModal } from "../GameModals";
 import { anim } from "@shared/ui/Animations";
 // hooks
 import useGames from "../../hooks/useGames";
+import useStatusFilter from "../../hooks/useStatusFilter";
 import { useDebouncedInput } from "@shared/hooks/useDebouncedInput";
 import { useEffect, useState } from "react";
 import { Input } from "@shared/ui/chadcn/input";
@@ -19,25 +20,10 @@ const Games = () => {
   const [sortBy, setSortBy] = useState<SortOption>("more-recent");
   const [addModalOpen, setAddModalOpen] = useState(false);
 
-  const [statusFilters, setStatusFilters] = useState<Record<GameStatus, boolean>>({
-    playing: true,
-    completed: true,
-    wishlist: true,
-    paused: false,
-  })
+  const { statusFilters, toggleStatusFilter, selectAll, filterByStatus } = useStatusFilter();
 
   // create a hash of the status filters to use as a key for the animated list
   const statusFiltersHash = Object.entries(statusFilters).map(([status, isActive]) => `${status}:${isActive}`).join(",");
-
-  const toggleStatusFilter = (status: GameStatus) => {
-    setStatusFilters(current => ({
-      ...current,
-      [status]: !current[status]
-    }))
-  }
-
-  const selectAll = () =>
-    setStatusFilters(Object.fromEntries(gameStatuses.map(s => [s, true])) as Record<GameStatus, boolean>);
 
   const { debouncedInput: debouncedSearch, waitingInput } = useDebouncedInput(searchText, {
     debounceTime: 500,
@@ -49,10 +35,6 @@ const Games = () => {
     if (!normalizedSearch) return true;
     return game.name.toLowerCase().includes(normalizedSearch)
   }
-  const byStatus = (game: Game) => {
-    return statusFilters[game.status]
-  };
-
   // sort
   const sortGames = (a: Game, b: Game) => {
     switch (sortBy) {
@@ -70,8 +52,8 @@ const Games = () => {
   }
 
   const visibleGames =
-    [...games]
-      .filter(byName).filter(byStatus)
+    filterByStatus([...games])
+      .filter(byName)
       .sort(sortGames)
 
   useEffect(() => {
