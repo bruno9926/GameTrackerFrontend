@@ -23,10 +23,12 @@ export type Game = {
   name: string;
   status: GameStatus;
   coverUrl?: string
-  gameTitleId: GameTitleId | null
+  gameTitleId: GameTitleId | null,
+  createdAt: string;
+  updatedAt: string;
 };
 
 export const DEFAULT_GAME_STATUS = GAME_STATUSES.playing;
 
-export type GameToCreate = Omit<Game, "id">;
+export type GameToCreate = Omit<Game, "id" | "createdAt" | "updatedAt">;
 export type GameToUpdate = Partial<Game> & { id: string };
