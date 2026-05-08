@@ -1,14 +1,41 @@
-//import game from '@assets/silksong.webp';
-//import game from '@assets/silksong2.webp';
+import useGOTW from "@features/games/hooks/useGOTW"
+import { Skeleton } from "@shared/ui/chadcn/skeleton"
+import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage"
+
+const bannerClass = "relative mb-4 h-125 lg:h-155 overflow-hidden"
 
 const GOTW = () => {
+
+  const { gotw, loading, error, fetchGOTW } = useGOTW();
+
+  if (loading) {
+    return <Skeleton className={`${bannerClass} rounded-none`} />
+  }
+
+  if (error) {
+    return (
+      <section className={`${bannerClass} flex items-center justify-center bg-card border-b border-border`}>
+        <ErrorMessage message={error} retryAction={fetchGOTW} />
+      </section>
+    )
+  }
+
+  if (!gotw) {
+    return (
+      <section className={`${bannerClass} flex flex-col items-center justify-center gap-2 bg-card border-b border-border`}>
+        <span className="text-4xl opacity-40 grayscale">🏆</span>
+        <p className="font-medium text-subtitle/60 text-sm">No Game of the Week yet</p>
+      </section>
+    )
+  }
+
   return (
     <section className="group relative mb-4 h-125 lg:h-155 overflow-hidden cursor-pointer">
       {/* Image */}
       <img
-        src="https://images.igdb.com/igdb/image/upload/t_1080p/sc63a7.webp"
-        alt="Game of the Week"
-        className="w-full h-full object-bottom object-cover group-hover:scale-105 transition-transform animation-duration contrast-115"
+        src={gotw.coverUrl || "https://images.igdb.com/igdb/image/upload/t_1080p/ar4sz.webp"}
+        alt={gotw.name}
+        className="w-full h-full object-center object-cover group-hover:scale-105 transition-transform animation-duration contrast-115"
       />
       {/* Overlay */}
       <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent" />
@@ -18,11 +45,11 @@ const GOTW = () => {
           Game of the Week
         </span>
         <h2 className="font-semibold text-2xl md:text-3xl leading-tight">
-          Hollow Knight: Silksong
+          {gotw.name}
         </h2>
         <div className="flex flex-wrap gap-2 mt-2">
-          <span className="bg-accent border-accent text-accent-foreground badge">Played by 2 friends</span>
-          <span className="border text-subtitle badge">Added by 10 players</span>
+          <span className="bg-accent border-accent text-accent-foreground badge">Played by {gotw.friendsPlaying} friends</span>
+          <span className="border text-subtitle badge">Added by {gotw.usersPlaying} players</span>
         </div>
 
       </div>
