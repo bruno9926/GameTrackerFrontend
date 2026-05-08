@@ -1,6 +1,6 @@
 import GameList from "@features/games/ui/GameList/GameList";
 import OnlineFriendsWidget from "@features/friends/ui/OnlineFriendsWidget";
-import GOTW from "../../shared/ui/GOTW/GOTW";
+import GOTW from "@features/games/ui/GOTW/GOTW";
 import AnimatedRoute from "../AnimatedRoute";
 import { anim } from "@shared/ui/Animations";
 
