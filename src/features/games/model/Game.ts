@@ -24,8 +24,8 @@ export type Game = {
   status: GameStatus;
   coverUrl?: string
   gameTitleId: GameTitleId | null,
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Readonly<string>;
+  updatedAt: Readonly<string>;
 };
 
 export const DEFAULT_GAME_STATUS = GAME_STATUSES.playing;
