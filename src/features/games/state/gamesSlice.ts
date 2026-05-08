@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, isAnyOf, type PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import type { Game, GameToCreate, GameToUpdate } from "../model/Game";
 import { gameService } from "../api/GameService";
 import { withErrorMessage } from "@shared/lib/error-messages";
