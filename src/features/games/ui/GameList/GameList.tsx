@@ -18,6 +18,10 @@ const GameList = () => {
 
   const [addModalOpen, setAddModalOpen] = useState(false);
 
+  const recentGames = [...games]
+    .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+    .slice(0, 5);
+
   const states = {
     loading: (
       <div className="games-grid">
@@ -28,7 +32,7 @@ const GameList = () => {
     empty: <EmptyGameList />,
     success: (
       <div className="games-grid">
-        {games.slice(0, 5).map((game) => <GameItem key={game.id} {...game} />)}
+        {recentGames.map((game) => <GameItem key={game.id} {...game} />)}
       </div>
     ),
   };
