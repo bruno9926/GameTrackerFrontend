@@ -112,7 +112,9 @@ const Games = () => {
         </div>
         {/* filtering and sorting */}
         <div className="flex md:flex-row flex-col justify-between items-start md:items-center">
-          <StatusFilter statusFilters={statusFilters} toggleStatusFilter={toggleStatusFilter} selectAll={selectAll}/>
+          <div className="flex items-center gap-2 md:gap-4 py-4 w-full min-w-0 overflow-x-auto no-scrollbar">
+            <StatusFilter statusFilters={statusFilters} toggleStatusFilter={toggleStatusFilter} selectAll={selectAll} />
+          </div>
           <SortSelect value={sortBy} onChange={setSortBy} />
         </div>
         <div className="mt-6 md:mt-0">
