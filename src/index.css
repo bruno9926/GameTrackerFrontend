@@ -302,19 +302,19 @@ input:-webkit-autofill:focus {
 }
 
 @utility badge-playing {
-  @apply border-playing text-playing bg-playing/10;
+  @apply border-playing/50 text-playing/80;
 }
 
 @utility badge-completed {
-  @apply border-completed text-completed bg-completed/10;
+  @apply border-completed/50 text-completed/80;
 }
 
 @utility badge-wishlist {
-  @apply border-wishlist text-wishlist bg-wishlist/10;
+  @apply border-wishlist/50 text-wishlist/80;
 }
 
 @utility badge-paused {
-  @apply border-paused text-paused bg-paused/10;
+  @apply border-paused/50 text-paused/80;
 }
 
 @utility animation-duration {
