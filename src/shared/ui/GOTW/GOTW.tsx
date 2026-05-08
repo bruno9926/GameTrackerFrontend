@@ -2,7 +2,7 @@ import useGOTW from "@features/games/hooks/useGOTW"
 import { Skeleton } from "@shared/ui/chadcn/skeleton"
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage"
 
-const bannerClass = "relative mb-4 h-125 lg:h-155 overflow-hidden"
+const bannerClass = "relative mb-4 h-125 lg:h-155 overflow-hidden md:rounded-lg xl:mr-4"
 
 const GOTW = () => {
 
@@ -23,14 +23,14 @@ const GOTW = () => {
   if (!gotw) {
     return (
       <section className={`${bannerClass} flex flex-col items-center justify-center gap-2 bg-card border-b border-border`}>
-        <span className="text-4xl opacity-40 grayscale">🏆</span>
+        <span className="opacity-40 grayscale text-4xl">🏆</span>
         <p className="font-medium text-subtitle/60 text-sm">No Game of the Week yet</p>
       </section>
     )
   }
 
   return (
-    <section className="group relative mb-4 h-125 lg:h-155 overflow-hidden cursor-pointer">
+    <section className={`group ${bannerClass} cursor-pointer`}>
       {/* Image */}
       <img
         src={gotw.coverUrl || "https://images.igdb.com/igdb/image/upload/t_1080p/ar4sz.webp"}

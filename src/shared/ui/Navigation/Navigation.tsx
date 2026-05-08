@@ -7,7 +7,7 @@ const navigationItems = Object.entries(routes).map(([token, path]) => (
 
 const Navigation = () => {
   return (
-    <aside className="hidden md:block bg-background p-4 border-border border-r min-w-62 h-full [grid-area:navigation]">
+    <aside className="hidden md:block bg-background p-4 pr-0 min-w-62 h-full [grid-area:navigation]">
       <nav className="flex flex-col h-full">
 
         {/* Logos con soporte para temas */}
