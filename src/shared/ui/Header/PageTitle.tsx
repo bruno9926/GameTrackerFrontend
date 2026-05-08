@@ -12,7 +12,7 @@ const PageTitle = () => {
     const pageName = routeToken !== null ? pageNames[routeToken] : defaultTitle;
     
     return (
-        <div className="hidden md:block pl-6">
+        <div className="hidden md:block">
             <h1 className="text-2xl">
                 {pageName}
             </h1>
