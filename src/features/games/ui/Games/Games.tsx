@@ -42,6 +42,10 @@ const Games = () => {
         return a.name.localeCompare(b.name);
       case "name-desc":
         return b.name.localeCompare(a.name);
+      case "more-recent":
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+      case "less-recent":
+        return new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
       default:
         return 0;
     }

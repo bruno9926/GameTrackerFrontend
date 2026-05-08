@@ -1,7 +1,7 @@
 import { Field, FieldGroup, FieldLabel } from "@shared/ui/chadcn/field";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@shared/ui/chadcn/select";
 
-export type SortOption = "name-asc" | "name-desc";
+export type SortOption = "name-asc" | "name-desc" | "more-recent" | "less-recent";
 
 interface Props {
   value: SortOption;
@@ -24,6 +24,8 @@ const SortSelect = ({ value, onChange }: Props) => {
               <SelectGroup>
                 <SelectItem value="name-asc">Name (A-Z)</SelectItem>
                 <SelectItem value="name-desc">Name (Z-A)</SelectItem>
+                <SelectItem value="more-recent">Recently Updated</SelectItem>
+                <SelectItem value="less-recent">Least Updated</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
