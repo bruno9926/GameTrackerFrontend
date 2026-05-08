@@ -47,9 +47,10 @@ const Login = () => {
             {/*info */}
             <div className="flex flex-col justify-center items-center mb-4 md:mb-0 p-6 md:p-10 lg:p-16">
                 <div className="relative mb-6 w-70 h-25">
-                    <img src="/logo-light.png" alt="GameTracker" className="dark:hidden girly:hidden absolute inset-0" />
+                    <img src="/logo-light.png" alt="GameTracker" className="dark:hidden berry:hidden amber:hidden absolute inset-0" />
                     <img src="/logo-dark.png" alt="GameTracker" className="hidden dark:block absolute inset-0" />
-                    <img src="/logo-girly.png" alt="GameTracker" className="hidden girly:block absolute inset-0" />
+                    <img src="/logo-berry.png" alt="GameTracker" className="hidden berry:block absolute inset-0" />
+                    <img src="/logo-amber.png" alt="GameTracker" className="hidden amber:block absolute inset-0" />
                 </div>
                 <span className="text-md text-center">The ultimate command center for your gaming stats, progressions and community connections.</span>
                 <div className="mt-10">

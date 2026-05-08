@@ -1,12 +1,13 @@
 import { useLayoutEffect, useState } from "react";
 import { IoSunny, IoMoon } from "react-icons/io5";
 
-type Theme = "light" | "dark" | "theme-girly";
+type Theme = "light" | "dark" | "theme-berry" | "theme-amber";
 
 const themes: { key: Theme; icon: React.JSX.Element; label: string }[] = [
   { key: "light", icon: <IoSunny />, label: "Light" },
   { key: "dark", icon: <IoMoon />, label: "Dark" },
-  //{ key: "theme-girly", icon: <span>🌸</span>, label: "Girly" },
+  { key: "theme-berry", icon: <span>🫐</span>, label: "Berry" },
+  { key: "theme-amber", icon: <span>🍂</span>, label: "Amber" },
 ];
 
 const ThemeToggle = () => {
@@ -19,7 +20,7 @@ const ThemeToggle = () => {
 
   useLayoutEffect(() => {
     const root = document.documentElement;
-    root.classList.remove("dark", "theme-girly");
+    root.classList.remove("dark", "theme-berry", "theme-amber");
 
     if (theme !== "light") {
       root.classList.add(theme);

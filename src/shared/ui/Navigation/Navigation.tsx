@@ -12,9 +12,10 @@ const Navigation = () => {
 
         {/* Logos con soporte para temas */}
         <div className="relative mb-6 w-40 h-15">
-          <img src="/logo-light.png" alt="GameTracker" className="dark:hidden girly:hidden absolute inset-0" />
+          <img src="/logo-light.png" alt="GameTracker" className="amber:hidden berry:hidden dark:hidden absolute inset-0" />
           <img src="/logo-dark.png" alt="GameTracker" className="hidden dark:block absolute inset-0" />
-          <img src="/logo-girly.png" alt="GameTracker" className="hidden girly:block absolute inset-0" />
+          <img src="/logo-girly.png" alt="GameTracker" className="hidden berry:block absolute inset-0" />
+          <img src="/logo-light.png" alt="GameTracker" className="hidden amber:block absolute inset-0" />
         </div>
 
         {/* Lista de Navegación */}

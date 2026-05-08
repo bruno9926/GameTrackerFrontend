@@ -4,7 +4,8 @@
 @import "@fontsource-variable/figtree";
 
 @custom-variant dark (&:is(.dark *));
-@custom-variant girly (&:is(.theme-girly *));
+@custom-variant berry (&:is(.theme-berry *));
+@custom-variant amber (&:is(.theme-amber *));
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -214,7 +215,54 @@ input:-webkit-autofill:focus {
   --busy: #c0672a;
 }
 
-.theme-girly {
+.theme-amber {
+  --background: #111109;
+  --foreground: #e4ddd0;
+  --card: #1a1914;
+  --card-foreground: #e4ddd0;
+  --popover: var(--card);
+  --popover-foreground: var(--card-foreground);
+  --secondary: #252318;
+  --secondary-foreground: #e4ddd0;
+  --muted: #171610;
+  --muted-foreground: #857e6e;
+  --accent-foreground: #e4ddd0;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #2e2b1e;
+  --input: #3e3a2a;
+  --ring: #a07838;
+  --chart-1: #c09050;
+  --chart-2: #8a6830;
+  --chart-3: #6a5020;
+  --chart-4: #4e3c18;
+  --chart-5: #322810;
+  --sidebar: #141310;
+  --sidebar-foreground: #e4ddd0;
+  --sidebar-primary: #a07838;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #252318;
+  --sidebar-accent-foreground: #e4ddd0;
+  --sidebar-border: #2e2b1e;
+  --sidebar-ring: #a07838;
+
+  /*custom colors*/
+  --scrollbar: #4a4430;
+
+  --title: #f0e8d8;
+  --subtitle: #857e6e;
+
+  /*game statuses*/
+  --playing: #4a90d9;
+  --completed: #3db87a;
+  --wishlist: #c03880;
+  --paused: #c08030;
+
+  /*online status colors*/
+  --offline: #6a5840;
+  --busy: #c07030;
+}
+
+.theme-berry {
   --background: #181114;
   --foreground: #f6d9df;
   --popover: var(--card);
