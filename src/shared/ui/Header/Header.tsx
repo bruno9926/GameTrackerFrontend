@@ -1,5 +1,5 @@
 import User from './User';
-import Notifications from './Notifications';
+import Notifications from '@features/notifications/ui/Notifications';
 import PageTitle from './PageTitle';
 import Search from './Search';
 import { useEffect, useState } from 'react';
