@@ -134,12 +134,12 @@
   --scrollbar: #bbbbbb;
 
   /*avatar colors*/
-  --avatar-1: #3d9665;
-  --avatar-2: #9d5dc2;
-  --avatar-3: #e4cb42;
-  --avatar-4: #b63535;
-  --avatar-5: #df5c83;
-  --avatar-6: #54acc2;
+  --avatar-1: #c9503a;
+  --avatar-2: #2a9d8f;
+  --avatar-3: #e07b39;
+  --avatar-4: #4a5de8;
+  --avatar-5: #6a9a5a;
+  --avatar-6: #c86878;
 
   /*online status colors*/
   --online: #53ad4b;
@@ -201,6 +201,14 @@ input:-webkit-autofill:focus {
   /*custom colors*/
   --scrollbar: #3b3b3b;
 
+  /*avatar colors*/
+  --avatar-1: #e05a50;
+  --avatar-2: #2ec4b6;
+  --avatar-3: #f0803a;
+  --avatar-4: #5c6ef0;
+  --avatar-5: #7ab86a;
+  --avatar-6: #e07888;
+
   --title: #fff;
   --subtitle: #929292;
 
@@ -248,6 +256,14 @@ input:-webkit-autofill:focus {
   /*custom colors*/
   --scrollbar: #4a4430;
 
+  /*avatar colors*/
+  --avatar-1: #e8b84b;
+  --avatar-2: #c8784a;
+  --avatar-3: #a05028;
+  --avatar-4: #88a858;
+  --avatar-5: #e09868;
+  --avatar-6: #d4c878;
+
   --title: #f0e8d8;
   --subtitle: #857e6e;
 
@@ -290,6 +306,14 @@ input:-webkit-autofill:focus {
   --title: #ffe8ee;
   --subtitle: #aa7f8c;
   --scrollbar: #ff3b6b;
+
+  /*avatar colors*/
+  --avatar-1: #e4476e;
+  --avatar-2: #c23060;
+  --avatar-3: #f07090;
+  --avatar-4: #982848;
+  --avatar-5: #e87898;
+  --avatar-6: #b03858;
 
   --playing: #7cb7ff;
   --completed: #6fd9a0;
