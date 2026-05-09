@@ -11,11 +11,11 @@ const Navigation = () => {
       <nav className="flex flex-col h-full">
 
         {/* Logos con soporte para temas */}
-        <div className="relative mb-6 w-40 h-15">
-          <img src="/logo-light.png" alt="GameTracker" className="amber:hidden berry:hidden dark:hidden absolute inset-0" />
-          <img src="/logo-dark.png" alt="GameTracker" className="hidden dark:block absolute inset-0" />
-          <img src="/logo-girly.png" alt="GameTracker" className="hidden berry:block absolute inset-0" />
-          <img src="/logo-light.png" alt="GameTracker" className="hidden amber:block absolute inset-0" />
+        <div className="relative mt-4 ml-4 w-30 h-15">
+          <img src="/logo-light.svg" alt="GameTracker" className="amber:hidden berry:hidden dark:hidden absolute inset-0" />
+          <img src="/logo-dark.svg" alt="GameTracker" className="hidden dark:block absolute inset-0" />
+          <img src="/logo-berry.svg" alt="GameTracker" className="hidden berry:block absolute inset-0" />
+          <img src="/logo-amber.svg" alt="GameTracker" className="hidden amber:block absolute inset-0" />
         </div>
 
         {/* Lista de Navegación */}

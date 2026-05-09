@@ -235,7 +235,7 @@ input:-webkit-autofill:focus {
   --muted: #171610;
   --muted-foreground: #857e6e;
   --accent-foreground: #e4ddd0;
-  --destructive: oklch(0.704 0.191 22.216);
+  --destructive: oklch(58.038% 0.18482 32.269);
   --border: #2e2b1e;
   --input: #3e3a2a;
   --ring: #a07838;
@@ -257,12 +257,12 @@ input:-webkit-autofill:focus {
   --scrollbar: #4a4430;
 
   /*avatar colors*/
-  --avatar-1: #e8b84b;
-  --avatar-2: #c8784a;
-  --avatar-3: #a05028;
-  --avatar-4: #88a858;
-  --avatar-5: #e09868;
-  --avatar-6: #d4c878;
+  --avatar-1: #a07820;
+  --avatar-2: #b05028;
+  --avatar-3: #883820;
+  --avatar-4: #5a7830;
+  --avatar-5: #9a5030;
+  --avatar-6: rgb(84, 110, 197);
 
   --title: #f0e8d8;
   --subtitle: #857e6e;
@@ -328,6 +328,7 @@ input:-webkit-autofill:focus {
     -moz-osx-font-smoothing: grayscale;
 
     color-scheme: light dark;
+    scroll-behavior: smooth;
   }
 
   * {
@@ -428,8 +429,6 @@ input:-webkit-autofill:focus {
 @utility empty-box {
   @apply flex flex-col justify-center items-center px-4 py-8 border-2 border-border border-dashed rounded-xl;
 }
-
-
 
 @utility app-layout {
   display: grid;

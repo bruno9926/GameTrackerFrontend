@@ -35,11 +35,11 @@ const Header = () => {
     <header className={clsx(baseStyles, mobileStyles, desktopStyles)}>
       <div className='flex items-center gap-8'>
         {/* Mobile Logo: visible only on small screens, adjusts opacity on scroll */}
-        <div className={clsx(
-          "md:hidden flex justify-center items-center w-8 h-8 transition-opacity duration-300",
-          isScrolled ? "opacity-100" : "opacity-60"
-        )}>
-          <span className="font-extrabold text-accent text-xl italic tracking-tighter">GT</span>
+        <div className={"md:hidden flex justify-center items-center ml-2 w-8 h-8 duration-300"}
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
+          <img src="/robot.png" alt="gametracker-logo" className='hidden amber:block dark:block light:block'/>
+          <img src="/robot-berry.png" alt="gametracker-logo" className='hidden berry:block'/>
         </div>
         
         {/* Page title component handles its own visibility/styling for desktop */}
