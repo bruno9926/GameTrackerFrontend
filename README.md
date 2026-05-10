@@ -51,7 +51,12 @@ npm run dev       # Development server
 npm run build     # Type-check + production build
 npm run lint      # ESLint
 npm run preview   # Preview production build
+npm run test      # Run tests
 ```
+
+## Testing
+
+Unit, UI, service, and integration tests use **Vitest** + **Testing Library**. E2E tests use **Playwright** and live in `e2e/`.
 
 ## Features
 

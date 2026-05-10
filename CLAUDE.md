@@ -9,9 +9,27 @@ npm run dev        # Start Vite dev server
 npm run build      # Type-check + production build
 npm run lint       # ESLint check
 npm run preview    # Preview production build
+npm run test       # Run Vitest (unit + UI + service + integration)
 ```
 
-No test framework is configured.
+## Testing
+
+Stack: **Vitest** + **Testing Library** for unit/UI/service/integration tests; **Playwright** for E2E.
+
+Shared test infrastructure lives in `src/test/`:
+- `setup.ts` — global setup (jest-dom matchers)
+- `test-utils.tsx` — custom `render` that wraps with all app `Providers`
+- `factories/` — typed factory functions for test data (e.g. `gameFactory`)
+
+### Test types and file placement
+
+| Type | What it covers | Where the file lives |
+|---|---|---|
+| Unit | Pure functions, utilities, helpers | Co-located with the module (`foo.test.ts`) |
+| UI | Component rendering, interactions | Co-located with the component (`Foo.test.tsx`) |
+| Service | API service class methods | Co-located in the feature's `api/` folder |
+| Integration | Hook + slice + service wired together | Co-located in the feature folder (`games.integration.test.ts`) |
+| E2E | Full user flows against the live app | `e2e/` at repo root (Playwright) |
 
 ## Architecture Overview
 
