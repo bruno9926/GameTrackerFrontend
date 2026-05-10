@@ -9,7 +9,7 @@ import AddGameButton from "@shared/ui/Organisms/AddGamesButton/AddGamesButton";
 // hooks
 import useGames from "../../hooks/useGames";
 
-const GameList = () => {
+const RecentGamesWidget = () => {
   const { loading, error, games, fetchGames } = useGames();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const GameList = () => {
       </div>
     ),
     error: (error && <ErrorMessage message={error} retryAction={fetchGames} />),
-    empty: <EmptyGameList />,
+    empty: <EmptyRecentGames />,
     success: (
       <div className="games-grid">
         {recentGames.map((game) => <GameItem key={game.id} {...game} />)}
@@ -58,7 +58,7 @@ const GameList = () => {
   );
 };
 
-const EmptyGameList = () => {
+const EmptyRecentGames = () => {
   return (
     <div className="flex flex-col justify-center items-center bg-card/20 border-2 border-border/80 border-dashed rounded-xl h-36 md:h-75">
       <div className="flex flex-col items-center gap-2 text-subtitle/60">
@@ -71,4 +71,4 @@ const EmptyGameList = () => {
   );
 };
 
-export default GameList;
+export default RecentGamesWidget;
