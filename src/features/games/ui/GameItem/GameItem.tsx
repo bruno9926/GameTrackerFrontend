@@ -10,7 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@shared/ui/chadcn/dropdown-menu";
-import GameCard from "./GameCard";
+import GameCard from "../GameCard/GameCard";
 
 const GameItem = (game: Game) => {
   const { id, name, status, coverUrl } = game;

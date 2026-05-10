@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import GameItem from "./GameItem";
-import { GameItemSkeleton } from "./GameCard";
+import GameItem from "../GameItem";
+import { GameItemSkeleton } from "../GameCard";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
 import { AddGameModal } from "../GameModals";
 import { NavLink } from "react-router";

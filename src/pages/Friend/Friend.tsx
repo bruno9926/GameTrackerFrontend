@@ -9,7 +9,7 @@ import FriendProfile from "@features/friends/ui/FriendProfile/FriendProfile";
 import FriendGames from "@features/friends/ui/FriendGames/FriendGames";
 import { UserAvatarSkeleton } from "@features/friends/ui/UserAvatar/UserAvatar";
 import { Skeleton } from "@shared/ui/chadcn/skeleton";
-import { GameItemSkeleton } from "@features/games/ui/GameList/GameCard";
+import { GameItemSkeleton } from "@features/games/ui/GameCard";
 
 const Friend = () => {
   const { id } = useParams<{ id: string }>();

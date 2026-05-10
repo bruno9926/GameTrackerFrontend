@@ -1,6 +1,6 @@
 import AnimatedRoute from "../../../../pages/AnimatedRoute";
-import GameItem from "../GameList/GameItem";
-import { GameItemSkeleton } from "../GameList/GameCard";
+import GameItem from "../GameItem";
+import { GameItemSkeleton } from "../GameCard";
 import type { Game } from "../../model/Game";
 import StatusFilter from "./StatusFilter";
 import AddGameButton from "@shared/ui/Organisms/AddGamesButton/AddGamesButton";

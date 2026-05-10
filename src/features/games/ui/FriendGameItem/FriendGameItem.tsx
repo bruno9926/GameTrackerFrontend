@@ -10,7 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@shared/ui/chadcn/dropdown-menu";
-import GameCard from "./GameCard";
+import GameCard from "../GameCard/GameCard";
 import toast from "@shared/ui/Atoms/Toast";
 import { getErrorMessage } from "@shared/lib/error-messages";
 

@@ -4,7 +4,7 @@ import type { Friend } from "@features/user/model/Friend";
 import type { Game } from "@features/games/model/Game";
 import useStatusFilter from "@features/games/hooks/useStatusFilter";
 import StatusFilter from "@features/games/ui/Games/StatusFilter";
-import FriendGameItem from "@features/games/ui/GameList/FriendGameItem";
+import FriendGameItem from "@features/games/ui/FriendGameItem";
 import { anim } from "@shared/ui/Animations";
 
 interface FriendGamesProps {
