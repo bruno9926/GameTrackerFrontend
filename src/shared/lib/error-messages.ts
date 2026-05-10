@@ -12,6 +12,7 @@ export const getErrorMessage = (error: unknown): string => {
   if (error instanceof Object && "message" in error && typeof error.message === "string") {
     return error.message;
   }
+  if (typeof error === "object") return JSON.stringify(error);
 
   return String(error);
 }
