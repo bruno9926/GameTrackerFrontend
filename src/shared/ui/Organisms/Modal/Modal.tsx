@@ -55,6 +55,7 @@ const Modal: FC<ModalProps & { children?: Readonly<ReactNode> }> = ({
                 transition: { delay: 0.1, duration: 0.3 },
               }}
               exit={{ y: 50 }}
+              role="dialog"
             >
               <div className={styles.header}>
                 <h2>{title}</h2>

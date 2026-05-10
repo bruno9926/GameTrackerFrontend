@@ -3,14 +3,17 @@ import { Provider } from "react-redux";
 import { createTestStore } from "./store/test-store";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { Toaster } from "react-hot-toast";
+import { MemoryRouter } from "react-router";
 
 const customRender = (ui: React.ReactNode, preloadedState = {}) => {
     return render(
         <Provider store={createTestStore(preloadedState)}>
-            <SkeletonTheme baseColor="#202020" highlightColor="#444">
-                <Toaster position="top-center" />
-                {ui}
-            </SkeletonTheme>
+            <MemoryRouter>
+                <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                    <Toaster position="top-center" />
+                    {ui}
+                </SkeletonTheme>
+            </MemoryRouter>
         </Provider>
     )
 }

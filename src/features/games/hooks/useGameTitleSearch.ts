@@ -1,13 +1,11 @@
 import { useState } from "react";
-import GameService from "../api/GameService";
+import { gameService } from "../api/GameService";
 import { getErrorMessage } from "@shared/lib/error-messages";
 import type { GameTitle } from "../model/GameTitle";
 
 const useGameTitleSearch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const gameService: GameService = GameService.getInstance();
 
   const searchGame = async (name: string): Promise<GameTitle[]> => {
     try {
