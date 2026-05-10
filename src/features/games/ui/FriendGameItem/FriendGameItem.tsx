@@ -39,7 +39,7 @@ const FriendGameItem = (game: Game) => {
   const actions = (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="text-foreground cursor-pointer">
+        <button className="text-foreground cursor-pointer" aria-label="options">
           <SlOptions />
         </button>
       </DropdownMenuTrigger>

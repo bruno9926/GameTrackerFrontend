@@ -1,18 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "@/test/test-utils";
 import GameCard from "./GameCard";
 import { GAME_STATUS_LABELS, type Game } from "@features/games/model";
-
-const gameFactory = (override?: Partial<Game>): Game => ({
-    id: "1",
-    name: "The Legend of Zelda: Breath of the Wild",
-    status: "playing",
-    coverUrl: "https://example.com/zelda-cover.jpg",
-    gameTitleId: "1",
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    ...override
-})
+import { gameFactory } from "@/test/factories/game.factory";
 
 const renderGame = (game: Game) => {
     render(<GameCard name={game.name} status={game.status} coverUrl={game.coverUrl} />);
