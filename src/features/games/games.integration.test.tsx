@@ -19,10 +19,13 @@ describe("RecentGamesWidget", () => {
         vi.clearAllMocks();
     });
 
-    it("renders heading that redirects to games page", () => {
+    it("renders heading that redirects to games page", async () => {
         mockGameService.fetchGames.mockResolvedValue([]);
 
         render(<RecentGamesWidget />);
+
+        // wait for the initial fetch to settle before asserting
+        await screen.findByText(/your games will show up here/i);
 
         const heading = screen.getByRole("heading", { name: /recent games/i });
         expect(heading).toBeInTheDocument();
@@ -70,16 +73,14 @@ describe("RecentGamesWidget", () => {
 
         render(<RecentGamesWidget />);
 
-        const addButton = screen.getByRole("button", { name: /add game/i });
-        expect(addButton).toBeInTheDocument();
+        // wait for the initial fetch to settle before interacting
+        await screen.findByText(games[0].name);
 
         const user = userEvent.setup();
-        await user.click(addButton);
+        await user.click(screen.getByRole("button", { name: /add game/i }));
 
         // shows the add game modal
-        await waitFor(() => {
-            expect(screen.getByRole("dialog")).toBeInTheDocument();
-            expect(screen.getByRole("heading", { name: /add a new game/i })).toBeInTheDocument();
-        });
+        expect(screen.getByRole("dialog")).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /add a new game/i })).toBeInTheDocument();
     })
 });
