@@ -24,4 +24,12 @@ dist-ssr
 *.sw?
 
 .env
+.env.e2e
 TODO.md
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
