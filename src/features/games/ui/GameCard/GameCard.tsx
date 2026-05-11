@@ -24,7 +24,7 @@ const gameStatusBadgeVariants = cva("", {
 const defaultImage = "/games/default-cover.jpg";
 
 const GameCard = ({ name, status, coverUrl, actions }: GameCardProps) => (
-  <div className="transition-all cursor-pointer game-card-layout animation-duration">
+  <article aria-label={name} className="transition-all cursor-pointer game-card-layout animation-duration">
     <div className="relative w-35 md:w-full h-full md:h-50 overflow-hidden shrink-0">
       <img
         loading="lazy"
@@ -46,7 +46,7 @@ const GameCard = ({ name, status, coverUrl, actions }: GameCardProps) => (
         {GAME_STATUS_LABELS[status]} {/*use the label from the status name*/}
       </div>
     </div>
-  </div>
+  </article>
 );
 
 export const GameItemSkeleton = () => (
