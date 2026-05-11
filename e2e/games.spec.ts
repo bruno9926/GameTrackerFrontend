@@ -95,6 +95,29 @@ test.describe('editing and deleting games', () => {
         await expect(updatedGameCard).toBeVisible();
         await expect(updatedGameCard.getByText(/playing/i)).toBeVisible();
     })
+
+    test.only('users can delete a game from their library', async ({ page }) => {
+        // given a created game
+        const gameCard = page.getByRole('article', { name: /super mario bros/i });
+
+        // when user delete the game
+        await gameCard.getByRole("button", { name: /options/i }).click();
+        await page.getByRole("menuitem", { name: /delete/i }).click();
+        await page.getByRole('button', { name: 'Delete', exact: true }).click();
+
+        // then the game should be removed from the library
+        await expect(page.getByText(/game deleted successfully/i)).toBeVisible({ timeout: 10000 });
+        await expect(gameCard).not.toBeVisible();
+    });
+})
+
+test('user can navigate to games page', async ({ page }) => {
+    // given we are on the dashboard
+    await page.goto('/dashboard');
+    // when we click on the "Games" link in the sidebar
+    await page.getByRole('link', { name: /recent games/i }).click();
+    // then we are navigated to the games page
+    await expect(page).toHaveURL(/\/games/);
 })
 
 

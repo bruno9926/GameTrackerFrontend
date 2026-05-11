@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Game } from "../../model/Game";
 import { DeleteGameModal, EditGameModal } from "../GameModals";
-import useGames from "../../hooks/useGames";
 import { SlOptions } from "react-icons/sl";
 import { RiEditLine, RiDeleteBinLine } from "react-icons/ri";
 import {
@@ -16,8 +15,6 @@ const GameItem = (game: Game) => {
   const { id, name, status, coverUrl } = game;
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const { deleteGame } = useGames();
-
   const actions = (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -44,11 +41,8 @@ const GameItem = (game: Game) => {
       <DeleteGameModal
         isOpen={deleteModalOpen}
         close={() => setDeleteModalOpen(false)}
+        gameId={id}
         gameName={name}
-        onConfirm={() => {
-          deleteGame(id);
-          setDeleteModalOpen(false);
-        }}
       />
       <EditGameModal
         gameToEdit={{ ...game }}

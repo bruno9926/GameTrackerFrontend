@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi, afterEach } from "vitest";
+import { describe, expect, it, vi, afterEach } from "vitest";
 import { render, screen, waitFor } from "@/test/test-utils";
 import RecentGamesWidget from "./ui/RecentGamesWidget/RecentGamesWidget";
 import { gameService } from "./api/GameService";
