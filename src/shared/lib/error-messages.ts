@@ -1,7 +1,7 @@
 import { isApiError, type ApiError, type ERROR_CODE } from "@shared/api/ApiError";
 
 const errorMessages: Record<ERROR_CODE, string> = {
-  GAME_ALREADY_EXISTS: "This game is already in your list",
+  GAME_ALREADY_EXISTS: "This game is already in your library",
   UNKNOWN_ERROR: "Unknown error"
 };
 

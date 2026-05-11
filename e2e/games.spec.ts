@@ -1,15 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { createGame, deleteAllGames } from './helpers/api';
 
-test.afterEach(async ({ page }) => {
-    // cleanup: delete all games after each test
-    await page.goto('/dashboard');
-    while (await page.getByRole('article').first().isVisible()) {
-        const count = await page.getByRole('article').count();
-        await page.getByRole('article').first().getByRole('button', { name: /options/i }).click();
-        await page.getByRole('menuitem', { name: /delete/i }).click();
-        await page.getByRole('button', { name: 'Delete', exact: true }).click();
-        await expect(page.getByRole('article')).toHaveCount(count - 1);
-    }
+test.afterEach(async ({ request }) => {
+    await deleteAllGames(request);
 })
 
 test('user can add a game to their library', async ({ page }) => {
@@ -36,21 +29,10 @@ test('user can add a game to their library', async ({ page }) => {
 
 test.describe('editing and deleting games', () => {
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page, request }) => {
         // given a created game
+        await createGame(request, 'super mario bros');
         await page.goto('/dashboard');
-        await page.getByRole('button', { name: /add game/i }).click();
-
-        await page.getByPlaceholder(/search for a game title/i).fill('super mario bros');
-        const option = page.getByRole('option', { name: /super mario bros/i }).first();
-        await option.click();
-
-        await page.getByRole('button', { name: 'Add', exact: true }).click();
-        await expect(page.getByText(/game added successfully/i)).toBeVisible({ timeout: 10000 });
-
-        const gameCard = page.getByRole('article', { name: /super mario bros/i });
-        await expect(gameCard).toBeVisible();
-        await expect(gameCard.getByText(/playing/i)).toBeVisible();
     });
 
     test('user can update game status', async ({ page }) => {
@@ -96,7 +78,7 @@ test.describe('editing and deleting games', () => {
         await expect(updatedGameCard.getByText(/playing/i)).toBeVisible();
     })
 
-    test.only('users can delete a game from their library', async ({ page }) => {
+    test('users can delete a game from their library', async ({ page }) => {
         // given a created game
         const gameCard = page.getByRole('article', { name: /super mario bros/i });
 
@@ -119,5 +101,32 @@ test('user can navigate to games page', async ({ page }) => {
     // then we are navigated to the games page
     await expect(page).toHaveURL(/\/games/);
 })
+
+test('user cant add the same game twice', async ({ page }) => {
+    // given we have a game in our library
+    await createGame(page.request, 'sonic the hedgehog');
+
+    await page.goto('/dashboard');
+    await page.getByRole('button', { name: /add game/i }).click();
+
+    const dialog = page.getByRole('dialog');
+    await dialog.getByPlaceholder('Search for a game title').fill('sonic the hedgehog');
+    
+    // when we select the same game from the search results and try to add it again
+    const option = page.getByRole('option', { name: /sonic the hedgehog/i }).first();
+    await expect(option).toBeVisible();
+    await option.click();
+    await page.getByRole('button', { name: 'Add', exact: true }).click();
+
+    // then we should see an error message indicating the game is already in the library
+    await expect(dialog.getByText(/this game is already in your library/i)).toBeVisible();
+});
+
+test('the empty state is shown when there are no games in the library', async ({ page }) => {
+    // given we have no games in our library
+    await page.goto('/dashboard');
+    // then we should see the empty state message
+    await expect(page.getByText(/your games will show up here/i)).toBeVisible();
+});
 
 

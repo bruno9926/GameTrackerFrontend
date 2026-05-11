@@ -64,7 +64,7 @@ const EmptyRecentGames = () => {
       <div className="flex flex-col items-center gap-2 text-subtitle/60">
         <span className="opacity-50 grayscale text-4xl">🎮</span>
         <p className="font-medium text-sm md:text-base">
-          Your games will show here
+          Your games will show up here
         </p>
       </div>
     </div>
