@@ -9,6 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
+    "test:unit": "vitest --reporter=verbose \\.test\\.ts$",
+    "test:ui": "vitest --reporter=verbose \\.test\\.tsx$",
+    "test:integration": "vitest --reporter=verbose integration",
     "test:e2e": "npx playwright test --headed --project=chromium"
   },
   "dependencies": {

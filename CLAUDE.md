@@ -5,11 +5,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev        # Start Vite dev server
-npm run build      # Type-check + production build
-npm run lint       # ESLint check
-npm run preview    # Preview production build
-npm run test       # Run Vitest (unit + UI + service + integration)
+npm run dev             # Start Vite dev server
+npm run build           # Type-check + production build
+npm run lint            # ESLint check
+npm run preview         # Preview production build
+npm run test            # Run all Vitest tests (unit + UI + service + integration)
+npm run test:unit       # Run unit and service tests only (*.test.ts)
+npm run test:ui         # Run UI tests only (*.test.tsx)
+npm run test:integration # Run integration tests only (*.integration.test.*)
+npm run test:e2e        # Run Playwright E2E tests (Chromium, headed)
 ```
 
 ## Testing
@@ -28,7 +32,7 @@ Shared test infrastructure lives in `src/test/`:
 | Unit | Pure functions, utilities, helpers | Co-located with the module (`foo.test.ts`) |
 | UI | Component rendering, interactions | Co-located with the component (`Foo.test.tsx`) |
 | Service | API service class methods | Co-located in the feature's `api/` folder |
-| Integration | Hook + slice + service wired together | Co-located in the feature folder (`games.integration.test.ts`) |
+| Integration | Multiple components/hooks/services wired together with mocked boundaries | Feature root folder, named by use case (`gotw.integration.test.tsx`) |
 | E2E | Full user flows against the live app | `e2e/` at repo root (Playwright) |
 
 ## Architecture Overview
