@@ -60,7 +60,7 @@ describe("RecentGamesWidget", () => {
         render(<RecentGamesWidget />);
 
         await waitFor(() => {
-            expect(screen.getByText(/your games will show here/i)).toBeInTheDocument();
+            expect(screen.getByText(/your games will show up here/i)).toBeInTheDocument();
         });
     })
 

@@ -16,7 +16,7 @@ function getAuthHeaders() {
     return { Authorization: `Bearer ${token}` };
 }
 
-export async function createGame(request: APIRequestContext, searchQuery: string) {
+export async function createGame(request: APIRequestContext, searchQuery: string, status = 'playing') {
     const headers = getAuthHeaders();
 
     const searchRes = await request.get(`${API_URL}/games/search?q=${encodeURIComponent(searchQuery)}`, { headers });
@@ -28,7 +28,7 @@ export async function createGame(request: APIRequestContext, searchQuery: string
         data: {
             name,
             gameTitleId,
-            status: 'playing',
+            status,
             ...(cover ? { coverUrl: cover } : {})
         }
     });

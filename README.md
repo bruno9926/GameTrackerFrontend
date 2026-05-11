@@ -65,3 +65,5 @@ Unit, UI, service, and integration tests use **Vitest** + **Testing Library**. E
 - **Friends** — send and manage friend requests, browse friends' game libraries, and copy games into your own library
 - **Dark / light theme** — persisted across sessions
 - **Authentication** — JWT-based with automatic token refresh
+
+[![React Doctor](https://www.react.doctor/share/badge?p=gamer-dashboard&s=82&e=6&w=90&f=48)](https://www.react.doctor/share?p=gamer-dashboard&s=82&e=6&w=90&f=48)
