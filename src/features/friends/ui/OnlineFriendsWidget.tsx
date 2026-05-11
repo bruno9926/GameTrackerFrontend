@@ -4,7 +4,7 @@ import { userRoutes } from '@app/routes/routes';
 import { useNavigate } from 'react-router';
 import { useFriends } from '../hook/useFriends';
 
-const Friends = () => {
+const OnlineFriendsWidget = () => {
     const navigate = useNavigate();
 
     const { onlineFriends, loading, error} = useFriends();
@@ -58,4 +58,4 @@ const EmptyFriendsList = () => (
     </div>
 );
 
-export default Friends
+export default OnlineFriendsWidget
