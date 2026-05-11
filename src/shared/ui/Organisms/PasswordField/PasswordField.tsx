@@ -15,6 +15,7 @@ const PasswordField = (props : PasswordFieldProps) => {
             <InputGroup>
                 <InputGroupInput
                     type={showPassword ? "text" : "password"}
+                    id="password"
                     name="password"
                     autoComplete="new-password"
                     {...props} // pass down any additional props (like disabled)
