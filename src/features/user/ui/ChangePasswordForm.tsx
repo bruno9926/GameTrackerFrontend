@@ -43,6 +43,7 @@ const PasswordInput = ({ ...props }: PasswordInputProps) => {
                 <button
                     type="button"
                     onClick={() => setShow(!show)}
+                    aria-label={show ? "Hide password" : "Show password"}
                     className="cursor-pointer"
                 >
                     {show ? <IoEyeOff /> : <IoEye />}
@@ -83,8 +84,9 @@ const ChangePasswordForm = ({ onCancel }: ChangePasswordFormProps) => {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-3 lg:p-5">
             <h2 className="mb-4">Change Password</h2>
             <Field>
-                <FieldLabel>Current Password</FieldLabel>
+                <FieldLabel htmlFor="currentPassword">Current Password</FieldLabel>
                 <PasswordInput
+                    id="currentPassword"
                     autoComplete="current-password"
                     disabled={isSubmitting}
                     {...register("currentPassword")}
@@ -97,8 +99,9 @@ const ChangePasswordForm = ({ onCancel }: ChangePasswordFormProps) => {
             </Field>
 
             <Field>
-                <FieldLabel>New Password</FieldLabel>
+                <FieldLabel htmlFor="newPassword">New Password</FieldLabel>
                 <PasswordInput
+                    id="newPassword"
                     autoComplete="new-password"
                     disabled={isSubmitting}
                     {...register("newPassword")}
@@ -111,8 +114,9 @@ const ChangePasswordForm = ({ onCancel }: ChangePasswordFormProps) => {
             </Field>
 
             <Field>
-                <FieldLabel>Confirm New Password</FieldLabel>
+                <FieldLabel htmlFor="confirmPassword">Confirm New Password</FieldLabel>
                 <PasswordInput
+                    id="confirmPassword"
                     autoComplete="new-password"
                     disabled={isSubmitting}
                     {...register("confirmPassword")}
