@@ -28,7 +28,7 @@ const FriendRequestsList = ({ search = "" }: { search?: string }) => {
         : requests;
 
     if (filtered.length === 0) return (
-        <EmptyRequestsList title='No requests requests' message='Try a different name'/>
+        <EmptyRequestsList title='No requests found' message='Try a different name'/>
     );
 
     return (

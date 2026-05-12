@@ -56,6 +56,7 @@ const FriendCodeCard = () => {
         />
         <button
           onClick={handleSubmit}
+          aria-label="Send friend request"
           className="flex justify-center items-center bg-accent hover:bg-accent/80 p-2 rounded-lg h-11 aspect-square text-white transition-colors cursor-pointer animation-duration shrink-0"
         >
           <RiArrowRightLine size={20} />

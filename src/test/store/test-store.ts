@@ -3,6 +3,7 @@ import { gamesReducer } from "@/features/games/state";
 import { friendsReducer } from "@/features/friends/state";
 import { userReducer } from "@/features/user/state";
 import { authReducer } from "@/features/auth/state";
+import { notificationsReducer } from "@/features/notifications/state";
 
 export const createTestStore = (preloadedState = {}) => {
     return configureStore({
@@ -11,6 +12,7 @@ export const createTestStore = (preloadedState = {}) => {
             friends: friendsReducer,
             user: userReducer,
             auth: authReducer,
+            notifications: notificationsReducer
         },
         preloadedState
     })
