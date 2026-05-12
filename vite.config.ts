@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -54,6 +53,14 @@ export default defineConfig({
     include: ['src/**/*.test.{ts,tsx}'],
     env: {
       VITE_API_URL: 'http://test-api',
+    },
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      exclude: [
+        'src/shared/ui/chadcn/**',
+        'src/shared/lib/utils.ts',
+      ],
     },
   },
 })

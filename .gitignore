@@ -33,3 +33,6 @@ TODO.md
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+#tests
+/coverage
