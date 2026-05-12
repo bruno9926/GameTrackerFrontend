@@ -39,6 +39,7 @@ const ThemeToggle = () => {
             key={t.key}
             onClick={() => setTheme(t.key)}
             title={t.label}
+            aria-label={t.label}
             className={`
               w-9 h-9 rounded-full
               border bg-card text-foreground
