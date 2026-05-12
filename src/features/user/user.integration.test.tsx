@@ -1,11 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen, within } from "@/test/test-utils";
 import userEvent from "@testing-library/user-event";
 import Header from "@/shared/ui/Header/Header";
 import { userFactory } from "@/test/factories/user.factory";
 
+vi.mock("@features/notifications/api/NotificationsService", () => ({
+    notificationService: { fetchNotifications: vi.fn().mockResolvedValue([]) }
+}));
+
 describe("User in navbar", () => {
-    it("shows users avatar in the navbar", () => {
+    it("shows users avatar in the navbar", async () => {
         const userData = userFactory();
         const preloadedState = {
             user: {
@@ -15,8 +19,8 @@ describe("User in navbar", () => {
             }
         }
         render(<Header />, preloadedState)
-                
-        const avatar = screen.getByAltText(userData.name)
+
+        const avatar = await screen.findByAltText(userData.name)
         expect(avatar).toBeInTheDocument();
         expect(avatar).toHaveAttribute("src", userData.avatarUrl);
     })
