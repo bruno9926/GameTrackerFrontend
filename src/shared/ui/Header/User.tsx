@@ -31,7 +31,7 @@ const User = () => {
                 </button>
             </PopoverTrigger>
             <PopoverContent align="end" className="gap-2 bg-card p-2 pb-4 w-60">
-                <Link to={userRoutes.SETTINGS} onClick={() => setOpen(false)}>
+                <Link to={userRoutes.SETTINGS} aria-label="Go to settings" onClick={() => setOpen(false)}>
                     <div className={itemClass}>
                         <Avatar avatarUrl={avatarUrl} name={name} />
                         <div className="flex flex-col">

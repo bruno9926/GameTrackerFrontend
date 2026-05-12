@@ -22,7 +22,7 @@ import {
     InputGroupInput,
 } from "@shared/ui/chadcn/input-group";
 import { IoIosSearch } from "react-icons/io";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
 const SearchIcon = () => (
@@ -41,6 +41,8 @@ const SearchInput = () => (
 )
 
 const CommandBody = ({ setOpen }: { setOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+    const navigate = useNavigate();
+
     return (
         <Command>
             <CommandInput placeholder="Search games, friends..." />
@@ -52,9 +54,12 @@ const CommandBody = ({ setOpen }: { setOpen: React.Dispatch<React.SetStateAction
                             return (
                                 <CommandItem
                                     key={routeToken}
-                                    onSelect={() => setOpen(false)}
+                                    onSelect={() => {
+                                        navigate(routes[routeToken as RouteToken]);
+                                        setOpen(false);
+                                    }}
                                 >
-                                    <Link to={routes[routeToken as RouteToken]}>{pageName}</Link>
+                                    {pageName}
                                 </CommandItem>
                             )
                         })
@@ -70,7 +75,7 @@ const SearchMobile = () => {
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger>
+            <PopoverTrigger aria-label="Open search">
                 <SearchIcon />
             </PopoverTrigger>
             <PopoverContent className="p-2" align="center" side="top">
@@ -85,7 +90,7 @@ const SearchDesktop = () => {
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger>
+            <PopoverTrigger aria-label="Open search">
                 <SearchInput />
             </PopoverTrigger>
             <PopoverContent className="p-1" align="end" side="top" sideOffset={-50}>
