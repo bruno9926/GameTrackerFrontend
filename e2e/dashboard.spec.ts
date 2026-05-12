@@ -128,3 +128,12 @@ test.describe('editing and deleting games', () => {
         await expect(gameCard).not.toBeVisible();
     });
 });
+
+test('user can navigate to friends page', async ({ page }) => {
+    // given we are on the dashboard
+    await page.goto('/dashboard');
+    // when we click on the "View all friends" button
+    await page.getByRole('button', { name: /view all friends/i }).click();
+    // then we are navigated to the friends page
+    await expect(page).toHaveURL(/\/friends/);
+});
