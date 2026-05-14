@@ -24,7 +24,7 @@ class SocketService {
             throw new Error("Access token needed for socket connection")
         }
         this.socket = io(API_URL, {
-            auth: { token: TokenProvider.getAccessToken() }
+            auth: (cb) => cb({ token: TokenProvider.getAccessToken() })
         })
     }
 
