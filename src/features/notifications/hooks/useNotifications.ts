@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "@app/store/store";
-import { fetchNotifications as fetchNotificationsThunk } from "../state/notificationsSlice";
+import { fetchNotifications as fetchNotificationsThunk, markNotificationRead } from "../state/notificationsSlice";
 import { useEffect } from "react";
 
 const useNotifications = () => {
@@ -12,6 +12,10 @@ const useNotifications = () => {
         dispatch(fetchNotificationsThunk());
     }
 
+    const markNotificationAsRead = (id: string) => {
+        dispatch(markNotificationRead(id));
+    }
+
     useEffect(() => {
         fetchNotifications();
     }, [])
@@ -20,7 +24,8 @@ const useNotifications = () => {
         error,
         loading,
         notifications,
-        fetchNotifications
+        fetchNotifications,
+        markNotificationAsRead,
     }
 }
 

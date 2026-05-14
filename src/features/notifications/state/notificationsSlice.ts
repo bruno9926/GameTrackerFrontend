@@ -19,6 +19,10 @@ export const fetchNotifications = createAsyncThunk("notifications/fetchNotificat
     () => notificationService.fetchNotifications()
 ))
 
+export const markNotificationRead = createAsyncThunk("notifications/markNotificationRead", withErrorMessage(
+    (id: string) => notificationService.markAsRead(id)
+))
+
 const notificationsSlice = createSlice({
     name: "notifications",
     initialState,
@@ -37,6 +41,10 @@ const notificationsSlice = createSlice({
             .addCase(fetchNotifications.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message ?? "Failed to fetch notifications";
+            })
+            .addCase(markNotificationRead.fulfilled, (state, action) => {
+                const notification = state.list.find(n => n.id === action.meta.arg);
+                if (notification) notification.read = true;
             })
     }
 })

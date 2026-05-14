@@ -7,15 +7,15 @@ import NotificationItem, { NotificationItemSkeleton } from "./NotificationItem";
 
 const NotificationTrigger = ({ hasNotifications }: { hasNotifications: boolean }) => (
     <div className="relative">
-        {hasNotifications && <div className="top-0.5 right-0.5 absolute bg-destructive rounded-full w-2 aspect-square" />}
+        {hasNotifications && <div className="top-0.5 right-0.5 absolute bg-notification rounded-full w-2 aspect-square" />}
         <IoIosNotifications />
     </div>
 )
 
 const Notifications = () => {
 
-    const { error, loading, notifications, fetchNotifications } = useNotifications();
-    const haveNotifications = notifications.length > 0;
+    const { error, loading, notifications, fetchNotifications, markNotificationAsRead } = useNotifications();
+    const hasUnread = notifications.some(n => !n.read);
 
     const [open, setOpen] = useState(false);
 
@@ -35,22 +35,23 @@ const Notifications = () => {
         success: (
             <div className="flex flex-col">
                 {notifications.map(notification => (
-                    <NotificationItem key={notification.id} {...notification} />
+                    <NotificationItem key={notification.id} {...notification} onRead={() => markNotificationAsRead(notification.id)} />
                 ))}
             </div>
         ),
     };
 
+    const haveNotifications = notifications.length > 0;
     const activeState = loading ? 'loading' : error ? 'error' : haveNotifications ? 'success' : 'empty';
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <button className="navbar-icon">
-                    <NotificationTrigger hasNotifications={haveNotifications} />
+                    <NotificationTrigger hasNotifications={hasUnread} />
                 </button>
             </PopoverTrigger>
-            <PopoverContent align="center" className="bg-card p-1 md:p-2 w-80 max-h-100 overflow-auto no-scrollbar">
+            <PopoverContent align="center" className="bg-card p-2 w-80 max-h-100 overflow-auto no-scrollbar">
                 {states[activeState]}
             </PopoverContent>
         </Popover>

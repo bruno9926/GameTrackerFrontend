@@ -1,7 +1,7 @@
 import { Skeleton } from '@shared/ui/chadcn/skeleton';
 import type { Notification } from '../model/Notification';
 
-type NotificationProps = Notification;
+type NotificationProps = Notification & { onRead: () => void };
 
 const INITIAL_COLORS = [
     'bg-avatar-1',
@@ -17,9 +17,9 @@ const getColorFromTitle = (title: string) => {
     return INITIAL_COLORS[index];
 };
 
-const NotificationItem = ({ title, message, image }: NotificationProps) => {
+const NotificationItem = ({ title, message, image, read, onRead }: NotificationProps) => {
     return (
-        <div className='flex flex-row items-center gap-3 p-2 hover:bg-border rounded-xl transition-colors cursor-pointer animation-duration'>
+        <div onClick={onRead} className='flex flex-row items-center gap-3 p-2 hover:bg-border rounded-lg transition-colors cursor-pointer animation-duration'>
             <div className='relative rounded-md w-10 aspect-square overflow-hidden shrink-0'>
                 {image
                     ? <img src={image} alt={title} className='w-full h-full object-cover' />
@@ -28,10 +28,11 @@ const NotificationItem = ({ title, message, image }: NotificationProps) => {
                     </div>
                 }
             </div>
-            <div className='flex flex-col'>
+            <div className='flex flex-col flex-1'>
                 <h3 className='text-md'>{title}</h3>
                 <p className='text-subtitle text-xs'>{message}</p>
             </div>
+            {!read && <div className='bg-notification rounded-full w-2 aspect-square shrink-0' />}
         </div>
     )
 }
