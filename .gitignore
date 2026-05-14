@@ -26,6 +26,7 @@ dist-ssr
 .env
 .env.e2e
 TODO.md
+REALTIME_STATUS_PLAN.md
 
 # Playwright
 /test-results/
