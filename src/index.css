@@ -60,6 +60,7 @@
   --color-discord: var(--discord);
   --color-google: var(--google);
   --color-online: var(--online);
+  --color-notification: var(--notification);
 
   /*online status colors*/
   --color-offline: var(--offline);
@@ -129,6 +130,7 @@
 
   /*custom colors*/
   --brand: #cc4e45;
+  --notification: #e03030;
   --discord: #5865F2;
   --google: #4285f4;
   --scrollbar: #bbbbbb;
@@ -199,6 +201,7 @@ input:-webkit-autofill:focus {
   --sidebar-ring: oklch(0.556 0 0);
 
   /*custom colors*/
+  --notification: #f04040;
   --scrollbar: #3b3b3b;
 
   /*avatar colors*/
@@ -254,6 +257,7 @@ input:-webkit-autofill:focus {
   --sidebar-ring: #a07838;
 
   /*custom colors*/
+  --notification: #d43030;
   --scrollbar: #4a4430;
 
   /*avatar colors*/
@@ -305,6 +309,7 @@ input:-webkit-autofill:focus {
 
   --title: #ffe8ee;
   --subtitle: #aa7f8c;
+  --notification: #e83a5a;
   --scrollbar: #ff3b6b;
 
   /*avatar colors*/
