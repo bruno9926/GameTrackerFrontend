@@ -17,9 +17,7 @@ class FriendsService {
   }
 
   async fetchFriends(): Promise<Friend[]> {
-    const friends: Friend[] = await apiClient(API_URL);
-    // temporal fix, we dont have status from the server
-    return friends.map(f => ({...f, status: "online"}))
+    return apiClient(API_URL);
   }
 
   async fetchFriendRequest(): Promise<FriendRequest[]> {

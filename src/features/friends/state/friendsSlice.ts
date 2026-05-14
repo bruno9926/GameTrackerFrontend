@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import type { Friend } from "@features/user/model/Friend";
+import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
+import type { Friend, FriendStatus } from "@features/user/model/Friend";
 import type { FriendRequest } from "@features/user/model/FriendRequest";
 import { friendsService } from "../api/FriendsService";
 import { withErrorMessage } from "@shared/lib/error-messages";
@@ -22,6 +22,11 @@ const initialState: FriendsState = {
     requestsError: null,
 };
 
+type SetFriendStatusPayload = {
+    friendId: string,
+    status: FriendStatus
+}
+
 export const fetchFriends = createAsyncThunk("friends/fetchFriends", withErrorMessage(() => friendsService.fetchFriends()));
 export const fetchRequests = createAsyncThunk("friends/fetchRequests", withErrorMessage(() => friendsService.fetchFriendRequest()));
 export const acceptRequest = createAsyncThunk("friends/acceptRequest", withErrorMessage((id: string) => friendsService.acceptFriendRequest(id)));
@@ -32,7 +37,12 @@ export const removeFriend = createAsyncThunk("friends/removeFriend", withErrorMe
 const friendsSlice = createSlice({
     name: "friends",
     initialState,
-    reducers: {},
+    reducers: {
+        setFriendStatus: (state, action: PayloadAction<SetFriendStatusPayload>) => {
+            const friend = state.friends.find(f => f.id === action.payload.friendId);
+            if (friend) friend.status = action.payload.status;
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchFriends.pending, state => {
@@ -41,7 +51,10 @@ const friendsSlice = createSlice({
             })
             .addCase(fetchFriends.fulfilled, (state, action) => {
                 state.friendsLoading = false;
-                state.friends = action.payload;
+                state.friends = action.payload.map(friend => {
+                    const existing = state.friends.find(f => f.id === friend.id);
+                    return existing ? { ...friend, status: existing.status } : friend;
+                });
             })
             .addCase(fetchFriends.rejected, (state, action) => {
                 state.friendsLoading = false;
@@ -72,4 +85,5 @@ const friendsSlice = createSlice({
     },
 });
 
+export const { setFriendStatus } = friendsSlice.actions;
 export default friendsSlice.reducer;

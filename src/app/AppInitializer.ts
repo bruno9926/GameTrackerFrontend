@@ -6,10 +6,14 @@ import { fetchUser } from "@features/user/state";
 import { clearAuth } from "@features/auth/state";
 import { fetchFriends, fetchRequests } from "@features/friends/state";
 import type { AppDispatch, RootState } from "./store/store";
+import useStatusSocket from "@/features/friends/hook/useStatusSocket";
 
 const AppInitializer = ({ children }: { children: Readonly<React.ReactNode> }) => {
     const dispatch = useDispatch<AppDispatch>();
     const token = useSelector((state: RootState) => state.auth.token);
+
+    // opens the socket connection to update friends status when they connect
+    useStatusSocket(token);
 
     const initializeUser = async () => {
         try {

@@ -9,13 +9,13 @@ interface FriendProfileProps {
 }
 
 const FriendProfile = ({ friend, onRemove }: FriendProfileProps) => {
-  const { name, username, avatarUrl } = friend;
+  const { name, username, avatarUrl, status } = friend;
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-row items-center gap-5">
-        <UserAvatar name={name} avatarUrl={avatarUrl} size="lg" status={'busy'} className="hidden md:block" />
-        <UserAvatar name={name} avatarUrl={avatarUrl} size="md" status={'busy'} className="md:hidden block" />
+        <UserAvatar name={name} avatarUrl={avatarUrl} size="lg" status={status} className="hidden md:block" />
+        <UserAvatar name={name} avatarUrl={avatarUrl} size="md" status={status} className="md:hidden block" />
 
         <div className="flex flex-col flex-1 gap-2 min-w-0 h-full">
           <div className="flex flex-col items-start gap-0">
