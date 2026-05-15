@@ -1,18 +1,23 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@/test/test-utils";
 import NotificationItem from "./NotificationItem";
-import type { Notification } from "../model/Notification";
+import { NotificationType, type Notification } from "../model/Notification";
 
+const notificationFactory = (override?: Partial<Notification>) => ({
+    id: "1",
+    title: "Friend Request",
+    message: "peach_princess22 wants to be your friend",
+    image: "https://example.com/peach.jpg",
+    type: NotificationType.FRIEND_REQUEST,
+    read: false,
+    createdAt: new Date().toISOString(),
+    ...override
+});
 
 describe("NotificationItem", () => {
     it("renders the notification information", () => {
-        const notification: Notification = {
-            id: "1",
-            title: "Friend Request",
-            message: "peach_princess22 wants to be your friend",
-            image: "https://example.com/peach.jpg"
-        }
-        render(<NotificationItem {...notification} />)
+        const notification = notificationFactory();
+        render(<NotificationItem {...notification} onRead={() => { }} />)
 
         expect(screen.getByRole("heading", { name: notification.title })).toBeInTheDocument();
         expect(screen.getByText(notification.message)).toBeInTheDocument();
@@ -23,12 +28,8 @@ describe("NotificationItem", () => {
     })
 
     it("renders title initial as image fallback", () => {
-        const notification: Notification = {
-            id: "1",
-            title: "Friend Request",
-            message: "peach_princess22 wants to be your friend"
-        }
-        render(<NotificationItem {...notification} />)
+        const notification = notificationFactory();
+        render(<NotificationItem {...notification} onRead={() => { }} />)
 
         expect(screen.getByText("F")).toBeInTheDocument();
         expect(screen.queryByAltText(notification.title, { exact: false })).not.toBeInTheDocument();
