@@ -98,7 +98,7 @@ Services follow the singleton pattern (`getInstance()`). API calls are made in t
 
 ### State (Redux)
 
-Three slices: `auth` (tokens), `user` (current user), `games` (games list). Slices expose async thunks (via `createAsyncThunk`) for operations that update shared state; hooks dispatch these thunks.
+Four slices: `auth` (tokens), `user` (current user), `games` (games list), `notifications` (notification list). Slices expose async thunks (via `createAsyncThunk`) for operations that update shared state; hooks dispatch these thunks.
 
 **When to use a thunk vs. a direct service call:**
 - **Thunk in slice** — the result is shared across multiple components, persists across navigation, or other parts of the app depend on it (e.g. fetching the games list, logging in to set auth tokens).
@@ -115,6 +115,25 @@ Three slices: `auth` (tokens), `user` (current user), `games` (games list). Slic
 ### Error Handling
 
 In catch blocks inside hooks, always use `getErrorMessage(e)` from `@shared/lib/error-messages` — never `e.message` directly.
+
+### Real-time Layer (Socket.IO)
+
+`src/features/friends/api/SocketService.ts` is a singleton that manages the Socket.IO connection to the backend `/status` namespace. It is connected/disconnected in `useStatusSocket` (mounted in `AppInitializer`) and listens for:
+
+- `friend:status` — updates a friend's online/offline status in Redux
+- `notification:created` — appends a new `Notification` to the Redux notifications list
+
+The backend pushes these events via `GatewayModule` in response to internal domain events.
+
+### Notifications
+
+The `notifications` feature (`src/features/notifications/`) handles:
+- Fetching persisted notifications from `GET /notifications`
+- Marking individual notifications as read via `PATCH /notifications/:id/read`
+- Receiving real-time notifications via the Socket.IO `notification:created` event
+- Clicking a notification marks it as read and navigates to the relevant page based on `NotificationType`
+
+`NotificationType` enum is defined in `src/features/notifications/model/Notification.ts` and maps to routes via a record in `NotificationItem.tsx`.
 
 ### Environment
 
