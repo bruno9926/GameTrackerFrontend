@@ -35,7 +35,13 @@ const Notifications = () => {
         success: (
             <div className="flex flex-col">
                 {notifications.map(notification => (
-                    <NotificationItem key={notification.id} {...notification} onRead={() => markNotificationAsRead(notification.id)} />
+                    <NotificationItem
+                        key={notification.id}
+                        {...notification}
+                        onRead={() => {
+                            markNotificationAsRead(notification.id)
+                            setOpen(false);
+                        }} />
                 ))}
             </div>
         ),

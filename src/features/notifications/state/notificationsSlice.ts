@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { notificationService } from "../api/NotificationsService"
 import { withErrorMessage } from "@shared/lib/error-messages"
 import type { Notification } from "../model/Notification"
@@ -26,7 +26,11 @@ export const markNotificationRead = createAsyncThunk("notifications/markNotifica
 const notificationsSlice = createSlice({
     name: "notifications",
     initialState,
-    reducers: {},
+    reducers: {
+        addNotification: (state, action: PayloadAction<Notification>) => {
+            state.list.unshift(action.payload);
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchNotifications.pending, state => {
@@ -49,4 +53,5 @@ const notificationsSlice = createSlice({
     }
 })
 
+export const { addNotification } = notificationsSlice.actions;
 export default notificationsSlice.reducer;

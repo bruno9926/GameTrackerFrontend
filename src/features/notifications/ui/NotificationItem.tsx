@@ -1,7 +1,13 @@
 import { Skeleton } from '@shared/ui/chadcn/skeleton';
-import type { Notification } from '../model/Notification';
+import { NotificationType, type Notification } from '../model/Notification';
+import { useNavigate } from 'react-router';
+import { userRoutes } from '@routes/routes';
 
 type NotificationProps = Notification & { onRead: () => void };
+
+const notificationRoute: Record<NotificationType, string> = {
+    [NotificationType.FRIEND_REQUEST]: userRoutes.FRIENDS,
+};
 
 const INITIAL_COLORS = [
     'bg-avatar-1',
@@ -17,9 +23,16 @@ const getColorFromTitle = (title: string) => {
     return INITIAL_COLORS[index];
 };
 
-const NotificationItem = ({ title, message, image, read, onRead }: NotificationProps) => {
+const NotificationItem = ({ title, message, image, read, type, onRead }: NotificationProps) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        onRead();
+        navigate(notificationRoute[type]);
+    };
+
     return (
-        <div onClick={onRead} className='flex flex-row items-center gap-3 p-2 hover:bg-border rounded-lg transition-colors cursor-pointer animation-duration'>
+        <div onClick={handleClick} className='flex flex-row items-center gap-3 p-2 hover:bg-border rounded-lg transition-colors cursor-pointer animation-duration'>
             <div className='relative rounded-md w-10 aspect-square overflow-hidden shrink-0'>
                 {image
                     ? <img src={image} alt={title} className='w-full h-full object-cover' />

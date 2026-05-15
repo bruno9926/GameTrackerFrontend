@@ -1,6 +1,7 @@
 import { io, type Socket } from "socket.io-client";
 import TokenProvider from "@shared/api/TokenProvider";
 import type { FriendStatus } from "@/features/user/model/Friend";
+import type { Notification } from "@features/notifications/model/Notification";
 
 const API_URL = import.meta.env.VITE_API_URL + "/status";
 
@@ -39,6 +40,14 @@ class SocketService {
 
     offFriendStatus(callback: (friendStatusEvent: FriendStatusEvent) => void) {
         this.socket?.off("friend:status", callback)
+    }
+
+    onNotificationCreated(callback: (notification: Notification) => void) {
+        this.socket?.on("notification:created", callback);
+    }
+
+    offNotificationCreated(callback: (notification: Notification) => void) {
+        this.socket?.off("notification:created", callback);
     }
 }
 
