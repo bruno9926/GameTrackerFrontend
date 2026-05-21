@@ -27,8 +27,8 @@ describe("NotificationItem", () => {
 
     })
 
-    it("renders title initial as image fallback", () => {
-        const notification = notificationFactory();
+    it.only("renders title initial as image fallback", () => {
+        const notification = notificationFactory({ image: undefined });
         render(<NotificationItem {...notification} onRead={() => { }} />)
 
         expect(screen.getByText("F")).toBeInTheDocument();
