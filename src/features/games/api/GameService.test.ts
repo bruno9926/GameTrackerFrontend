@@ -26,7 +26,6 @@ describe("GameService", () => {
         it("returns the games from the api", async () => {
             const games = [
                 gameFactory()
-                // clauide, please add more games here
             ]
             mockApiClient.mockResolvedValueOnce(games);
 
