@@ -26,6 +26,7 @@ export type Game = {
   gameTitleId: GameTitleId | null,
   createdAt: Readonly<string>;
   updatedAt: Readonly<string>;
+  completionDate?: string | null;
 };
 
 export const DEFAULT_GAME_STATUS = GAME_STATUSES.playing;
