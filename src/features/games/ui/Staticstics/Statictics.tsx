@@ -21,7 +21,7 @@ const Staticstics = () => {
 const GamesFinished = ({ gamesFinished }: { gamesFinished: number }) => {
     return (
         <StaticsticCard variant="primary">
-            <span className="text-2xl md:text-3xl">You have <span className="font-bold not-italic">finished {gamesFinished} games</span> this year!</span>
+            <span>You have <span className="font-bold not-italic">finished {gamesFinished} games</span> this year!</span>
         </StaticsticCard>
     )
 }
@@ -29,13 +29,13 @@ const GamesFinished = ({ gamesFinished }: { gamesFinished: number }) => {
 const GamesInProgress = ({ gamesInProgress }: { gamesInProgress: number }) => {
     return (
         <StaticsticCard variant="secondary">
-            <span className="text-2xl md:text-3xl">You have <span className="font-bold not-italic"> {gamesInProgress} games in progress</span>!</span>
+            <span>You have <span className="font-bold not-italic"> {gamesInProgress} games in progress</span>!</span>
         </StaticsticCard>
     )
 }
 
 const StaticsticCard = ({ children, variant = 'primary' }: { children: React.ReactNode, variant?: 'primary' | 'secondary' }) => {
-    const styles = cva('card w-45 md:w-60 md:p-6 border-0 text-accent-foreground shadow-lg italic shrink-0 hover:scale-105 transition-transform', {
+    const styles = cva('card w-45 md:w-60 md:p-6 border-0 text-accent-foreground shadow-lg italic shrink-0 hover:scale-105 transition-transform text-2xl md:text-3xl', {
         variants: {
             variant: {
                 primary: 'bg-gradient-to-br from-primary to-[#290f0c]',
