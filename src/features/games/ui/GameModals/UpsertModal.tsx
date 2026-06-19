@@ -9,6 +9,7 @@ import {
   type GameToUpdate,
   DEFAULT_GAME_STATUS,
   GAME_STATUS_LABELS,
+  GAME_STATUSES,
 } from "../../model/Game";
 import type { GameTitle } from "@features/games/model/GameTitle";
 import ErrorMessage from "@shared/ui/Atoms/ErrorMessage/ErrorMessage";
@@ -49,6 +50,7 @@ const UpsertModal: FC<UpsertModalProps> = ({
   const [status, setStatus] = useState<GameStatus>(
     gameToEdit?.status || DEFAULT_GAME_STATUS
   );
+  const completionDate = status === GAME_STATUSES.completed ? (new Date()).toISOString() : null;
 
   useEffect(() => {
     if (isEditMode && gameToEdit && gameToEdit.gameTitleId) {
@@ -90,12 +92,12 @@ const UpsertModal: FC<UpsertModalProps> = ({
     try {
       if (isEditMode && gameToEdit) {
         await updateGame({
-          ...{ id: gameToEdit.id, name, status },
+          ...{ id: gameToEdit.id, name, status, completionDate },
           ...(cover !== null ? { coverUrl: cover } : {})
         });
       } else {
         await submitGame({
-          ...{ name, status, gameTitleId },
+          ...{ name, status, gameTitleId, completionDate },
           ...(cover !== null ? { coverUrl: cover } : {})
         });
       }
